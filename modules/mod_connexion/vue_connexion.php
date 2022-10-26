@@ -9,15 +9,15 @@ class VueConnexion {
     public function menu() {
         if (!isset($_SESSION['username'])) {
             echo("<br>");
-            echo(" <a href=\"index.php?module=connexion&action=form_connexion\">Connexion</a>");
+            echo(" <a href=\"index.php?module=connexion&action=form_connexion\" id=\"lien\">Connexion</a>");
             echo("<br>");
-            echo(" <a href=\"index.php?module=connexion&action=form_inscription\">Inscription</a>");
+            echo(" <a href=\"index.php?module=connexion&action=form_inscription\" id=\"lien\">Inscription</a>");
         }
         echo("<br>");
         
         if (isset($_SESSION['username'])) {
             echo("<br>");
-            echo(" <a href=\"index.php?module=connexion&action=deconnexion\">Deconnexion</a>");
+            echo(" <a href=\"index.php?module=connexion&action=deconnexion\" id=\"lien\">Deconnexion</a>");
         }
         echo("<br>");
     }

@@ -36,7 +36,7 @@
         switch ($_GET['module']) {
 
             case "accueil":
-                echo(" <a href=\"index.php?module=connexion&action=bienvenue\">Connexion</a>");
+                echo(" <a href=\"index.php?module=connexion&action=bienvenue\" id=\"lien\">Connexion</a>");
                 echo("<br>");
                 break;
             case "connexion":
@@ -56,14 +56,14 @@
     </header>
 
     <main>
+    
 
-   
 
 </main>
 
 <footer>
 
-    <p> Droits d'auteurs : Rachid ABDOULALIME, Steven CHING et Yanis HAMANI - IUT de Montreuil </p> 
+    <p> ShowBizFlex © Tous droits réservés 2022  </p> 
 
 </footer>
 

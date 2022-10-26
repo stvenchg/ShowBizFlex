@@ -1,0 +1,28 @@
+
+body {
+    text-align: center;
+    /*margin: auto;*/
+    font-family:fantasy;
+    background-color:rgb(54, 46, 100);
+}
+
+h1 {
+    display: inline-block; 
+    color:silver;
+    text-decoration: underline;
+}
+
+#Logos {
+    text-align: center;
+    display: block; 
+}
+
+#lien{
+    text-decoration: none;
+    color:silver;
+    border: 2px silver solid;
+    margin: 10px;
+    padding: 5px;
+    display: inline-block;
+
+}
