@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!--HAMANI Yanis C1-->
+<!--SHOWBIZFLEX-->
 
 <html>
  
@@ -63,7 +63,7 @@
 
 <footer>
 
-    <p> Copyright Rachid, Steven et Yanis - IUT de Montreuil </p> 
+    <p> Droits d'auteurs : Rachid ABDOULALIME, Steven CHING et Yanis HAMANI - IUT de Montreuil </p> 
 
 </footer>
 
