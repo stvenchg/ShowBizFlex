@@ -16,7 +16,7 @@
 
     <div id="Logos">
 
-        <a href="index.php" id="LogoJoueur"><img src="Images/LogoShowBizFlex.png" alt="LogoJoueur" /></a>
+        <a href="index.php" id="Logo"><img src="Images/LogoShowBizFlex.png" alt="Logo" /></a>
 
     </div>
 
