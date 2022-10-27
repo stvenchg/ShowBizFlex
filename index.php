@@ -1,73 +1,52 @@
 
-<!DOCTYPE html>
-<!--SHOWBIZFLEX-->
+<?php
 
-<html>
- 
-<head>
-    <meta charset="UTF-8" />
-    <link href="style.css" rel="stylesheet" type="text/css">
-    <title> index.html </title>
-</head>
+    session_start();
 
-<body>
-    <!--Partie visible du programme-->
-
-    <header>
-
-    <div id="Logos">
-
-        <a href="index.php" id="Logo"><img src="Images/LogoShowBizFlex.png" alt="Logo" /></a>
-
-    </div>
-
-        <?php
-
-        session_start();
-
-        require_once('modules/mod_connexion/mod_connexion.php');
-        require_once('connexion.php');
-
-        Connexion::initConnexion();
-
-        $moduleConnexion ; 
-
-        $_GET['module'] = isset($_GET['module']) ? $_GET['module'] : "accueil";
-
-        switch ($_GET['module']) {
-
-            case "accueil":
-                echo(" <a href=\"index.php?module=connexion&action=bienvenue\" id=\"lien\">Connexion</a>");
-                echo("<br>");
-                break;
-            case "connexion":
-                if (isset($moduleEquipes)) {
-                    $moduleEquipes = null; 
-                } 
-                if (isset($moduleJoueurs)) {
-                    $moduleJoueurs = null; 
-                } 
-                $moduleConnexion = new ModConnexion();
-                break;
-        }
-
-        ?>
-
-
-    </header>
-
-    <main>
+    require_once('modules/mod_connexion/mod_connexion.php');
+    require_once('connexion.php');
+    require_once('vue_generique.php');
+    require_once('composants/comp_menu/comp_menu.php');
     
 
+    Connexion::initConnexion();
 
-</main>
+    $moduleConnexion ; 
 
-<footer>
+    $affichage;
 
-    <p> ShowBizFlex © Tous droits réservés 2022  </p> 
+    $vueGenerique = new VueGenerique;
+  
+    
 
-</footer>
+    $_GET['module'] = isset($_GET['module']) ? $_GET['module'] : "accueil";
 
-</body>
+    switch ($_GET['module']) {
 
-</html>
+        case "accueil":
+            $vueGenerique->affichage();
+            break;
+        case "connexion":
+            $moduleConnexion = new ModConnexion();
+            if (!isset($_SESSION['username'])) {
+                echo("<br>");
+                echo(" <a href=\"index.php?module=connexion&action=form_connexion\" id=\"lien\">Connexion</a>");
+                echo("<br>");
+                echo(" <a href=\"index.php?module=connexion&action=form_inscription\" id=\"lien\">Inscription</a>");
+            } else {
+                echo("<br>");
+                echo(" <a href=\"index.php?module=connexion&action=deconnexion\" id=\"lien\">Deconnexion</a>");
+            }
+            echo("<br>");
+            $vueGenerique->affichage();
+            break;
+        default:
+            die("module inconnu");
+            break;
+    }
+
+    $composantMenu = new CompMenu();
+    require_once('template.php');
+
+?>
+

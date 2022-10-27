@@ -1,12 +1,15 @@
 <?php
 
-class VueConnexion {
+require_once('vue_generique.php');
+
+class VueConnexion extends VueGenerique {
     
     public function __construct () {
-
+        parent::__construct();
     }
 
     public function menu() {
+        /*
         if (!isset($_SESSION['username'])) {
             echo("<br>");
             echo(" <a href=\"index.php?module=connexion&action=form_connexion\" id=\"lien\">Connexion</a>");
@@ -20,6 +23,7 @@ class VueConnexion {
             echo(" <a href=\"index.php?module=connexion&action=deconnexion\" id=\"lien\">Deconnexion</a>");
         }
         echo("<br>");
+        */
     }
 
     public function form_inscription() {
