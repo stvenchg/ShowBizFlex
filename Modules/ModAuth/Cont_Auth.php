@@ -40,7 +40,12 @@ class ContAuth
 
     // Logout
     public function logout() {
-        $this->model->logout();
+        $this->model->sendLogout();
+    }
+
+    // Forgot password
+    public function forgot() {
+        $this->view->form_forgot();
     }
 
     public function exec() {

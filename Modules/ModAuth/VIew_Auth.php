@@ -28,7 +28,7 @@ class ViewAuth extends GenericView
                     <label for="login">MOT DE PASSE : </label>
                     <input class="form-input" type="password" name="password" required>
 
-                    <label class="forgotpswd"><a href="./module=auth&action=forgot">MOT DE PASSE OUBLIÉ ?</a></label>
+                    <label class="forgotpswd"><a href="./?module=auth&action=forgot">MOT DE PASSE OUBLIÉ ?</a></label>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
@@ -79,6 +79,32 @@ class ViewAuth extends GenericView
 
                 <div class="auth-title">
                     <p>Déjà un compte ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
+                </div>
+            </div>
+        </div>';
+        } else {
+            $this->alreadyAuthenticated();
+        }
+    }
+
+    public function form_forgot() {
+        if (!isset($_SESSION['login'])) {
+            echo '
+        <div class="auth">
+            <div class="auth-title">
+                <h1>Ta mémoire te joue des tours ?</h1>
+                <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
+            </div>
+            <div class="auth-form">
+                <form action="./?module=auth&action=sendForgot" method="POST">
+                    <label for="email">ADRESSE E-MAIL : </label>
+                    <input class="form-input" type="text" name="email" id="email" required>
+
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
+                </form>
+
+                <div class="auth-title">
+                    <p>Ça t\'es revenu ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
                 </div>
             </div>
         </div>';

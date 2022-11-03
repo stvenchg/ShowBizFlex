@@ -125,6 +125,15 @@ label {
     margin: auto;
 }
 
+.auth {
+    /*margin: auto;
+    width: 600px;
+    background: #1A1F2A;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;*/
+}
+
 a {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.55);

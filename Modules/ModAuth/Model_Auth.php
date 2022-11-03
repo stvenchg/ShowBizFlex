@@ -94,7 +94,7 @@ class ModelAuth extends PDOConnection
         }
     }
 
-    public function logout()
+    public function sendLogout()
     {
         if (isset($_SESSION['login'])) {
             session_unset();
@@ -105,5 +105,9 @@ class ModelAuth extends PDOConnection
         else {
             $this->view->logoutError();
         }
+    }
+
+    public function sendForgot() {
+
     }
 }
