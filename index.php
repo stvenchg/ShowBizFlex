@@ -2,10 +2,10 @@
 
 session_start();
 
-include_once("./Database/PDOConnection.php");
+include_once("PDOConnection.php");
 include_once("Controller.php");
 
-PDOConnection::getPDO();
+PDOConnection::initConnection();
 
 $view;
 

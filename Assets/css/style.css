@@ -1,4 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 body {
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
     margin: auto;
+    width: 80%;
+    background-color: #1b1a1a;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 80%;;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+}  
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.55);
+    margin-right: -10px;
+}
+
+.btn-link:hover {
+    color: rgba(199, 200, 201);
+}
+
+.btn-link:active {
+    color: rgba(199, 200, 201);
+}
+
+
+.navbar-expand-lg {
+    margin: 0 auto;
+}
+
+@media only screen and (max-width: 991px) {
+    body {
+        width: 100%;
+    }
+    .footer {
+        width: 100%;;
+    } 
 }
