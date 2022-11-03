@@ -34,7 +34,7 @@ class ModelAuth extends PDOConnection
             if ($countRowUsername >= 1 && $countRowEmail >= 1) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'Ce nom d'utilisateur ainsi que cet email sont déjà utilisé.',
+                    'Ce nom d\'utilisateur ainsi que cet email sont déjà utilisé.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -52,7 +52,7 @@ class ModelAuth extends PDOConnection
             } else if ($countRowUsername >= 1) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'Ce nom d'utilisateur est déjà utilisé.',
+                    'Ce nom d\'utilisateur est déjà utilisé.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -61,7 +61,7 @@ class ModelAuth extends PDOConnection
             } else if (strlen($username) < 4) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'Le nom d'utilisateur saisi est trop court. Il doit comporter au moins 4 caractères.',
+                    'Le nom d\'utilisateur saisi est trop court. Il doit comporter au moins 4 caractères.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -70,7 +70,7 @@ class ModelAuth extends PDOConnection
             } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'Le nom d'utilisateur doit uniquement être constitué de chiffres et de lettres.',
+                    'Le nom d\'utilisateur doit uniquement être constitué de chiffres et de lettres.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -79,7 +79,7 @@ class ModelAuth extends PDOConnection
             } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'L'adresse e-mail saisie est incorrecte.',
+                    'L\'adresse e-mail saisie est incorrecte.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -104,7 +104,7 @@ class ModelAuth extends PDOConnection
             } else if ($tos != 1) {
                 echo "<script>Swal.fire(
                     'Il y a un problème !',
-                    'Il est nécessaire d'accepter les conditions générales d'utilisation.',
+                    'Il est nécessaire d\'accepter les conditions générales d'utilisation.',
                     'error'
                   ).then(function() {
                     window.location = './?module=auth&action=register';
@@ -156,9 +156,15 @@ class ModelAuth extends PDOConnection
             
             if ($stmtResult && password_verify($password, $stmtResult['password'])) {
                 $_SESSION["login"] = $stmtResult['username'];
-                echo '<p style="color:green">Vous êtes bien connecté.</p>';
+                header('Location: ./');
             } else {
-                echo '<p style="color:red">Le login ou le mot de passe est invalide.</p>';
+                echo "<script>Swal.fire(
+                    'Il y a un problème !',
+                    'Les informations d\'identification fournies ne sont pas valides.',
+                    'error'
+                  ).then(function() {
+                    window.location = './?module=auth&action=login';
+                });</script>";
             }
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
@@ -167,10 +173,26 @@ class ModelAuth extends PDOConnection
 
     public function logout()
     {
-        session_unset();
-        session_destroy();
+        if (isset($_SESSION['login'])) {
+            session_unset();
+            session_destroy();
 
-        echo '<p style="color:green">Vous avez été déconnecté.</p>';
-        header("refresh:2;url=index.php");
+            echo "<script>Swal.fire(
+                'Déconnexion réussie !',
+                'On espère te revoir bientôt.',
+                'success'
+              ).then(function() {
+                window.location = './';
+            });</script>";
+        }
+        else {
+            echo "<script>Swal.fire(
+                'Il y a un problème !',
+                'Tu es déjà déconnecté.',
+                'error'
+              ).then(function() {
+                window.location = './';
+            });</script>";
+        }
     }
 }

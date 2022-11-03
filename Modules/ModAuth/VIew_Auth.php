@@ -2,7 +2,8 @@
 
 require_once("./GenericView.php");
 
-class ViewAuth extends GenericView {
+class ViewAuth extends GenericView
+{
 
     public function __construct()
     {
@@ -11,7 +12,9 @@ class ViewAuth extends GenericView {
 
     public function form_login()
     {
-        echo '
+
+        if (!isset($_SESSION['login'])) {
+            echo '
         <div class="auth">
             <div class="auth-title">
                 <h1>Content de te revoir !</h1>
@@ -35,11 +38,16 @@ class ViewAuth extends GenericView {
                 </div>
             </div>
         </div>';
+        } else {
+            $this->alreadyAuthenticated();
+        }
     }
 
     public function form_register()
     {
-        echo '
+
+        if (!isset($_SESSION['login'])) {
+            echo '
         <div class="auth">
             <div class="auth-title">
                 <h1>Créer un compte</h1>
@@ -74,5 +82,19 @@ class ViewAuth extends GenericView {
                 </div>
             </div>
         </div>';
+        } else {
+            $this->alreadyAuthenticated();
+        }
+    }
+
+    public function alreadyAuthenticated()
+    {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Tu es déjà connecté.',
+            'error'
+          ).then(function() {
+            window.location = './';
+        });</script>";
     }
 }
