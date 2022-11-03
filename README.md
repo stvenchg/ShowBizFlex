@@ -1,2 +1,3 @@
 # ShowBizFlex
-SAE DevWeb Steven CHING / Rachid Abdoulalime / Yanis HAMANI
+Live DEV Demo : https://dev.showbizflex.com/
+Steven CHING / Rachid Abdoulalime / Yanis HAMANI
