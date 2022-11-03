@@ -1,6 +1,7 @@
 <?php
 
 require_once('PDOConnection.php');
+require_once('View_Auth.php');
 
 class ModelAuth extends PDOConnection
 {
@@ -8,7 +9,9 @@ class ModelAuth extends PDOConnection
     private $view;
 
     public function __construct()
-    {}
+    {
+        $this->view = new ViewAuth;
+    }
 
     public function sendRegister()
     {
@@ -32,83 +35,23 @@ class ModelAuth extends PDOConnection
             $countRowEmail = $stmtCountEmail->rowCount();
 
             if ($countRowUsername >= 1 && $countRowEmail >= 1) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Ce nom d\'utilisateur ainsi que cet email sont déjà utilisé.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "Ce nom d'utilisateur ainsi que cet email sont déjà utilisé.";
+                $this->view->usernameAndPasswordAlreadyUsed();
             } else if ($countRowEmail >= 1) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Cet email est déjà utilisé.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "Cet email est déjà utilisé.";
+                $this->view->emailAlreadyUsed();
             } else if ($countRowUsername >= 1) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Ce nom d\'utilisateur est déjà utilisé.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "Ce nom d'utilisateur est déjà utilisé.";
+                $this->view->usernameAlreadyUsed();
             } else if (strlen($username) < 4) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Le nom d\'utilisateur saisi est trop court. Il doit comporter au moins 4 caractères.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "Le nom d'utilisateur saisi est trop court. Il doit comporter au moins 4 caractères.";
+                $this->view->usernameTooShort();
             } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Le nom d\'utilisateur doit uniquement être constitué de chiffres et de lettres.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "Le nom d'utilisateur doit uniquement être constitué de chiffres et de lettres.";
+                $this->view->specialCharsInUsername();
             } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'L\'adresse e-mail saisie est incorrecte.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
-                echo "L'adresse e-mail saisie est incorrecte.";
+                $this->view->invalidEmail();
             } else if ($password !== $passwordconfirm) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Les mots de passe saisis ne sont pas identiques.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
+                $this->view->passwordDifferents();
             } else if (strlen($password) < 6) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Le mot de passe saisi est trop court. Il doit comporter au moins 4 caractères.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
+                $this->view->passwordTooShort();
             } else if ($tos != 1) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Il est nécessaire d\'accepter les conditions générales d'utilisation.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=register';
-                });</script>";
+                $this->view->userDidNotAcceptedTOS();
             } else {
 
                 $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO accounts(username, email, password, is_admin) VALUES (:username, :email, :password, 0)");
@@ -118,23 +61,9 @@ class ModelAuth extends PDOConnection
                 $stmtResult = $stmtRegisterNewUser->execute();
 
                 if ($stmtResult) {
-                    echo "<script>Swal.fire(
-                        'Inscription validée !',
-                        'Tu recevras dans un instant un e-mail de confirmation.',
-                        'success'
-                      ).then(function() {
-                        window.location = './?module=auth&action=login';
-                    });</script>";
-
-
+                    $this->view->registrationSuccessful();
                 } else {
-                    echo "<script>Swal.fire(
-                        'Il y a un problème !',
-                        'Une erreur est survenue. Merci de recommencer ton inscription.',
-                        'error'
-                      ).then(function() {
-                        window.location = './?module=auth&action=register';
-                    });</script>";
+                    $this->view->unknownErrorWhileRegistration();
                 }
             }
         } catch (Exception $e) {
@@ -158,13 +87,7 @@ class ModelAuth extends PDOConnection
                 $_SESSION["login"] = $stmtResult['username'];
                 header('Location: ./');
             } else {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Les informations d\'identification fournies ne sont pas valides.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=auth&action=login';
-                });</script>";
+                $this->view->invalidLoginDetails();
             }
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
@@ -177,22 +100,10 @@ class ModelAuth extends PDOConnection
             session_unset();
             session_destroy();
 
-            echo "<script>Swal.fire(
-                'Déconnexion réussie !',
-                'On espère te revoir bientôt.',
-                'success'
-              ).then(function() {
-                window.location = './';
-            });</script>";
+            $this->view->logoutSuccessful();
         }
         else {
-            echo "<script>Swal.fire(
-                'Il y a un problème !',
-                'Tu es déjà déconnecté.',
-                'error'
-              ).then(function() {
-                window.location = './';
-            });</script>";
+            $this->view->logoutError();
         }
     }
 }
