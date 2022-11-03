@@ -24,14 +24,25 @@ class ViewNavigation extends GenericView
                     <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Rechercher</a>
                     <a class="nav-link" href="#"><i class="fa-solid fa-arrow-trend-up"></i> Tendances</a>
                     <a class="nav-link" href="#"><i class="fa-solid fa-ranking-star"></i> Top 100</a>
-                </div>
-                <div class="navbar-nav ms-auto">
+                </div>';
+
+        if (!isset($_SESSION['login'])) {
+            $this->view = $this->view . '<div class="navbar-nav ms-auto">
                     <a class="nav-link" href="./?module=auth&action=login"><button type="button" class="btn btn-link"><i class="fa-solid fa-right-to-bracket"></i> Connexion</button></a>
                     <a class="nav-link" href="./?module=auth&action=register"><button type="button" class="btngradient btngradient-hover color-9">S\'inscrire</button></a>
                 </div>
             </div>
         </div>
     </nav>';
+        } else {
+            $this->view = $this->view . '<div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="./?module=auth&action=login"><button type="button" class="btn btn-link">Bonjour, ' . $_SESSION['login'] . '</button></a>
+                    <a class="nav-link" href="#"><button type="button" class="btngradient btngradient-hover color-9">Mon compte</button></a>
+                </div>
+            </div>
+        </div>
+    </nav>';
+        }
     }
 
     public function view()

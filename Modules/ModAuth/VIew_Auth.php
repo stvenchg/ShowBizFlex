@@ -18,16 +18,16 @@ class ViewAuth extends GenericView {
                 <p>Merci de saisir tes identifiants afin que nous puissions t\'authentifier.</p>
             </div>
             <div class="auth-form">
-                <form action="" method="POST">
+                <form action="./?module=auth&action=sendLogin" method="POST">
                     <label for="login">NOM D\'UTILISATEUR OU E-MAIL : </label>
-                    <input class="form-input" type="text" name="login">
+                    <input class="form-input" type="text" name="login" required>
 
                     <label for="login">MOT DE PASSE : </label>
-                    <input class="form-input" type="text" name="login">
+                    <input class="form-input" type="password" name="password" required>
 
                     <label class="forgotpswd"><a href="./module=auth&action=forgot">MOT DE PASSE OUBLIÉ ?</a></label>
 
-                    <button type="button" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
 
                 <div class="auth-title">
@@ -48,16 +48,16 @@ class ViewAuth extends GenericView {
             <div class="auth-form">
                 <form action="./?module=auth&action=sendRegister" method="POST">
                     <label for="username">NOM D\'UTILISATEUR : </label>
-                    <input class="form-input" type="text" name="username" id="username">
+                    <input class="form-input" type="text" name="username" id="username" required>
 
                     <label for="email">ADRESSE E-MAIL : </label>
-                    <input class="form-input" type="text" name="email" id="email">
+                    <input class="form-input" type="text" name="email" id="email" required>
 
                     <label for="login">MOT DE PASSE : </label>
-                    <input class="form-input" type="password" name="password" id="password">
+                    <input class="form-input" type="password" name="password" id="password" required>
 
                     <label for="login">CONFIRMATION DU MOT DE PASSE : </label>
-                    <input class="form-input" type="password" name="passwordconfirm" id="passwordconfirm">
+                    <input class="form-input" type="password" name="passwordconfirm" id="passwordconfirm" required>
 
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" id="tos" name="tos" required>
