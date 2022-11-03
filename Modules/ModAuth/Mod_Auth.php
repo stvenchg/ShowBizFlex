@@ -1,9 +1,5 @@
 <?php
 
-namespace Modules\ModAuth;
-
-use PDOConnection;
-
 require_once "Cont_Auth.php";
 include_once "PDOConnection.php";
 
@@ -14,9 +10,6 @@ class ModAuth extends PDOConnection
 
     public function __construct()
     {
-
-        global $title;
-
         $this->controller = new ContAuth();
 
         switch ($this->controller->getAction()) 
@@ -28,7 +21,6 @@ class ModAuth extends PDOConnection
                 $this->controller->sendRegister();
             break;
             case "login":
-                $this->$title = "Login";
                 $this->controller->login();
             break;
             case "sendConnection":

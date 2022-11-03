@@ -2,13 +2,15 @@
 
 class PDOConnection
 {
-    public function __construct() 
-    {}
-
-    protected static $db;
+    static protected $bdd;
     
-    public static  function initConnection() 
+    public static function initPDO() 
     {
-        self::$db = new PDO('mysql:localhost;dbname=showbizflex','root','');
+        $dsn = "mysql:host=localhost;dbname=showbizflex;charset=UTF8";
+        try {
+            self::$bdd = new PDO($dsn, 'root', '');
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
     }
 }

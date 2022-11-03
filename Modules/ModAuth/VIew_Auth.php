@@ -1,10 +1,6 @@
 <?php
 
-namespace Modules\ModAuth;
-
 require_once("./GenericView.php");
-
-use GenericView;
 
 class ViewAuth extends GenericView {
 
@@ -33,6 +29,10 @@ class ViewAuth extends GenericView {
 
                     <button type="button" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
+
+                <div class="auth-title">
+                    <p>Pas encore de compte ? <a href="./?module=auth&action=register">S\'inscrire</a>.</p>
+                </div>
             </div>
         </div>';
     }
@@ -46,28 +46,32 @@ class ViewAuth extends GenericView {
                 <p>Merci de renseigner les informations suivantes.</p>
             </div>
             <div class="auth-form">
-                <form action="" method="POST">
+                <form action="./?module=auth&action=sendRegister" method="POST">
                     <label for="username">NOM D\'UTILISATEUR : </label>
-                    <input class="form-input" type="text" name="username">
+                    <input class="form-input" type="text" name="username" id="username">
 
                     <label for="email">ADRESSE E-MAIL : </label>
-                    <input class="form-input" type="text" name="email">
+                    <input class="form-input" type="text" name="email" id="email">
 
                     <label for="login">MOT DE PASSE : </label>
-                    <input class="form-input" type="password" name="password">
+                    <input class="form-input" type="password" name="password" id="password">
 
                     <label for="login">CONFIRMATION DU MOT DE PASSE : </label>
-                    <input class="form-input" type="password" name="passwordconfirm">
+                    <input class="form-input" type="password" name="passwordconfirm" id="passwordconfirm">
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="tos" required>
+                        <input class="form-check-input" type="checkbox" value="1" id="tos" name="tos" required>
                         <label class="form-check-label" for="tos">
-                            En m\'inscrivant, je confirme avoir lu et accepter les <a href="./">conditions générales d\'utilisations</a>.
+                            En m\'inscrivant, je confirme avoir lu et accepter les <a href="./">conditions générales d\'utilisation</a>.
                         </label>
                     </div>
 
-                    <button type="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
                 </form>
+
+                <div class="auth-title">
+                    <p>Déjà un compte ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
+                </div>
             </div>
         </div>';
     }

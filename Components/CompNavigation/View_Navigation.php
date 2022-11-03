@@ -1,9 +1,6 @@
 <?php
 
-namespace Components\CompNavigation;
-
 require_once("./GenericView.php");
-use GenericView;
 
 class ViewNavigation extends GenericView
 {

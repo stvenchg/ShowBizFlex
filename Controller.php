@@ -6,11 +6,6 @@ require_once("./Components/CompFooter/Comp_Footer.php");
 require_once("./Modules/ModAuth/Mod_Auth.php");
 require_once("./Modules/ModHome/Mod_Home.php");
 
-use Components\CompNavigation\CompNavigation;
-use Components\CompFooter\CompFooter;
-use Modules\ModAuth\ModAuth;
-use Modules\ModHome\ModHome;
-
 class Controller
 {
 

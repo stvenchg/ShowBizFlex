@@ -1,9 +1,7 @@
 <?php
 
-namespace Modules\ModAuth;
-
 require_once('Model_Auth.php');
-include_once('View_Auth.php');
+require_once('View_Auth.php');
 
 class ContAuth 
 {

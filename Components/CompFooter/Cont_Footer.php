@@ -1,12 +1,7 @@
 <?php
 
-namespace Components\CompFooter;
-
 require_once("./Components/CompFooter/View_Footer.php");
 require_once("./Components/CompFooter/Model_Footer.php");
-
-use Components\CompFooter\ViewFooter;
-use Components\CompFooter\ModelFooter;
 
 class ContFooter
 {

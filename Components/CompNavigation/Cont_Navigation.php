@@ -1,12 +1,7 @@
 <?php
 
-namespace Components\CompNavigation;
-
 require_once("./Components/CompNavigation/View_Navigation.php");
 require_once("./Components/CompNavigation/Model_Navigation.php");
-
-use Components\CompNavigation\ViewNavigation;
-use Components\CompNavigation\ModelNavigation;
 
 class ContNavigation
 {

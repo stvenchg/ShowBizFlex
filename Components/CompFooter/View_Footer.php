@@ -1,9 +1,6 @@
 <?php
 
-namespace Components\CompFooter;
-
 require_once("./GenericView.php");
-use GenericView;
 
 class ViewFooter extends GenericView
 {
