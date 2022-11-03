@@ -46,6 +46,6 @@ class ContAuth
     }
 
     public function exec() {
-        $this->vue->menu();
+        $this->view->view();
     }
 }

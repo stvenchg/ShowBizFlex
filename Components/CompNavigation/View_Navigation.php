@@ -29,8 +29,8 @@ class ViewNavigation extends GenericView
                     <a class="nav-link" href="#"><i class="fa-solid fa-ranking-star"></i> Top 100</a>
                 </div>
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="#"><button type="button" class="btn btn-link"><i class="fa-solid fa-right-to-bracket"></i> Connexion</button></a>
-                    <a class="nav-link" href="#"><button type="button" class="btn btn-outline-light rounded-pill">Inscription</button></a>
+                    <a class="nav-link" href="./?module=auth&action=login"><button type="button" class="btn btn-link"><i class="fa-solid fa-right-to-bracket"></i> Connexion</button></a>
+                    <a class="nav-link" href="./?module=auth&action=register"><button type="button" class="btngradient btngradient-hover color-9">S\'inscrire</button></a>
                 </div>
             </div>
         </div>

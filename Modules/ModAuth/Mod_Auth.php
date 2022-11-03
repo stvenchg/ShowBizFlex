@@ -14,6 +14,9 @@ class ModAuth extends PDOConnection
 
     public function __construct()
     {
+
+        global $title;
+
         $this->controller = new ContAuth();
 
         switch ($this->controller->getAction()) 
@@ -25,6 +28,7 @@ class ModAuth extends PDOConnection
                 $this->controller->sendRegister();
             break;
             case "login":
+                $this->$title = "Login";
                 $this->controller->login();
             break;
             case "sendConnection":

@@ -5,9 +5,8 @@ session_start();
 include_once("PDOConnection.php");
 include_once("Controller.php");
 
-PDOConnection::initConnection();
-
 $view;
+PDOConnection::initConnection();
 
 $controller = new Controller();
 $controller -> exec();
