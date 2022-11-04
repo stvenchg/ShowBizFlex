@@ -11,6 +11,16 @@ class ModelProfile extends PDOConnection
 
     public function getUserDetails()
     {
-        
+
+        $login = $_SESSION['login'];
+
+        try {
+            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login");
+            $stmtLogin->bindParam(':login', $login);
+            $stmtLogin->execute();
+            return $stmtLogin->fetch();
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
     }
 }

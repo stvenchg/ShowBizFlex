@@ -36,7 +36,7 @@ class ViewNavigation extends GenericView
     </nav>';
         } else {
             $this->view = $this->view . '<div class="navbar-nav ms-auto">
-                    <div class="avatar" id="avatar" onclick="toggleMenu()" style="background: url(\'http://localhost/Assets/images/default/avatar.jpg\');"></div>
+                    <div class="avatar" id="avatar" onclick="toggleMenu()" style="background: url(\'../Assets/images/avatar/' . $_SESSION['avatar_id'] . '.png\');"></div>
                 </div>
                     <div id="submenu" class="sub-menu-wrap">
                         <div class="sub-menu">

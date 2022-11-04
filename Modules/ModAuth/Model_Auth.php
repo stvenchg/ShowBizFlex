@@ -13,11 +13,13 @@ class ModelAuth extends PDOConnection
         $this->view = new ViewAuth;
     }
 
-    public function getIP() {
+    public function getIP()
+    {
         return $_SERVER['REMOTE_ADDR'];
     }
 
-    public function getUA() {
+    public function getUA()
+    {
         return $_SERVER['HTTP_USER_AGENT'];
     }
 
@@ -33,53 +35,58 @@ class ModelAuth extends PDOConnection
         $ip = $this->getIP();
         $ua = $this->getUA();
 
-        try {
-            $stmtCountUsername = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:username");
-            $stmtCountUsername->bindParam(':username', $username);
-            $stmtCountUsername->execute();
-            $countRowUsername = $stmtCountUsername->rowCount();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && !empty($_POST['username'])) {
+            try {
+                $stmtCountUsername = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:username");
+                $stmtCountUsername->bindParam(':username', $username);
+                $stmtCountUsername->execute();
+                $countRowUsername = $stmtCountUsername->rowCount();
 
-            $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
-            $stmtCountEmail->bindParam(':email', $email);
-            $stmtCountEmail->execute();
-            $countRowEmail = $stmtCountEmail->rowCount();
+                $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
+                $stmtCountEmail->bindParam(':email', $email);
+                $stmtCountEmail->execute();
+                $countRowEmail = $stmtCountEmail->rowCount();
 
-            if ($countRowUsername >= 1 && $countRowEmail >= 1) {
-                $this->view->usernameAndPasswordAlreadyUsed();
-            } else if ($countRowEmail >= 1) {
-                $this->view->emailAlreadyUsed();
-            } else if ($countRowUsername >= 1) {
-                $this->view->usernameAlreadyUsed();
-            } else if (strlen($username) < 4) {
-                $this->view->usernameTooShort();
-            } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
-                $this->view->specialCharsInUsername();
-            } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
-                $this->view->invalidEmail();
-            } else if ($password !== $passwordconfirm) {
-                $this->view->passwordDifferents();
-            } else if (strlen($password) < 6) {
-                $this->view->passwordTooShort();
-            } else if ($tos != 1) {
-                $this->view->userDidNotAcceptedTOS();
-            } else {
-
-                $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0)");
-                $stmtRegisterNewUser->bindParam(':username', $username);
-                $stmtRegisterNewUser->bindParam(':email', $email);
-                $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
-                $stmtRegisterNewUser->bindParam(':registration_ip', $ip);
-                $stmtRegisterNewUser->bindParam(':registration_ua', $ua);
-                $stmtResult = $stmtRegisterNewUser->execute();
-
-                if ($stmtResult) {
-                    $this->view->registrationSuccessful();
+                if ($countRowUsername >= 1 && $countRowEmail >= 1) {
+                    $this->view->usernameAndPasswordAlreadyUsed();
+                } else if ($countRowEmail >= 1) {
+                    $this->view->emailAlreadyUsed();
+                } else if ($countRowUsername >= 1) {
+                    $this->view->usernameAlreadyUsed();
+                } else if (strlen($username) < 4) {
+                    $this->view->usernameTooShort();
+                } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
+                    $this->view->specialCharsInUsername();
+                } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
+                    $this->view->invalidEmail();
+                } else if ($password !== $passwordconfirm) {
+                    $this->view->passwordDifferents();
+                } else if (strlen($password) < 6) {
+                    $this->view->passwordTooShort();
+                } else if ($tos != 1) {
+                    $this->view->userDidNotAcceptedTOS();
                 } else {
-                    $this->view->unknownErrorWhileRegistration();
+
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_id) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, 1)");
+                    $stmtRegisterNewUser->bindParam(':username', $username);
+                    $stmtRegisterNewUser->bindParam(':email', $email);
+                    $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
+                    $stmtRegisterNewUser->bindParam(':registration_ip', $ip);
+                    $stmtRegisterNewUser->bindParam(':registration_ua', $ua);
+                    $stmtResult = $stmtRegisterNewUser->execute();
+
+                    if ($stmtResult) {
+                        $this->view->registrationSuccessful();
+                    } else {
+                        $this->view->unknownErrorWhileRegistration();
+                    }
                 }
+            } catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
             }
-        } catch (Exception $e) {
-            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+        else {
+            $this->view->invalidRequest();
         }
     }
 
@@ -89,16 +96,19 @@ class ModelAuth extends PDOConnection
         $login = htmlspecialchars($_POST['login']);
         $password = htmlspecialchars($_POST['password']);
 
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login']) && !empty($_POST['login'])) {
         try {
             $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login OR email=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
             $stmtResult = $stmtLogin->fetch();
-            
+
             if ($stmtResult && password_verify($password, $stmtResult['password'])) {
                 $_SESSION["login"] = $stmtResult['username'];
+                $_SESSION["avatar_id"] = $stmtResult['avatar_id'];
 
-                if($stmtResult['is_admin'] == 1) {
+                if ($stmtResult['is_admin'] == 1) {
                     $_SESSION["is_admin"] = "1";
                 }
 
@@ -110,6 +120,10 @@ class ModelAuth extends PDOConnection
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
+    else {
+        $this->view->invalidRequest();
+    }
+    }
 
     public function sendLogout()
     {
@@ -118,13 +132,12 @@ class ModelAuth extends PDOConnection
             session_destroy();
 
             $this->view->logoutSuccessful();
-        }
-        else {
+        } else {
             $this->view->logoutError();
         }
     }
 
-    public function sendForgot() {
-
+    public function sendForgot()
+    {
     }
 }

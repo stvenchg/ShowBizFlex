@@ -265,5 +265,13 @@ class ViewAuth extends GenericView
         });</script>";
     }
 
-
+    public function invalidRequest() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'La requête est invalide.',
+            'error'
+          ).then(function() {
+            window.location = './';
+        });</script>";
+    }
 }
