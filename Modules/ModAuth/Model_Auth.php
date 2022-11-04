@@ -97,6 +97,11 @@ class ModelAuth extends PDOConnection
             
             if ($stmtResult && password_verify($password, $stmtResult['password'])) {
                 $_SESSION["login"] = $stmtResult['username'];
+
+                if($stmtResult['is_admin'] == 1) {
+                    $_SESSION["is_admin"] = "1";
+                }
+
                 header('Location: ./');
             } else {
                 $this->view->invalidLoginDetails();

@@ -14,6 +14,7 @@ body {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 60px;
+    margin-top: 3px;
 }
 
 .footer {
@@ -183,43 +184,60 @@ a:hover {
 .sub-menu-wrap {
     position: absolute;
     top: 100%;
-    right: 2%;
+    right: 1%;
     width: 300px;
     max-height: 0px;
     overflow: hidden;
-    transition: max-height 0.5s;
 }
 
 .sub-menu-wrap.open-menu {
     max-height: 400px;
+    animation: fadeInDown;
+    animation-duration: 0.2s; /* don't forget to set a duration! */
 }
 
 .sub-menu {
-    background: white;
-    color:  grey;
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
+    color:  rgb(255, 255, 255);
     padding: 10px;
     border-radius: 10px;
+    margin-top: -10px;
 }
 
 .sub-menu hr {
     border: 0;
     height: 1px;
     width: 100%;
-    background-color: rgb(10, 10, 10);
+    background-color: rgb(94, 94, 94);
     margin: 15px 0 10px;;
 
 }
 
 .sub-menu a {
-    color: grey;
+    display: block;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 10px;
 }
 
-.user-info {
-
+.sub-menu a:hover {
+    color: rgba(199, 200, 201);
 }
 
-.user-info h3 {
+.menuLogout {
+    color: rgb(173, 38, 38) !important;
+}
+
+.menuLogout:hover {
+    color: red !important;
+}
+
+.sub-menu a i {
+    margin-right: 10px;
+}
+
+.user-info h5 {
     font-weight: bold;
+    font-size: medium;
 }
 
 @media only screen and (max-width: 991px) {

@@ -36,26 +36,56 @@ class ViewNavigation extends GenericView
     </nav>';
         } else {
             $this->view = $this->view . '<div class="navbar-nav ms-auto">
-                    <a class="nav-link" href="./?module=auth&action=login"><button type="button" class="btn btn-link nav-link">Bonjour, ' . $_SESSION['login'] . '</button></a>
                     <div class="avatar" id="avatar" onclick="toggleMenu()" style="background: url(\'http://localhost/Assets/images/default/avatar.jpg\');"></div>
                 </div>
                     <div id="submenu" class="sub-menu-wrap">
                         <div class="sub-menu">
                             <div class="user-info">
-                                <h3>Utilisateur</h3>
+                                <h5>Salut, ' . $_SESSION['login'] . ' !</h5>
                             </div>
                         <hr>
 
-                            <a href="./?module=auth&action=logout" class="sub-menu-link">
-                                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+                            <a href="#" class="sub-menu-link">
+                                <i class="fa-solid fa-user"></i> Profil
                             </a>
-                        </div>
-                    </div>
-            </div>
+
+                            <a href="#" class="sub-menu-link">
+                                <i class="fa-solid fa-bell"></i> Notifications
+                            </a>
+
+                            <a href="#" class="sub-menu-link">
+                                <i class="fa-solid fa-gear"></i> Paramètres
+                            </a>';
+
+            if (isset($_SESSION["is_admin"])) {
+                $this->view = $this->view . '
+                
+                <a href="#" class="sub-menu-link">
+                    <i class="fa-solid fa-shield"></i> Administration
+                </a>
+                
+                <a href="./?module=auth&action=logout" class="sub-menu-link menuLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+            </a>
         </div>
-    </nav>';
+    </div>
+</div>
+</div>
+</nav>';
+            } else {
+                $this->view = $this->view . '
+                  
+                <a href="./?module=auth&action=logout" class="sub-menu-link menuLogout">
+                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</nav>';
         }
     }
+}
 
     public function view()
     {
