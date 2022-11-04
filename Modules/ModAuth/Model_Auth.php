@@ -13,6 +13,14 @@ class ModelAuth extends PDOConnection
         $this->view = new ViewAuth;
     }
 
+    public function getIP() {
+        return $_SERVER['REMOTE_ADDR'];
+    }
+
+    public function getUA() {
+        return $_SERVER['HTTP_USER_AGENT'];
+    }
+
     public function sendRegister()
     {
 
@@ -22,6 +30,8 @@ class ModelAuth extends PDOConnection
         $passwordconfirm = htmlspecialchars($_POST['passwordconfirm']);
         $passwordhashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $tos = htmlspecialchars($_POST['tos']);
+        $ip = $this->getIP();
+        $ua = $this->getUA();
 
         try {
             $stmtCountUsername = parent::$db->prepare("SELECT * FROM accounts WHERE username=:username");
@@ -54,10 +64,12 @@ class ModelAuth extends PDOConnection
                 $this->view->userDidNotAcceptedTOS();
             } else {
 
-                $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO accounts(username, email, password, is_admin) VALUES (:username, :email, :password, 0)");
+                $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO accounts(username, email, password, registration_ip, registration_ua, is_admin) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0)");
                 $stmtRegisterNewUser->bindParam(':username', $username);
                 $stmtRegisterNewUser->bindParam(':email', $email);
                 $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
+                $stmtRegisterNewUser->bindParam(':registration_ip', $ip);
+                $stmtRegisterNewUser->bindParam(':registration_ua', $ua);
                 $stmtResult = $stmtRegisterNewUser->execute();
 
                 if ($stmtResult) {
