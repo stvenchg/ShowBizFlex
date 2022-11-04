@@ -92,7 +92,7 @@ class ViewAuth extends GenericView
             echo '
         <div class="auth">
             <div class="auth-title">
-                <h1>Ta mémoire te joue des tours ?</h1>
+                <h1>Un oubli ?</h1>
                 <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
             </div>
             <div class="auth-form">

@@ -22,7 +22,7 @@ class ViewNavigation extends GenericView
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Rechercher</a>
-                    <a class="nav-link" href="#" onclick="toggleMenu()"><i class="fa-solid fa-arrow-trend-up"></i> Tendances</a>
+                    <a class="nav-link" href="#"><i class="fa-solid fa-arrow-trend-up"></i> Tendances</a>
                     <a class="nav-link" href="#"><i class="fa-solid fa-ranking-star"></i> Top 100</a>
                 </div>';
 
@@ -41,21 +41,42 @@ class ViewNavigation extends GenericView
                     <div id="submenu" class="sub-menu-wrap">
                         <div class="sub-menu">
                             <div class="user-info">
-                                <h5>Salut, ' . $_SESSION['login'] . ' !</h5>
-                            </div>
-                        <hr>
+                                <h5>Salut, ' . $_SESSION['login'] . ' !</h5>';
 
-                            <a href="#" class="sub-menu-link">
-                                <i class="fa-solid fa-user"></i> Profil
-                            </a>
+            if (!isset($_SESSION['is_admin'])) {
+                $this->view = $this->view . '<label><i class="fa-solid fa-crown"></i> MEMBRE PREMIUM</label>
+                </div>
+            <hr>
 
-                            <a href="#" class="sub-menu-link">
-                                <i class="fa-solid fa-bell"></i> Notifications
-                            </a>
+                <a href="./?module=profile&action=page" class="sub-menu-link">
+                    <i class="fa-solid fa-user"></i> Profil
+                </a>
 
-                            <a href="#" class="sub-menu-link">
-                                <i class="fa-solid fa-gear"></i> Paramètres
-                            </a>';
+                <a href="#" class="sub-menu-link">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+
+                <a href="./?module=profile&action=settings" class="sub-menu-link">
+                    <i class="fa-solid fa-gear"></i> Paramètres
+                </a>';
+            }
+            else {
+                $this->view = $this->view . '<label style="color:#ba3c29"><i class="fa-solid fa-shield"></i> ADMINISTRATEUR</label>
+                </div>
+            <hr>
+
+                <a href="./?module=profile&action=page" class="sub-menu-link">
+                    <i class="fa-solid fa-user"></i> Profil
+                </a>
+
+                <a href="#" class="sub-menu-link">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+
+                <a href="./?module=profile&action=settings" class="sub-menu-link">
+                    <i class="fa-solid fa-gear"></i> Paramètres
+                </a>';
+            }
 
             if (isset($_SESSION["is_admin"])) {
                 $this->view = $this->view . '
@@ -64,9 +85,7 @@ class ViewNavigation extends GenericView
                     <i class="fa-solid fa-shield"></i> Administration
                 </a>
                 
-                <a href="./?module=auth&action=logout" class="sub-menu-link menuLogout">
-                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
-            </a>
+                <a class="nav-link" href="./?module=auth&action=logout"><button type="button" class="btngradient btngradient-hover color-9-s">Se déconnecter</button></a>
         </div>
     </div>
 </div>
@@ -75,9 +94,7 @@ class ViewNavigation extends GenericView
             } else {
                 $this->view = $this->view . '
                   
-                <a href="./?module=auth&action=logout" class="sub-menu-link menuLogout">
-                <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
-            </a>
+                <a class="nav-link" href="./?module=auth&action=logout"><button type="button" class="btngradient btngradient-hover color-9-s">Se déconnecter</button></a>
         </div>
     </div>
 </div>
