@@ -34,12 +34,12 @@ class ModelAuth extends PDOConnection
         $ua = $this->getUA();
 
         try {
-            $stmtCountUsername = parent::$db->prepare("SELECT * FROM accounts WHERE username=:username");
+            $stmtCountUsername = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:username");
             $stmtCountUsername->bindParam(':username', $username);
             $stmtCountUsername->execute();
             $countRowUsername = $stmtCountUsername->rowCount();
 
-            $stmtCountEmail = parent::$db->prepare("SELECT * FROM accounts WHERE email=:email");
+            $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
             $stmtCountEmail->bindParam(':email', $email);
             $stmtCountEmail->execute();
             $countRowEmail = $stmtCountEmail->rowCount();
@@ -64,7 +64,7 @@ class ModelAuth extends PDOConnection
                 $this->view->userDidNotAcceptedTOS();
             } else {
 
-                $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO accounts(username, email, password, registration_ip, registration_ua, is_admin) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0)");
+                $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0)");
                 $stmtRegisterNewUser->bindParam(':username', $username);
                 $stmtRegisterNewUser->bindParam(':email', $email);
                 $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
@@ -90,7 +90,7 @@ class ModelAuth extends PDOConnection
         $password = htmlspecialchars($_POST['password']);
 
         try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM accounts WHERE username=:login OR email=:login");
+            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login OR email=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
             $stmtResult = $stmtLogin->fetch();

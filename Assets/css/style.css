@@ -7,6 +7,7 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
     margin: auto;
     width: 80%;
     /*background-color: #1b1a1a;*/
@@ -153,6 +154,19 @@ a:hover {
 
 .mt-5p {
     margin-top: 5%;
+}
+
+.swal2-popup {
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%) !important;
+}
+
+.swal2-title, .swal2-html-container {
+    color: white !important;
+}
+
+.swal2-confirm, .swal2-styled {
+    border-radius: 50px !important;
+    background-color: #4481eb !important;
 }
 
 @media only screen and (max-width: 991px) {
