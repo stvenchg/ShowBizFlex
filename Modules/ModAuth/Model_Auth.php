@@ -1,16 +1,16 @@
 <?php
 
 require_once('PDOConnection.php');
-require_once('View_Auth.php');
+require_once('Alert.php');
 
 class ModelAuth extends PDOConnection
 {
 
-    private $view;
+    private $viewAlert;
 
     public function __construct()
     {
-        $this->view = new ViewAuth;
+        $this->viewAlert = new Alert;
     }
 
     public function getIP()
@@ -48,23 +48,23 @@ class ModelAuth extends PDOConnection
                 $countRowEmail = $stmtCountEmail->rowCount();
 
                 if ($countRowUsername >= 1 && $countRowEmail >= 1) {
-                    $this->view->usernameAndPasswordAlreadyUsed();
+                    $this->viewAlert->usernameAndPasswordAlreadyUsed();
                 } else if ($countRowEmail >= 1) {
-                    $this->view->emailAlreadyUsed();
+                    $this->viewAlert->emailAlreadyUsed();
                 } else if ($countRowUsername >= 1) {
-                    $this->view->usernameAlreadyUsed();
+                    $this->viewAlert->usernameAlreadyUsed();
                 } else if (strlen($username) < 4) {
-                    $this->view->usernameTooShort();
+                    $this->viewAlert->usernameTooShort();
                 } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
-                    $this->view->specialCharsInUsername();
+                    $this->viewAlert->specialCharsInUsername();
                 } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
-                    $this->view->invalidEmail();
+                    $this->viewAlert->invalidEmail();
                 } else if ($password !== $passwordconfirm) {
-                    $this->view->passwordDifferents();
+                    $this->viewAlert->passwordDifferents();
                 } else if (strlen($password) < 6) {
-                    $this->view->passwordTooShort();
+                    $this->viewAlert->passwordTooShort();
                 } else if ($tos != 1) {
-                    $this->view->userDidNotAcceptedTOS();
+                    $this->viewAlert->userDidNotAcceptedTOS();
                 } else {
 
                     $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_id) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, 1)");
@@ -76,9 +76,9 @@ class ModelAuth extends PDOConnection
                     $stmtResult = $stmtRegisterNewUser->execute();
 
                     if ($stmtResult) {
-                        $this->view->registrationSuccessful();
+                        $this->viewAlert->registrationSuccessful();
                     } else {
-                        $this->view->unknownErrorWhileRegistration();
+                        $this->viewAlert->unknownErrorWhileRegistration();
                     }
                 }
             } catch (Exception $e) {
@@ -86,7 +86,7 @@ class ModelAuth extends PDOConnection
             }
         }
         else {
-            $this->view->invalidRequest();
+            $this->viewAlert->invalidRequest();
         }
     }
 
@@ -114,14 +114,14 @@ class ModelAuth extends PDOConnection
 
                 header('Location: ./');
             } else {
-                $this->view->invalidLoginDetails();
+                $this->viewAlert->invalidLoginDetails();
             }
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
     else {
-        $this->view->invalidRequest();
+        $this->viewAlert->invalidRequest();
     }
     }
 
@@ -131,13 +131,12 @@ class ModelAuth extends PDOConnection
             session_unset();
             session_destroy();
 
-            $this->view->logoutSuccessful();
+            $this->viewAlert->logoutSuccessful();
         } else {
-            $this->view->logoutError();
+            $this->viewAlert->logoutError();
         }
     }
 
     public function sendForgot()
-    {
-    }
+    {}
 }

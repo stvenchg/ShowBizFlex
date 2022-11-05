@@ -1,16 +1,16 @@
 <?php
 
 require_once('PDOConnection.php');
-require_once('View_Settings.php');
+require_once('Alert.php');
 
 class ModelSettings extends PDOConnection
 {
 
-    //private $view;
+    private $viewAlert;
 
     public function __construct()
     {
-        //$this->view = new ViewSettings;
+        $this->viewAlert = new Alert;
     }
 
     public function getUserDetails()
@@ -41,29 +41,11 @@ class ModelSettings extends PDOConnection
             $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
 
             if ($_FILES['avatarFile']['error'] > 0) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Une erreur est survenue.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=settings&action=uploadAvatar';
-                });</script>";
+                $this->viewAlert->unknownErrorOccured();
             } else if ($fileSize > $maxFileSize) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Le poids du fichier sélectionné dépasse la limite autorisée (500 Ko).',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=settings&action=uploadAvatar';
-                });</script>";
+                $this->viewAlert->fileTooBig();
             } else if (!in_array($fileExt, $acceptedExt)) {
-                echo "<script>Swal.fire(
-                    'Il y a un problème !',
-                    'Uniquement les fichiers au format .PNG sont acceptés.',
-                    'error'
-                  ).then(function() {
-                    window.location = './?module=settings&action=uploadAvatar';
-                });</script>";
+                $this->viewAlert->fileInvalidExt();
             } else {
                 $tmpFileName = $_FILES['avatarFile']['tmp_name'];
                 $uniqueFileName = md5(uniqid(rand(), true));
@@ -77,13 +59,7 @@ class ModelSettings extends PDOConnection
                         $stmtLogin->bindParam(':login', $login);
                         $stmtLogin->execute();
 
-                        echo "<script>Swal.fire(
-                            'Importation réussie !',
-                            'Le fichier a bien été chargé et ta photo de profil a été mise à jour.',
-                            'success'
-                          ).then(function() {
-                            window.location = './?module=settings';
-                        });</script>";
+                        $this->viewAlert->fileTransferSuccess();
                         $_SESSION['avatar_id'] = $uniqueFileName;
                         
                     } catch (Exception $e) {
@@ -91,23 +67,11 @@ class ModelSettings extends PDOConnection
                     }
                 }
                 else {
-                    echo "<script>Swal.fire(
-                        'Il y a un problème !',
-                        'Le transfert du fichier a échoué. Merci de réessayer.',
-                        'error'
-                      ).then(function() {
-                        window.location = './?module=settings&action=uploadAvatar';
-                    });</script>";
+                    $this->viewAlert->fileTransferError();
                 }
             }
         } else {
-            echo "<script>Swal.fire(
-                'Il y a un problème !',
-                'Tu n\'es pas connecté.',
-                'error'
-              ).then(function() {
-                window.location = './?module=auth&action=login';
-            });</script>";
+            $this->viewAlert->userNotAuthenticated();
         }
     }
 }

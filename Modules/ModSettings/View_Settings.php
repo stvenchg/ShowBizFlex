@@ -64,7 +64,7 @@ class ViewSettings extends GenericView
 
                 <form action="./?module=settings&action=sendUploadAvatar" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label">IMPORTER UNE IMAGE :</label>
-                    <input class="form-control form-control-sm" type="file" name="avatarFile" />
+                    <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
                     <label class="warningFileUpload">FORMAT DE FICHIER ACCEPTÉ : PNG</label>
                     <label class="warningFileUpload">TAILLE DE FICHIER MAXIMALE : 500 KO</label>
 
