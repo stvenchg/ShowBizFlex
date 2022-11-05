@@ -310,6 +310,10 @@ a:hover {
     width: 100%;
 }
 
+.warningFileUpload {
+    margin-top: 10px;
+}
+
 @media only screen and (max-width: 991px) {
     body {
         width: 100%;

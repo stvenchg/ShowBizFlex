@@ -48,7 +48,7 @@ class ViewNavigation extends GenericView
                 </div>
             <hr>
 
-                <a href="./?module=profile&action=page" class="sub-menu-link">
+                <a href="./?module=profile" class="sub-menu-link">
                     <i class="fa-solid fa-user"></i> Profil
                 </a>
 
@@ -56,7 +56,7 @@ class ViewNavigation extends GenericView
                     <i class="fa-solid fa-bell"></i> Notifications
                 </a>
 
-                <a href="./?module=profile&action=settings" class="sub-menu-link">
+                <a href="./?module=settings" class="sub-menu-link">
                     <i class="fa-solid fa-gear"></i> Paramètres
                 </a>';
             }

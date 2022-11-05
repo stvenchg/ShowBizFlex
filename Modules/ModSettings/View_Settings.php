@@ -17,9 +17,10 @@ class ViewSettings extends GenericView
     public function show_settings()
     {
 
-        $user = $this->model->getUserDetails();
-
         if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+
             echo '<div class="settings">
             <div class="auth-title">
                 <h1>Paramètres</h1>
@@ -42,15 +43,16 @@ class ViewSettings extends GenericView
             </div>
         </div>';
         } else {
-            echo "Pas identifié";
+            echo '';
         }
     }
 
     public function show_uploadAvatar() {
 
-        $user = $this->model->getUserDetails();
-
         if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+
             echo '<div class="settings">
             <div class="auth-title">
                 <h1>Importer une photo de profil</h1>
@@ -60,15 +62,17 @@ class ViewSettings extends GenericView
             <div class="fileUpload">
                 <div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_id'] .'.png\');"></div>
 
-                <form action="./?module=settings&action=sendUploadAvatar" method="POST">
+                <form action="./?module=settings&action=sendUploadAvatar" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label">IMPORTER UNE IMAGE :</label>
-                    <input class="form-control form-control-sm" id="formFileSm" type="file" name="avatar" />
+                    <input class="form-control form-control-sm" type="file" name="avatarFile" />
+                    <label class="warningFileUpload">FORMAT DE FICHIER ACCEPTÉ : PNG</label>
+                    <label class="warningFileUpload">TAILLE DE FICHIER MAXIMALE : 500 KO</label>
 
-                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9">Importer</button>
+                    <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                 </form>
             </div>';
         } else {
-            echo "Pas identifié";
+            echo '';
         }
     }
 }
