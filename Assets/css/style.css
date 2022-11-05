@@ -225,6 +225,7 @@ a:hover {
     display: block;
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 10px;
+    font-size: 15px;
 }
 
 .sub-menu a:hover {
@@ -250,6 +251,7 @@ a:hover {
 
 .user-info label {
     color: orange;
+    font-size: 12px;
 }
 
 .profilePicName {
@@ -262,6 +264,7 @@ a:hover {
     padding: 1em;
     position: relative;
 }
+
 
 .profilePic {
     width: 100px;
@@ -282,6 +285,29 @@ a:hover {
 
 .profileName input {
     width: 300px;
+}
+
+.fileUpload {
+    width: 700px;
+    height: 150px;
+    margin: auto;
+    padding: 1em;
+    position: relative;
+}
+
+.fileUpload .profilePic {
+    margin: auto;
+    text-align: center;
+    cursor:default;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.fileUpload form button {
+    margin-top: 20px;
+    width: 100%;
 }
 
 @media only screen and (max-width: 991px) {
@@ -319,5 +345,9 @@ a:hover {
         width: 300px;
         max-height: 0px;
         overflow: hidden;
+    }
+
+    .fileUpload {
+        width: 90%;
     }
 }

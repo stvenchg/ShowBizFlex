@@ -8,6 +8,7 @@ require_once("./Components/CompFooter/Comp_Footer.php");
 require_once("./Modules/ModAuth/Mod_Auth.php");
 require_once("./Modules/ModHome/Mod_Home.php");
 require_once("./Modules/ModProfile/Mod_Profile.php");
+require_once("./Modules/ModSettings/Mod_Settings.php");
 
 class Controller
 {
@@ -42,6 +43,9 @@ class Controller
             break;
             case 'profile':
                 new ModProfile();
+            break;
+            case 'settings':
+                new ModSettings();
             break;
             default :
                 die("Le module demandé n'existe pas.");

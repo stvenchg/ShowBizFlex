@@ -13,7 +13,7 @@ class ContProfile
     {
         $this->view = new ViewProfile();
         $this->model = new ModelProfile();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : "page";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "view";
     }
 
     public function getAction() {
@@ -21,13 +21,8 @@ class ContProfile
     }
 
     // Profile page
-    public function page() {
-        $this->view->show_page();
-    }
-
-    // Settings
-    public function settings() {
-        $this->view->show_settings();
+    public function profile() {
+        $this->view->show_profile();
     }
 
     public function exec() {
