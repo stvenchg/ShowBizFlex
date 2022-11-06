@@ -2,15 +2,18 @@
 
 require_once('PDOConnection.php');
 require_once('Alert.php');
+require_once('./Mail/Mail.php');
 
 class ModelAuth extends PDOConnection
 {
 
     private $viewAlert;
+    private $sendMail;
 
     public function __construct()
     {
         $this->viewAlert = new Alert;
+        $this->sendMail = new Mail;
     }
 
     public function getIP()
@@ -77,6 +80,7 @@ class ModelAuth extends PDOConnection
 
                     if ($stmtResult) {
                         $this->viewAlert->registrationSuccessful();
+                        $this->sendMail->sendWelcomeEmail($username, $email);
                     } else {
                         $this->viewAlert->unknownErrorWhileRegistration();
                     }
@@ -112,6 +116,7 @@ class ModelAuth extends PDOConnection
 
                 if ($stmtResult['is_admin'] == 1) {
                     $_SESSION["is_admin"] = "1";
+                    $this->sendMail->mailConfig();
                 }
 
                 header('Location: ./');
@@ -121,10 +126,9 @@ class ModelAuth extends PDOConnection
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }
-    else {
-        $this->viewAlert->invalidRequest();
-    }
+        } else {
+            $this->viewAlert->invalidRequest();
+        }
     }
 
     public function sendLogout()

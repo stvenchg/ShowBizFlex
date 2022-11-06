@@ -23,17 +23,19 @@ class Alert extends GenericView
     }
 
     public function logoutSuccessful() {
-        echo "<script>Swal.fire(
-            'Déconnexion réussie !',
-            'On espère te revoir bientôt.',
-            'success'
-          ).then(function() {
+        echo "<script>Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Déconnexion réussie !',
+        showConfirmButton: false,
+        timer: 950
+        }).then(function() {
             window.location = './';
         });</script>";
     }
 
     public function logoutError() {
-        echo "<script>Swal.fire(
+        echo "<script>Swal.fire({
             'Il y a un problème !',
             'Tu es déjà déconnecté.',
             'error'
