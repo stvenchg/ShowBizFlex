@@ -14,6 +14,7 @@ body {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 60px;
+    margin-top: 3px;
 }
 
 .footer {
@@ -53,6 +54,14 @@ body {
 
 .btngradient-hover.color-9 {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+}
+
+.btngradient-hover.color-9-s {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    width: 100%;
+    height: 30px;
+    margin-top: 10px;
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
 }
 
@@ -156,6 +165,14 @@ a:hover {
     margin-top: 5%;
 }
 
+.mt-5 {
+    margin-top: 4px;
+}
+
+.w-100p {
+    width: 100%;
+}
+
 .swal2-popup {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%) !important;
 }
@@ -167,6 +184,166 @@ a:hover {
 .swal2-confirm, .swal2-styled {
     border-radius: 50px !important;
     background-color: #4481eb !important;
+}
+
+.avatar {
+    background-size: cover !important;
+    border-radius: 50px;
+    height: 38px;
+    width: 38px;
+    transition: .8s;
+    margin-top: 4%;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: transform .2s; /* Animation */
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+}
+
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 1%;
+    width: 300px;
+    max-height: 0px;
+    overflow: hidden;
+}
+
+.sub-menu-wrap.open-menu {
+    max-height: 400px;
+    animation: fadeInUp;
+    animation-duration: 0.2s;
+}
+
+.sub-menu {
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
+    color:  rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: -10px;
+}
+
+.sub-menu hr {
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background-color: rgb(94, 94, 94);
+    margin: 15px 0 10px;;
+
+}
+
+.sub-menu a {
+    display: block;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.sub-menu a:hover {
+    color: rgba(199, 200, 201);
+}
+
+.menuLogout {
+    color: rgb(173, 38, 38) !important;
+}
+
+.menuLogout:hover {
+    color: red !important;
+}
+
+.sub-menu a i {
+    margin-right: 10px;
+}
+
+.user-info h5 {
+    font-weight: bold;
+    font-size: medium;
+}
+
+.user-info label {
+    color: orange;
+    font-size: 12px;
+}
+
+.profilePicName {
+    width: 700px;
+    height: 150px;
+    margin: auto;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    position: relative;
+}
+
+
+.profilePic {
+    width: 100px;
+    height: 100px;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 50px;
+    padding: auto;
+    background-size: cover !important;
+    cursor: pointer;
+    -webkit-filter: brightness(100%);
+}
+
+.profilePic:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.profileName {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.profileName input {
+    width: 300px;
+}
+
+.fileUpload {
+    width: 700px;
+    height: 150px;
+    margin: auto;
+    padding: 1em;
+    position: relative;
+}
+
+.fileUpload .profilePic {
+    margin: auto;
+    text-align: center;
+    cursor:default;
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+}
+
+.fileUpload form button {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.warningFileUpload {
+    margin-top: 10px;
+}
+
+.deleteCurrentAvatar {
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 991px) {
@@ -182,6 +359,10 @@ a:hover {
         text-align: center;
     }
 
+    .avatar {
+        margin: auto;
+    }
+
     .auth-title h1 {
         font-size: 25px;
     }
@@ -192,5 +373,21 @@ a:hover {
 
     .auth-form {
         width: 400px;
+    }
+
+    .sub-menu-wrap {
+        display: flex;
+        justify-content: center;
+        width: 300px;
+        max-height: 0px;
+        overflow: hidden;
+    }
+
+    .fileUpload {
+        width: 90%;
+    }
+
+    .profilePicName {
+        width: 90%;
     }
 }

@@ -1,13 +1,21 @@
 <?php
 
 require_once("./GenericView.php");
+require_once("Alert.php");
+require_once("Model_Auth.php");
 
 class ViewAuth extends GenericView
 {
 
+    private $viewAlert;
+    private $model;
+
     public function __construct()
     {
         parent::__construct();
+        $this->viewAlert = new Alert;
+        $this->model = new ModelAuth;
+
     }
 
     public function form_login()
@@ -39,7 +47,7 @@ class ViewAuth extends GenericView
             </div>
         </div>';
         } else {
-            $this->alreadyAuthenticated();
+            $this->viewAlert->alreadyAuthenticated();
         }
     }
 
@@ -83,7 +91,7 @@ class ViewAuth extends GenericView
             </div>
         </div>';
         } else {
-            $this->alreadyAuthenticated();
+            $this->viewAlert->alreadyAuthenticated();
         }
     }
 
@@ -92,7 +100,7 @@ class ViewAuth extends GenericView
             echo '
         <div class="auth">
             <div class="auth-title">
-                <h1>Ta mémoire te joue des tours ?</h1>
+                <h1>Un oubli ?</h1>
                 <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
             </div>
             <div class="auth-form">
@@ -109,161 +117,38 @@ class ViewAuth extends GenericView
             </div>
         </div>';
         } else {
-            $this->alreadyAuthenticated();
+            $this->viewAlert->alreadyAuthenticated();
         }
     }
 
-    public function alreadyAuthenticated()
-    {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Tu es déjà connecté.',
-            'error'
-          ).then(function() {
-            window.location = './';
-        });</script>";
+    public function form_resetPassword() {
+        if (isset($_GET['forgot_auth']) && isset($_GET['email']) && !empty($_GET['forgot_auth']) && !empty($_GET['email']) && !isset($_SESSION['login'])) {
+            if ($this->model->verifyResetPassword(htmlspecialchars($_GET['email']), htmlspecialchars($_GET['forgot_auth']))) {
+                echo '
+        <div class="auth">
+            <div class="auth-title">
+                <h1>Réinitialisation du mot de passe</h1>
+                <p>Merci de remplir les champs ci-dessous.</p>
+            </div>
+            <div class="auth-form">
+                <form action="./?module=auth&action=sendResetPassword" method="POST">
+                    <label for="email">NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="password" id="password" required>
+
+                    <label for="email">CONFIRMATION DU NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" required>
+
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
+                </form>
+            </div>
+        </div>';
+            }
+            else {
+                $this->viewAlert->invalidRequestPasswordReset();
+            }
+        }
+        else {
+            $this->viewAlert->invalidRequestPasswordReset();
+        }
     }
-
-    public function logoutSuccessful() {
-        echo "<script>Swal.fire(
-            'Déconnexion réussie !',
-            'On espère te revoir bientôt.',
-            'success'
-          ).then(function() {
-            window.location = './';
-        });</script>";
-    }
-
-    public function logoutError() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Tu es déjà déconnecté.',
-            'error'
-          ).then(function() {
-            window.location = './';
-        });</script>";
-    }
-
-    public function invalidLoginDetails() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Les informations d\'identification fournies ne sont pas valides.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=login';
-        });</script>";
-    }
-
-    public function unknownErrorWhileRegistration() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Une erreur est survenue. Merci de recommencer ton inscription.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function registrationSuccessful()
-    {
-        echo "<script>Swal.fire(
-            'Inscription validée !',
-            'Tu recevras dans un instant un e-mail de confirmation.',
-            'success'
-          ).then(function() {
-            window.location = './?module=auth&action=login';
-        });</script>";
-    }
-
-    public function userDidNotAcceptedTOS() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Il est nécessaire d\'accepter les conditions générales d'utilisation.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function usernameAndPasswordAlreadyUsed() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Ce nom d\'utilisateur ainsi que cet email sont déjà utilisés.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function emailAlreadyUsed() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Cet email est déjà utilisé.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function usernameAlreadyUsed() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Ce nom d\'utilisateur est déjà utilisé.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function usernameTooShort() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le nom d\'utilisateur saisi est trop court. Il doit comporter au moins 4 caractères.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function specialCharsInUsername() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le nom d\'utilisateur doit uniquement être constitué de chiffres et de lettres.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function invalidEmail() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'L\'adresse e-mail saisie est incorrecte.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function passwordDifferents() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Les mots de passe saisis ne sont pas identiques.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-    public function passwordTooShort() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le mot de passe saisi est trop court. Il doit comporter au moins 4 caractères.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
-        });</script>";
-    }
-
-
 }

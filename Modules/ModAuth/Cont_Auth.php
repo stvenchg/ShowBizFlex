@@ -48,6 +48,19 @@ class ContAuth
         $this->view->form_forgot();
     }
 
+    public function sendForgot() {
+        $this->model->sendForgot();
+    }
+
+    public function resetPassword() {
+        $this->view->form_resetPassword();
+    }
+
+    public function sendResetPassword() {
+        $this->model->sendResetPassword();
+    }
+
+
     public function exec() {
         $this->view->view();
     }
