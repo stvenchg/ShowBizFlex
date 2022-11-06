@@ -18,6 +18,14 @@
 
 [![Made with JS](https://img.shields.io/badge/MADE%20WITH-JS-orange?style=for-the-badge)]()
 
+## Démonstration live
+
+Le site est toujours en cours de développement.
+Néanmoins, il est possible de suivre son avancé et découvrir les fonctionnalitées qui s'ajoutent en accéder au lien suivant :
+https://dev.showbizflex.com
+
+Dernière mise à jour du site : 06/11/2022 à 18:00
+
 ## Problématique
 
 Aujourd’hui, les séries occupent une place très importante au sein de notre société.
