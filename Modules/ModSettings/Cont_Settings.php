@@ -26,7 +26,7 @@ class ContSettings
     }
 
 
-    // Avatar ou photo de profil
+    // Settings - Avatar ou photo de profil
     public function uploadAvatar() {
         $this->view->show_uploadAvatar();
     }
@@ -34,6 +34,16 @@ class ContSettings
     public function sendUploadAvatar() {
         $this->model->sendUploadAvatar();
     }
+
+    public function deleteCurrentAvatar() {
+        $this->model->deleteCurrentAvatar();
+    }
+
+    // Settings - Details utilisateur
+    public function updateUserDetails() {
+        $this->model->updateUserDetails();
+    }
+
 
     public function exec() {
         $this->view->view();

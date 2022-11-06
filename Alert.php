@@ -230,7 +230,57 @@ class Alert extends GenericView
             'Une erreur est survenue.',
             'error'
           ).then(function() {
+            window.location = './?module=settings';
+        });</script>";
+    }
+
+    public function unableToDeleteAvatarIsDefault() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Impossible de supprimer la photo de profil actuelle. Tu as la photo de profil par défaut.',
+            'error'
+          ).then(function() {
             window.location = './?module=settings&action=uploadAvatar';
+        });</script>";
+    }
+
+    public function avatarDeleteSuccess() {
+        echo "<script>Swal.fire(
+            'Suppression réussie !',
+            'Ta photo de profil actuelle a bien été supprimée.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=uploadAvatar';
+        });</script>";
+    }
+
+    public function usernameAlreadyTaken() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Le nom d\'utilisateur saisi est déjà pris.',
+            'error'
+          ).then(function() {
+            window.location = './?module=settings';
+        });</script>";
+    }
+
+    public function userDetailsUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'Modification apportée !',
+            'Tes changements ont bien été pris en compte.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings';
+        });</script>";
+    }
+
+    public function emailAlreadyTaken() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'L\'adresse e-mail saisie est déjà prise.',
+            'error'
+          ).then(function() {
+            window.location = './?module=settings';
         });</script>";
     }
 }

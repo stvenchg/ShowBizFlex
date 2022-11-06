@@ -105,7 +105,9 @@ class ModelAuth extends PDOConnection
             $stmtResult = $stmtLogin->fetch();
 
             if ($stmtResult && password_verify($password, $stmtResult['password'])) {
+                $_SESSION["id"] = $stmtResult['id'];
                 $_SESSION["login"] = $stmtResult['username'];
+                $_SESSION["email"] = $stmtResult['email'];
                 $_SESSION["avatar_id"] = $stmtResult['avatar_id'];
 
                 if ($stmtResult['is_admin'] == 1) {

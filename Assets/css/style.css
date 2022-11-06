@@ -165,6 +165,14 @@ a:hover {
     margin-top: 5%;
 }
 
+.mt-5 {
+    margin-top: 4px;
+}
+
+.w-100p {
+    width: 100%;
+}
+
 .swal2-popup {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%) !important;
 }
@@ -187,6 +195,14 @@ a:hover {
     margin-top: 4%;
     margin-left: 5px;
     cursor: pointer;
+    transition: transform .2s; /* Animation */
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
 }
 
 .sub-menu-wrap {
@@ -276,6 +292,16 @@ a:hover {
     padding: auto;
     background-size: cover !important;
     cursor: pointer;
+    -webkit-filter: brightness(100%);
+}
+
+.profilePic:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
 
 .profileName {
@@ -312,6 +338,12 @@ a:hover {
 
 .warningFileUpload {
     margin-top: 10px;
+}
+
+.deleteCurrentAvatar {
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 991px) {
