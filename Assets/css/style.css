@@ -109,6 +109,14 @@ body {
     font-size: 30px;
 }
 
+.auth-title a {
+    color: rgba(199, 200, 201);
+}
+
+.auth-title a:hover {
+    color: white;
+}
+
 input, label {
     display: block;
 }
@@ -293,6 +301,7 @@ a:hover {
     background-size: cover !important;
     cursor: pointer;
     -webkit-filter: brightness(100%);
+    position: relative;
 }
 
 .profilePic:hover {
@@ -302,6 +311,12 @@ a:hover {
     -o-transition: all 0.4s ease;
     -ms-transition: all 0.4s ease;
     transition: all 0.4s ease;
+}
+
+.editIconProfilePic {
+    position: absolute;
+    left: 42%;
+    top: 42%;
 }
 
 .profileName {

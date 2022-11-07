@@ -209,7 +209,7 @@ class Alert extends GenericView
     public function fileInvalidExt() {
         echo "<script>Swal.fire(
             'Il y a un problème !',
-            'Uniquement les fichiers au format .PNG sont acceptés.',
+            'Uniquement les fichiers au format .PNG, .JPG ou .GIF sont acceptés.',
             'error'
           ).then(function() {
             window.location = './?module=settings&action=uploadAvatar';
@@ -219,7 +219,7 @@ class Alert extends GenericView
     public function fileTooBig() {
         echo "<script>Swal.fire(
             'Il y a un problème !',
-            'Le poids du fichier sélectionné dépasse la limite autorisée (500 Ko).',
+            'Le poids du fichier sélectionné dépasse la limite autorisée (2 Mo).',
             'error'
           ).then(function() {
             window.location = './?module=settings&action=uploadAvatar';
@@ -283,6 +283,59 @@ class Alert extends GenericView
             'error'
           ).then(function() {
             window.location = './?module=settings';
+        });</script>";
+    }
+
+
+    // Auth Forgot
+    public function invalidRequestForgot() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'La requête est incorrecte.',
+            'error'
+          ).then(function() {
+            window.location = './?module=auth&action=forgot';
+        });</script>";
+    }
+
+    public function emailDontExist() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Aucun compte n\'est associé à cette adresse e-mail.',
+            'error'
+          ).then(function() {
+            window.location = './?module=auth&action=forgot';
+        });</script>";
+    }
+
+    public function forgotEmailSent() {
+        echo "<script>Swal.fire(
+            'E-mail envoyé !',
+            'Tu devrais avoir reçu un e-mail avec un lien te permettant de réinitialiser ton mot de passe.',
+            'success'
+          ).then(function() {
+            window.location = './?module=auth&action=forgot';
+        });</script>";
+    }
+
+    // Auth Forgot Reset Password
+    public function invalidRequestPasswordReset() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'La requête est incorrecte ou ce lien de réinitialisation a expiré.',
+            'error'
+          ).then(function() {
+            window.location = './?module=auth&action=forgot';
+        });</script>";
+    }
+
+    public function passwordResetSuccess() {
+        echo "<script>Swal.fire(
+            'Réinitialisation réussie !',
+            'Ton mot de passe a bien été réinitialisé.',
+            'success'
+          ).then(function() {
+            window.location = './?module=auth&action=login';
         });</script>";
     }
 }

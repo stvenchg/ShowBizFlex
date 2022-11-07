@@ -2,16 +2,20 @@
 
 require_once("./GenericView.php");
 require_once("Alert.php");
+require_once("Model_Auth.php");
 
 class ViewAuth extends GenericView
 {
 
     private $viewAlert;
+    private $model;
 
     public function __construct()
     {
         parent::__construct();
         $this->viewAlert = new Alert;
+        $this->model = new ModelAuth;
+
     }
 
     public function form_login()
@@ -114,6 +118,37 @@ class ViewAuth extends GenericView
         </div>';
         } else {
             $this->viewAlert->alreadyAuthenticated();
+        }
+    }
+
+    public function form_resetPassword() {
+        if (isset($_GET['forgot_auth']) && isset($_GET['email']) && !empty($_GET['forgot_auth']) && !empty($_GET['email']) && !isset($_SESSION['login'])) {
+            if ($this->model->verifyResetPassword(htmlspecialchars($_GET['email']), htmlspecialchars($_GET['forgot_auth']))) {
+                echo '
+        <div class="auth">
+            <div class="auth-title">
+                <h1>Réinitialisation du mot de passe</h1>
+                <p>Merci de remplir les champs ci-dessous.</p>
+            </div>
+            <div class="auth-form">
+                <form action="./?module=auth&action=sendResetPassword" method="POST">
+                    <label for="email">NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="password" id="password" required>
+
+                    <label for="email">CONFIRMATION DU NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" required>
+
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
+                </form>
+            </div>
+        </div>';
+            }
+            else {
+                $this->viewAlert->invalidRequestPasswordReset();
+            }
+        }
+        else {
+            $this->viewAlert->invalidRequestPasswordReset();
         }
     }
 }

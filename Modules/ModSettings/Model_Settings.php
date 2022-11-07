@@ -33,8 +33,8 @@ class ModelSettings extends PDOConnection
         if (isset($_POST["submit"]) && isset($_SESSION['login'])) {
 
             $login = $_SESSION['login'];
-            $maxFileSize = 500000;
-            $acceptedExt = array('.png');
+            $maxFileSize = 2000000;
+            $acceptedExt = array('.png', '.jpg', '.jpeg', '.gif');
 
             $fileName = $_FILES['avatarFile']['name'];
             $fileSize = $_FILES['avatarFile']['size'];
@@ -49,24 +49,25 @@ class ModelSettings extends PDOConnection
             } else {
                 $tmpFileName = $_FILES['avatarFile']['tmp_name'];
                 $uniqueFileName = md5(uniqid(rand(), true));
-                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $uniqueFileName . $fileExt;
+                $uniqueFileNameWithExt = $uniqueFileName . $fileExt;
+                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $uniqueFileNameWithExt;
                 $result = move_uploaded_file($tmpFileName, $finalFileName);
 
                 if ($result) {
                     try {
-                        $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_id=:avatar_id WHERE username=:login");
-                        $stmtLogin->bindParam(':avatar_id', $uniqueFileName);
+                        $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_file=:avatar_file WHERE username=:login");
+                        $stmtLogin->bindParam(':avatar_file', $uniqueFileNameWithExt);
                         $stmtLogin->bindParam(':login', $login);
                         $stmtLogin->execute();
 
                         $this->viewAlert->fileTransferSuccess();
 
-                        if (!($_SESSION['avatar_id'] == 1)) {
-                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_id'] . ".png";
+                        if (!($_SESSION['avatar_file'] == "1.png")) {
+                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_file'];
                             unlink($oldFileToDelete);
                         }
 
-                        $_SESSION['avatar_id'] = $uniqueFileName;
+                        $_SESSION['avatar_file'] = $uniqueFileNameWithExt;
                     } catch (Exception $e) {
                         echo 'Erreur survenue : ',  $e->getMessage(), "\n";
                     }
@@ -86,20 +87,20 @@ class ModelSettings extends PDOConnection
 
             $login = $_SESSION['login'];
 
-            if ($_SESSION['avatar_id'] == 1) {
+            if ($_SESSION['avatar_file'] == "1.png") {
                 $this->viewAlert->unableToDeleteAvatarIsDefault();
             } else {
                 try {
-                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_id=1 WHERE username=:login");
+                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_file='1.png' WHERE username=:login");
                     $stmtLogin->bindParam(':login', $login);
                     $stmtLogin->execute();
 
-                    if (!($_SESSION['avatar_id'] == 1)) {
-                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_id'] . ".png";
+                    if (!($_SESSION['avatar_file'] == "1.png")) {
+                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_file'];
                         unlink($oldFileToDelete);
                     }
 
-                    $_SESSION['avatar_id'] = 1;
+                    $_SESSION['avatar_file'] = "1.png";
 
                     $this->viewAlert->avatarDeleteSuccess();
                 } catch (Exception $e) {

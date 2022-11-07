@@ -31,7 +31,7 @@ class ViewSettings extends GenericView
             </div>
 
             <div class="profilePicName">
-                <a href="./?module=settings&action=uploadAvatar"><div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_id'] .'.png\');"></div></a>
+                <a href="./?module=settings&action=uploadAvatar"><div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"><i class="fa fa-pencil editIconProfilePic"></i></div></a>
                 <div class="profileName">
                     <form action="./?module=settings&action=updateUserDetails" method="POST">
                     <label>NOM D\'UTILISATEUR :</label>
@@ -66,13 +66,13 @@ class ViewSettings extends GenericView
             </div>
             
             <div class="fileUpload">
-                <div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_id'] .'.png\');"></div>
+                <div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
 
                 <form action="./?module=settings&action=sendUploadAvatar" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label">IMPORTER UNE IMAGE :</label>
                     <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
-                    <label class="warningFileUpload">Format de fichier autorisé : PNG</label>
-                    <label class="warningFileUpload">Taille maximale du fichier : 500 Ko</label>
+                    <label class="warningFileUpload">Format de fichier autorisé : .png, .jpg, .gif</label>
+                    <label class="warningFileUpload">Taille maximale du fichier : 2 Mo</label>
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                     <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER LA PHOTO DE PROFIL ACTUELLE</label></a>
