@@ -25,29 +25,55 @@ class ViewSettings extends GenericView
             $user = $this->model->getUserDetails();
 
             echo '<div class="settings">
-            <div class="auth-title">
-                <h1>Paramètres</h1>
-                <p>Besoin d\'actualiser quelques informations ? C\'est par ici.</p>
+            <div class="page-title">
+            <h1>Paramètres</h1>
+            <p>Besoin d\'actualiser quelques informations ? C\'est par là.</p>
+        </div>
+
+        <div class="settings-container">
+            <div class="settings-nav">
+                <a href="./?module=settings">
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-user"></i> Profil</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-gear"></i> Compte</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-list"></i> Listes</div>
+                </a>
             </div>
 
-            <div class="profilePicName">
-                <a href="./?module=settings&action=uploadAvatar"><div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"><i class="fa fa-pencil editIconProfilePic"></i></div></a>
-                <div class="profileName">
-                    <form action="./?module=settings&action=updateUserDetails" method="POST">
-                    <label>NOM D\'UTILISATEUR :</label>
-                    <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
+            <div class="settings-content">
 
-                    <label>ADRESSE E-MAIL :</label>
-                    <input class="form-input" type="text" name="email" id="email" value="' . $user['email'] . '">
-
-                    <label>DÉFINIR UN NOUVEAU MOT DE PASSE :</label>
-                    <input class="form-input" type="password" name="password" id="password">
-
-                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9">Modifier</button>
-                    </form>
-                </div>
+            <div class="default-container about-container">
+                <label>A PROPOS DE TOI</label>
+                <form>
+                    <input class="form-input" type="text" name="about" id="about">
+                </form>
             </div>
-        </div>';
+
+            <div class="default-container avatarPic-container">
+                <label>AVATAR</label>
+                <a href="./?module=settings&action=uploadAvatar">
+                    <div class="avatarPic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
+                </a>
+            </div>
+
+            <div class="default-container banner-container">
+                <label>BANNIÈRE</label>
+                <a href="./?module=settings&action=uploadBanner">
+                    <div class="bannerPic" style=""></div>
+                </a>
+            </div>
+
+            <button type="submit" id="submit" class="btngradient btngradient-hover color-9">Valider les modifications</button>
+        </div>
+
+        </div>
+    </div>';
         } else {
             $this->viewAlert->userNotAuthenticated();
         }
@@ -60,22 +86,22 @@ class ViewSettings extends GenericView
             $user = $this->model->getUserDetails();
 
             echo '<div class="settings">
-            <div class="auth-title">
-                <h1>Importer une photo de profil</h1>
-                <p>Prêt à te démarquer avec une photo de profil personnalisée ?</p>
+            <div class="page-title">
+                <h1>Importer un avatar</h1>
+                <p>Prêt à te démarquer avec un avatar personnalisée ?</p>
             </div>
             
             <div class="fileUpload">
-                <div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
+                <div class="avatarPic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
 
                 <form action="./?module=settings&action=sendUploadAvatar" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label">IMPORTER UNE IMAGE :</label>
                     <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
-                    <label class="warningFileUpload">Format de fichier autorisé : .png, .jpg, .gif</label>
-                    <label class="warningFileUpload">Taille maximale du fichier : 2 Mo</label>
+                    <label class="warningFileUpload">Formats autorisés : JPEG, PNG, GIF.</label>
+                    <label class="warningFileUpload">Taille maximale : 2 Mo. Dimensions recommandées : 300x300.</label>
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
-                    <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER LA PHOTO DE PROFIL ACTUELLE</label></a>
+                    <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER L\'AVATAR ACTUEL</label></a>
                 </form>
             </div>';
         } else {
