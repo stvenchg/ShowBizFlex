@@ -23,8 +23,8 @@
 
     <main>
         <?php
-        global $view;
-        echo $view;
+            global $view;
+            echo $view;
         ?>
     </main>
 

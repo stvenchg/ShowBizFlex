@@ -32,6 +32,15 @@ class ModAuth extends PDOConnection
             case "forgot":
                 $this->controller->forgot();
             break;
+            case "sendForgot":
+                $this->controller->sendForgot();
+            break;
+            case "resetPassword":
+                $this->controller->resetPassword();
+            break;
+            case "sendResetPassword":
+                $this->controller->sendResetPassword();
+            break;
         }
 
         $this->controller->exec();

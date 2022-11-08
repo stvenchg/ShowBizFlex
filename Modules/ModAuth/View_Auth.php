@@ -2,16 +2,20 @@
 
 require_once("./GenericView.php");
 require_once("Alert.php");
+require_once("Model_Auth.php");
 
 class ViewAuth extends GenericView
 {
 
     private $viewAlert;
+    private $model;
 
     public function __construct()
     {
         parent::__construct();
         $this->viewAlert = new Alert;
+        $this->model = new ModelAuth;
+
     }
 
     public function form_login()
@@ -20,7 +24,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Content de te revoir !</h1>
                 <p>Merci de saisir tes identifiants afin que nous puissions t\'authentifier.</p>
             </div>
@@ -37,7 +41,7 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Pas encore de compte ? <a href="./?module=auth&action=register">S\'inscrire</a>.</p>
                 </div>
             </div>
@@ -53,7 +57,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Créer un compte</h1>
                 <p>Merci de renseigner les informations suivantes.</p>
             </div>
@@ -81,7 +85,7 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Déjà un compte ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
                 </div>
             </div>
@@ -95,7 +99,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Un oubli ?</h1>
                 <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
             </div>
@@ -107,13 +111,44 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Ça t\'es revenu ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
                 </div>
             </div>
         </div>';
         } else {
             $this->viewAlert->alreadyAuthenticated();
+        }
+    }
+
+    public function form_resetPassword() {
+        if (isset($_GET['forgot_auth']) && isset($_GET['email']) && !empty($_GET['forgot_auth']) && !empty($_GET['email']) && !isset($_SESSION['login'])) {
+            if ($this->model->verifyResetPassword(htmlspecialchars($_GET['email']), htmlspecialchars($_GET['forgot_auth']))) {
+                echo '
+        <div class="auth">
+            <div class="page-title">
+                <h1>Réinitialisation du mot de passe</h1>
+                <p>Merci de remplir les champs ci-dessous.</p>
+            </div>
+            <div class="auth-form">
+                <form action="./?module=auth&action=sendResetPassword" method="POST">
+                    <label for="email">NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="password" id="password" required>
+
+                    <label for="email">CONFIRMATION DU NOUVEAU MOT DE PASSE : </label>
+                    <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" required>
+
+                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
+                </form>
+            </div>
+        </div>';
+            }
+            else {
+                $this->viewAlert->invalidRequestPasswordReset();
+            }
+        }
+        else {
+            $this->viewAlert->invalidRequestPasswordReset();
         }
     }
 }

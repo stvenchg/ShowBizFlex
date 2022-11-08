@@ -14,7 +14,7 @@ class ViewFooter extends GenericView
     public function Footer()
     {
         $this->view = '<div class="container">
-        <p>ShowBizFlex © Tous droits réservés 2022</p>
+        <p>© 2022 ShowBizFlex. Tous droits réservés.</p>
     </div>';
     }
 

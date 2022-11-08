@@ -97,16 +97,24 @@ body {
     outline: none;
 }
 
-.auth-title {
+.page-title {
     text-align: center;
     margin-top: 5%;
     margin-bottom: 2%;
 }
 
-.auth-title h1 {
+.page-title h1 {
     color: white;
     font-weight: bold;
     font-size: 30px;
+}
+
+.page-title a {
+    color: rgba(199, 200, 201);
+}
+
+.page-title a:hover {
+    color: white;
 }
 
 input, label {
@@ -270,32 +278,52 @@ a:hover {
     font-size: 12px;
 }
 
-.profilePicName {
-    width: 700px;
-    height: 150px;
-    margin: auto;
-    gap: 20px;
-    display: flex;
-    justify-content: center;
-    padding: 1em;
-    position: relative;
+.default-container {
+    margin-bottom: 25px !important;
 }
 
+.default-container label {
+    margin-bottom: 10px;
+}
 
-.profilePic {
-    width: 100px;
-    height: 100px;
+.avatarPic-container {
+    width: 200px;
+}
+
+.avatarPic {
+    width: 150px;
+    height: 150px;
     border-color: white;
     border-style: solid;
     border-width: 1px;
-    border-radius: 50px;
-    padding: auto;
+    border-radius: 50%;
     background-size: cover !important;
     cursor: pointer;
     -webkit-filter: brightness(100%);
 }
 
-.profilePic:hover {
+.avatarPic:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 0.4s ease;
+    -moz-transition: all 0.4s ease;
+    -o-transition: all 0.4s ease;
+    -ms-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+.bannerPic {
+    width: 100%;
+    height: 200px;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 10px;
+    background-size: cover !important;
+    cursor: pointer;
+    -webkit-filter: brightness(100%);
+}
+
+.bannerPic:hover {
     -webkit-filter: brightness(70%);
     -webkit-transition: all 0.4s ease;
     -moz-transition: all 0.4s ease;
@@ -321,7 +349,7 @@ a:hover {
     position: relative;
 }
 
-.fileUpload .profilePic {
+.fileUpload .avatarPic {
     margin: auto;
     text-align: center;
     cursor:default;
@@ -346,6 +374,79 @@ a:hover {
     cursor: pointer;
 }
 
+.settings-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.settings-nav, .settings-content  {
+/*     border-color: white;
+    border-width: 2px;
+    border-style: solid; */
+    border-radius: 10px;
+}
+
+.settings-nav {
+    width: 250px;
+    min-height: 800px;
+    display: block;
+}
+
+.settings-nav-item {
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 13px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.settings-nav-item:hover {
+    background-image: linear-gradient(to right, #1b1e29 , #1C202E);
+}
+
+.settings-nav-item-selected {
+    background-image: linear-gradient(to right, #161922 , #1C202E);
+}
+
+.settings-nav-item-selected:hover {
+    background-image: linear-gradient(to right, #161922 , #1C202E);
+}
+
+.settings-nav-item i {
+    margin-right: 10px;
+}
+
+.settings-content {
+    padding: 20px;
+    width: 900px;
+    min-height: 800px;
+    /*background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;*/
+    border-right-width: 2px;
+    border-right-color: #171E26;
+    border-right-style: solid;
+
+    border-left-width: 2px;
+    border-left-color: #171E26;
+    border-left-style: solid;
+
+   border-top-width: 2px;
+    border-top-color: #171E26;
+    border-top-style: solid;
+
+    position: relative;
+}
+
+.settings-content button {
+    width: 250px;
+    position: absolute;
+    right: 10px;
+    bottom: 1%;
+}
+
 @media only screen and (max-width: 991px) {
     body {
         width: 100%;
@@ -363,11 +464,11 @@ a:hover {
         margin: auto;
     }
 
-    .auth-title h1 {
+    .page-title h1 {
         font-size: 25px;
     }
 
-    .auth-title p {
+    .page-title p {
         font-size: 15px;
     }
 
@@ -387,7 +488,7 @@ a:hover {
         width: 90%;
     }
 
-    .profilePicName {
+    .avatarPicName {
         width: 90%;
     }
 }
