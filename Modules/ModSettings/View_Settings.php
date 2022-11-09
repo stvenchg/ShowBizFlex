@@ -179,7 +179,7 @@ class ViewSettings extends GenericView
             echo '<div class="settings">
             <div class="page-title">
                 <h1>Importer un avatar</h1>
-                <p>Prêt à te démarquer avec un avatar personnalisée ?</p>
+                <p>Prêt à te démarquer avec un avatar personnalisé ?</p>
             </div>
             
             <div class="fileUpload">
@@ -193,6 +193,36 @@ class ViewSettings extends GenericView
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                     <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER L\'AVATAR ACTUEL</label></a>
+                </form>
+            </div>';
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function show_uploadBanner() {
+
+        if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+
+            echo '<div class="settings">
+            <div class="page-title">
+                <h1>Importer une bannière</h1>
+                <p>Prêt à te démarquer avec une bannière personnalisée ?</p>
+            </div>
+            
+            <div class="fileUpload">
+                <div class="bannerPic" style="background: url(\'../Assets/images/banner/' . $user['banner_file'] . '\');"></div>
+
+                <form action="./?module=settings&action=sendUploadBanner" method="POST" enctype="multipart/form-data">
+                    <label for="formFileSm" class="form-label mt-20">IMPORTER UNE IMAGE :</label>
+                    <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
+                    <label class="warningFileUpload">Formats autorisés : JPEG, PNG.</label>
+                    <label class="warningFileUpload">Taille maximale : 3 Mo. Dimensions recommandées : 300x300.</label>
+
+                    <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
+                    <a href="./?module=settings&action=deleteCurrentBanner"><label class="deleteCurrentBanner">SUPPRIMER LA BANNIÈRE ACTUELLE</label></a>
                 </form>
             </div>';
         } else {

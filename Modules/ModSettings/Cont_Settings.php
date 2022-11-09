@@ -43,6 +43,11 @@ class ContSettings
         $this->model->deleteCurrentAvatar();
     }
 
+    // Settings - Bannière
+    public function uploadBanner() {
+        $this->view->show_uploadBanner();
+    }
+
     // Settings - Details utilisateur
     public function updateUserDetails() {
         $this->model->updateUserDetails();

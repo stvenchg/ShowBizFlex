@@ -378,7 +378,7 @@ a:hover {
     margin-top: 10px;
 }
 
-.deleteCurrentAvatar {
+.deleteCurrentAvatar, .deleteCurrentBanner {
     margin-top: 20px;
     text-align: center;
     cursor: pointer;
@@ -395,6 +395,10 @@ a:hover {
     border-width: 2px;
     border-style: solid; */
     border-radius: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }
 
 .settings-nav {
@@ -560,5 +564,18 @@ a:hover {
 
     .avatarPicName {
         width: 90%;
+    }
+
+    .settings-container {
+        display: block;
+    }
+
+    .settings-nav {
+        width: 95%;
+        min-height: 200px;
+    }
+
+    .settings-content {
+        width: 95%;
     }
 }
