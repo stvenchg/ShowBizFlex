@@ -13,7 +13,7 @@ class ContSettings
     {
         $this->view = new ViewSettings();
         $this->model = new ModelSettings();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : "main";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "profile";
     }
 
     public function getAction() {
@@ -21,8 +21,12 @@ class ContSettings
     }
 
     // Settings
-    public function settings() {
-        $this->view->show_settings();
+    public function profile() {
+        $this->view->show_settingsProfile();
+    }
+
+    public function account() {
+        $this->view->show_settingsAccount();
     }
 
 

@@ -57,12 +57,22 @@ body {
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
 }
 
+.btngradient-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+}
+
 .btngradient-hover.color-9-s {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     width: 100%;
     height: 30px;
     margin-top: 10px;
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+}
+
+.btngradient-hover.color-11 {
+    background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  
+    box-shadow: 0 0 rgba(242, 97, 103, .4);
 }
 
 .btngradient {
@@ -420,32 +430,92 @@ a:hover {
 }
 
 .settings-content {
-    padding: 20px;
+    padding: 30px;
     width: 900px;
     min-height: 800px;
-    /*background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;*/
-    border-right-width: 2px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+/*     border-right-width: 4px;
     border-right-color: #171E26;
     border-right-style: solid;
 
-    border-left-width: 2px;
+    border-left-width: 4px;
     border-left-color: #171E26;
     border-left-style: solid;
 
-   border-top-width: 2px;
+   border-top-width: 4px;
     border-top-color: #171E26;
     border-top-style: solid;
+
+    border-bottom-width: 4px;
+    border-bottom-color: #171E26;
+    border-bottom-style: solid; */
 
     position: relative;
 }
 
-.settings-content button {
+.delete-account {
+    width: 250px;
+}
+
+.request-data {
+    width: 250px;
+}
+
+.submit-all {
     width: 250px;
     position: absolute;
-    right: 10px;
-    bottom: 1%;
+    right: 2%;
+    bottom: 2%;
 }
+
+.profil-color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.profil-color-palette-item {
+    width: 50px;
+    height: 50px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profil-color-palette-item:hover {
+    transform: scale(1.1);
+}
+
+.profil-color-palette-item.blue {
+    background-color: #3DB4F2
+}
+
+.profil-color-palette-item.purple {
+    background-color: #C063FF;
+}
+
+.profil-color-palette-item.green {
+    background-color: #4CCA51;
+}
+
+.profil-color-palette-item.orange {
+    background-color: #EF881A;
+}
+
+.profil-color-palette-item.red {
+    background-color: #E13333;
+}
+
+.profil-color-palette-item.pink {
+    background-color: #FC9DD6;
+}
+
+.profil-color-palette-item.grey {
+    background-color: #677B94;
+}
+
 
 @media only screen and (max-width: 991px) {
     body {
