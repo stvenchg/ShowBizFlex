@@ -48,9 +48,17 @@ class ContSettings
         $this->view->show_uploadBanner();
     }
 
+    public function sendUploadBanner() {
+        $this->model->sendUploadBanner();
+    }
+
+    public function deleteCurrentBanner() {
+        $this->model->deleteCurrentBanner();
+    }
+
     // Settings - Details utilisateur
-    public function updateUserDetails() {
-        $this->model->updateUserDetails();
+    public function updateAbout() {
+        $this->model->updateAbout();
     }
 
 

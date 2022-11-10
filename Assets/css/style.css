@@ -520,6 +520,10 @@ a:hover {
     background-color: #677B94;
 }
 
+.hide {
+    display: none;
+}
+
 
 @media only screen and (max-width: 991px) {
     body {

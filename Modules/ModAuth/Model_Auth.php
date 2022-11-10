@@ -71,7 +71,7 @@ class ModelAuth extends PDOConnection
                 } else {
                     
                     // Insertion des informations concernant le compte de l'utilisateur
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_file, banner_file) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, '1.png', '1.png')");
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_file, avatar_banner) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, '1.png', '1.png')");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
@@ -124,13 +124,8 @@ class ModelAuth extends PDOConnection
                 $_SESSION["id"] = $stmtResult['id'];
                 $_SESSION["login"] = $stmtResult['username'];
                 $_SESSION["email"] = $stmtResult['email'];
-
-               /*  $stmtProfile = parent::$db->prepare("SELECT * FROM showbizflex.accounts_profile WHERE account_id=:account_id");
-                $stmtProfile->bindParam(':account_id',  $stmtResult['id']);
-                $stmtProfile->execute();
-                $stmtResultProfile = $stmtProfile->fetch(); */
-
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
+                $_SESSION["banner_file"] = $stmtResult['banner_file'];
 
                 if ($stmtResult['is_admin'] == 1) {
                     $_SESSION["is_admin"] = "1";

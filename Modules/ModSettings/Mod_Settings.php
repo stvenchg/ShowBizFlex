@@ -32,8 +32,14 @@ class ModSettings extends PDOConnection
             case "uploadBanner":
                 $this->controller->uploadBanner();
             break;
-            case "updateUserDetails":
-                $this->controller->updateUserDetails();
+            case "sendUploadBanner":
+                $this->controller->sendUploadBanner();
+            break;
+            case "deleteCurrentBanner":
+                $this->controller->deleteCurrentBanner();
+            break;
+            case "updateAbout":
+                $this->controller->updateAbout();
             break;
         }
 

@@ -49,7 +49,7 @@ class ModelSettings extends PDOConnection
             } else {
                 $tmpFileName = $_FILES['avatarFile']['tmp_name'];
                 $uniqueFileName = md5(uniqid(rand(), true));
-                $uniqueFileNameWithExt = $uniqueFileName . $fileExt;
+                $uniqueFileNameWithExt = $login . "_" . $uniqueFileName . $fileExt;
                 $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $uniqueFileNameWithExt;
                 $result = move_uploaded_file($tmpFileName, $finalFileName);
 
@@ -112,6 +112,90 @@ class ModelSettings extends PDOConnection
         }
     }
 
+    public function sendUploadBanner()
+    {
+        if (isset($_POST["submit"]) && isset($_SESSION['login'])) {
+
+            $login = $_SESSION['login'];
+            $maxFileSize = 3000000;
+            $acceptedExt = array('.png', '.jpg', '.jpeg');
+
+            $fileName = $_FILES['bannerFile']['name'];
+            $fileSize = $_FILES['bannerFile']['size'];
+            $fileExt = "." . strtolower(substr(strrchr($fileName, '.'), 1));
+
+            if ($_FILES['bannerFile']['error'] > 0) {
+                $this->viewAlert->unknownErrorOccured();
+            } else if ($fileSize > $maxFileSize) {
+                $this->viewAlert->fileTooBig();
+            } else if (!in_array($fileExt, $acceptedExt)) {
+                $this->viewAlert->fileInvalidExt();
+            } else {
+                $tmpFileName = $_FILES['bannerFile']['tmp_name'];
+                $uniqueFileName = md5(uniqid(rand(), true));
+                $uniqueFileNameWithExt = $login . "_" . $uniqueFileName . $fileExt;
+                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $uniqueFileNameWithExt;
+                $result = move_uploaded_file($tmpFileName, $finalFileName);
+
+                if ($result) {
+                    try {
+                        $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET banner_file=:banner_file WHERE username=:login");
+                        $stmtLogin->bindParam(':banner_file', $uniqueFileNameWithExt);
+                        $stmtLogin->bindParam(':login', $login);
+                        $stmtLogin->execute();
+
+                        $this->viewAlert->fileTransferSuccess();
+
+                        if (!($_SESSION['banner_file'] == "1.png")) {
+                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $_SESSION['banner_file'];
+                            unlink($oldFileToDelete);
+                        }
+
+                        $_SESSION['banner_file'] = $uniqueFileNameWithExt;
+                    } catch (Exception $e) {
+                        echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+                    }
+                } else {
+                    $this->viewAlert->fileTransferError();
+                }
+            }
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function deleteCurrentBanner()
+    {
+
+        if (isset($_SESSION['login'])) {
+
+            $login = $_SESSION['login'];
+
+            if ($_SESSION['banner_file'] == "1.png") {
+                $this->viewAlert->unableToDeleteBannerIsDefault();
+            } else {
+                try {
+                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET banner_file='1.png' WHERE username=:login");
+                    $stmtLogin->bindParam(':login', $login);
+                    $stmtLogin->execute();
+
+                    if (!($_SESSION['banner_file'] == "1.png")) {
+                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $_SESSION['banner_file'];
+                        unlink($oldFileToDelete);
+                    }
+
+                    $_SESSION['banner_file'] = "1.png";
+
+                    $this->viewAlert->bannerDeleteSuccess();
+                } catch (Exception $e) {
+                    echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+                }
+            }
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
     public function updateUserDetails()  {
         if (isset($_SESSION['login']) && isset($_POST['username']) && isset($_POST['email'])) {
             $username = $_SESSION['login'];
@@ -146,31 +230,31 @@ class ModelSettings extends PDOConnection
             else {
                 $this->viewAlert->unknownErrorOccured();
             }
+        }
+        else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
 
-            // Email
-            /* if (($postEmail != $email) && (!str_contains($postEmail, '@') || !str_contains($postEmail, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $postEmail)) && !empty($postEmail)) {
-                $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
-                $stmtCountEmail->bindParam(':email', $email);
-                $stmtCountEmail->execute();
-                $countRowEmail = $stmtCountEmail->rowCount();
+    public function updateAbout()  {
+        if (isset($_SESSION['login']) && isset($_POST['about'])) {
 
-                if ($countRowEmail != 0) {
-                    $this->viewAlert->emailAlreadyTaken();
-                } else {
-                    $stmtEmail = parent::$db->prepare("UPDATE showbizflex.accounts SET email=:email WHERE id=:id");
-                    $stmtEmail->bindParam(':email', $postEmail);
-                    $stmtEmail->bindParam(':id', $id);
-                    $stmtEmail->execute();
+            $about = htmlspecialchars($_POST['about']);
+            $id = $_SESSION['id'];
 
-                    if ($stmtEmail) {
-                        $_SESSION['email'] = $postEmail;
-                        $this->viewAlert->userDetailsUpdateSuccess();
-                    }
+            if (strlen($about) <= 300) {
+                $stmtAbout = parent::$db->prepare("UPDATE showbizflex.accounts SET about=:about WHERE id=:id");
+                $stmtAbout->bindParam(':about', $about);
+                $stmtAbout->bindParam(':id', $id);
+                $stmtAbout->execute();
+
+                if ($stmtAbout) {
+                    $this->viewAlert->aboutUpdateSuccess();
                 }
             }
             else {
                 $this->viewAlert->unknownErrorOccured();
-            } */
+            }
         }
         else {
             $this->viewAlert->userNotAuthenticated();

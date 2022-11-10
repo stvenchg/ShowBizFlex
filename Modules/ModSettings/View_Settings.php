@@ -53,7 +53,7 @@ class ViewSettings extends GenericView
 
             <div class="settings-content">
 
-            <div class="default-container about-container">
+            <div class="default-container">
                 <label>COULEUR DE PROFIL</label>
                 
                 <div class="profil-color-palette">
@@ -69,8 +69,10 @@ class ViewSettings extends GenericView
 
             <div class="default-container about-container">
                 <label>À PROPOS DE TOI</label>
-                <form>
-                    <input class="form-input" type="text" name="about" id="about">
+                <form id="formChangeAbout" action="./?module=settings&action=updateAbout" method="POST">
+                    <input class="form-input" type="text" name="about" id="about" value="' . $user['about'] . '">
+
+                    <button type="submit" id="saveChangeAbout" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
                 </form>
             </div>
 
@@ -84,7 +86,7 @@ class ViewSettings extends GenericView
             <div class="default-container banner-container">
                 <label>BANNIÈRE</label>
                 <a href="./?module=settings&action=uploadBanner">
-                    <div class="bannerPic" style="background: url(\'../Assets/images/banner/1.png\');"></div>
+                    <div class="bannerPic" style="background: url(\'../Assets/images/banner/' . $user['banner_file'] . '\');"></div>
                 </a>
             </div>
         </div>
@@ -123,8 +125,10 @@ class ViewSettings extends GenericView
 
             <div class="default-container">
                 <label>NOM D\'UTILISATEUR</label>
-                <form>
+                <form id="formChangeUsername">
                     <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
+
+                    <button type="submit" id="saveChangeUsername" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
                 </form>
             </div>
 
@@ -217,9 +221,9 @@ class ViewSettings extends GenericView
 
                 <form action="./?module=settings&action=sendUploadBanner" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label mt-20">IMPORTER UNE IMAGE :</label>
-                    <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
+                    <input class="form-control form-control-sm" type="file" name="bannerFile" required/>
                     <label class="warningFileUpload">Formats autorisés : JPEG, PNG.</label>
-                    <label class="warningFileUpload">Taille maximale : 3 Mo. Dimensions recommandées : 300x300.</label>
+                    <label class="warningFileUpload">Taille maximale : 3 Mo.</label>
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                     <a href="./?module=settings&action=deleteCurrentBanner"><label class="deleteCurrentBanner">SUPPRIMER LA BANNIÈRE ACTUELLE</label></a>
