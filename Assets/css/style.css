@@ -224,6 +224,7 @@ a:hover {
 }
 
 .sub-menu-wrap {
+    z-index: 1;
     position: absolute;
     top: 100%;
     right: 1%;

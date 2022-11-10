@@ -41,6 +41,12 @@ class ModSettings extends PDOConnection
             case "updateAbout":
                 $this->controller->updateAbout();
             break;
+            case "updateUsername":
+                $this->controller->updateUsername();
+            break;
+            case "updateEmail":
+                $this->controller->updateEmail();
+            break;
         }
 
         $this->controller->exec();

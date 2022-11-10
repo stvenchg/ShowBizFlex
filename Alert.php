@@ -292,7 +292,7 @@ class Alert extends GenericView
             'Tes changements ont bien été pris en compte.',
             'success'
           ).then(function() {
-            window.location = './?module=settings';
+            window.location = './?module=settings&action=account';
         });</script>";
     }
 
@@ -302,7 +302,7 @@ class Alert extends GenericView
             'L\'adresse e-mail saisie est déjà prise.',
             'error'
           ).then(function() {
-            window.location = './?module=settings';
+            window.location = './?module=settings&action=account';
         });</script>";
     }
 
@@ -313,6 +313,36 @@ class Alert extends GenericView
             'success'
           ).then(function() {
             window.location = './?module=settings';
+        });</script>";
+    }
+
+    public function usernameUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'C\'est enregistré !',
+            'Ton nom d\'utilisateur a été mise à jour.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
+        });</script>";
+    }
+
+    public function usernameUpdateAlreadyTaken() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Le nom d\'utilisateur saisi est déjà pris.',
+            'error'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
+        });</script>";
+    }
+
+    public function emailUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'C\'est enregistré !',
+            'Ton adresse e-mail a été mise à jour.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
         });</script>";
     }
 

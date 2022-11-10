@@ -61,6 +61,13 @@ class ContSettings
         $this->model->updateAbout();
     }
 
+    public function updateUsername() {
+        $this->model->updateUsername();
+    }
+
+    public function updateEmail() {
+        $this->model->updateEmail();
+    }
 
     public function exec() {
         $this->view->view();

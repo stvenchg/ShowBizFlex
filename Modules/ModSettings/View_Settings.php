@@ -125,7 +125,7 @@ class ViewSettings extends GenericView
 
             <div class="default-container">
                 <label>NOM D\'UTILISATEUR</label>
-                <form id="formChangeUsername">
+                <form id="formChangeUsername" action="./?module=settings&action=updateUsername" method="POST">
                     <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
 
                     <button type="submit" id="saveChangeUsername" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
@@ -134,8 +134,10 @@ class ViewSettings extends GenericView
 
             <div class="default-container">
                 <label>ADRESSE E-MAIL</label>
-                <form>
+                <form id="formChangeEmail" action="./?module=settings&action=updateEmail" method="POST">
                     <input class="form-input" type="email" name="email" id="email" value="' . $user['email'] . '">
+
+                    <button type="submit" id="saveChangeEmail" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
                 </form>
             </div>
 

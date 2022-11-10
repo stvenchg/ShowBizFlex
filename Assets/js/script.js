@@ -12,3 +12,7 @@ $('input', '#formChangeAbout').change(function() {
 $('input', '#formChangeUsername').change(function() {
     $("#saveChangeUsername").removeClass("hide");
 });
+
+$('input', '#formChangeEmail').change(function() {
+    $("#saveChangeEmail").removeClass("hide");
+});
