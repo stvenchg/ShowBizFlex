@@ -17,37 +17,160 @@ class ViewSettings extends GenericView
         $this->viewAlert = new Alert;
     }
 
-    public function show_settings()
+    public function headerSettings() {
+        echo '<div class="settings">
+            <div class="page-title">
+            <h1>Paramètres</h1>
+            <p>Besoin d\'actualiser quelques informations ? C\'est par là.</p>
+        </div>';
+
+        $user = $this->model->getUserDetails();
+    }
+
+    public function show_settingsProfile()
     {
 
         if (isset($_SESSION['login'])) {
 
             $user = $this->model->getUserDetails();
+            $this->headerSettings();
 
-            echo '<div class="settings">
-            <div class="auth-title">
-                <h1>Paramètres</h1>
-                <p>Besoin d\'actualiser quelques informations ? C\'est par ici.</p>
+            echo '<div class="settings-container">
+            <div class="settings-nav">
+                <a href="./?module=settings">
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-user"></i> Profil</div>
+                </a>
+                <a href="./?module=settings&action=account">
+                    <div class="settings-nav-item"><i class="fa-solid fa-lock"></i> Compte</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-list"></i> Listes</div>
+                </a>
             </div>
 
-            <div class="profilePicName">
-                <a href="./?module=settings&action=uploadAvatar"><div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_id'] .'.png\');"></div></a>
-                <div class="profileName">
-                    <form action="./?module=settings&action=updateUserDetails" method="POST">
-                    <label>NOM D\'UTILISATEUR :</label>
-                    <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
+            <div class="settings-content">
 
-                    <label>ADRESSE E-MAIL :</label>
-                    <input class="form-input" type="text" name="email" id="email" value="' . $user['email'] . '">
-
-                    <label>DÉFINIR UN NOUVEAU MOT DE PASSE :</label>
-                    <input class="form-input" type="password" name="password" id="password">
-
-                    <button type="submit" id="submit" class="btngradient btngradient-hover color-9">Modifier</button>
-                    </form>
+            <div class="default-container">
+                <label>COULEUR DE PROFIL</label>
+                
+                <div class="profil-color-palette">
+                    <div class="profil-color-palette-item blue"></div>
+                    <div class="profil-color-palette-item purple"></div>
+                    <div class="profil-color-palette-item green"></div>
+                    <div class="profil-color-palette-item orange"></div>
+                    <div class="profil-color-palette-item red"></div>
+                    <div class="profil-color-palette-item pink"></div>
+                    <div class="profil-color-palette-item grey"></div>
                 </div>
             </div>
-        </div>';
+
+            <div class="default-container about-container">
+                <label>À PROPOS DE TOI</label>
+                <form id="formChangeAbout" action="./?module=settings&action=updateAbout" method="POST">
+                    <input class="form-input" type="text" name="about" id="about" value="' . $user['about'] . '">
+
+                    <button type="submit" id="saveChangeAbout" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                </form>
+            </div>
+
+            <div class="default-container avatarPic-container">
+                <label>AVATAR</label>
+                <a href="./?module=settings&action=uploadAvatar">
+                    <div class="avatarPic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
+                </a>
+            </div>
+
+            <div class="default-container banner-container">
+                <label>BANNIÈRE</label>
+                <a href="./?module=settings&action=uploadBanner">
+                    <div class="bannerPic" style="background: url(\'../Assets/images/banner/' . $user['banner_file'] . '\');"></div>
+                </a>
+            </div>
+        </div>
+
+        </div>
+    </div>';
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function show_settingsAccount()
+    {
+        if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+            $this->headerSettings();
+
+            echo '<div class="settings-container">
+            <div class="settings-nav">
+                <a href="./?module=settings">
+                    <div class="settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
+                </a>
+                <a href="./?module=settings&action=account">
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-lock"></i> Compte</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-list"></i> Listes</div>
+                </a>
+            </div>
+
+            <div class="settings-content">
+
+            <div class="default-container">
+                <label>NOM D\'UTILISATEUR</label>
+                <form id="formChangeUsername" action="./?module=settings&action=updateUsername" method="POST">
+                    <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
+
+                    <button type="submit" id="saveChangeUsername" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                </form>
+            </div>
+
+            <div class="default-container">
+                <label>ADRESSE E-MAIL</label>
+                <form id="formChangeEmail" action="./?module=settings&action=updateEmail" method="POST">
+                    <input class="form-input" type="email" name="email" id="email" value="' . $user['email'] . '">
+
+                    <button type="submit" id="saveChangeEmail" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                </form>
+            </div>
+
+            <div class="default-container">
+                <label>MODIFIER LE MOT DE PASSE</label>
+                <form>
+                    <input class="form-input" type="password" name="password" id="password" placeholder="Nouveau mot de passe">
+                    <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirmer le nouveau mot de passe">
+                </form>
+            </div>
+
+            <hr>
+
+            <div class="default-container">
+                <label>RGPD</label>
+                <p>Conformément au RGPD (Règlement Général sur la Protection des Données), tu peux demander à télécharger une copie de tes données stockées sur ShowBizFlex.com en appuyant sur le bouton ci-dessous.</p>
+
+                <button type="submit" id="submit" class="btngradient btngradient-hover color-9 request-data">Demander une copie</button>
+            </div>
+
+            <hr>
+
+            <div class="default-container">
+                <label style="color:red">SUPPRIMER LE COMPTE</label>
+                <p>Attention ! Cette action effacera de manière permanente les données de ton compte.</p>
+
+                <p>Afin de protéger ton compte, tu devras patienter un délais de 24 heures après ta demande de suppression. Une fois que les 24 heures sont passées, reviens sur cette page et appuie à nouveau sur le bouton ci-dessous pour confirmer la suppression du compte.</p>
+                <button type="submit" id="submit" class="btngradient btngradient-hover color-11 delete-account">Supprimer le compte</button>
+            </div>
+        </div>
+
+        </div>
+    </div>';
         } else {
             $this->viewAlert->userNotAuthenticated();
         }
@@ -60,22 +183,52 @@ class ViewSettings extends GenericView
             $user = $this->model->getUserDetails();
 
             echo '<div class="settings">
-            <div class="auth-title">
-                <h1>Importer une photo de profil</h1>
-                <p>Prêt à te démarquer avec une photo de profil personnalisée ?</p>
+            <div class="page-title">
+                <h1>Importer un avatar</h1>
+                <p>Prêt à te démarquer avec un avatar personnalisé ?</p>
             </div>
             
             <div class="fileUpload">
-                <div class="profilePic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_id'] .'.png\');"></div>
+                <div class="avatarPic" style="background: url(\'../Assets/images/avatar/' . $user['avatar_file'] . '\');"></div>
 
                 <form action="./?module=settings&action=sendUploadAvatar" method="POST" enctype="multipart/form-data">
                     <label for="formFileSm" class="form-label">IMPORTER UNE IMAGE :</label>
                     <input class="form-control form-control-sm" type="file" name="avatarFile" required/>
-                    <label class="warningFileUpload">Format de fichier autorisé : PNG</label>
-                    <label class="warningFileUpload">Taille maximale du fichier : 500 Ko</label>
+                    <label class="warningFileUpload">Formats autorisés : JPEG, PNG, GIF.</label>
+                    <label class="warningFileUpload">Taille maximale : 2 Mo. Dimensions recommandées : 300x300.</label>
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
-                    <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER LA PHOTO DE PROFIL ACTUELLE</label></a>
+                    <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER L\'AVATAR ACTUEL</label></a>
+                </form>
+            </div>';
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function show_uploadBanner() {
+
+        if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+
+            echo '<div class="settings">
+            <div class="page-title">
+                <h1>Importer une bannière</h1>
+                <p>Prêt à te démarquer avec une bannière personnalisée ?</p>
+            </div>
+            
+            <div class="fileUpload">
+                <div class="bannerPic" style="background: url(\'../Assets/images/banner/' . $user['banner_file'] . '\');"></div>
+
+                <form action="./?module=settings&action=sendUploadBanner" method="POST" enctype="multipart/form-data">
+                    <label for="formFileSm" class="form-label mt-20">IMPORTER UNE IMAGE :</label>
+                    <input class="form-control form-control-sm" type="file" name="bannerFile" required/>
+                    <label class="warningFileUpload">Formats autorisés : JPEG, PNG.</label>
+                    <label class="warningFileUpload">Taille maximale : 3 Mo.</label>
+
+                    <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
+                    <a href="./?module=settings&action=deleteCurrentBanner"><label class="deleteCurrentBanner">SUPPRIMER LA BANNIÈRE ACTUELLE</label></a>
                 </form>
             </div>';
         } else {

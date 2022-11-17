@@ -24,7 +24,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Content de te revoir !</h1>
                 <p>Merci de saisir tes identifiants afin que nous puissions t\'authentifier.</p>
             </div>
@@ -41,7 +41,7 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Pas encore de compte ? <a href="./?module=auth&action=register">S\'inscrire</a>.</p>
                 </div>
             </div>
@@ -57,7 +57,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Créer un compte</h1>
                 <p>Merci de renseigner les informations suivantes.</p>
             </div>
@@ -85,7 +85,7 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Déjà un compte ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
                 </div>
             </div>
@@ -99,7 +99,7 @@ class ViewAuth extends GenericView
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Un oubli ?</h1>
                 <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
             </div>
@@ -111,7 +111,7 @@ class ViewAuth extends GenericView
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
                 </form>
 
-                <div class="auth-title">
+                <div class="page-title">
                     <p>Ça t\'es revenu ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
                 </div>
             </div>
@@ -126,7 +126,7 @@ class ViewAuth extends GenericView
             if ($this->model->verifyResetPassword(htmlspecialchars($_GET['email']), htmlspecialchars($_GET['forgot_auth']))) {
                 echo '
         <div class="auth">
-            <div class="auth-title">
+            <div class="page-title">
                 <h1>Réinitialisation du mot de passe</h1>
                 <p>Merci de remplir les champs ci-dessous.</p>
             </div>

@@ -14,8 +14,11 @@ class ModSettings extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-            case "main":
-                $this->controller->settings();
+            case "profile":
+                $this->controller->profile();
+            break;
+            case "account":
+                $this->controller->account();
             break;
             case "uploadAvatar":
                 $this->controller->uploadAvatar();
@@ -26,8 +29,23 @@ class ModSettings extends PDOConnection
             case "deleteCurrentAvatar":
                 $this->controller->deleteCurrentAvatar();
             break;
-            case "updateUserDetails":
-                $this->controller->updateUserDetails();
+            case "uploadBanner":
+                $this->controller->uploadBanner();
+            break;
+            case "sendUploadBanner":
+                $this->controller->sendUploadBanner();
+            break;
+            case "deleteCurrentBanner":
+                $this->controller->deleteCurrentBanner();
+            break;
+            case "updateAbout":
+                $this->controller->updateAbout();
+            break;
+            case "updateUsername":
+                $this->controller->updateUsername();
+            break;
+            case "updateEmail":
+                $this->controller->updateEmail();
             break;
         }
 

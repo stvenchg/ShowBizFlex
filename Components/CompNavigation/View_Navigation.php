@@ -13,7 +13,7 @@ class ViewNavigation extends GenericView
 
     public function navigation()
     {
-        $this->view = '<nav class="navbar navbar-dark navbar-expand-lg">
+        $this->view = '<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
         <div class="container-fluid">
             <a class="navbar-brand" href="./">ShowBizFlex.</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@ class ViewNavigation extends GenericView
                 </div>';
 
         if (!isset($_SESSION['login'])) {
-            $this->view = $this->view . '<div class="navbar-nav ms-auto">
+            $this->view = $this->view . '<div class="navbar-nav ms-auto" id="navbar">
                     <a class="nav-link" href="./?module=auth&action=login"><button type="button" class="btn btn-link"><i class="fa-solid fa-right-to-bracket"></i> Connexion</button></a>
                     <a class="nav-link" href="./?module=auth&action=register"><button type="button" class="btngradient btngradient-hover color-9">S\'inscrire</button></a>
                 </div>
@@ -36,7 +36,7 @@ class ViewNavigation extends GenericView
     </nav>';
         } else {
             $this->view = $this->view . '<div class="navbar-nav ms-auto">
-                    <div class="avatar" id="avatar" onclick="toggleMenu()" style="background: url(\'../Assets/images/avatar/' . $_SESSION['avatar_id'] . '.png\');"></div>
+                    <div class="avatar" id="avatar" onclick="toggleMenu()" style="background: url(\'../Assets/images/avatar/' . $_SESSION['avatar_file'] . '\');"></div>
                 </div>
                     <div id="submenu" class="sub-menu-wrap">
                         <div class="sub-menu">
