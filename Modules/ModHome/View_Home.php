@@ -28,7 +28,7 @@ class ViewHome extends GenericView
         <p>Tu es actuellement sur une version démonstrative et en cours de développement.<br>Connectez-toi ou inscris-toi pour faire disparaître ce message.</p>
 
         <p style="color: green;">Dernière mise à jour : 17/11/2022</p>
-    </div>';
+        </div>';
         }
 
 
@@ -50,7 +50,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
-                <a href="#"><img src="' . $fullPosterPath . '"></a>s
+                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>s
             </div>
         </li>';
 
@@ -74,7 +74,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="featured-box">
-                <a href="#"><img src="' . $fullBackdropPath . '"></a>
+                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullBackdropPath . '"></a>
             </div>
         </li>';
 
@@ -98,7 +98,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="toprated-box">
-                <a href="#"><img src="' . $fullPosterPath . '"></a>
+                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
             </div>
         </li>';
 
