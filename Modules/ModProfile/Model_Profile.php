@@ -1,7 +1,6 @@
 <?php
 
 require_once('PDOConnection.php');
-require_once('View_Profile.php');
 
 class ModelProfile extends PDOConnection
 {
@@ -18,7 +17,7 @@ class ModelProfile extends PDOConnection
             $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
-            return $stmtLogin->fetch();
+            return $stmtLogin->fetchAll();
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }

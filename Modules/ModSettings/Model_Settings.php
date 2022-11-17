@@ -53,7 +53,7 @@ class ModelSettings extends PDOConnection
                 $tmpFileName = $_FILES['avatarFile']['tmp_name'];
                 $uniqueFileName = md5(uniqid(rand(), true));
                 $uniqueFileNameWithExt = $login . "_" . $uniqueFileName . $fileExt;
-                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $uniqueFileNameWithExt;
+                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/avatar/" . $uniqueFileNameWithExt;
                 $result = move_uploaded_file($tmpFileName, $finalFileName);
 
                 if ($result) {
@@ -66,7 +66,7 @@ class ModelSettings extends PDOConnection
                         $this->viewAlert->fileTransferSuccess();
 
                         if (!($_SESSION['avatar_file'] == "1.png")) {
-                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_file'];
+                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/avatar/" . $_SESSION['avatar_file'];
                             unlink($oldFileToDelete);
                         }
 
@@ -99,7 +99,7 @@ class ModelSettings extends PDOConnection
                     $stmtLogin->execute();
 
                     if (!($_SESSION['avatar_file'] == "1.png")) {
-                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/avatar/" . $_SESSION['avatar_file'];
+                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/avatar/" . $_SESSION['avatar_file'];
                         unlink($oldFileToDelete);
                     }
 
@@ -137,7 +137,7 @@ class ModelSettings extends PDOConnection
                 $tmpFileName = $_FILES['bannerFile']['tmp_name'];
                 $uniqueFileName = md5(uniqid(rand(), true));
                 $uniqueFileNameWithExt = $login . "_" . $uniqueFileName . $fileExt;
-                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $uniqueFileNameWithExt;
+                $finalFileName = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/banner/" . $uniqueFileNameWithExt;
                 $result = move_uploaded_file($tmpFileName, $finalFileName);
 
                 if ($result) {
@@ -150,7 +150,7 @@ class ModelSettings extends PDOConnection
                         $this->viewAlert->fileTransferSuccess();
 
                         if (!($_SESSION['banner_file'] == "1.png")) {
-                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $_SESSION['banner_file'];
+                            $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/banner/" . $_SESSION['banner_file'];
                             unlink($oldFileToDelete);
                         }
 
@@ -183,7 +183,7 @@ class ModelSettings extends PDOConnection
                     $stmtLogin->execute();
 
                     if (!($_SESSION['banner_file'] == "1.png")) {
-                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "Assets/images/banner/" . $_SESSION['banner_file'];
+                        $oldFileToDelete = $_SERVER['DOCUMENT_ROOT'] . "/Assets/images/banner/" . $_SESSION['banner_file'];
                         unlink($oldFileToDelete);
                     }
 
