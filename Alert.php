@@ -199,7 +199,7 @@ class Alert extends GenericView
     public function fileTransferSuccess() {
         echo "<script>Swal.fire(
             'Importation réussie !',
-            'Le fichier a bien été chargé et ta photo de profil a été mise à jour.',
+            'Le fichier a bien été chargé et ton compte a été mise à jour.',
             'success'
           ).then(function() {
             window.location = './?module=settings';
@@ -212,7 +212,7 @@ class Alert extends GenericView
             'Uniquement les fichiers au format .PNG, .JPG ou .GIF sont acceptés.',
             'error'
           ).then(function() {
-            window.location = './?module=settings&action=uploadAvatar';
+            window.location = './?module=settings';
         });</script>";
     }
 
@@ -222,7 +222,7 @@ class Alert extends GenericView
             'Le poids du fichier sélectionné dépasse la limite autorisée (2 Mo).',
             'error'
           ).then(function() {
-            window.location = './?module=settings&action=uploadAvatar';
+            window.location = './?module=settings';
         });</script>";
     }
 
@@ -256,6 +256,26 @@ class Alert extends GenericView
         });</script>";
     }
 
+    public function unableToDeleteBannerIsDefault() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Impossible de supprimer la bannière actuelle. Tu as la bannière par défaut.',
+            'error'
+          ).then(function() {
+            window.location = './?module=settings&action=uploadBanner';
+        });</script>";
+    }
+
+    public function bannerDeleteSuccess() {
+        echo "<script>Swal.fire(
+            'Suppression réussie !',
+            'Ta bannière actuelle a bien été supprimée.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=uploadBanner';
+        });</script>";
+    }
+
     public function usernameAlreadyTaken() {
         echo "<script>Swal.fire(
             'Il y a un problème !',
@@ -272,7 +292,7 @@ class Alert extends GenericView
             'Tes changements ont bien été pris en compte.',
             'success'
           ).then(function() {
-            window.location = './?module=settings';
+            window.location = './?module=settings&action=account';
         });</script>";
     }
 
@@ -282,7 +302,47 @@ class Alert extends GenericView
             'L\'adresse e-mail saisie est déjà prise.',
             'error'
           ).then(function() {
+            window.location = './?module=settings&action=account';
+        });</script>";
+    }
+
+    public function aboutUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'C\'est enregistré !',
+            'La description de ton profil a été mise à jour.',
+            'success'
+          ).then(function() {
             window.location = './?module=settings';
+        });</script>";
+    }
+
+    public function usernameUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'C\'est enregistré !',
+            'Ton nom d\'utilisateur a été mise à jour.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
+        });</script>";
+    }
+
+    public function usernameUpdateAlreadyTaken() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Le nom d\'utilisateur saisi est déjà pris.',
+            'error'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
+        });</script>";
+    }
+
+    public function emailUpdateSuccess() {
+        echo "<script>Swal.fire(
+            'C\'est enregistré !',
+            'Ton adresse e-mail a été mise à jour.',
+            'success'
+          ).then(function() {
+            window.location = './?module=settings&action=account';
         });</script>";
     }
 

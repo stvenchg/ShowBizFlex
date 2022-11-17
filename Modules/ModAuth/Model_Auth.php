@@ -69,14 +69,26 @@ class ModelAuth extends PDOConnection
                 } else if ($tos != 1) {
                     $this->viewAlert->userDidNotAcceptedTOS();
                 } else {
-
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_file) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, '1.png')");
+                    
+                    // Insertion des informations concernant le compte de l'utilisateur
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_file, banner_file) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, '1.png', '1.png')");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
                     $stmtRegisterNewUser->bindParam(':registration_ip', $ip);
                     $stmtRegisterNewUser->bindParam(':registration_ua', $ua);
                     $stmtResult = $stmtRegisterNewUser->execute();
+
+/*                     // Récupération de l'id de l'utilisateur crée
+                    $stmtRegisterNewUserGetId = parent::$db->prepare("SELECT id FROM showbizflex.accounts WHERE username=:username");
+                    $stmtRegisterNewUserGetId->bindParam(':username', $username);
+                    $stmtRegisterNewUserGetId->execute();
+                    $stmtResultGetId = $stmtRegisterNewUserGetId->fetch();
+
+                    // Insérer les informations par défaut du profil
+                    $stmtRegisterNewUserProfile = parent::$db->prepare("INSERT INTO showbizflex.accounts_profile(account_id, avatar_file, banner_file) VALUES (:account_id, '1.png', '1.png')");
+                    $stmtRegisterNewUserProfile->bindParam(':account_id', $stmtResultGetId['id']);
+                    $stmtResultProfile = $stmtRegisterNewUserProfile->execute(); */
 
                     if ($stmtResult) {
                         $this->viewAlert->registrationSuccessful();
@@ -113,6 +125,7 @@ class ModelAuth extends PDOConnection
                 $_SESSION["login"] = $stmtResult['username'];
                 $_SESSION["email"] = $stmtResult['email'];
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
+                $_SESSION["banner_file"] = $stmtResult['banner_file'];
 
                 if ($stmtResult['is_admin'] == 1) {
                     $_SESSION["is_admin"] = "1";

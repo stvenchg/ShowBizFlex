@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
 html {
     position: relative;
     min-height: 100%;
@@ -7,6 +5,8 @@ html {
 
 body {
     font-family: 'Montserrat', sans-serif;
+	font-weight: normal;
+	font-style: normal;
     -webkit-font-smoothing: antialiased;
     margin: auto;
     width: 80%;
@@ -57,12 +57,22 @@ body {
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
 }
 
+.btngradient-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+}
+
 .btngradient-hover.color-9-s {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     width: 100%;
     height: 30px;
     margin-top: 10px;
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+}
+
+.btngradient-hover.color-11 {
+    background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  
+    box-shadow: 0 0 rgba(242, 97, 103, .4);
 }
 
 .btngradient {
@@ -214,6 +224,7 @@ a:hover {
 }
 
 .sub-menu-wrap {
+    z-index: 1;
     position: absolute;
     top: 100%;
     right: 1%;
@@ -368,7 +379,7 @@ a:hover {
     margin-top: 10px;
 }
 
-.deleteCurrentAvatar {
+.deleteCurrentAvatar, .deleteCurrentBanner {
     margin-top: 20px;
     text-align: center;
     cursor: pointer;
@@ -385,6 +396,10 @@ a:hover {
     border-width: 2px;
     border-style: solid; */
     border-radius: 10px;
+}
+
+.mt-20 {
+    margin-top: 20px;
 }
 
 .settings-nav {
@@ -420,32 +435,186 @@ a:hover {
 }
 
 .settings-content {
-    padding: 20px;
+    padding: 30px;
     width: 900px;
     min-height: 800px;
-    /*background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;*/
-    border-right-width: 2px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+/*     border-right-width: 4px;
     border-right-color: #171E26;
     border-right-style: solid;
 
-    border-left-width: 2px;
+    border-left-width: 4px;
     border-left-color: #171E26;
     border-left-style: solid;
 
-   border-top-width: 2px;
+   border-top-width: 4px;
     border-top-color: #171E26;
     border-top-style: solid;
+
+    border-bottom-width: 4px;
+    border-bottom-color: #171E26;
+    border-bottom-style: solid; */
 
     position: relative;
 }
 
-.settings-content button {
+.delete-account {
+    width: 250px;
+}
+
+.request-data {
+    width: 250px;
+}
+
+.submit-all {
     width: 250px;
     position: absolute;
-    right: 10px;
-    bottom: 1%;
+    right: 2%;
+    bottom: 2%;
 }
+
+.profil-color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.profil-color-palette-item {
+    width: 50px;
+    height: 50px;
+    border-color: white;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.profil-color-palette-item:hover {
+    transform: scale(1.1);
+}
+
+.profil-color-palette-item.blue {
+    background-color: #3DB4F2
+}
+
+.profil-color-palette-item.purple {
+    background-color: #C063FF;
+}
+
+.profil-color-palette-item.green {
+    background-color: #4CCA51;
+}
+
+.profil-color-palette-item.orange {
+    background-color: #EF881A;
+}
+
+.profil-color-palette-item.red {
+    background-color: #E13333;
+}
+
+.profil-color-palette-item.pink {
+    background-color: #FC9DD6;
+}
+
+.profil-color-palette-item.grey {
+    background-color: #677B94;
+}
+
+.hide {
+    display: none;
+}
+
+.featured-box {
+    width: 600px;
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 10px;
+    margin: 0px 20px 10px 0px;
+    overflow: hidden;
+    transition: transform 0.5s;
+}
+
+.featured-box:hover {
+    transform: scale(1.01);
+}
+
+
+.featured-box img {
+    width: 100%;
+    height: 100%;
+    object-fit:cover;
+    object-position: top;
+}
+
+.featured-heading {
+    padding-left: 30px;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+.trending-heading, .toprated-heading, .latest-heading {
+    padding-left: 30px;
+    color: white;
+    font-weight: bold;
+    margin:  10px  10px;
+    margin-top: 50px;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+}
+
+.trending-box, .toprated-box, .latest-box {
+    width: 200px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin:  10px  10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.5s;
+}
+
+.trending-box img, .toprated-box img, .latest-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.trending-box:hover, .toprated-box:hover, .latest-box:hover {
+    transform: scale(1.05);
+}
+
+.cs-hidden {
+    overflow: visible !important;
+}
+
+.alpha-alert {
+    width: 50%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.alpha-alert h1 {
+    color:white;
+    font-weight: bold;
+    font-size:large;
+}
+
+
 
 @media only screen and (max-width: 991px) {
     body {
@@ -491,4 +660,43 @@ a:hover {
     .avatarPicName {
         width: 90%;
     }
+
+    .settings-container {
+        display: block;
+    }
+
+    .settings-nav {
+        width: 95%;
+        min-height: 200px;
+    }
+
+    .settings-content {
+        width: 95%;
+    }
+
+    .alpha-alert {
+        width: 90%;
+        margin: auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        text-align: center;
+        border-radius: 10px;
+        background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+
+    .featured-heading, .trending-heading, .toprated-heading, .latest-heading {
+        font-size: 0.9em;
+    }
+
+    .featured-box {
+        width: 400px;
+        height: 250px;
+    }
+
+    .trending-box, .toprated-box, .latest-box {
+        width: 150px;
+        height: 220px;
+    }
+    
 }

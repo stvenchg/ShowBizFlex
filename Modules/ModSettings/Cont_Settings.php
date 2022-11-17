@@ -13,7 +13,7 @@ class ContSettings
     {
         $this->view = new ViewSettings();
         $this->model = new ModelSettings();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : "main";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "profile";
     }
 
     public function getAction() {
@@ -21,8 +21,12 @@ class ContSettings
     }
 
     // Settings
-    public function settings() {
-        $this->view->show_settings();
+    public function profile() {
+        $this->view->show_settingsProfile();
+    }
+
+    public function account() {
+        $this->view->show_settingsAccount();
     }
 
 
@@ -39,11 +43,31 @@ class ContSettings
         $this->model->deleteCurrentAvatar();
     }
 
-    // Settings - Details utilisateur
-    public function updateUserDetails() {
-        $this->model->updateUserDetails();
+    // Settings - Bannière
+    public function uploadBanner() {
+        $this->view->show_uploadBanner();
     }
 
+    public function sendUploadBanner() {
+        $this->model->sendUploadBanner();
+    }
+
+    public function deleteCurrentBanner() {
+        $this->model->deleteCurrentBanner();
+    }
+
+    // Settings - Details utilisateur
+    public function updateAbout() {
+        $this->model->updateAbout();
+    }
+
+    public function updateUsername() {
+        $this->model->updateUsername();
+    }
+
+    public function updateEmail() {
+        $this->model->updateEmail();
+    }
 
     public function exec() {
         $this->view->view();
