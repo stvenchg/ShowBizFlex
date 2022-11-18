@@ -21,18 +21,23 @@ class ViewShows extends GenericView
     {
         $res = $this->model->getShowDetails();
 
+        echo '<div class="show-box">';
+
+        $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
+        echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\');"></div>';
+
+        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
+        echo '<div class="poster">
+            <img src="' . $fullPosterPath . '"/>
+        </div>';
+
+        echo '<div class="show-info">';
+
         echo'<h2>'.$res['name'].'</h2>';
         echo("<br>");
         echo($res['tagline']);
         echo("<br>");
 
-        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
-        echo("<img src=\"".$fullPosterPath."\"/>");
-        echo("<br>");
-
-        $fullBackdropPath = "https://image.tmdb.org/t/p/w500/" . $res['backdrop_path'];
-        echo("<img src=\"".$fullBackdropPath."\"/>");
-        echo("<br>");
 
         echo("Genre(s) : ");
         foreach($res['genres'] as $genre) {
@@ -94,7 +99,9 @@ class ViewShows extends GenericView
             echo($saison['episode_count']." ");    
         }
 
-       
+        echo '</div>';
+
+        echo "</div>";
 
     }
 }
