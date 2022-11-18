@@ -31,10 +31,11 @@ class ViewHome extends GenericView
         </div>';
         }
 
-
+        echo '<div class="home">';
         $this->featured();
         $this->trendingThisWeek();
         $this->topRated();
+        echo '</div>';
     }
 
     public function trendingThisWeek() {

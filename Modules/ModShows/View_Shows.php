@@ -22,6 +22,7 @@ class ViewShows extends GenericView
         $res = $this->model->getShowDetails();
 
         echo '<div class="show-box">';
+        echo '<div class="show-images">';
 
         $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
         echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\');"></div>';
@@ -31,9 +32,15 @@ class ViewShows extends GenericView
             <img src="' . $fullPosterPath . '"/>
         </div>';
 
+        echo '</div>';
+
         echo '<div class="show-info">';
 
-        echo'<h2>'.$res['name'].'</h2>';
+        echo '<div class="show-info-left">';
+        echo '</div>';
+        
+        echo '<div class="show-info-right">';
+        echo'<h3 style="font-weight: bold; color: white;">'.$res['name'].'</h3>';
         echo("<br>");
         echo($res['tagline']);
         echo("<br>");
@@ -98,6 +105,8 @@ class ViewShows extends GenericView
             echo($saison['name']." ");
             echo($saison['episode_count']." ");    
         }
+
+        echo '</div>';
 
         echo '</div>';
 
