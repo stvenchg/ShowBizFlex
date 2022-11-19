@@ -20,8 +20,8 @@ class ContShows
         return $this->action;
     }
 
-    public function show() {
-        $this->view->show_show();
+    public function overview() {
+        $this->view->show_overview();
     }
 
     public function exec() {

@@ -51,7 +51,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
-                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>s
+                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>s
             </div>
         </li>';
 
@@ -75,7 +75,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="featured-box">
-                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullBackdropPath . '"></a>
+                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullBackdropPath . '"></a>
             </div>
         </li>';
 
@@ -99,7 +99,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="toprated-box">
-                <a href="?module=shows&action=show&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
+                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
             </div>
         </li>';
 

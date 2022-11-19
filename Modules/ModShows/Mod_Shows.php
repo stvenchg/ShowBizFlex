@@ -14,8 +14,8 @@ class ModShows extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-            case "show":
-                $this->controller->show();
+            case "overview":
+                $this->controller->overview();
             break;
         }
 
