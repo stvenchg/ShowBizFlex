@@ -29,7 +29,8 @@ body {
 
 header {
     width: 80%;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .home {
@@ -38,7 +39,7 @@ header {
 }
 
 .navbar-brand {
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .btn-link {
@@ -123,7 +124,7 @@ header {
 
 .page-title h1 {
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 30px;
 }
 
@@ -140,7 +141,7 @@ input, label {
 }
 
 label {
-    font-weight: bold;
+    font-weight: 600;
     font-size: small;
     margin-bottom: 7px;
 }
@@ -248,11 +249,12 @@ a:hover {
 }
 
 .sub-menu {
-    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
     color:  rgb(255, 255, 255);
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: -10px;
+    padding: 15px;
+    border-radius: 20px;
+    z-index: 10000;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 .sub-menu hr {
@@ -288,7 +290,7 @@ a:hover {
 }
 
 .user-info h5 {
-    font-weight: bold;
+    font-weight: 500;
     font-size: medium;
 }
 
@@ -558,7 +560,7 @@ a:hover {
 .featured-heading {
     padding-left: 30px;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     margin-bottom: 20px;
     margin-top: 20px;
     text-transform: uppercase;
@@ -569,7 +571,7 @@ a:hover {
 .trending-heading, .toprated-heading, .latest-heading {
     padding-left: 30px;
     color: white;
-    font-weight: bold;
+    font-weight: 700;
     margin:  10px  10px;
     margin-top: 50px;
     text-transform: uppercase;
@@ -587,7 +589,7 @@ a:hover {
     margin:  10px  10px;
     border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 
 .trending-box img, .toprated-box img, .latest-box img {
@@ -618,13 +620,13 @@ a:hover {
 
 .alpha-alert h1 {
     color:white;
-    font-weight: bold;
+    font-weight: 500;
     font-size:large;
 }
 
 .backdrop {
     width: 100%;
-    height: 600px;
+    height: 660px;
     opacity: 0.20;
     margin: auto;
 }
@@ -633,6 +635,11 @@ a:hover {
     width: 350px;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s;
+}
+
+.poster img:hover {
+    transform: scale(1.05);
 }
 
 .header-show-container {
@@ -649,7 +656,7 @@ a:hover {
 
 .show-title {
     font-size: 2.2rem;
-    font-weight: 1000;
+    font-weight: 900;
 }
 
 .show-release-date {
@@ -670,13 +677,13 @@ a:hover {
     display: flex;
     margin: auto;
     position: absolute;
-    top: 6%;
+    top: 13%;
     left: 10%;
-    gap: 35px;
+    gap: 50px;
 }
 
 .showMainInfo {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .show-genres {
@@ -696,7 +703,7 @@ a:hover {
 
 .section-title {
     font-size: 1.3rem;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 20px;
     margin-bottom: 10px;
 }
@@ -705,16 +712,88 @@ a:hover {
     background-color: transparent;
     border: none;
     width: auto;
-    height: auto;
     font-weight: 600;
+    font-size: 1rem;
+    will-change: opacity;
+    transition: linear .1s;
+    color: white;
+    margin-top: 21px;
+    padding: 10px;
+}
+
+.showMainControls {
+    display: flex;
+    gap: 20px;
+}
+
+.favButton {
+    background-color: transparent;
+    width: auto;
+    font-weight: 600;
+    font-size: 1rem;
     will-change: opacity;
     transition: linear .1s;
     color: white;
     margin-top: 20px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.showSubControls {
+    display: flex;
+    gap: 10px;
+}
+
+.favButton i {
+    padding: 5px;
+}
+
+.favButton:hover {
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+.favButton i:hover {
+    color: rgb(235, 80, 80);
+}
+
+.addToListButton {
+    background-color: transparent;
+    width: auto;
+    font-weight: 600;
+    font-size: 1rem;
+    will-change: opacity;
+    transition: linear .1s;
+    color: white;
+    margin-top: 20px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.showTrailerButton i {
+    margin-right: 10px;
 }
 
 .showTrailerButton:hover {
     color: rgba(255, 255, 255, 0.55);
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+.show-synopsis {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: justify;
+}
+
+.show-synopsis:hover {
+    -webkit-line-clamp: 10;
 }
 
 .show-availability {
@@ -725,12 +804,93 @@ a:hover {
 .show-availability img {
     width: 50px;
     border-radius: 50%;
-    transition: transform 0.5s;
+    transition: transform 0.2s;
 }
 
 .show-availability img:hover {
     transform: scale(1.1);
     cursor: pointer;
+}
+
+.show-tagline {
+    margin-top: 15px;
+    font-size: 17px;
+    color: rgba(255, 255, 255, 0.55);
+    font-style: italic;
+}
+
+.body-show-container {
+    margin: auto;
+    margin-top: 30px;
+    width: 80%;
+    display: flex;
+    gap: 50px
+}
+
+.showFactsLeftColumn {
+    min-width: 350px;
+}
+
+.showPanel {
+    width: 80%;
+}
+
+.fact-wrap {
+    margin-bottom: 20px;
+}
+
+.fact {
+    font-size: 15px;
+    font-weight: 300;
+    color:  white;
+}
+
+.fact-title {
+    font-size: 17px;
+    font-weight: 600;
+    color:  white;
+    margin-bottom: 20px;
+}
+
+.fact-subtitle {
+    font-size: 15px;
+    font-weight: 500;
+    color:  white;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+.panel-title {
+    color: white;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.cast-box {
+    width: 150px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin:  10px  10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+}
+
+.cast-box img {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    object-position: top;
+}
+
+.cast-box:hover {
+    transform: scale(1.05);
 }
 
 @media only screen and (max-width: 991px) {
@@ -815,6 +975,31 @@ a:hover {
     .trending-box, .toprated-box, .latest-box {
         width: 150px;
         height: 220px;
+    }
+
+    .showPosterAndMainInfo {
+        position: absolute;
+        top: 5%;
+        left: 10%;
+        gap: 30px;
+        display: block;
+    }
+
+    .showMainInfo {
+        margin-top: 10%;
+    }
+
+    .backdrop {
+        width: 100%;
+        height: 1200px;
+    }
+
+    .body-show-container {
+        display: block;
+    }
+
+    .showPanel {
+        margin-top: 10%;
     }
     
 }
