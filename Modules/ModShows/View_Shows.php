@@ -140,7 +140,8 @@ class ViewShows extends GenericView
                 <h1 class="show-title"><a style="color: white" href="#">' . $showName . '</a><span class="show-release-date">' . $showFirstAirYear . '</span>'. '</h1>
                 <span class="show-rating">' . $rating . '</span><span class="show-genres">' . $showGenres . '</span>
                 <div class="showMainControls">
-                    <a target="_blank" href="https://youtube.com/embed/' . $trailer . '"><button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button></a>
+                    <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
+                    <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>
                     <div class="showSubControls">
                         <a href="#"><button class="favButton"><i class="fa-solid fa-heart"></i></button></a>
                     </div>
@@ -198,6 +199,7 @@ class ViewShows extends GenericView
             </div>
 
         </div>';
+        
 
         /*
         

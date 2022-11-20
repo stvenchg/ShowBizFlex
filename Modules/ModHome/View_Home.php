@@ -51,7 +51,7 @@ class ViewHome extends GenericView
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
-                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>s
+                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
             </div>
         </li>';
 

@@ -753,6 +753,7 @@ a:hover {
 
 .favButton:hover {
     border-color: rgba(255, 255, 255, 0.55);
+    color: rgb(235, 80, 80);
 }
 
 .favButton i:hover {
@@ -773,6 +774,46 @@ a:hover {
     border-style: solid;
     border-radius: 50%;
     padding: 10px;
+}
+
+.modalTrailer {
+    width: 90vw;
+    position: relative;
+    padding-top: 56.25%;
+    margin: 2em 0;
+}
+
+.modalTrailer iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    border: none;
+    width: 50%;
+    height: 50%;
+    z-index: 100;
+    border-radius: 10px;
+}
+
+.modalTrailer-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8);
+    width: 100vw;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    transition: opacity 0.2s ease-in-out;
+    z-index: 10000;
+}
+
+.modalTrailer-bg {
+    display: none;
+    opacity: 0;
 }
 
 .showTrailerButton i {
@@ -987,6 +1028,10 @@ a:hover {
 
     .showMainInfo {
         margin-top: 10%;
+    }
+
+    .poster img {
+        width: 50%;
     }
 
     .backdrop {
