@@ -30,10 +30,10 @@ class ViewAuth extends GenericView
             </div>
             <div class="auth-form">
                 <form action="./?module=auth&action=sendLogin" method="POST">
-                    <label for="login">NOM D\'UTILISATEUR OU E-MAIL : </label>
+                    <label for="login">NOM D\'UTILISATEUR OU E-MAIL</label>
                     <input class="form-input" type="text" name="login" required>
 
-                    <label for="login">MOT DE PASSE : </label>
+                    <label for="login">MOT DE PASSE</label>
                     <input class="form-input" type="password" name="password" required>
 
                     <label class="forgotpswd"><a href="./?module=auth&action=forgot">MOT DE PASSE OUBLIÉ ?</a></label>
@@ -63,16 +63,16 @@ class ViewAuth extends GenericView
             </div>
             <div class="auth-form">
                 <form action="./?module=auth&action=sendRegister" method="POST">
-                    <label for="username">NOM D\'UTILISATEUR : </label>
+                    <label for="username">NOM D\'UTILISATEUR</label>
                     <input class="form-input" type="text" name="username" id="username" required>
 
-                    <label for="email">ADRESSE E-MAIL : </label>
+                    <label for="email">ADRESSE E-MAIL</label>
                     <input class="form-input" type="text" name="email" id="email" required>
 
-                    <label for="login">MOT DE PASSE : </label>
+                    <label for="login">MOT DE PASSE</label>
                     <input class="form-input" type="password" name="password" id="password" required>
 
-                    <label for="login">CONFIRMATION DU MOT DE PASSE : </label>
+                    <label for="login">CONFIRMATION DU MOT DE PASSE</label>
                     <input class="form-input" type="password" name="passwordconfirm" id="passwordconfirm" required>
 
                     <div class="form-check">
@@ -105,7 +105,7 @@ class ViewAuth extends GenericView
             </div>
             <div class="auth-form">
                 <form action="./?module=auth&action=sendForgot" method="POST">
-                    <label for="email">ADRESSE E-MAIL : </label>
+                    <label for="email">ADRESSE E-MAIL</label>
                     <input class="form-input" type="text" name="email" id="email" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>

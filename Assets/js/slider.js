@@ -37,7 +37,18 @@ $(document).ready(function () {
         loop: true,
         pager: false,
         onSliderLoad: function () {
-            $('#autoWidthTopRated').removeClass('cS-hidden');
+            $('#autoWidthLatest').removeClass('cS-hidden');
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#autoWidthShowCast').lightSlider({
+        autoWidth: true,
+        loop: true,
+        pager: false,
+        onSliderLoad: function () {
+            $('#autoWidthShowCast').removeClass('cS-hidden');
         }
     });
 });
