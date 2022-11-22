@@ -27,6 +27,9 @@
     </header>
 
     <main>
+    <div class="modalSearch-bg"></div>
+    <div class="search"></div>
+
         <?php
         global $view;
         echo $view;

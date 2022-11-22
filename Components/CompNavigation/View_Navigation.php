@@ -15,13 +15,13 @@ class ViewNavigation extends GenericView
     {
         $this->view = '<nav class="navbar navbar-dark navbar-expand-lg" id="navbar">
         <div class="container-fluid">
-            <a class="navbar-brand" href="./">ShowBizFlex.</a>
+            <a class="navbar-brand" href="./"><span class="gradient-brand-blue">Show</span><span class="gradient-brand-gray">BizFlex</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass"></i> Rechercher</a>
+                    <a class="nav-link" id="searchbutton"><i class="fa-solid fa-magnifying-glass"></i> Rechercher</a>
                     <a class="nav-link" href="#"><i class="fa-solid fa-arrow-trend-up"></i> Tendances</a>
                     <a class="nav-link" href="#"><i class="fa-solid fa-ranking-star"></i> Top 100</a>
                 </div>';

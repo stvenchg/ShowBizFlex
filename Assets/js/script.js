@@ -1,3 +1,4 @@
+// Profile subMenu events
 const subMenu = document.querySelector('#submenu');
 const avatar = document.querySelector('#avatar');
 
@@ -17,7 +18,32 @@ $('input', '#formChangeEmail').change(function() {
     $("#saveChangeEmail").removeClass("hide");
 });
 
+// Search events
+const searchButton = document.querySelector('#searchbutton');
+const modalSearchBg = document.querySelector('.modalSearch-bg');
+const searchInput = document.querySelector('.search');
 
+searchButton.addEventListener('click', () => {
+    modalSearchBg.style.display = "flex";
+    setTimeout(() => {
+        modalSearchBg.style.opacity = "0.5";
+    }, 50);
+
+    setTimeout(() => {
+    searchInput.innerHTML = '<div class="search-box"><input class="inputSearch" placeholder="Rechercher ShowBizFlex..." type="text" name="query" id="inputSearch"></div>';
+    }, 100);
+});
+
+modalSearchBg.addEventListener('click', () => {
+    modalSearchBg.innerHTML = '';
+    modalSearchBg.style.opacity = "0";
+    searchInput.innerHTML = '';
+    setTimeout(() => {
+        modalSearchBg.style.display = "none";
+    }, 250);
+});
+
+// View trailer events
 const showTrailerButton = document.querySelector('.showTrailerButton');
 const modalTrailerBg = document.querySelector('.modalTrailer-bg');
 let value = $('.modalTrailer-bg').data('value');
