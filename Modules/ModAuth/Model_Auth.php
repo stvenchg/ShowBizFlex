@@ -149,7 +149,7 @@ class ModelAuth extends PDOConnection
             session_unset();
             session_destroy();
 
-            $this->viewAlert->logoutSuccessful();
+            header('Location: ./');
         } else {
             $this->viewAlert->logoutError();
         }

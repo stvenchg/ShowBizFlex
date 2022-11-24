@@ -24,7 +24,7 @@ class ViewShows extends GenericView
         echo '<style>
             header {
                 position: absolute;
-                top: 0;
+                top: 3px;
                 left: 0;
                 right: 0;
                 bottom: 0;
