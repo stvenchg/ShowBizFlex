@@ -1,6 +1,6 @@
 <?php
 
-require_once("./GenericView.php");
+require_once("GenericView.php");
 require_once("Alert.php");
 require_once("Model_Shows.php");
 
@@ -142,9 +142,11 @@ class ViewShows extends GenericView
                 <div class="showMainControls">
                     <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
                     <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>
-                    <div class="showSubControls">
-                        <a href="#"><button class="favButton"><i class="fa-solid fa-heart"></i></button></a>
-                    </div>
+                    <div class="showSubControls">';
+                    if(isset($_SESSION['login'])){
+                        echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
+                    }
+        echo' </div>
                 </div>
                 <h2 class="show-tagline">' . $tagLine . '</h2>
                 <h3 class="section-title">Synopsis</h3>
