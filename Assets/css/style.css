@@ -60,6 +60,23 @@ header {
     font-weight: 650;
 }
 
+.nav-link {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.nav-button {
+    margin-right: 0px;
+}
+
+.nav-link i {
+    margin-right: 4px;
+}
+
+.nav-link:hover {
+    cursor: pointer;
+}
+
 .gradient-brand-blue {
     background: -webkit-linear-gradient(#25aae1, #3f86ed);
   -webkit-background-clip: text;
@@ -76,6 +93,7 @@ header {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.55);
     margin-right: -10px;
+    font-weight: 500;
 }
 
 .btn-link:hover {
@@ -244,13 +262,12 @@ a:hover {
     height: 38px;
     width: 38px;
     transition: .8s;
-    margin-top: 4%;
     margin-left: 5px;
     cursor: pointer;
     transition: transform .2s; /* Animation */
     border-width: 1px;
     border-style: solid;
-    border-color: white;
+    border-color: rgb(25, 27, 43);
 }
 
 .avatar:hover {
@@ -262,7 +279,7 @@ a:hover {
     position: absolute;
     top: 100%;
     right: 1%;
-    width: 300px;
+    width: 270px;
     max-height: 0px;
     overflow: hidden;
 }
@@ -276,7 +293,10 @@ a:hover {
 .sub-menu {
     background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
     color:  rgb(255, 255, 255);
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 5px;
     border-radius: 20px;
     z-index: 10000;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -988,7 +1008,8 @@ a:hover {
     bottom:0;
     left: 0;
     right: 0;
-    background: white;
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    color: white;
     border: none;
     font-size: 1rem;
     font-weight: 600;
@@ -996,8 +1017,7 @@ a:hover {
     margin-left: 0;
     outline: 0;
     padding: 26px 0;
-    padding-left: 10px;
-    text-transform: capitalize;
+    padding-left: 15px;
     width: 700px;
     height: 30px;
     margin-left: auto;
@@ -1006,6 +1026,44 @@ a:hover {
     animation: fadeInDown 0.5s;
     border-radius: 10vw;
 }
+
+.searchContainer {
+    width: 80%;
+    margin: auto;
+}
+
+.searchContainer h1 {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+.resultsContainer {
+    margin-top: 50px;
+    margin-left: 8%;
+    display: grid;
+    grid-template-areas: "a a a a a";
+    gap: 35px;
+    grid-auto-columns: 200px;
+}
+
+.grid-item {
+    width: 200px;
+    height: 300px;
+}
+
+.grid-item img {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s;
+}
+
+
+.grid-item img:hover {
+    transform: scale(1.05);
+}
+
 
 @media only screen and (max-width: 991px) {
 
