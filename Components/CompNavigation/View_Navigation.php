@@ -53,7 +53,7 @@ class ViewNavigation extends GenericView
                             <div class="user-info">
                                 <h5>Salut, ' . $_SESSION['login'] . ' !</h5>';
 
-            if (!isset($_SESSION['is_admin'])) {
+            if ($_SESSION["idRole"] != 1) {
                 $this->view = $this->view . '<label><i class="fa-solid fa-crown"></i> MEMBRE PREMIUM</label>
                 </div>
             <hr>
@@ -88,7 +88,7 @@ class ViewNavigation extends GenericView
                 </a>';
             }
 
-            if (isset($_SESSION["is_admin"])) {
+            if ($_SESSION["idRole"] == 1) {
                 $this->view = $this->view . '
                 
                 <a href="#" class="sub-menu-link">
