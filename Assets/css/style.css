@@ -1396,7 +1396,8 @@ a:hover {
     bottom:0;
     left: 0;
     right: 0;
-    background: white;
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    color: white;
     border: none;
     font-size: 1rem;
     font-weight: 600;
@@ -1404,8 +1405,7 @@ a:hover {
     margin-left: 0;
     outline: 0;
     padding: 26px 0;
-    padding-left: 10px;
-    text-transform: capitalize;
+    padding-left: 15px;
     width: 700px;
     height: 30px;
     margin-left: auto;
@@ -1413,6 +1413,43 @@ a:hover {
     z-index: 1000001;
     animation: fadeInDown 0.5s;
     border-radius: 10vw;
+}
+
+.searchContainer {
+    width: 80%;
+    margin: auto;
+}
+
+.searchContainer h1 {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 25px;
+}
+
+.resultsContainer {
+    margin-top: 50px;
+    margin-left: 8%;
+    display: grid;
+    grid-template-areas: "a a a a a";
+    gap: 35px;
+    grid-auto-columns: 200px;
+}
+
+.grid-item {
+    width: 200px;
+    height: 300px;
+}
+
+.grid-item img {
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: transform 0.2s;
+}
+
+
+.grid-item img:hover {
+    transform: scale(1.05);
 }
 
 @media only screen and (max-width: 991px) {
