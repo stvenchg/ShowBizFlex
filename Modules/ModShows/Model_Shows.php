@@ -48,6 +48,10 @@ class ModelShows extends PDOConnection
         }
     }
 
+    public function addShowToDB() {
+        
+    }
+
     public function getDetails()
     {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");

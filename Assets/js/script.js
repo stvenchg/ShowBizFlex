@@ -64,3 +64,4 @@ modalTrailerBg.addEventListener('click', () => {
         modalTrailerBg.style.display = "none";
     }, 450);
 });
+
