@@ -112,8 +112,13 @@ class ViewShows extends GenericView
         $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
         $showName = $details['name'];
         $showFirstAirYear = ' (' . strtok($details['first_air_date'], '-') . ')';
-        $episodeRunTime = $details['episode_run_time'][0];
-        $showGenres = rtrim($loopGenres, ', ') . ' - ' . $episodeRunTime . 'm';
+        if (!empty($details['episode_run_time'][0])) {
+            $episodeRunTime = $details['episode_run_time'][0] . 'm';
+        } else {
+            $episodeRunTime = 'Durée moyenne non définie';
+        }
+        
+        $showGenres = rtrim($loopGenres, ', ') . ' - ' . $episodeRunTime;
         $showSynopsis = str_replace('...', '.', $details['overview']);
         $showSynopsisB = str_replace('.', '.<br />', $showSynopsis);
         $tagLine = $details['tagline'];
