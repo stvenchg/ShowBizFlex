@@ -2,7 +2,7 @@
 
 extract($_POST);
 
-$dsn = "mysql:host=localhost;dbname=showfzpx_db;charset=UTF8";
+$dsn = "mysql:host=localhost;dbname=dutinfopw201637;charset=UTF8";
 $bdd = new PDO($dsn, 'root', '');
 
 $sql = 'SELECT * FROM Show WHERE idShow = :idShow';
