@@ -43,9 +43,16 @@ class ViewShows extends GenericView
         // Version courte recupération données cast
         $showCastString = '';
         foreach($showCast['cast'] as $index => $value) {
+            if (!empty($value['profile_path'])) {
+                $profilPath = 'https://image.tmdb.org/t/p/w200' . $value['profile_path'];
+            }
+            else {
+                $profilPath = './Assets/images/image_unavailable200.png';
+            }
+
             $showCastString .= '<li class="item-' . $index . '">
             <div class="cast-box">
-                <a href="#"><img src="https://image.tmdb.org/t/p/w200' . $value['profile_path'] . '"></a>
+                <a href="#"><img src="' . $profilPath . '"></a>
                 <h1 class="cast-title">' . $value['name'] . '</h1>
                 <h2 class="cast-character">' . $value['character'] . '</h2>
             </div>
@@ -127,6 +134,15 @@ class ViewShows extends GenericView
         $type = $details['type'];
         $originalLanguage = $details['original_language'];
 
+        $seasonCount = count($details['seasons'])-1;
+        $lastSeasonName = $details['seasons'][$seasonCount]['name'];
+        $lastSeasonPosterPath = $details['seasons'][$seasonCount]['poster_path'];
+        $lastSeasonEpisodeCount = $details['seasons'][$seasonCount]['episode_count'];
+        $lastSeasonNumber = $details['seasons'][$seasonCount]['season_number'];
+        $lastSeasonOverview = $details['seasons'][$seasonCount]['overview'];
+        $lastSeasonAirDate = $details['seasons'][$seasonCount]['air_date'];
+
+
         echo '<div class="show-box">';
 
         echo '<div class="header-show-container">';
@@ -196,196 +212,26 @@ class ViewShows extends GenericView
             </div>
 
             <div class="showPanel">
-                <h2 class="panel-title">Distribution des rôles</h2>
+                    <h2 class="panel-title">Distribution des rôles</h2>
 
-                <ul id="autoWidthShowCast" class="cs-hidden">
-                    ' .$showCastString . '
-                </ul>
+                    <ul id="autoWidthShowCast" class="cs-hidden">
+                        ' .$showCastString . '
+                    </ul>
+
+                <div class="panel-box">
+                <h2 class="panel-title mb-20">Dernière saison</h2>
+
+                <div class="panel-showLastSeason">
+                    <img src="https://image.tmdb.org/t/p/w500'. $lastSeasonPosterPath .'"></img>
+                    <div class="panel-lastSeasonDetails">
+                        <h1 class="panel-lastSeasonTitle">'. $lastSeasonName .'</h1>
+                        <h2 class="panel-lastSeasonInfos">'. $lastSeasonAirDate .' | '. $lastSeasonEpisodeCount .' épisode(s)</h2>
+                        <p>'. $lastSeasonOverview .'</p>
+                    </div>
+                </div>
+                </div>
             </div>
 
         </div>';
-        
-
-        /*
-        
-        $res = $this->model->getShowDetails();
-
-        echo '<div class="show-box">';
-        echo '<div class="show-main-info">';
-
-        $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
-        echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\'); background-size: cover;"></div>';
-
-        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
-        echo '<div class="poster">
-            <img src="' . $fullPosterPath . '"/>
-        </div>';
-
-        $firstAirYear = ' (' . strtok($res['first_air_date'], '-') . ')';
-
-        echo '<div class="main-info-right">';
-        echo '<h1 class="show-title">' . $res['name'] . '<span class="show-release-date">' . $firstAirYear . '</span>'. '</h1>';
-
-        $genres = '';
-        foreach($res['genres'] as $genre) {
-            $genres .= ($genre['name'] . ', ');
-        }
-
-        echo rtrim($genres, ', ') . ' - ' . '[durée moyenne à récupérer]';
-
-        echo '<br>';
-        echo '<br>';
-        echo($res['overview']);
-
-        echo '</div>';
-
-        echo '</div>';
-
-        echo($res['tagline']);
-
-        echo("<br>");
-
-        if($res['in_production']) {
-            echo("En cours");
-            echo("<br>");
-        } else {
-            echo("Terminé");
-            echo("<br>");
-        }
-
-        echo'<p> Dernière diffusion : '.$res['last_air_date'].'</p>' ;
-        
-        //A revoir
-
-        if($res['in_production'] && $res['next_episode_to_air'] != null) {
-           
-            echo'<p> Prochain épisode : '.$res['next_episode_to_air']['air_date'].'</p>' ;
-            
-        } else {
-            echo("<br>");
-        }
-
-        echo($res['overview']);
-        echo("<br>");
-        echo("<br>");
-
-        echo'<p> Nombre de saisons : '.$res['number_of_seasons'].'</p>';
-        echo'<p> Nombre d\'épisodes : '.$res['number_of_episodes'].'</p>';
-        echo("<br>");
-
-        echo'<p> Pays d\'origine : '.$res['origin_country'][0].'</p>';
-        echo("<br>");
-
-        echo'<p> Nom d\'origine : '.$res['original_name'].'</p>';
-        echo("<br>");
-
-        echo'Produit par : ';
-        foreach($res['production_companies'] as $companie) {
-            echo($companie['name']);
-            echo(" ");
-        }
-        echo("<br>");
-
-        echo'<p> Type : '.$res['type'].'</p>';
-
-        foreach($res['seasons'] as $saison) {
-            $posterPath = "https://image.tmdb.org/t/p/w92/" . $res['poster_path'];
-            echo("<img src=\"".$posterPath."\"/> ");
-            echo($saison['season_number']." ");
-            echo($saison['name']." ");
-            echo($saison['episode_count']." ");    
-        }
-
-        echo "</div>";$res = $this->model->getShowDetails();
-
-        echo '<div class="show-box">';
-        echo '<div class="show-main-info">';
-
-        $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
-        echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\'); background-size: cover;"></div>';
-
-        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
-        echo '<div class="poster">
-            <img src="' . $fullPosterPath . '"/>
-        </div>';
-
-        $firstAirYear = ' (' . strtok($res['first_air_date'], '-') . ')';
-
-        echo '<div class="main-info-right">';
-        echo '<h1 class="show-title">' . $res['name'] . '<span class="show-release-date">' . $firstAirYear . '</span>'. '</h1>';
-
-        $genres = '';
-        foreach($res['genres'] as $genre) {
-            $genres .= ($genre['name'] . ', ');
-        }
-
-        echo rtrim($genres, ', ') . ' - ' . '[durée moyenne à récupérer]';
-
-        echo '<br>';
-        echo '<br>';
-        echo($res['overview']);
-
-        echo '</div>';
-
-        echo '</div>';
-
-        echo($res['tagline']);
-
-        echo("<br>");
-
-        if($res['in_production']) {
-            echo("En cours");
-            echo("<br>");
-        } else {
-            echo("Terminé");
-            echo("<br>");
-        }
-
-        echo'<p> Dernière diffusion : '.$res['last_air_date'].'</p>' ;
-        
-        //A revoir
-
-        if($res['in_production'] && $res['next_episode_to_air'] != null) {
-           
-            echo'<p> Prochain épisode : '.$res['next_episode_to_air']['air_date'].'</p>' ;
-            
-        } else {
-            echo("<br>");
-        }
-
-        echo($res['overview']);
-        echo("<br>");
-        echo("<br>");
-
-        echo'<p> Nombre de saisons : '.$res['number_of_seasons'].'</p>';
-        echo'<p> Nombre d\'épisodes : '.$res['number_of_episodes'].'</p>';
-        echo("<br>");
-
-        echo'<p> Pays d\'origine : '.$res['origin_country'][0].'</p>';
-        echo("<br>");
-
-        echo'<p> Nom d\'origine : '.$res['original_name'].'</p>';
-        echo("<br>");
-
-        echo'Produit par : ';
-        foreach($res['production_companies'] as $companie) {
-            echo($companie['name']);
-            echo(" ");
-        }
-        echo("<br>");
-
-        echo'<p> Type : '.$res['type'].'</p>';
-
-        foreach($res['seasons'] as $saison) {
-            $posterPath = "https://image.tmdb.org/t/p/w92/" . $res['poster_path'];
-            echo("<img src=\"".$posterPath."\"/> ");
-            echo($saison['season_number']." ");
-            echo($saison['name']." ");
-            echo($saison['episode_count']." ");    
-        }
-
-        echo "</div>";
-
-        */
     }
 }
