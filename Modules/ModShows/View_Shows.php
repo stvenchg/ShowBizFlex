@@ -4,7 +4,6 @@ require_once("GenericView.php");
 require_once("Alert.php");
 require_once("Model_Shows.php");
 
-
 class ViewShows extends GenericView
 {
 
@@ -25,7 +24,7 @@ class ViewShows extends GenericView
         echo '<style>
             header {
                 position: absolute;
-                top: 0;
+                top: 3px;
                 left: 0;
                 right: 0;
                 bottom: 0;
