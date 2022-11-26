@@ -45,10 +45,32 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#autoWidthShowCast').lightSlider({
         autoWidth: true,
-        loop: true,
+        loop: false,
         pager: false,
         onSliderLoad: function () {
             $('#autoWidthShowCast').removeClass('cS-hidden');
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#autoWidthShowVideos').lightSlider({
+        autoWidth: true,
+        loop: false,
+        pager: false,
+        onSliderLoad: function () {
+            $('#autoWidthShowVideos').removeClass('cS-hidden');
+        }
+    });
+});
+
+$(document).ready(function () {
+    $('#autoWidthShowWallpapers').lightSlider({
+        autoWidth: true,
+        loop: false,
+        pager: false,
+        onSliderLoad: function () {
+            $('#autoWidthShowWallpapers').removeClass('cS-hidden');
         }
     });
 });

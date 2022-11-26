@@ -65,3 +65,40 @@ modalTrailerBg.addEventListener('click', () => {
         modalTrailerBg.style.display = "none";
     }, 450);
 });
+
+// Media buttons events
+const panelVideosButton = document.querySelector('#panelVideosButton');
+const panelWallpapersButton = document.querySelector('#panelWallpapersButton');
+const panelPostersButton = document.querySelector('#panelPostersButton');
+
+const sliderVideos = document.querySelector('#autoWidthShowVideos');
+const sliderWallpapers = document.querySelector('#autoWidthShowWallpapers');
+
+panelVideosButton.addEventListener('click', () => {
+    panelVideosButton.classList.add("activeSpan");
+
+    panelWallpapersButton.classList.remove("activeSpan");
+    panelPostersButton.classList.remove("activeSpan");
+
+    sliderVideos.classList.remove("hidden");
+    sliderWallpapers.classList.add("hidden");
+});
+
+
+panelWallpapersButton.addEventListener('click', () => {
+    panelWallpapersButton.classList.add("activeSpan");
+
+    panelVideosButton.classList.remove("activeSpan");
+    panelPostersButton.classList.remove("activeSpan");
+
+    sliderWallpapers.classList.remove("hidden");
+    sliderVideos.classList.add("hidden");
+});
+
+
+panelPostersButton.addEventListener('click', () => {
+    panelPostersButton.classList.add("activeSpan");
+
+    panelVideosButton.classList.remove("activeSpan");
+    panelWallpapersButton.classList.remove("activeSpan");
+});

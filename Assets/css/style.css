@@ -290,6 +290,10 @@ a:hover {
     animation-duration: 0.2s;
 }
 
+.hidden {
+    display: none;
+}
+
 .sub-menu {
     background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
     color:  rgb(255, 255, 255);
@@ -1862,14 +1866,14 @@ a:hover {
 }
 
 .panel-box {
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .panel-showLastSeason {
     display: flex;
     gap: 20px;
     width: 100%;
-    height: 20%;
+    height: 100%;
     border-radius: 10px;
     background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -1889,7 +1893,7 @@ a:hover {
 }
 
 .panel-lastSeasonDetails {
-    width: 100%;
+    width: 80%;
     height: 50%;
 }
 
@@ -1905,6 +1909,56 @@ a:hover {
 .panel-lastSeasonInfos {
     color: white;
     font-size: 16px;
+}
+
+.panel-title span {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 50px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.activeSpan {
+    background: -webkit-linear-gradient(#25aae1, #3f86ed);
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
+
+.videos-box {
+    width: 500px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin:  10px  10px;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+}
+
+.videos-box img {
+    width: 100%;
+    height: 100%;
+    object-fit:fill;
+    object-position: center;
+}
+
+.videos-box:hover {
+    transform: scale(1.05);
+}
+
+.playVideo {
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999999;
 }
 
 @media only screen and (max-width: 991px) {

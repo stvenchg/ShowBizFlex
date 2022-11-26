@@ -35,10 +35,11 @@ class ViewShows extends GenericView
 
         $details = $this->model->getDetails();
         $showRating = $this->model->getContentRating();
-        $showTrailer = $this->model->getVideos();
+        $showVideos = $this->model->getVideos();
         $watchProviders = $this->model->getWatchProviders();
         $externalIds = $this->model->getExternalIds();
         $showCast = $this->model->getCast();
+        $showImages = $this->model->getImages();
 
         // Version courte recupération données cast
         $showCastString = '';
@@ -59,8 +60,8 @@ class ViewShows extends GenericView
         </li>';
         }
 
-        if (!empty($showTrailer['results'])) {
-            foreach($showTrailer['results'] as $index => $value) {
+        if (!empty($showVideos['results'])) {
+            foreach($showVideos['results'] as $index => $value) {
                 if ($index == 0) {
                     $trailer = $value['key'];
                 }
@@ -111,6 +112,30 @@ class ViewShows extends GenericView
             $networksString = "Information indisponible.";
         }
 
+
+        $showVideosString = '';
+        foreach($showVideos['results'] as $index => $value) {
+            $showVideosString .= '<li class="item-' . $index . '">
+            <div class="videos-box">
+                <a href="#">
+                <img src="https://img.youtube.com/vi/'. $value['key'] .'/maxresdefault.jpg">
+                </a>
+            </div>
+        </li>';
+        }
+
+        $showWallpapersString = '';
+        foreach($showImages['backdrops'] as $index => $value) {
+            $showWallpapersString .= '<li class="item-' . $index . '">
+            <div class="videos-box">
+                <a href="#">
+                <img src="https://image.tmdb.org/t/p/w500'. $value['file_path'] . '"
+                </a>
+            </div>
+        </li>';
+        }
+
+
         // header
         $fullBackdropPath = "https://image.tmdb.org/t/p/original" . $details['backdrop_path'];
         $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
@@ -141,6 +166,8 @@ class ViewShows extends GenericView
         $lastSeasonNumber = $details['seasons'][$seasonCount]['season_number'];
         $lastSeasonOverview = $details['seasons'][$seasonCount]['overview'];
         $lastSeasonAirDate = $details['seasons'][$seasonCount]['air_date'];
+        $lastSeasonAirDateTime = new DateTime($details['seasons'][$seasonCount]['air_date']);
+        $lastSeasonAirYear = $lastSeasonAirDateTime->format('Y');
 
 
         echo '<div class="show-box">';
@@ -225,10 +252,23 @@ class ViewShows extends GenericView
                     <img src="https://image.tmdb.org/t/p/w500'. $lastSeasonPosterPath .'"></img>
                     <div class="panel-lastSeasonDetails">
                         <h1 class="panel-lastSeasonTitle">'. $lastSeasonName .'</h1>
-                        <h2 class="panel-lastSeasonInfos">'. $lastSeasonAirDate .' | '. $lastSeasonEpisodeCount .' épisode(s)</h2>
+                        <h2 class="panel-lastSeasonInfos">'. $lastSeasonAirYear .' | '. $lastSeasonEpisodeCount .' épisodes</h2>
                         <p>'. $lastSeasonOverview .'</p>
                     </div>
                 </div>
+                </div>
+
+                <div class="panel-box">
+                    <h2 class="panel-title mb-25">Médias <span class="activeSpan" id="panelWallpapersButton">Images</span> <span id="panelVideosButton">Vidéos</span> <span  id="panelPostersButton">Affiches</span></h2>
+
+                    <ul id="autoWidthShowWallpapers" class="cs-hidden">
+                        ' . $showWallpapersString . '
+                    </ul>
+
+                    <ul id="autoWidthShowVideos" class="cs-hidden hidden">
+                    ' . $showVideosString . '
+                    </ul>
+
                 </div>
             </div>
 
