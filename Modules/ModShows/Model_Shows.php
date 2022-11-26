@@ -62,7 +62,21 @@ class ModelShows extends PDOConnection
         }
     }
 
-   
+    public function deleteComments(){
+        $idCom = $_GET['idCom'];
+        $idUser = $_GET['idUser'];
+
+        if($idUser == $_SESSION['id']){
+            try {
+                $requestdeleteComments = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
+                $requestdeleteComments->execute(array($idCom));
+                echo 'Commentaire supprimé !';
+            }
+            catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+            }
+        }
+    }
 
 
     public function getComments(){

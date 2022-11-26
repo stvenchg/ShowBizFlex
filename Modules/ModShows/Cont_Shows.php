@@ -32,7 +32,9 @@ class ContShows
         $this->view->redirection();
     }
 
-   
+    public function deleteCom(){
+        $this->model->deleteComments();
+    }
 
     public function exec() {
         $this->view->view();

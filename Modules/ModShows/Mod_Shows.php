@@ -22,6 +22,9 @@ class ModShows extends PDOConnection
                 $this->controller->comments();
                 $this->controller->redirection();
 
+            case"deleteComments":
+                $this->controller->deleteCom();
+                //$this->controller->redirection();
         }
 
         $this->controller->exec();

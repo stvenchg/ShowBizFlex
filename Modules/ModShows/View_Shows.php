@@ -227,9 +227,12 @@ class ViewShows extends GenericView
 
             $comments = $this->model->getComments();
             foreach($comments as $row){
+                $idCom = $row['idCom'];
+                $idUser = $row['id'];
 
                 echo $row['username'] . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
+                echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>' . "<br> <br>";
             }
         }
     
