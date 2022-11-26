@@ -40,16 +40,14 @@ class ViewShows extends GenericView
         $externalIds = $this->model->getExternalIds();
         $showCast = $this->model->getCast();
 
-        $showCastPicture = array();
+        // Version courte recupération données cast
+        $showCastString = '';
         foreach($showCast['cast'] as $index => $value) {
-            array_push($showCastPicture, $showCast['cast'][$index]['profile_path']);
-        }
-
-        $showCastPictureString = '';
-        foreach ($showCastPicture as $index => $castPic) {
-            $showCastPictureString .= '<li class="item-' . $index . '">
+            $showCastString .= '<li class="item-' . $index . '">
             <div class="cast-box">
-                <a href="#"><img src="https://image.tmdb.org/t/p/w200' . $castPic . '"></a>
+                <a href="#"><img src="https://image.tmdb.org/t/p/w200' . $value['profile_path'] . '"></a>
+                <h1 class="cast-title">' . $value['name'] . '</h1>
+                <h2 class="cast-character">' . $value['character'] . '</h2>
             </div>
         </li>';
         }
@@ -200,8 +198,8 @@ class ViewShows extends GenericView
             <div class="showPanel">
                 <h2 class="panel-title">Distribution des rôles</h2>
 
-                <ul id="autoWidthTopRated" class="cs-hidden">
-                    ' .$showCastPictureString . '
+                <ul id="autoWidthShowCast" class="cs-hidden">
+                    ' .$showCastString . '
                 </ul>
             </div>
 

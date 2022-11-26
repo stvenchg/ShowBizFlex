@@ -958,16 +958,16 @@ a:hover {
 
 .cast-box {
     width: 150px;
-    height: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    height: 270px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     margin:  10px  10px;
     border-radius: 10px;
     overflow: hidden;
     transition: transform 0.2s;
     background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 
 .cast-box img {
@@ -1450,6 +1450,19 @@ a:hover {
 
 .grid-item img:hover {
     transform: scale(1.05);
+}
+
+.cast-title {
+    color: white;
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cast-character {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 15px;
+    font-weight: 500;
 }
 
 @media only screen and (max-width: 991px) {
