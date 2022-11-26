@@ -22,7 +22,14 @@ class ViewSearch extends GenericView
             
             $resultsString = '';
             foreach($showsResults['results'] as $index => $value) {
-                $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="https://image.tmdb.org/t/p/w200' . $value['poster_path'] . '"></a></div>';
+                if (!empty($value['poster_path'])) {
+                    $posterPath = 'https://image.tmdb.org/t/p/w200' . $value['poster_path'];
+                }
+                else {
+                    $posterPath = './Assets/images/image_unavailable200.png';
+                }
+
+                $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $posterPath . '"></a></div>';
             }
 
             $query = htmlspecialchars($_GET['query']);
