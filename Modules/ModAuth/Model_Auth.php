@@ -122,10 +122,8 @@ class ModelAuth extends PDOConnection
                 $_SESSION["email"] = $stmtResult['email'];
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
                 $_SESSION["banner_file"] = $stmtResult['banner_file'];
-
-                if ($stmtResult['idRole'] == 1) {
-                    $_SESSION["idRole"] = "1";
-                }
+                $_SESSION["idRole"] = $stmtResult['idRole'];
+                
 
                 header('Location: ./');
             } else {
@@ -145,7 +143,7 @@ class ModelAuth extends PDOConnection
             session_unset();
             session_destroy();
 
-            $this->viewAlert->logoutSuccessful();
+            header('Location: ./');
         } else {
             $this->viewAlert->logoutError();
         }

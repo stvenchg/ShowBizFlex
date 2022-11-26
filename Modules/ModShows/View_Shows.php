@@ -4,7 +4,6 @@ require_once("GenericView.php");
 require_once("Alert.php");
 require_once("Model_Shows.php");
 
-
 class ViewShows extends GenericView
 {
 
@@ -25,7 +24,7 @@ class ViewShows extends GenericView
         echo '<style>
             header {
                 position: absolute;
-                top: 0;
+                top: 3px;
                 left: 0;
                 right: 0;
                 bottom: 0;
@@ -112,8 +111,13 @@ class ViewShows extends GenericView
         $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
         $showName = $details['name'];
         $showFirstAirYear = ' (' . strtok($details['first_air_date'], '-') . ')';
-        $episodeRunTime = $details['episode_run_time'][0];
-        $showGenres = rtrim($loopGenres, ', ') . ' - ' . $episodeRunTime . 'm';
+        if (!empty($details['episode_run_time'][0])) {
+            $episodeRunTime = $details['episode_run_time'][0] . 'm';
+        } else {
+            $episodeRunTime = 'Durée moyenne non définie';
+        }
+        
+        $showGenres = rtrim($loopGenres, ', ') . ' - ' . $episodeRunTime;
         $showSynopsis = str_replace('...', '.', $details['overview']);
         $showSynopsisB = str_replace('.', '.<br />', $showSynopsis);
         $tagLine = $details['tagline'];
@@ -202,7 +206,33 @@ class ViewShows extends GenericView
             </div>
 
         </div>';
+
+        "<br> <br> <br>";
         
+
+        if(isset($_SESSION['login'])){
+            $idShow = $_GET['id'];
+            echo '
+                <div class="forComments">
+                    <h1 class="titleComments"> Commentaires : </h1> <br>
+                    <form action="./?module=shows&action=sendComments&id='.$idShow.'" method="POST">
+                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
+            
+                            <input type="submit" value="Poster mon commentaire" name="submitCommentaire">   
+                    </form> 
+                </div>
+            ';
+            
+            echo "<br> <br>";
+
+            $comments = $this->model->getComments();
+            foreach($comments as $row){
+
+                echo $row['username'] . " : " . $row['message'] . "<br>";
+                echo 'Publié le : ' . $row['datePublication'] . "<br>";
+            }
+        }
+    
 
         /*
         
@@ -386,4 +416,11 @@ class ViewShows extends GenericView
 
         */
     }
+
+    public function redirection(){
+        $idShow = $_GET['id'];
+        $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
+        header("refresh:0, url=$urlShow");
+    }
+
 }

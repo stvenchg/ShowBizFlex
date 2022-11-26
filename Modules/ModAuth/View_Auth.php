@@ -100,7 +100,7 @@ class ViewAuth extends GenericView
             echo '
         <div class="auth">
             <div class="page-title">
-                <h1>Un oubli ?</h1>
+                <h1>Mot de passe oublié ?</h1>
                 <p>Saisis ton e-mail afin que nous puissions réinitialiser ton mot de passe.</p>
             </div>
             <div class="auth-form">

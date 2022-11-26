@@ -48,8 +48,34 @@ class ModelShows extends PDOConnection
         }
     }
 
-    public function addShowToDB() {
-        
+
+    public function sendComments(){
+        $idShow = $_GET['id'];
+        try{
+            $requestSendComments = parent::$db->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
+            if(isset($_POST['commentaire']) && isset($idShow) && isset($_SESSION['id'])){
+                $requestSendComments->execute(array(":comment" => $_POST['commentaire'], "idUser" => $_SESSION['id'], ":idShow" => $idShow));
+            }
+        }
+        catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+   
+
+
+    public function getComments(){
+        $idShow = $_GET['id'];
+        try {
+            $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
+            $requesteGetComments->execute(array($idShow));
+
+            return $requesteGetComments->fetchAll();
+        }
+        catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
     }
 
     public function getDetails()
@@ -78,4 +104,5 @@ class ModelShows extends PDOConnection
     public function getCast() {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/credits?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
     }
+    
 }
