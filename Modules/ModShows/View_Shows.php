@@ -126,13 +126,22 @@ class ViewShows extends GenericView
 
         $showWallpapersString = '';
         foreach($showImages['backdrops'] as $index => $value) {
-            $showWallpapersString .= '<li class="item-' . $index . '">
+            if ($index <= 4)  {
+                $showWallpapersString .= '<li class="item-' . $index . '">
             <div class="videos-box">
                 <a href="#">
                 <img src="https://image.tmdb.org/t/p/w500'. $value['file_path'] . '"
                 </a>
             </div>
         </li>';
+            }
+        }
+
+        $showPostersString = '';
+        foreach($showImages['posters'] as $index => $value) {
+            if ($index <= 4)  {
+                $showPostersString .= '<img src="https://image.tmdb.org/t/p/w200'. $value['file_path'] .'"></img>';
+            }
         }
 
 
@@ -268,6 +277,10 @@ class ViewShows extends GenericView
                     <ul id="autoWidthShowVideos" class="cs-hidden hidden">
                     ' . $showVideosString . '
                     </ul>
+
+                    <div id="showPosters" class="showPosters hidden">
+                        '. $showPostersString .'
+                    </div>
 
                 </div>
             </div>

@@ -291,7 +291,7 @@ a:hover {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .sub-menu {
@@ -1959,6 +1959,24 @@ a:hover {
     top: 50%;
     left: 50%;
     z-index: 999999;
+}
+
+.showPosters {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.2s;
+}
+
+.showPosters img {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.showPosters img:hover {
+    transform: scale(1.05);
 }
 
 @media only screen and (max-width: 991px) {

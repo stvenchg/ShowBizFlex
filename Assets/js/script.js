@@ -73,6 +73,7 @@ const panelPostersButton = document.querySelector('#panelPostersButton');
 
 const sliderVideos = document.querySelector('#autoWidthShowVideos');
 const sliderWallpapers = document.querySelector('#autoWidthShowWallpapers');
+const sliderPosters = document.querySelector('#showPosters');
 
 panelVideosButton.addEventListener('click', () => {
     panelVideosButton.classList.add("activeSpan");
@@ -81,7 +82,9 @@ panelVideosButton.addEventListener('click', () => {
     panelPostersButton.classList.remove("activeSpan");
 
     sliderVideos.classList.remove("hidden");
+
     sliderWallpapers.classList.add("hidden");
+    sliderPosters.classList.add("hidden");
 });
 
 
@@ -92,7 +95,9 @@ panelWallpapersButton.addEventListener('click', () => {
     panelPostersButton.classList.remove("activeSpan");
 
     sliderWallpapers.classList.remove("hidden");
+
     sliderVideos.classList.add("hidden");
+    sliderPosters.classList.add("hidden");
 });
 
 
@@ -101,4 +106,9 @@ panelPostersButton.addEventListener('click', () => {
 
     panelVideosButton.classList.remove("activeSpan");
     panelWallpapersButton.classList.remove("activeSpan");
+
+    sliderPosters.classList.remove("hidden");
+
+    sliderVideos.classList.add("hidden");
+    sliderWallpapers.classList.add("hidden");
 });
