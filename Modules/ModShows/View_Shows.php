@@ -113,6 +113,10 @@ class ViewShows extends GenericView
         }
 
 
+        $videoCount = count($showVideos['results']);
+        $imageCount = count($showImages['backdrops']);
+        $posterCount = count($showImages['posters']);
+
         $showVideosString = '';
         foreach($showVideos['results'] as $index => $value) {
             $showVideosString .= '<li class="item-' . $index . '">
@@ -147,16 +151,22 @@ class ViewShows extends GenericView
 
         // header
         $fullBackdropPath = "https://image.tmdb.org/t/p/original" . $details['backdrop_path'];
-        $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
+
+        if (!empty($details['poster_path'])) {
+            $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
+        } else {
+            $fullPosterPath = 'Assets/images/image_unavailable.png';
+        }
+
         $showName = $details['name'];
         $showFirstAirYear = ' (' . strtok($details['first_air_date'], '-') . ')';
         if (!empty($details['episode_run_time'][0])) {
-            $episodeRunTime = $details['episode_run_time'][0] . 'm';
+            $episodeRunTime = ' - ' . $details['episode_run_time'][0] . 'm';
         } else {
-            $episodeRunTime = 'Durée moyenne non définie';
+            $episodeRunTime = '';
         }
         
-        $showGenres = rtrim($loopGenres, ', ') . ' - ' . $episodeRunTime;
+        $showGenres = rtrim($loopGenres, ', ') . $episodeRunTime;
         $showSynopsis = str_replace('...', '.', $details['overview']);
         $showSynopsisB = str_replace('.', '.<br />', $showSynopsis);
         $tagLine = $details['tagline'];
@@ -204,7 +214,11 @@ class ViewShows extends GenericView
             $nextEpisodeToAirName = $details['next_episode_to_air']['name'];
             $nextEpisodeToAirOverview = $details['next_episode_to_air']['overview'];
             $nextEpisodeToAirSeason = $details['next_episode_to_air']['season_number'];
-            $nextEpisodeToAirThumbail = $details['next_episode_to_air']['still_path'];
+            if (!empty($details['next_episode_to_air']['still_path'])) {
+                $nextEpisodeToAirThumbail = 'https://image.tmdb.org/t/p/w500' . $details['next_episode_to_air']['still_path'];
+            } else {
+                $nextEpisodeToAirThumbail = "Assets/images/episode_thumbail_unavailable.png";
+            }
             $nextEpisodeToAirDate = (new DateTime($details['next_episode_to_air']['air_date']))->format('d M Y');
         }
 
@@ -287,10 +301,10 @@ class ViewShows extends GenericView
                 </div>
 
                 <div class="panel-box">
-                    <h2 class="panel-title mb-25">Épisode <span class="activeSpan" id="panelLastEpisodeButton">Dernier</span>';
+                    <h2 class="panel-title mb-25">Épisode <span class="selector activeSpan" id="panelLastEpisodeButton">Dernier</span>';
                     
                     if (!empty($nextEpisodeToAirDate)) {
-                        echo  '<span id="panelNextEpisodeButton">Prochain</span>';
+                        echo  '<span class="selector" id="panelNextEpisodeButton">Prochain</span>';
                     }
     
                     echo '</h2>
@@ -304,7 +318,7 @@ class ViewShows extends GenericView
                     </div>
 
                     <div class="panel-showNextEpisode hidden">
-                        <img src="https://image.tmdb.org/t/p/w500' . $nextEpisodeToAirThumbail . '"></img>
+                        <img src="' . $nextEpisodeToAirThumbail . '"></img>
                         <div class="panel-lastSeasonDetails">
                             <h1 class="panel-lastSeasonTitle">'. $nextEpisodeToAirName .'</h1>
                             <h2 class="panel-lastSeasonInfos">Saison '. $nextEpisodeToAirSeason .', Épisode '. $nextEpisodeToAirNumber . ' | Sortie le : '. $nextEpisodeToAirDate .'</h2>
@@ -327,7 +341,7 @@ class ViewShows extends GenericView
                 </div>
 
                 <div class="panel-box">
-                    <h2 class="panel-title mb-20">Médias <span class="activeSpan" id="panelWallpapersButton">Images</span> <span id="panelVideosButton">Vidéos</span> <span  id="panelPostersButton">Affiches</span></h2>
+                    <h2 class="panel-title mb-20">Médias <span class="activeSpan selector" id="panelWallpapersButton">Images <span class="countElements">'. $imageCount .'</span></span> <span class="selector" id="panelVideosButton">Vidéos <span class="countElements">'. $videoCount .'</span></span> <span class="selector" id="panelPostersButton">Affiches <span class="countElements">'. $posterCount .'</span></span></h2>
 
                     <div class="showWallpapers">
                     <ul id="autoWidthShowWallpapers" class="cs-hidden">

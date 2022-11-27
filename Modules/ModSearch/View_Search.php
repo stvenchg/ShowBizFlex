@@ -26,7 +26,7 @@ class ViewSearch extends GenericView
                     $posterPath = 'https://image.tmdb.org/t/p/w200' . $value['poster_path'];
                 }
                 else {
-                    $posterPath = './Assets/images/image_unavailable200.png';
+                    $posterPath = './Assets/images/image_unavailable.png';
                 }
 
                 $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $posterPath . '"></a></div>';
