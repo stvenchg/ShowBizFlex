@@ -41,6 +41,7 @@ class ViewShows extends GenericView
         $showCast = $this->model->getCast();
         $showImages = $this->model->getImages();
         $showLogo = $this->model->getImagesFR();
+        $similars = $this->model->getSimilar();
 
         if (!empty($showLogo['logos'][0]['file_path'])) {
             $logo = $showLogo['logos'][0]['file_path'];
@@ -53,7 +54,7 @@ class ViewShows extends GenericView
                 $profilPath = 'https://image.tmdb.org/t/p/w200' . $value['profile_path'];
             }
             else {
-                $profilPath = './Assets/images/image_unavailable200.png';
+                $profilPath = './Assets/images/image_unavailable.png';
             }
 
             $showCastString .= '<li class="item-' . $index . '">
@@ -61,6 +62,22 @@ class ViewShows extends GenericView
                 <a href="#"><img src="' . $profilPath . '"></a>
                 <h1 class="cast-title">' . $value['name'] . '</h1>
                 <h2 class="cast-character">' . $value['character'] . '</h2>
+            </div>
+        </li>';
+        }
+
+        $similarString = '';
+        foreach($similars['results'] as $index => $value) {
+            if (!empty($value['poster_path'])) {
+                $similarPosterPath = 'https://image.tmdb.org/t/p/w342' . $value['poster_path'];
+            }
+            else {
+                $similarPosterPath = './Assets/images/image_unavailable.png';
+            }
+
+            $similarString .= '<li class="item-' . $index . '">
+            <div class="trending-box">
+                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $similarPosterPath . '"></a>
             </div>
         </li>';
         }
@@ -242,7 +259,7 @@ class ViewShows extends GenericView
             </div>
             <div class="showMainInfo">';
 
-            if (!empty($showLogo['logos'][0]['file_path']) && $showLogo['logos'][0]['height'] < 500) {
+            if (!empty($showLogo['logos'][0]['file_path']) && $showLogo['logos'][0]['height'] < 700) {
                 echo '<h1 class="show-title"><img style="margin-bottom: 20px; width: 25%; margin-top: -30px" src="https://image.tmdb.org/t/p/w500' . $logo . '"></img>'. '</h1>';
             } else {
                 echo '<h1 class="show-title"><a style="color: white" href="#">' . $showName . '</a><span class="show-release-date">' . $showFirstAirYear . '</span>'. '</h1>';
@@ -369,6 +386,14 @@ class ViewShows extends GenericView
                         '. $showPostersString .'
                     </div>
 
+                </div>
+
+                <div class="panel-box">
+                    <h2 class="panel-title">Ça pourrait t\'intéresser...</h2>
+
+                    <ul id="autoWidthShowSimilar" class="cs-hidden">
+                        ' . $similarString . '
+                    </ul>
                 </div>
             </div>
 

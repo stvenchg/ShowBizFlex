@@ -74,3 +74,14 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $('#autoWidthShowSimilar').lightSlider({
+        autoWidth: true,
+        loop: false,
+        pager: false,
+        onSliderLoad: function () {
+            $('#autoWidthShowSimilar').removeClass('cS-hidden');
+        }
+    });
+});
