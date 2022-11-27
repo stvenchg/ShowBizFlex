@@ -9,6 +9,8 @@ require_once("./Modules/ModAuth/Mod_Auth.php");
 require_once("./Modules/ModHome/Mod_Home.php");
 require_once("./Modules/ModProfile/Mod_Profile.php");
 require_once("./Modules/ModSettings/Mod_Settings.php");
+require_once("./Modules/ModShows/Mod_Shows.php");
+require_once("./Modules/ModSearch/Mod_Search.php");
 
 class Controller
 {
@@ -46,6 +48,12 @@ class Controller
             break;
             case 'settings':
                 new ModSettings();
+            break;
+            case 'shows':
+                new ModShows();
+            break;
+            case 'search':
+                new ModSearch;
             break;
             default :
                 die("Le module demandé n'existe pas.");

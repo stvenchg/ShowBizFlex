@@ -1,21 +1,21 @@
 <?php
 
-require_once "Cont_Home.php";
+require_once "Cont_Shows.php";
 include_once "PDOConnection.php";
 
-class ModHome extends PDOConnection
+class ModShows extends PDOConnection
 {
 
     private $controller;
 
     public function __construct()
     {
-        $this->controller = new ContHome();
+        $this->controller = new ContShows();
 
         switch ($this->controller->getAction()) 
         {
-            case "home":
-                $this->controller->home();
+            case "overview":
+                $this->controller->overview();
             break;
         }
 

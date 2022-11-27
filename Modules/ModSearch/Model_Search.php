@@ -1,17 +1,13 @@
 <?php
 
 require_once('PDOConnection.php');
-require_once('Alert.php');
+require_once('View_Search.php');
 
-class ModelHome extends PDOConnection
+class ModelSearch extends PDOConnection
 {
 
-    private $viewAlert;
-
     public function __construct()
-    {
-        $this->viewAlert = new Alert;
-    }
+    {}
 
     public function callTmdbAPI($api_url) {
         $ch = curl_init();
@@ -48,23 +44,9 @@ class ModelHome extends PDOConnection
         }
     }
 
-    public function getTmdbTrending()
+    public function getTmdbSearchResults($adult)
     {
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/trending/tv/day?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
-    }
-
-    public function getTmdbPopular()
-    {
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/trending/tv/week?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
-    }
-
-    public function getTmdbTopRated()
-    {
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/top_rated?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
-    }
-
-    public function getTmdbLatest()
-    {
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/top_rated?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
+        $query = urlencode(htmlspecialchars($_GET['query']));
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/search/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&include_adult=$adult&page=1&query=" . $query);
     }
 }

@@ -69,6 +69,11 @@ class ContSettings
         $this->model->updateEmail();
     }
 
+    // Settings - Sécurité
+    public function security() {
+        $this->view->show_settingsSecurity();
+    }
+
     public function exec() {
         $this->view->view();
     }
