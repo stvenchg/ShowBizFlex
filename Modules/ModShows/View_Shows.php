@@ -40,6 +40,11 @@ class ViewShows extends GenericView
         $externalIds = $this->model->getExternalIds();
         $showCast = $this->model->getCast();
         $showImages = $this->model->getImages();
+        $showLogo = $this->model->getImagesFR();
+
+        if (!empty($showLogo['logos'][0]['file_path'])) {
+            $logo = $showLogo['logos'][0]['file_path'];
+        }
 
         // Version courte recupération données cast
         $showCastString = '';
@@ -235,8 +240,15 @@ class ViewShows extends GenericView
             <div class="poster">
                 <img src="' . $fullPosterPath . '"/>
             </div>
-            <div class="showMainInfo">
-                <h1 class="show-title"><a style="color: white" href="#">' . $showName . '</a><span class="show-release-date">' . $showFirstAirYear . '</span>'. '</h1>
+            <div class="showMainInfo">';
+
+            if (!empty($showLogo['logos'][0]['file_path']) && $showLogo['logos'][0]['height'] < 500) {
+                echo '<h1 class="show-title"><img style="margin-bottom: 20px; width: 25%; margin-top: -30px" src="https://image.tmdb.org/t/p/w500' . $logo . '"></img>'. '</h1>';
+            } else {
+                echo '<h1 class="show-title"><a style="color: white" href="#">' . $showName . '</a><span class="show-release-date">' . $showFirstAirYear . '</span>'. '</h1>';
+            }
+            
+            echo '
                 <span class="show-rating">' . $rating . '</span><span class="show-genres">' . $showGenres . '</span>
                 <div class="showMainControls">
                     <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
