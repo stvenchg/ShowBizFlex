@@ -149,6 +149,9 @@ class ViewShows extends GenericView
                     if(isset($_SESSION['login'])){
                         echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
                     }
+                    if(isset($_SESSION['login'])){
+                        echo '<a href="#"><button class="saveButton" id="saveButton"><i class="fa-solid fa-heart"></i></button></a>';
+                    }
         echo' </div>
                 </div>
                 <h2 class="show-tagline">' . $tagLine . '</h2>
