@@ -3,6 +3,8 @@
 session_start();
 extract($_POST);
 
+$email = $_SESSION["email"];
+
 if (isset($_SESSION['login']) && $_SESSION['id'] == $idUser) {
 
 
@@ -19,8 +21,10 @@ echo $adult;
 if ($adult == 1)
 {
     $_SESSION['adult'] = 1;
+    $parameterValue = 'Activé';
 } else {
     $_SESSION['adult'] = 0;
+    $parameterValue = 'Désactivé';
 }
 
 } else {

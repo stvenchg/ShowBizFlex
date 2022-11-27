@@ -218,7 +218,7 @@ class ViewSettings extends GenericView
             <div class="settings-content">
 
             <div class="default-container">
-                <label style="color: #f74d91;">CONTENUS CLASSÉS 18+</label>
+                <label style="color: #f74d91;">CONTENUS SENSIBLES</label>
                 <div class="form-check form-switch">';
 
                 if ($user['adult']) {
@@ -228,7 +228,7 @@ class ViewSettings extends GenericView
                 }
 
                 echo '
-                    <label class="form-check-label" for="enableAdultCheckbox">Je certifie être majeur et souhaite laisser apparaître les contenus classés pour adulte dans les résultats de mes recherches</label>
+                    <label class="form-check-label" for="enableAdultCheckbox">Je souhaite afficher les contenus sensibles dans les résultats de mes recherches</label>
                 </div>
             </div>
         </div>

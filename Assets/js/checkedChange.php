@@ -9,7 +9,7 @@ $(document).ready(function() {
                 if (data == 1) {
                     iziToast.success({
                         title: 'OK !',
-                        message: 'Les contenus pour adulte seront affichés.',
+                        message: 'Les contenus sensibles seront affichés.',
                         position: 'topCenter',
                         timeout: 1500,
                         close: false,
@@ -26,7 +26,7 @@ $(document).ready(function() {
                 if (data == 0) {
                     iziToast.success({
                         title: 'OK !',
-                        message: 'Les contenus pour adulte seront masqués.',
+                        message: 'Les contenus sensibles seront masqués.',
                         position: 'topCenter',
                         timeout: 1500,
                         close: false,
