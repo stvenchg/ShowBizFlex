@@ -42,7 +42,7 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbTrending();
 
         echo '        <!-- Les séries en tendances actuellement -->
-        <h4 class="trending-heading">TENDANCES DE LA SEMAINE</h4>
+        <h4 class="trending-heading">TENDANCES MAINTENANT</h4>
         <ul id="autoWidthTrending" class="cs-hidden">';
 
         foreach($res['results'] as $value) {
@@ -65,8 +65,6 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbPopular();
 
         echo '<!-- Séries mise en avant -->
-        <h4 class="featured-heading">EN VEDETTE</h4>
-
         <ul id="autoWidthFeatured" class="cs-hidden">';
 
         foreach($res['results'] as $value) {
@@ -89,7 +87,7 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbTopRated();
 
         echo '<!-- Les séries les mieux notés -->
-        <h4 class="toprated-heading">LES MIEUX NOTÉS</h4>
+        <h4 class="toprated-heading">LES MIEUX NOTÉS CETTE SAISON</h4>
 
         <ul id="autoWidthTopRated" class="cs-hidden">';
 

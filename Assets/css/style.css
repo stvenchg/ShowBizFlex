@@ -1,6 +1,5 @@
 html {
-    position: relative;
-    min-height: 100%;
+    height: auto;
 }
 
 ::-webkit-scrollbar {
@@ -31,17 +30,71 @@ body {
     color: rgba(255, 255, 255, 0.55);
     margin-bottom: 60px;
     margin-top: 3px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 60px;
-    /* Set the fixed height of the footer here */
-    line-height: 60px;
-    /* Vertically center the text there */
-    text-align: center;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: auto;
+    height: 200px;
+    padding-top: 50px;
+    box-shadow: 0px -9px 12px 0px rgba(0,0,0,0.1);
+    color: white;
+}
+
+.footer-content {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.footer-content a {
+    color: white;
+}
+
+.footer-brand {
+    font-size: 30px;
+    font-weight: 600;
+    width: 20%;
+}
+
+.thanksTmdb {
+    margin-top: 20px;
+    font-size: 16px;
+    margin-bottom: -5px;
+}
+
+.copyright {
+    font-size: 16px;
+    margin-bottom: -5px;
+}
+
+.footer-links {
+    width: 70%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footer-link {
+    width: 20%;
+    display:block;
+}
+
+.footer-section-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+main {
+    flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+  padding-bottom: 50px;
 }
 
 header {
@@ -2008,6 +2061,9 @@ a:hover {
     transform: scale(1.05);
 }
 
+#autoWidthFeatured {
+    margin-top: 30px;
+}
 
 @media only screen and (max-width: 991px) {
 
