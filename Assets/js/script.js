@@ -112,3 +112,27 @@ panelPostersButton.addEventListener('click', () => {
     sliderVideos.classList.add("hidden");
     sliderWallpapers.classList.add("hidden");
 });
+
+
+// Episodes buttons events
+const panelLastEpisodeButton = document.querySelector('#panelLastEpisodeButton');
+const panelNextEpisodeButton = document.querySelector('#panelNextEpisodeButton');
+
+const panelshowLastEpisode = document.querySelector('.panel-showLastEpisode');
+const panelshowNextEpisode = document.querySelector('.panel-showNextEpisode');
+
+panelLastEpisodeButton.addEventListener('click', () => {
+    panelLastEpisodeButton.classList.add("activeSpan");
+    panelNextEpisodeButton.classList.remove("activeSpan");
+
+    panelshowLastEpisode.classList.remove("hidden");
+    panelshowNextEpisode.classList.add("hidden");
+});
+
+panelNextEpisodeButton.addEventListener('click', () => {
+    panelNextEpisodeButton.classList.add("activeSpan");
+    panelLastEpisodeButton.classList.remove("activeSpan");
+
+    panelshowNextEpisode.classList.remove("hidden");
+    panelshowLastEpisode.classList.add("hidden");
+});

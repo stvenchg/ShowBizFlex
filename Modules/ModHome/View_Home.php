@@ -47,7 +47,7 @@ class ViewHome extends GenericView
 
         foreach($res['results'] as $value) {
 
-            $fullPosterPath = "https://image.tmdb.org/t/p/w200/" . $value['poster_path'];
+            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
@@ -95,7 +95,7 @@ class ViewHome extends GenericView
 
         foreach($res['results'] as $value) {
 
-            $fullPosterPath = "https://image.tmdb.org/t/p/w200/" . $value['poster_path'];
+            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="toprated-box">

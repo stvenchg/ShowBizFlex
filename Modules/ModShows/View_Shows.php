@@ -170,13 +170,43 @@ class ViewShows extends GenericView
 
         $seasonCount = count($details['seasons'])-1;
         $lastSeasonName = $details['seasons'][$seasonCount]['name'];
-        $lastSeasonPosterPath = $details['seasons'][$seasonCount]['poster_path'];
+
+        if (!empty($details['seasons'][$seasonCount]['poster_path']))  {
+            $lastSeasonPosterPath = $details['seasons'][$seasonCount]['poster_path'];
+        }  else {
+            $lastSeasonPosterPath = $details['poster_path'];
+        }
+
+
         $lastSeasonEpisodeCount = $details['seasons'][$seasonCount]['episode_count'];
         $lastSeasonNumber = $details['seasons'][$seasonCount]['season_number'];
         $lastSeasonOverview = $details['seasons'][$seasonCount]['overview'];
         $lastSeasonAirDate = $details['seasons'][$seasonCount]['air_date'];
         $lastSeasonAirDateTime = new DateTime($details['seasons'][$seasonCount]['air_date']);
         $lastSeasonAirYear = $lastSeasonAirDateTime->format('Y');
+
+        $lastEpisodeToAirNumber = $details['last_episode_to_air']['episode_number'];
+        $lastEpisodeToAirName = $details['last_episode_to_air']['name'];
+        $lastEpisodeToAirOverview = $details['last_episode_to_air']['overview'];
+        $lastEpisodeToAirSeason = $details['last_episode_to_air']['season_number'];
+        $lastEpisodeToAirThumbail = $details['last_episode_to_air']['still_path'];
+        $lastEpisodeToAirDate = (new DateTime($details['last_episode_to_air']['air_date']))->format('d M Y');
+
+        $nextEpisodeToAirNumber = '';
+        $nextEpisodeToAirName = '';
+        $nextEpisodeToAirOverview = '';
+        $nextEpisodeToAirSeason = '';
+        $nextEpisodeToAirThumbail = '';
+        $nextEpisodeToAirDate = '';
+
+        if (!empty($details['next_episode_to_air']['air_date'])) {
+            $nextEpisodeToAirNumber = $details['next_episode_to_air']['episode_number'];
+            $nextEpisodeToAirName = $details['next_episode_to_air']['name'];
+            $nextEpisodeToAirOverview = $details['next_episode_to_air']['overview'];
+            $nextEpisodeToAirSeason = $details['next_episode_to_air']['season_number'];
+            $nextEpisodeToAirThumbail = $details['next_episode_to_air']['still_path'];
+            $nextEpisodeToAirDate = (new DateTime($details['next_episode_to_air']['air_date']))->format('d M Y');
+        }
 
 
         echo '<div class="show-box">';
@@ -248,11 +278,40 @@ class ViewShows extends GenericView
             </div>
 
             <div class="showPanel">
+                <div class="first-panel-box">
                     <h2 class="panel-title">Distribution des rôles</h2>
 
                     <ul id="autoWidthShowCast" class="cs-hidden">
                         ' .$showCastString . '
                     </ul>
+                </div>
+
+                <div class="panel-box">
+                    <h2 class="panel-title mb-25">Épisode <span class="activeSpan" id="panelLastEpisodeButton">Dernier</span>';
+                    
+                    if (!empty($nextEpisodeToAirDate)) {
+                        echo  '<span id="panelNextEpisodeButton">Prochain</span>';
+                    }
+    
+                    echo '</h2>
+                    <div class="panel-showLastEpisode">
+                        <img src="https://image.tmdb.org/t/p/w500' . $lastEpisodeToAirThumbail . '"></img>
+                        <div class="panel-lastSeasonDetails">
+                            <h1 class="panel-lastSeasonTitle">'. $lastEpisodeToAirName .'</h1>
+                            <h2 class="panel-lastSeasonInfos">Saison '. $lastEpisodeToAirSeason .', Épisode '. $lastEpisodeToAirNumber . ' | Sortie le : '. $lastEpisodeToAirDate .'</h2>
+                            <p>'. $lastEpisodeToAirOverview .'</p>
+                        </div>
+                    </div>
+
+                    <div class="panel-showNextEpisode hidden">
+                        <img src="https://image.tmdb.org/t/p/w500' . $nextEpisodeToAirThumbail . '"></img>
+                        <div class="panel-lastSeasonDetails">
+                            <h1 class="panel-lastSeasonTitle">'. $nextEpisodeToAirName .'</h1>
+                            <h2 class="panel-lastSeasonInfos">Saison '. $nextEpisodeToAirSeason .', Épisode '. $nextEpisodeToAirNumber . ' | Sortie le : '. $nextEpisodeToAirDate .'</h2>
+                            <p>'. $nextEpisodeToAirOverview .'</p>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="panel-box">
                 <h2 class="panel-title mb-20">Dernière saison</h2>
@@ -268,11 +327,13 @@ class ViewShows extends GenericView
                 </div>
 
                 <div class="panel-box">
-                    <h2 class="panel-title mb-25">Médias <span class="activeSpan" id="panelWallpapersButton">Images</span> <span id="panelVideosButton">Vidéos</span> <span  id="panelPostersButton">Affiches</span></h2>
+                    <h2 class="panel-title mb-20">Médias <span class="activeSpan" id="panelWallpapersButton">Images</span> <span id="panelVideosButton">Vidéos</span> <span  id="panelPostersButton">Affiches</span></h2>
 
+                    <div class="showWallpapers">
                     <ul id="autoWidthShowWallpapers" class="cs-hidden">
                         ' . $showWallpapersString . '
                     </ul>
+                    </div>
 
                     <ul id="autoWidthShowVideos" class="cs-hidden hidden">
                     ' . $showVideosString . '
