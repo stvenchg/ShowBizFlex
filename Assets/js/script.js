@@ -1,3 +1,22 @@
+// Return to top button
+let returnToTopButton = document.getElementById("returnToTopButton");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    returnToTopButton.style.display = "block";
+  } else {
+    returnToTopButton.style.display = "none";
+  }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
 // Profile subMenu events
 const subMenu = document.querySelector('#submenu');
 const avatar = document.querySelector('#avatar');
