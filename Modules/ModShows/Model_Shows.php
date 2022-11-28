@@ -74,4 +74,16 @@ class ModelShows extends PDOConnection
     public function getCast() {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/credits?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
     }
+
+    public function getImages() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/images?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb");
+    }
+
+    public function getImagesFR() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/images?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr");
+    }
+
+    public function getSimilar() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/similar?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&page=1");
+    }
 }

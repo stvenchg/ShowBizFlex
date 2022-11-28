@@ -1,3 +1,22 @@
+// Return to top button
+let returnToTopButton = document.getElementById("returnToTopButton");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    returnToTopButton.style.display = "block";
+  } else {
+    returnToTopButton.style.display = "none";
+  }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+
 // Profile subMenu events
 const subMenu = document.querySelector('#submenu');
 const avatar = document.querySelector('#avatar');
@@ -64,4 +83,75 @@ modalTrailerBg.addEventListener('click', () => {
     setTimeout(() => {
         modalTrailerBg.style.display = "none";
     }, 450);
+});
+
+// Media buttons events
+const panelVideosButton = document.querySelector('#panelVideosButton');
+const panelWallpapersButton = document.querySelector('#panelWallpapersButton');
+const panelPostersButton = document.querySelector('#panelPostersButton');
+
+const sliderVideos = document.querySelector('#autoWidthShowVideos');
+const sliderWallpapers = document.querySelector('#autoWidthShowWallpapers');
+const sliderPosters = document.querySelector('#showPosters');
+
+panelVideosButton.addEventListener('click', () => {
+    panelVideosButton.classList.add("activeSpan");
+
+    panelWallpapersButton.classList.remove("activeSpan");
+    panelPostersButton.classList.remove("activeSpan");
+
+    sliderVideos.classList.remove("hidden");
+
+    sliderWallpapers.classList.add("hidden");
+    sliderPosters.classList.add("hidden");
+});
+
+
+panelWallpapersButton.addEventListener('click', () => {
+    panelWallpapersButton.classList.add("activeSpan");
+
+    panelVideosButton.classList.remove("activeSpan");
+    panelPostersButton.classList.remove("activeSpan");
+
+    sliderWallpapers.classList.remove("hidden");
+
+    sliderVideos.classList.add("hidden");
+    sliderPosters.classList.add("hidden");
+});
+
+
+panelPostersButton.addEventListener('click', () => {
+    panelPostersButton.classList.add("activeSpan");
+
+    panelVideosButton.classList.remove("activeSpan");
+    panelWallpapersButton.classList.remove("activeSpan");
+
+    sliderPosters.classList.remove("hidden");
+
+    sliderVideos.classList.add("hidden");
+    sliderWallpapers.classList.add("hidden");
+});
+
+
+// Episodes buttons events
+const panelLastEpisodeButton = document.querySelector('#panelLastEpisodeButton');
+const panelNextEpisodeButton = document.querySelector('#panelNextEpisodeButton');
+
+const panelshowLastEpisode = document.querySelector('.panel-showLastEpisode');
+const panelshowNextEpisode = document.querySelector('.panel-showNextEpisode');
+
+panelLastEpisodeButton.addEventListener('click', () => {
+    panelLastEpisodeButton.classList.add("activeSpan");
+    panelNextEpisodeButton.classList.remove("activeSpan");
+
+    panelshowLastEpisode.classList.remove("hidden");
+    panelshowNextEpisode.classList.add("hidden");
+});
+
+panelNextEpisodeButton.addEventListener('click', () => {
+    panelNextEpisodeButton.classList.add("activeSpan");
+    panelLastEpisodeButton.classList.remove("activeSpan");
+
+    panelshowNextEpisode.classList.remove("hidden");
+    panelshowLastEpisode.classList.add("hidden");
 });

@@ -50,7 +50,7 @@ class ModelHome extends PDOConnection
 
     public function getTmdbTrending()
     {
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/trending/tv/week?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/trending/tv/day?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
     }
 
     public function getTmdbPopular()

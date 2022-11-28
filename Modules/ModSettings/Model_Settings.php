@@ -22,7 +22,7 @@ class ModelSettings extends PDOConnection
         $login = $_SESSION['login'];
 
         try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login");
+            $stmtLogin = parent::$db->prepare("SELECT * FROM User WHERE username=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
             return $stmtLogin->fetch();
@@ -58,7 +58,7 @@ class ModelSettings extends PDOConnection
 
                 if ($result) {
                     try {
-                        $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_file=:avatar_file WHERE username=:login");
+                        $stmtLogin = parent::$db->prepare("UPDATE User SET avatar_file=:avatar_file WHERE username=:login");
                         $stmtLogin->bindParam(':avatar_file', $uniqueFileNameWithExt);
                         $stmtLogin->bindParam(':login', $login);
                         $stmtLogin->execute();
@@ -94,7 +94,7 @@ class ModelSettings extends PDOConnection
                 $this->viewAlert->unableToDeleteAvatarIsDefault();
             } else {
                 try {
-                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET avatar_file='1.png' WHERE username=:login");
+                    $stmtLogin = parent::$db->prepare("UPDATE User SET avatar_file='1.png' WHERE username=:login");
                     $stmtLogin->bindParam(':login', $login);
                     $stmtLogin->execute();
 
@@ -142,7 +142,7 @@ class ModelSettings extends PDOConnection
 
                 if ($result) {
                     try {
-                        $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET banner_file=:banner_file WHERE username=:login");
+                        $stmtLogin = parent::$db->prepare("UPDATE User SET banner_file=:banner_file WHERE username=:login");
                         $stmtLogin->bindParam(':banner_file', $uniqueFileNameWithExt);
                         $stmtLogin->bindParam(':login', $login);
                         $stmtLogin->execute();
@@ -178,7 +178,7 @@ class ModelSettings extends PDOConnection
                 $this->viewAlert->unableToDeleteBannerIsDefault();
             } else {
                 try {
-                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET banner_file='1.png' WHERE username=:login");
+                    $stmtLogin = parent::$db->prepare("UPDATE User SET banner_file='1.png' WHERE username=:login");
                     $stmtLogin->bindParam(':login', $login);
                     $stmtLogin->execute();
 
@@ -209,14 +209,14 @@ class ModelSettings extends PDOConnection
             $username = htmlspecialchars($_POST['username']);
             $id = $_SESSION['id'];
 
-            $stmtCheckIfUsernameAlreadyTaken = parent::$db->prepare("SELECT username FROM showbizflex.accounts WHERE username=:username");
+            $stmtCheckIfUsernameAlreadyTaken = parent::$db->prepare("SELECT username FROM User WHERE username=:username");
             $stmtCheckIfUsernameAlreadyTaken->bindParam(':username', $username);
             $stmtCheckIfUsernameAlreadyTaken->execute();
             $stmtUsernameCount = $stmtCheckIfUsernameAlreadyTaken->rowCount();
 
             if ((strlen($username) > 4) && !preg_match("/[\'^£$%&*()}{@#~?><>,\|=_+¬-].!/", $username) && $stmtUsernameCount == 0) {
                 
-                $stmtUsername = parent::$db->prepare("UPDATE showbizflex.accounts SET username=:username WHERE id=:id");
+                $stmtUsername = parent::$db->prepare("UPDATE User SET username=:username WHERE id=:id");
                 $stmtUsername->bindParam(':username', $username);
                 $stmtUsername->bindParam(':id', $id);
                 $stmtUsername->execute();
@@ -246,14 +246,14 @@ class ModelSettings extends PDOConnection
             $email = htmlspecialchars($_POST['email']);
             $id = $_SESSION['id'];
 
-            $stmtCheckIfEmailAlreadyTaken = parent::$db->prepare("SELECT email FROM showbizflex.accounts WHERE email=:email");
+            $stmtCheckIfEmailAlreadyTaken = parent::$db->prepare("SELECT email FROM User WHERE email=:email");
             $stmtCheckIfEmailAlreadyTaken->bindParam(':email', $email);
             $stmtCheckIfEmailAlreadyTaken->execute();
             $stmtEmailCount = $stmtCheckIfEmailAlreadyTaken->rowCount();
 
             if ((strlen($email) > 5) && preg_match("/@/", $email) && $stmtEmailCount == 0) {
                 
-                $stmtEmail = parent::$db->prepare("UPDATE showbizflex.accounts SET email=:email WHERE id=:id");
+                $stmtEmail = parent::$db->prepare("UPDATE User SET email=:email WHERE id=:id");
                 $stmtEmail->bindParam(':email', $email);
                 $stmtEmail->bindParam(':id', $id);
                 $stmtEmail->execute();
@@ -284,7 +284,7 @@ class ModelSettings extends PDOConnection
             $id = $_SESSION['id'];
 
             if (strlen($about) <= 300) {
-                $stmtAbout = parent::$db->prepare("UPDATE showbizflex.accounts SET about=:about WHERE id=:id");
+                $stmtAbout = parent::$db->prepare("UPDATE User SET about=:about WHERE id=:id");
                 $stmtAbout->bindParam(':about', $about);
                 $stmtAbout->bindParam(':id', $id);
                 $stmtAbout->execute();
