@@ -180,6 +180,18 @@ header {
     color: rgba(199, 200, 201);
 }
 
+div.forComments {
+    margin-top: 100px;
+    margin-left: 162px;
+}
+.titleComments {
+    text-size-adjust: 5px;
+}
+
+.zoneComments {
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
+    color: rgba(255, 255, 255, 0.55);
+}
 
 .navbar-expand-lg {
     margin: 0 auto;
@@ -2637,3 +2649,4 @@ a:hover {
        transform: scale(1);
     }
  } 
+
