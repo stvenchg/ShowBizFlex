@@ -19,6 +19,10 @@
     <?php
         require_once("Assets/js/favButton.php");
     ?>
+    <?php
+        require_once("Assets/js/checkedChange.php");
+        require_once("Assets/js/saveButton.php");
+    ?>
 </head>
 
 <body>

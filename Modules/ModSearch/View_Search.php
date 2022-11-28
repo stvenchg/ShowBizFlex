@@ -16,9 +16,20 @@ class ViewSearch extends GenericView
 
     public function show_searchResults()
     {
+
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (isset($_GET['query']) && !empty($_GET['query'])) {
 
-            $showsResults = $this->model->getTmdbSearchResults();
+            if ($_SESSION['adult']) {
+                $showsResults = $this->model->getTmdbSearchResults('true');
+            } else {
+                $showsResults = $this->model->getTmdbSearchResults('false');
+            }
             
             $resultsString = '';
             foreach($showsResults['results'] as $index => $value) {

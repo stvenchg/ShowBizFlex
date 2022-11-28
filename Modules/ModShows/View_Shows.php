@@ -32,6 +32,9 @@ class ViewShows extends GenericView
                 height: 5%;
             }
         </style>';
+        
+        $isFollowing = $this->model->checkFollowStatus();
+        $isSavedForLater = $this->model->checkSaveStatus();
 
         $details = $this->model->getDetails();
         $showRating = $this->model->getContentRating();
@@ -274,13 +277,29 @@ class ViewShows extends GenericView
         echo '
                 <span class="show-rating">' . $rating . '</span><span class="show-genres">' . $showGenres . '</span>
                 <div class="showMainControls">
-                    <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
-                    <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>
-                    <div class="showSubControls">';
-        if (isset($_SESSION['login'])) {
-            echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
-        }
-        echo ' </div>
+                    <div class="show-actions">
+                        <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
+                    <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>';
+
+                    if(isset($_SESSION['login'])){
+                        echo ' <div class="showSubControls">';
+
+                        if ($isFollowing) {
+                            echo '<div class="favButton activeFavButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
+                        } else {
+                            echo '<div class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
+                        }
+
+                        if ($isSavedForLater) {
+                            echo '<div class="saveButton activeSaveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
+                        } else {
+                            echo '<div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
+                        }
+                    }
+                    
+        echo ' 
+        </div>
+        </div>
                 </div>
                 <h2 class="show-tagline">' . $tagLine . '</h2>
                 <h3 class="section-title">Synopsis</h3>
@@ -403,6 +422,53 @@ class ViewShows extends GenericView
                 </div>
             </div>
 
-        </div>';
+        </div>
+
+        <br> <br> <br>';
+        
+
+        if(isset($_SESSION['login'])){
+            $idShow = $_GET['id'];
+            echo '
+                <div class="forComments">
+                    <h1 class="titleComments"> Commentaires : </h1> <br>
+                    <form action="./?module=shows&action=sendComments&id='.$idShow.'" method="POST">
+                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
+            
+                            <input type="submit" value="Poster mon commentaire" name="submitCommentaire">   
+                    </form> 
+                </div>
+            ';
+            
+            echo "<br> <br>";
+
+            $comments = $this->model->getComments();
+            foreach($comments as $row){
+                $idCom = $row['idCom'];
+                $idUser = $row['id'];
+                $userName = $row['username'];
+                $idRole = $row['idRole'];
+                
+                echo '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . " : " . $row['message'] . "<br>";
+                echo 'Publié le : ' . $row['datePublication'] . "<br>";
+
+                if($_SESSION['idRole'] == 1){
+                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                }
+                if($_SESSION['idRole'] == 2){
+                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
+                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                    }
+                }
+                echo '<br> <br>';  
+            }
+        }
     }
+
+    public function redirection(){
+        $idShow = $_GET['id'];
+        $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
+        header("refresh:0, url=$urlShow");
+    }
+
 }

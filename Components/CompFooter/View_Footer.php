@@ -41,7 +41,7 @@ class ViewFooter extends GenericView
         <div class="footer-link">
             <h2 class="footer-section-title">Mentions légales</h2>
             <a href="#">Conditions générales</a><br>
-            <a href="#">Confidentialité et cookies</a>
+            <a href="#">Confidentialité et cookies</a><br>
             <a href="#">Accessibilité</a>
         </div>
         </div>
