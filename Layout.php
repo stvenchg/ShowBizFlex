@@ -21,6 +21,7 @@
     ?>
     <?php
         require_once("Assets/js/checkedChange.php");
+        require_once("Assets/js/saveButton.php");
     ?>
 </head>
 

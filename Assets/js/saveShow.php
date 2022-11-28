@@ -16,12 +16,12 @@ if(!$verif){
     $sth->execute(array(':idShow'=>$idShow));
 }
 
-$verifShowInFollowed=$bdd->prepare('SELECT * FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow');
-$verifShowInFollowed->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
-$row = $verifShowInFollowed->fetch();
+$verifShowInWatchLater=$bdd->prepare('SELECT * FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow');
+$verifShowInWatchLater->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
+$row = $verifShowInWatchLater->fetch();
 
 if(!$row){
-    $sql3 = 'INSERT INTO `FollowedShows` (`idUser`, `idShow`) VALUES (?, ?)';
+    $sql3 = 'INSERT INTO `ToWatchLaterShows` (`idUser`, `idShow`) VALUES (?, ?)';
     $inser=$bdd->prepare($sql3);
     $inser->execute(array($idUser,$idShow));
 
@@ -30,7 +30,7 @@ if(!$row){
  
  else{
 
-    $inser=$bdd->prepare('DELETE FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow');
+    $inser=$bdd->prepare('DELETE FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow');
     $inser->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
 
     echo '0';
