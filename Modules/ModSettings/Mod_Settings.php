@@ -20,6 +20,9 @@ class ModSettings extends PDOConnection
             case "account":
                 $this->controller->account();
             break;
+            case "security":
+                $this->controller->security();
+            break;
             case "uploadAvatar":
                 $this->controller->uploadAvatar();
             break;

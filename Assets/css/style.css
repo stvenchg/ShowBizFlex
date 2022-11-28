@@ -117,7 +117,7 @@ main {
     flex-grow: 1;
   flex-shrink: 0;
   flex-basis: auto;
-  padding-bottom: 50px;
+  padding-bottom: 60px;
 }
 
 header {

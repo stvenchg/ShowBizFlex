@@ -13,28 +13,17 @@
                 idShow: "<?php echo $_GET['id'] ?>"
             }, function(data) {
                 if (data == 1) {
-                    iziToast.success({
-                        title: 'OK !',
-                        message: 'La série a été ajoutée à la liste des séries suivies.',
-                        position: 'topCenter',
-                        timeout: 1500,
-                        close: false,
-                        displayMode: 2,
-                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Série ajoutée à la liste des séries suivies'
+                    })
                 } else {
-                    iziToast.success({
-                        title: 'OK !',
-                        message: 'La série a été retirée de la liste des séries suivies.',
-                        position: 'topCenter',
-                        timeout: 1500,
-                        close: false,
-                        displayMode: 2,
-                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Série retirée de la liste des séries suivies'
+                    })
                 }
             });
-
         });
-
-
     });
 </script>
