@@ -65,11 +65,23 @@ class ModelShows extends PDOConnection
     public function deleteComments(){
         $idCom = $_GET['idCom'];
         $idUser = $_GET['idUser'];
+        $idRole = $_SESSION['idRole'];
 
         if($idUser == $_SESSION['id']){
             try {
                 $requestdeleteComments = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
                 $requestdeleteComments->execute(array($idCom));
+                echo 'Commentaire supprimé !';
+            }
+            catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+            }
+        }
+
+        if($idRole == 1){
+            try {
+                $requestdeleteCommentsAdmin = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
+                $requestdeleteCommentsAdmin->execute(array($idCom));
                 echo 'Commentaire supprimé !';
             }
             catch (Exception $e) {
@@ -82,7 +94,7 @@ class ModelShows extends PDOConnection
     public function getComments(){
         $idShow = $_GET['id'];
         try {
-            $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
+            $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication, idRole FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
             $requesteGetComments->execute(array($idShow));
 
             return $requesteGetComments->fetchAll();

@@ -230,10 +230,20 @@ class ViewShows extends GenericView
                 $idCom = $row['idCom'];
                 $idUser = $row['id'];
                 $userName = $row['username'];
+                $idRole = $row['idRole'];
                 
                 echo '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
-                echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>' . "<br> <br>";
+
+                if($_SESSION['idRole'] == 1){
+                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                }
+                if($_SESSION['idRole'] == 2){
+                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
+                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                    }
+                }
+                echo '<br> <br>';  
             }
         }
     
