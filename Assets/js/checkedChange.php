@@ -7,14 +7,10 @@ $(document).ready(function() {
                 adult: 1,
             }, function(data) {
                 if (data == 1) {
-                    iziToast.success({
-                        title: 'OK !',
-                        message: 'Les contenus sensibles seront affichés.',
-                        position: 'topCenter',
-                        timeout: 1500,
-                        close: false,
-                        displayMode: 2,
-                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Les contenus sensibles seront visibles'
+                    })
                 }
             });
         }
@@ -24,14 +20,10 @@ $(document).ready(function() {
                 adult: 0,
             }, function(data) {
                 if (data == 0) {
-                    iziToast.success({
-                        title: 'OK !',
-                        message: 'Les contenus sensibles seront masqués.',
-                        position: 'topCenter',
-                        timeout: 1500,
-                        close: false,
-                        displayMode: 2,
-                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Les contenus sensibles seront masqués'
+                    })
                 }
             });
         }
