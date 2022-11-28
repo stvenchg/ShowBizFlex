@@ -229,8 +229,9 @@ class ViewShows extends GenericView
             foreach($comments as $row){
                 $idCom = $row['idCom'];
                 $idUser = $row['id'];
-
-                echo $row['username'] . " : " . $row['message'] . "<br>";
+                $userName = $row['username'];
+                
+                echo '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
                 echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>' . "<br> <br>";
             }
