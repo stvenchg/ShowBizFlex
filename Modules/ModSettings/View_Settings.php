@@ -211,7 +211,7 @@ class ViewSettings extends GenericView
             <div class="settings-content">
 
             <div class="default-container">
-                <label style="color: #f74d91;">CONTENUS SENSIBLES</label>
+                <label style="color: #f74d91;">CONTENUS SENSIBLES (NSFW)</label>
                 <div class="form-check form-switch">';
 
                 if ($user['adult']) {

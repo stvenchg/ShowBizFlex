@@ -10,11 +10,6 @@ class ViewProfile extends GenericView
         parent::__construct();
     }
 
-    public function menuProfile(){
-        echo "<a href=./?module=profile&action=viewProfile> Voir mon profil </a>" . "<br> <br>";
-        echo "<a href=./?module=profile&action=viewOtherProfile> </a>" . "<br> <br>";
-    }
-
     public function show_profile($user)
     {
         if (isset($_SESSION['login'])) {

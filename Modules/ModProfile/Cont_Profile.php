@@ -12,9 +12,8 @@ class ContProfile
     public function __construct() 
     {
         $this->view = new ViewProfile();
-        $this->view->menuProfile();
         $this->model = new ModelProfile();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : " ";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "viewProfile";
     }
 
     public function getAction() {
