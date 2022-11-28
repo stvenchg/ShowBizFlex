@@ -278,10 +278,10 @@ class ViewShows extends GenericView
                     <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>
                     <div class="showSubControls">';
                     if(isset($_SESSION['login'])){
-                        echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
+                        echo '<a href="#"><div class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></div></a>';
                     }
                     if(isset($_SESSION['login'])){
-                        echo '<a href="#"><button class="saveButton" id="saveButton"><i class="fa-solid fa-heart"></i></button></a>';
+                        echo '<a href="#"><div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div></a>';
                     }
         echo' </div>
                 </div>

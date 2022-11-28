@@ -15,12 +15,12 @@
                 if (data == 1) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Série ajoutée à la liste des séries suivies'
+                        title: 'Ajoutée à la liste des séries suivies'
                     })
                 } else {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Série retirée de la liste des séries suivies'
+                        title: 'Retirée de la liste des séries suivies'
                     })
                 }
             });
