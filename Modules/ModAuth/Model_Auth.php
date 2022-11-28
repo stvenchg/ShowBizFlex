@@ -69,7 +69,7 @@ class ModelAuth extends PDOConnection
                 } else {
                     
                     // Insertion des informations concernant le compte de l'utilisateur
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file) VALUES (:username, :email, :password, 2, '1.png', '1.png')");
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult) VALUES (:username, :email, :password, 2, '1.png', '1.png', false)");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
@@ -123,7 +123,7 @@ class ModelAuth extends PDOConnection
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
                 $_SESSION["banner_file"] = $stmtResult['banner_file'];
                 $_SESSION["idRole"] = $stmtResult['idRole'];
-                
+                $_SESSION["adult"] = $stmtResult['adult'];                
 
                 header('Location: ./');
             } else {

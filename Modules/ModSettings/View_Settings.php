@@ -41,7 +41,10 @@ class ViewSettings extends GenericView
                     <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-user"></i> Profil</div>
                 </a>
                 <a href="./?module=settings&action=account">
-                    <div class="settings-nav-item"><i class="fa-solid fa-lock"></i> Compte</div>
+                    <div class="settings-nav-item"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item"><i class="fa-solid fa-shield"></i> Sécurité</div>
                 </a>
                 <a href="#">
                     <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -108,10 +111,13 @@ class ViewSettings extends GenericView
             echo '<div class="settings-container">
             <div class="settings-nav">
                 <a href="./?module=settings">
-                    <div class="settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
+                    <div class="settings-nav-item settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
                 </a>
                 <a href="./?module=settings&action=account">
-                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-lock"></i> Compte</div>
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item"><i class="fa-solid fa-shield"></i> Sécurité</div>
                 </a>
                 <a href="#">
                     <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -171,6 +177,57 @@ class ViewSettings extends GenericView
 
         </div>
     </div>';
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function show_settingsSecurity()
+    {
+        if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+            $this->headerSettings();
+
+            echo '<div class="settings-container">
+            <div class="settings-nav">
+                <a href="./?module=settings">
+                    <div class="settings-nav-item settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
+                </a>
+                <a href="./?module=settings&action=account">
+                    <div class="settings-nav-item"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-shield"></i> Sécurité</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-list"></i> Listes</div>
+                </a>
+            </div>
+
+            <div class="settings-content">
+
+            <div class="default-container">
+                <label style="color: #f74d91;">CONTENUS SENSIBLES (NSFW)</label>
+                <div class="form-check form-switch">';
+
+                if ($user['adult']) {
+                    echo '<input name="enableAdult" class="form-check-input enableAdultCheckbox" type="checkbox" id="enableAdultCheckbox" checked>';
+                } else {
+                    echo '<input class="form-check-input" type="checkbox" id="enableAdultCheckbox">';
+                }
+
+                echo '
+                    <label class="form-check-label" for="enableAdultCheckbox">Je souhaite afficher les contenus sensibles dans les résultats de mes recherches</label>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>';
+
         } else {
             $this->viewAlert->userNotAuthenticated();
         }

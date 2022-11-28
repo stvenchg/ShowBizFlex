@@ -1,27 +1,31 @@
 <?php
 
 require_once("./GenericView.php");
-require_once("Model_Profile.php");
 
 class ViewProfile extends GenericView
 {
 
-    private $model;
-
     public function __construct()
     {
         parent::__construct();
-        $this->model = new ModelProfile;
     }
 
-    public function show_profile()
+    public function show_profile($user)
     {
-        $user = $this->model->getUserDetails();
-
         if (isset($_SESSION['login'])) {
-            echo 'profile page';
+            foreach($user as $row){
+                echo 'Identifiant : ' . $row["username"] . "<br> <br>";
+                echo 'Description : ' . $row["about"] . "<br> <br>";
+                echo 'Avatar : ' . '<img src="/Assets/images/avatar/'. $row['avatar_file'] . '"</img>' . "<br> <br> <br>";
+                echo 'Bannière : ' . '<img src="/Assets/images/banner/' . $row['banner_file'] . '" . width="300px" </img>';
+            }
         } else {
             echo "Pas identifié";
         }
     }
+
+    public function show_other_profile($otherUsers){
+        $this->show_profile($otherUsers);
+    }
+
 }

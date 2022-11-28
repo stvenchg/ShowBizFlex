@@ -19,6 +19,10 @@
     <?php
         require_once("Assets/js/favButton.php");
     ?>
+    <?php
+        require_once("Assets/js/checkedChange.php");
+        require_once("Assets/js/saveButton.php");
+    ?>
 </head>
 
 <body>
@@ -31,6 +35,7 @@
     </header>
 
     <main>
+
     <div class="modalSearch-bg"></div>
     <div class="search"></div>
 
@@ -45,6 +50,8 @@
         $controller->footer();
         ?>
     </footer>
+
+    <div class="returnToTopButton" onclick="topFunction()" id="returnToTopButton" title="Retourner en haut"><i class="fa-solid fa-arrow-up" style="line-height: 50px"></i></div>
 
     <script src="https://kit.fontawesome.com/e477e9361e.js" crossorigin="anonymous"></script>
     <script src="Assets/js/script.js"></script>

@@ -1,11 +1,11 @@
 <script>
     $(document).ready(function() {
-        $('.favButton').click(function() {
+        $('.saveButton').click(function() {
 
-            if ($('#favButton').hasClass('activeFavButton')) {
-                $('#favButton').removeClass('activeFavButton')
+            if ($('#saveButton').hasClass('activeSaveButton')) {
+                $('#saveButton').removeClass('activeSaveButton')
             } else {
-                $('#favButton').addClass('activeFavButton')
+                $('#saveButton').addClass('activeSaveButton')
             }
 
             iziToast.settings({
@@ -14,22 +14,25 @@
                 transitionOut: 'fadeOutUp',
             });
 
-            $.post("Assets/js/followShow.php", {
+            $.post("Assets/js/saveShow.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idShow: "<?php echo $_GET['id'] ?>"
             }, function(data) {
                 if (data == 1) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Ajoutée à la liste des séries suivies'
+                        title: 'Ajoutée à la liste des séries à regarder plus tard'
                     })
                 } else {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Retirée de la liste des séries suivies'
+                        title: 'Retirée de la liste des séries à regarder plus tard'
                     })
                 }
             });
+
         });
+
+
     });
 </script>
