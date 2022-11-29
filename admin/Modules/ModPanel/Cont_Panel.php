@@ -13,15 +13,15 @@ class ContPanel
     {
         $this->view = new ViewPanel();
         $this->model = new ModelPanel();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : "overview";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "dashboard";
     }
 
     public function getAction() {
         return $this->action;
     }
 
-    public function overview() {
-        $this->view->show_overview();
+    public function dashboard() {
+        $this->view->show_dashboard();
     }
 
     public function exec() {

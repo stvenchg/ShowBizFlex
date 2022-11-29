@@ -14,8 +14,8 @@ class ModPanel extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-            case "overview":
-                $this->controller->overview();
+            case "dashboard":
+                $this->controller->dashboard();
             break;
         }
 

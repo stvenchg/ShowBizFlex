@@ -14,9 +14,37 @@ class ViewNavigation extends GenericView
     public function navigation()
     {
         if (isset($_SESSION['admin_id'])) {
-            $this->view = '<div class="">
 
-            </div>';
+            echo '<style>main {
+                position: relative;
+                left: 310px;
+                background-color: var(--panel-color);
+                min-height: 100vh;
+                width: calc(100% - 310px);
+                padding: 10px 14px;
+                transition: var(--tran-05);
+            }
+            </style>';
+
+            $this->view = '<nav>
+            <div class="navLogo">
+                <a class="navbar-brand" href="./"><span class="gradient-brand-blue">Show</span><span class="gradient-brand-gray">BizFlex / Admin</span></a>
+            </div>
+            <div class="nav-items">
+                <div class="nav-link">
+                    <i class="fa-solid fa-house"></i> Vue d\'ensemble
+                </div>
+                <div class="nav-link">
+                    <i class="fa-solid fa-users"></i> Comptes
+                </div>
+                <div class="nav-link">
+                    <i class="fa-solid fa-chart-simple"></i> Statistiques
+                </div>
+                <a href="./?module=auth&action=logout"><div class="nav-link" style="color: lightred;">
+                    <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
+                </div></a>
+            </div>
+    </nav>';
         }
     }
 

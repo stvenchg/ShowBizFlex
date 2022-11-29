@@ -17,13 +17,13 @@ class ViewPanel extends GenericView
         $this->model = new ModelPanel;
     }
 
-    public function show_overview()
+    public function show_dashboard()
     {
         if (!isset($_SESSION['admin_id'])) {
             header("Location: ./?module=auth&action=login");
         }
         else {
-            echo 'bienvenue <a href="./?module=auth&action=logout">Se déconnecter</a>';
+            echo 'cc';
         }
     }
 }
