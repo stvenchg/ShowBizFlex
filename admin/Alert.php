@@ -68,20 +68,10 @@ class Alert extends GenericView
     {
         echo "<script>Swal.fire(
             'Inscription validée !',
-            'Tu recevras dans un instant un e-mail de confirmation.',
+            'Le compte administrateur a été crée.',
             'success'
           ).then(function() {
             window.location = './?module=auth&action=login';
-        });</script>";
-    }
-
-    public function userDidNotAcceptedTOS() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Il est nécessaire d\'accepter les conditions générales d'utilisation.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=register';
         });</script>";
     }
 
@@ -175,227 +165,23 @@ class Alert extends GenericView
         });</script>";
     }
 
-    // Alert for ModSettings
-    public function userNotAuthenticated() {
+    public function pinDifferents() {
         echo "<script>Swal.fire(
             'Il y a un problème !',
-            'Tu n\'es pas connecté.',
+            'Les codes pin saisis ne sont pas identiques.',
             'error'
           ).then(function() {
-            window.location = './?module=auth&action=login';
+            window.location = './?module=auth&action=register';
         });</script>";
     }
 
-    public function fileTransferError() {
+    public function pinOnlyNumberAllowed() {
         echo "<script>Swal.fire(
             'Il y a un problème !',
-            'Le transfert du fichier a échoué. Merci de réessayer.',
+            'Le code pin doit être uniquement constitué de chiffres.',
             'error'
           ).then(function() {
-            window.location = './?module=settings&action=uploadAvatar';
-        });</script>";
-    }
-
-    public function fileTransferSuccess() {
-        echo "<script>Swal.fire(
-            'Importation réussie !',
-            'Le fichier a bien été chargé et ton compte a été mise à jour.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function fileInvalidExt() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Uniquement les fichiers au format .PNG, .JPG ou .GIF sont acceptés.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function fileTooBig() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le poids du fichier sélectionné dépasse la limite autorisée (2 Mo).',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function unknownErrorOccured() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Une erreur est survenue.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function unableToDeleteAvatarIsDefault() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Impossible de supprimer la photo de profil actuelle. Tu as la photo de profil par défaut.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings&action=uploadAvatar';
-        });</script>";
-    }
-
-    public function avatarDeleteSuccess() {
-        echo "<script>Swal.fire(
-            'Suppression réussie !',
-            'Ta photo de profil actuelle a bien été supprimée.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings&action=uploadAvatar';
-        });</script>";
-    }
-
-    public function unableToDeleteBannerIsDefault() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Impossible de supprimer la bannière actuelle. Tu as la bannière par défaut.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings&action=uploadBanner';
-        });</script>";
-    }
-
-    public function bannerDeleteSuccess() {
-        echo "<script>Swal.fire(
-            'Suppression réussie !',
-            'Ta bannière actuelle a bien été supprimée.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings&action=uploadBanner';
-        });</script>";
-    }
-
-    public function usernameAlreadyTaken() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le nom d\'utilisateur saisi est déjà pris.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function userDetailsUpdateSuccess() {
-        echo "<script>Swal.fire(
-            'Modification apportée !',
-            'Tes changements ont bien été pris en compte.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings&action=account';
-        });</script>";
-    }
-
-    public function emailAlreadyTaken() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'L\'adresse e-mail saisie est déjà prise.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings&action=account';
-        });</script>";
-    }
-
-    public function aboutUpdateSuccess() {
-        echo "<script>Swal.fire(
-            'C\'est enregistré !',
-            'La description de ton profil a été mise à jour.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings';
-        });</script>";
-    }
-
-    public function usernameUpdateSuccess() {
-        echo "<script>Swal.fire(
-            'C\'est enregistré !',
-            'Ton nom d\'utilisateur a été mise à jour.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings&action=account';
-        });</script>";
-    }
-
-    public function usernameUpdateAlreadyTaken() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Le nom d\'utilisateur saisi est déjà pris.',
-            'error'
-          ).then(function() {
-            window.location = './?module=settings&action=account';
-        });</script>";
-    }
-
-    public function emailUpdateSuccess() {
-        echo "<script>Swal.fire(
-            'C\'est enregistré !',
-            'Ton adresse e-mail a été mise à jour.',
-            'success'
-          ).then(function() {
-            window.location = './?module=settings&action=account';
-        });</script>";
-    }
-
-
-    // Auth Forgot
-    public function invalidRequestForgot() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'La requête est incorrecte.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=forgot';
-        });</script>";
-    }
-
-    public function emailDontExist() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'Aucun compte n\'est associé à cette adresse e-mail.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=forgot';
-        });</script>";
-    }
-
-    public function forgotEmailSent() {
-        echo "<script>Swal.fire(
-            'E-mail envoyé !',
-            'Tu devrais avoir reçu un e-mail avec un lien te permettant de réinitialiser ton mot de passe.',
-            'success'
-          ).then(function() {
-            window.location = './?module=auth&action=forgot';
-        });</script>";
-    }
-
-    // Auth Forgot Reset Password
-    public function invalidRequestPasswordReset() {
-        echo "<script>Swal.fire(
-            'Il y a un problème !',
-            'La requête est incorrecte ou ce lien de réinitialisation a expiré.',
-            'error'
-          ).then(function() {
-            window.location = './?module=auth&action=forgot';
-        });</script>";
-    }
-
-    public function passwordResetSuccess() {
-        echo "<script>Swal.fire(
-            'Réinitialisation réussie !',
-            'Ton mot de passe a bien été réinitialisé.',
-            'success'
-          ).then(function() {
-            window.location = './?module=auth&action=login';
+            window.location = './?module=auth&action=register';
         });</script>";
     }
 }

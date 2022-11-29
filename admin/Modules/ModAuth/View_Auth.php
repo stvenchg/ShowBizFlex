@@ -21,7 +21,7 @@ class ViewAuth extends GenericView
     public function form_login()
     {
 
-        if (!isset($_SESSION['login'])) {
+        if (!isset($_SESSION['admin_id'])) {
             echo '
         <div class="auth">
             <div class="page-title">
@@ -37,7 +37,7 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="password" name="password" required>
 
                     <label for="login">CODE CONFIDENTIEL</label>
-                    <input class="form-input" type="password" name="pin" required>
+                    <input class="form-input" type="password" maxlength="6" name="pin" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
                 </form>
@@ -55,7 +55,7 @@ class ViewAuth extends GenericView
     public function form_register()
     {
 
-        if (!isset($_SESSION['login'])) {
+        if (!isset($_SESSION['admin_id'])) {
             echo '
         <div class="auth">
             <div class="page-title">
@@ -63,7 +63,7 @@ class ViewAuth extends GenericView
                 <p>Merci de compléter le formulaire ci-dessous.</p>
             </div>
             <div class="auth-form">
-                <form method="POST">
+                <form action="./?module=auth&action=sendRegister" method="POST">
                     <label>NOM D\'UTILISATEUR</label>
                     <input class="form-input" type="text" name="username" required>
 
@@ -77,10 +77,10 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="password" name="confirmpassword" required>
 
                     <label>CODE CONFIDENTIEL</label>
-                    <input class="form-input" type="password" name="pin" required>
+                    <input class="form-input" type="password" maxlength="6" name="pin" required>
 
                     <label>CONFIRMATION DU CODE CONFIDENTIEL</label>
-                    <input class="form-input" type="password" name="confirmpin" required>
+                    <input class="form-input" type="password" maxlength="6" name="confirmpin" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
                 </form>

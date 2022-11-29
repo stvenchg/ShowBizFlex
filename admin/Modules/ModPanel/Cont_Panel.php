@@ -20,8 +20,8 @@ class ContPanel
         return $this->action;
     }
 
-    public function home() {
-        $this->view->show_home();
+    public function overview() {
+        $this->view->show_overview();
     }
 
     public function exec() {
