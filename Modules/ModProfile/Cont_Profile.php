@@ -30,6 +30,7 @@ class ContProfile
 
     public function follow(){
         $this->model->sendfollowedsUsers();
+        $this->view->showfollowedUsersList($this->model->getFollowedUsersList());
     }
 
     public function exec() {

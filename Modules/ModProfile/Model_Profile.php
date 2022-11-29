@@ -35,7 +35,17 @@ class ModelProfile extends PDOConnection {
         }
     }
 
+    public function getFollowedUsersList(){
+        $idUserForShowList = $_GET['idFollowedUser'];
+        try {
+            $stmtUserFollowedList = parent::$db->prepare("SELECT * FROM User NATURAL JOIN FollowedShows WHERE idUser = ?");
+            $stmtUserFollowedList->execute(array($idUserForShowList));
+            return $stmtUserFollowedList->fetchAll();
 
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
 
     public function getOtherUser(){
         try{
