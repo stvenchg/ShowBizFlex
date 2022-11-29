@@ -257,9 +257,8 @@ nav {
 
 .nav-bottom {
     position: absolute;
-    bottom: 10px;
-    left: 20px;
-    border: 1px solid white;
+    bottom: 20px;
+    left: 25px;
 }
 
 .overview-panel {
