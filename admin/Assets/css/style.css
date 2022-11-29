@@ -5,6 +5,7 @@
     --more-darker-primary-color: linear-gradient(180.2deg, rgb(29, 30, 46) 6.8%, rgb(17, 25, 27) 131%);
     --primary-text-color: #3f86ed;
     --primary-gradient: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    --secondary-color: rgb(255, 255, 255);
     /* ====== Transition ====== */
     --tran-05: all 0.5s ease;
     --tran-03: all 0.3s ease;
@@ -204,12 +205,28 @@ nav {
 .navLogo {
     text-align: center;
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .navbar-brand {
     font-weight: 700;
     font-size: 20px;
+}
+
+.navUserGreeting h1 {
+    font-size: 16px;
+    text-align: center;
+    color: white;
+}
+
+.navUserGreeting h2 {
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navUserGreeting {
+    margin-bottom: 15px;
 }
 
 .nav-items {
@@ -235,5 +252,38 @@ nav {
 
 .nav-link-active {
     color: white;
-    background: var(--more-darker-primary-color);
+    background: #12141f;
+}
+
+.nav-bottom {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    border: 1px solid white;
+}
+
+.overview-panel {
+    width: 100%;
+    height: 100vh;
+}
+
+.overview-panel h1 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 1%;
+    font-weight: 600;
+}
+
+.global-stats {
+    display: flex;
+    gap: 60px;
+    justify-content: space-evenly;
+}
+
+.stats {
+    width: 500px;
+    height: 150px;
+    border-radius: 10px;
+    background: var(--darker-primary-color);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }

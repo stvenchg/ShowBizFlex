@@ -23,7 +23,23 @@ class ViewPanel extends GenericView
             header("Location: ./?module=auth&action=login");
         }
         else {
-            echo 'cc';
+            echo '<div class="overview-panel">
+                <h1>Vue d\'ensemble</h1>
+                <div class="global-stats">
+                    <div class="stats">
+                    
+                    </div>
+                    <div class="stats">
+                    
+                    </div>
+                    <div class="stats">
+                    
+                    </div>
+                    <div class="stats">
+                    
+                    </div>
+                </div>
+            </div>';
         }
     }
 }
