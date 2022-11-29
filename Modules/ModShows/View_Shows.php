@@ -277,10 +277,13 @@ class ViewShows extends GenericView
                     <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
                     <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>
                     <div class="showSubControls">';
-        if (isset($_SESSION['login'])) {
-            echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
-        }
-        echo ' </div>
+                    if(isset($_SESSION['login'])){
+                        echo '<a href="#"><button class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></button></a>';
+                    }
+                    if(isset($_SESSION['login'])){
+                        echo '<a href="#"><button class="saveButton" id="saveButton"><i class="fa-solid fa-heart"></i></button></a>';
+                    }
+        echo' </div>
                 </div>
                 <h2 class="show-tagline">' . $tagLine . '</h2>
                 <h3 class="section-title">Synopsis</h3>
@@ -404,5 +407,241 @@ class ViewShows extends GenericView
             </div>
 
         </div>';
+
+        "<br> <br> <br>";
+        
+
+        if(isset($_SESSION['login'])){
+            $idShow = $_GET['id'];
+            echo '
+                <div class="forComments">
+                    <h1 class="titleComments"> Commentaires : </h1> <br>
+                    <form action="./?module=shows&action=sendComments&id='.$idShow.'" method="POST">
+                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
+            
+                            <input type="submit" id="submitComments" value="Poster mon commentaire">   
+                    </form> 
+                </div>
+            ';
+            
+            echo "<br> <br>";
+
+            $comments = $this->model->getComments();
+            foreach($comments as $row){
+                $idCom = $row['idCom'];
+                $idUser = $row['id'];
+                $userName = $row['username'];
+                $idRole = $row['idRole'];
+                
+                if($userName == $_SESSION['login']){
+                    echo '<b class="usernameComments">'. $userName . '</b>' . " : " . $row['message'] . "<br>";
+                }
+                else {
+                    echo '<b>' . '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . '</b>' . " : " . $row['message'] . "<br>";
+                }
+
+                echo 'Publié le : ' . $row['datePublication'] . "<br>";
+
+                if($_SESSION['idRole'] == 1){
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a> </b>';
+                }
+                else {
+                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a> </b>';
+                    }
+                }
+                echo '<br> <br>';  
+            }
+        }
+    
+
+        /*
+        
+        $res = $this->model->getShowDetails();
+
+        echo '<div class="show-box">';
+        echo '<div class="show-main-info">';
+
+        $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
+        echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\'); background-size: cover;"></div>';
+
+        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
+        echo '<div class="poster">
+            <img src="' . $fullPosterPath . '"/>
+        </div>';
+
+        $firstAirYear = ' (' . strtok($res['first_air_date'], '-') . ')';
+
+        echo '<div class="main-info-right">';
+        echo '<h1 class="show-title">' . $res['name'] . '<span class="show-release-date">' . $firstAirYear . '</span>'. '</h1>';
+
+        $genres = '';
+        foreach($res['genres'] as $genre) {
+            $genres .= ($genre['name'] . ', ');
+        }
+
+        echo rtrim($genres, ', ') . ' - ' . '[durée moyenne à récupérer]';
+
+        echo '<br>';
+        echo '<br>';
+        echo($res['overview']);
+
+        echo '</div>';
+
+        echo '</div>';
+
+        echo($res['tagline']);
+
+        echo("<br>");
+
+        if($res['in_production']) {
+            echo("En cours");
+            echo("<br>");
+        } else {
+            echo("Terminé");
+            echo("<br>");
+        }
+
+        echo'<p> Dernière diffusion : '.$res['last_air_date'].'</p>' ;
+        
+        //A revoir
+
+        if($res['in_production'] && $res['next_episode_to_air'] != null) {
+           
+            echo'<p> Prochain épisode : '.$res['next_episode_to_air']['air_date'].'</p>' ;
+            
+        } else {
+            echo("<br>");
+        }
+
+        echo($res['overview']);
+        echo("<br>");
+        echo("<br>");
+
+        echo'<p> Nombre de saisons : '.$res['number_of_seasons'].'</p>';
+        echo'<p> Nombre d\'épisodes : '.$res['number_of_episodes'].'</p>';
+        echo("<br>");
+
+        echo'<p> Pays d\'origine : '.$res['origin_country'][0].'</p>';
+        echo("<br>");
+
+        echo'<p> Nom d\'origine : '.$res['original_name'].'</p>';
+        echo("<br>");
+
+        echo'Produit par : ';
+        foreach($res['production_companies'] as $companie) {
+            echo($companie['name']);
+            echo(" ");
+        }
+        echo("<br>");
+
+        echo'<p> Type : '.$res['type'].'</p>';
+
+        foreach($res['seasons'] as $saison) {
+            $posterPath = "https://image.tmdb.org/t/p/w92/" . $res['poster_path'];
+            echo("<img src=\"".$posterPath."\"/> ");
+            echo($saison['season_number']." ");
+            echo($saison['name']." ");
+            echo($saison['episode_count']." ");    
+        }
+
+        echo "</div>";$res = $this->model->getShowDetails();
+
+        echo '<div class="show-box">';
+        echo '<div class="show-main-info">';
+
+        $fullBackdropPath = "https://image.tmdb.org/t/p/original/" . $res['backdrop_path'];
+        echo '<div class="backdrop" style="background: url(\'' . $fullBackdropPath . '\'); background-size: cover;"></div>';
+
+        $fullPosterPath = "https://image.tmdb.org/t/p/w500/" . $res['poster_path'];
+        echo '<div class="poster">
+            <img src="' . $fullPosterPath . '"/>
+        </div>';
+
+        $firstAirYear = ' (' . strtok($res['first_air_date'], '-') . ')';
+
+        echo '<div class="main-info-right">';
+        echo '<h1 class="show-title">' . $res['name'] . '<span class="show-release-date">' . $firstAirYear . '</span>'. '</h1>';
+
+        $genres = '';
+        foreach($res['genres'] as $genre) {
+            $genres .= ($genre['name'] . ', ');
+        }
+
+        echo rtrim($genres, ', ') . ' - ' . '[durée moyenne à récupérer]';
+
+        echo '<br>';
+        echo '<br>';
+        echo($res['overview']);
+
+        echo '</div>';
+
+        echo '</div>';
+
+        echo($res['tagline']);
+
+        echo("<br>");
+
+        if($res['in_production']) {
+            echo("En cours");
+            echo("<br>");
+        } else {
+            echo("Terminé");
+            echo("<br>");
+        }
+
+        echo'<p> Dernière diffusion : '.$res['last_air_date'].'</p>' ;
+        
+        //A revoir
+
+        if($res['in_production'] && $res['next_episode_to_air'] != null) {
+           
+            echo'<p> Prochain épisode : '.$res['next_episode_to_air']['air_date'].'</p>' ;
+            
+        } else {
+            echo("<br>");
+        }
+
+        echo($res['overview']);
+        echo("<br>");
+        echo("<br>");
+
+        echo'<p> Nombre de saisons : '.$res['number_of_seasons'].'</p>';
+        echo'<p> Nombre d\'épisodes : '.$res['number_of_episodes'].'</p>';
+        echo("<br>");
+
+        echo'<p> Pays d\'origine : '.$res['origin_country'][0].'</p>';
+        echo("<br>");
+
+        echo'<p> Nom d\'origine : '.$res['original_name'].'</p>';
+        echo("<br>");
+
+        echo'Produit par : ';
+        foreach($res['production_companies'] as $companie) {
+            echo($companie['name']);
+            echo(" ");
+        }
+        echo("<br>");
+
+        echo'<p> Type : '.$res['type'].'</p>';
+
+        foreach($res['seasons'] as $saison) {
+            $posterPath = "https://image.tmdb.org/t/p/w92/" . $res['poster_path'];
+            echo("<img src=\"".$posterPath."\"/> ");
+            echo($saison['season_number']." ");
+            echo($saison['name']." ");
+            echo($saison['episode_count']." ");    
+        }
+
+        echo "</div>";
+
+        */
     }
+
+    public function redirection(){
+        $idShow = $_GET['id'];
+        $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
+        header("refresh:0, url=$urlShow");
+    }
+
 }

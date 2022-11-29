@@ -180,9 +180,26 @@ header {
     color: rgba(199, 200, 201);
 }
 
+div.forComments {
+    margin-top: 100px;
+    margin-left: 162px;
+}
+.titleComments {
+    text-size-adjust: 5px;
+}
+
+.zoneComments {
+    background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
+    color: rgba(255, 255, 255, 0.55);
+}
 
 .navbar-expand-lg {
     margin: 0 auto;
+}
+
+.btngradient-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
 }
 
 .btngradient-hover.color-9 {
@@ -485,6 +502,22 @@ a:hover {
 
 .profileName input {
     width: 300px;
+}
+
+.deleteComments {
+    color: rgb(110, 40, 40);
+}
+
+.usernameComments {
+    color: #175165;
+}
+
+.usernameTwoComments {
+    color: #307132;
+}
+
+.followsUsers {
+    color: #0e5f84;
 }
 
 .fileUpload {
@@ -864,6 +897,35 @@ a:hover {
     border-style: solid;
     border-radius: 50%;
     padding: 10px;
+}
+
+.saveButton {
+    background-color: transparent;
+    width: auto;
+    font-weight: 600;
+    font-size: 1rem;
+    will-change: opacity;
+    transition: linear .1s;
+    color: white;
+    margin-top: 20px;
+    border-width: 1px;
+    border-color: white;
+    border-style: solid;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.saveButton i {
+    padding: 5px;
+}
+
+.saveButton:hover {
+    border-color: rgba(255, 255, 255, 0.55);
+    color: rgb(199, 169, 72);
+}
+
+.saveButton i:hover {
+    color: rgb(199, 169, 72);
 }
 
 .showSubControls {
@@ -2637,3 +2699,4 @@ a:hover {
        transform: scale(1);
     }
  } 
+
