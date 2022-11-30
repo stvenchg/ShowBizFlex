@@ -16,13 +16,31 @@ class ViewSearch extends GenericView
 
     public function show_searchResults()
     {
+
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (isset($_GET['query']) && !empty($_GET['query'])) {
 
-            $showsResults = $this->model->getTmdbSearchResults();
+            if ($_SESSION['adult']) {
+                $showsResults = $this->model->getTmdbSearchResults('true');
+            } else {
+                $showsResults = $this->model->getTmdbSearchResults('false');
+            }
             
             $resultsString = '';
             foreach($showsResults['results'] as $index => $value) {
-                $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="https://image.tmdb.org/t/p/w200' . $value['poster_path'] . '"></a></div>';
+                if (!empty($value['poster_path'])) {
+                    $posterPath = 'https://image.tmdb.org/t/p/w200' . $value['poster_path'];
+                }
+                else {
+                    $posterPath = './Assets/images/image_unavailable.png';
+                }
+
+                $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $posterPath . '"></a></div>';
             }
 
             $query = htmlspecialchars($_GET['query']);

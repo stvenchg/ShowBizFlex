@@ -11,6 +11,7 @@ class ModelShows extends PDOConnection
     public function __construct()
     {
         $this->viewAlert = new Alert;
+        $this->addShowToDB();
     }
 
     public function callTmdbAPI($api_url) {
@@ -48,8 +49,56 @@ class ModelShows extends PDOConnection
         }
     }
 
+    public function checkFollowStatus() {
+        if (isset($_SESSION['login'])) {
 
-    public function sendComments(){
+            $idShow = $_GET['id'];
+            $idUser = $_SESSION['id'];
+
+            try{
+                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow");
+                $stmt->bindParam(':idUser', $idUser);
+                $stmt->bindParam(':idShow', $idShow);
+                $stmt->execute();
+                $isFollowing = $stmt->fetchAll();
+                if ($isFollowing[0][0] == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+            }
+        }
+    }
+
+    public function checkSaveStatus() {
+        if (isset($_SESSION['login'])) {
+
+            $idShow = $_GET['id'];
+            $idUser = $_SESSION['id'];
+
+            try{
+                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow");
+                $stmt->bindParam(':idUser', $idUser);
+                $stmt->bindParam(':idShow', $idShow);
+                $stmt->execute();
+                $isFollowing = $stmt->fetchAll();
+                if ($isFollowing[0][0] == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+            }
+        }
+    }
+
+
+    /*public function sendComments(){
         $idShow = $_GET['id'];
         try{
             $requestSendComments = parent::$db->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
@@ -60,14 +109,14 @@ class ModelShows extends PDOConnection
         catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }
+    }*/
 
-    public function deleteComments(){
+    /*public function deleteComments(){
         $idCom = $_GET['idCom'];
         $idUser = $_GET['idUser'];
         $idRole = $_SESSION['idRole'];
 
-        if($idUser == $_SESSION['id']){
+        if($idUser == $_SESSION['id'] || $idRole == 1){
             try {
                 $requestdeleteComments = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
                 $requestdeleteComments->execute(array($idCom));
@@ -77,21 +126,10 @@ class ModelShows extends PDOConnection
                 echo 'Erreur survenue : ',  $e->getMessage(), "\n";
             }
         }
-
-        if($idRole == 1){
-            try {
-                $requestdeleteCommentsAdmin = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
-                $requestdeleteCommentsAdmin->execute(array($idCom));
-                echo 'Commentaire supprimé !';
-            }
-            catch (Exception $e) {
-                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
-            }
-        }
-    }
+    }*/
 
 
-    public function getComments(){
+    /*public function getComments(){
         $idShow = $_GET['id'];
         try {
             $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication, idRole FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
@@ -102,7 +140,7 @@ class ModelShows extends PDOConnection
         catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }
+    }*/
 
     public function getDetails()
     {
@@ -130,5 +168,46 @@ class ModelShows extends PDOConnection
     public function getCast() {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/credits?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
     }
-    
+
+    public function getImages() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/images?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb");
+    }
+
+    public function getImagesFR() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/images?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr");
+    }
+
+    public function getSimilar() {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/similar?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&page=1");
+    }
+
+    public function addShowToDB() {
+
+        $sql = 'SELECT * FROM Show WHERE idShow = :idShow';
+        $showExist=parent::$db->prepare($sql);
+        $showExist->execute(array(':idShow'=>$_GET['id']));
+        $verif = $showExist->fetch();
+
+        if(!$verif){
+            $sql2 = 'INSERT INTO Show (idShow, rating) VALUES (:idShow, NULL)';
+            $sth=parent::$db->prepare($sql2);
+            $sth->execute(array(':idShow'=>$_GET['id']));
+        }
+
+        $results = $this->getDetails();
+
+        foreach($results['genres'] as $genre) {
+                $sql3 = 'SELECT * FROM Belong WHERE idShow = :idShow AND idGenre = :idGenre';
+                $showExistInBelong=parent::$db->prepare($sql3);
+                $showExistInBelong->execute(array(':idShow'=>$_GET['id'],'idGenre'=>$genre['id']));
+                $verif2 = $showExistInBelong->fetch();
+
+            if(!$verif){
+                $sql3 = 'INSERT INTO Belong VALUES (:idShow, :idGenre)';
+                $insertBelong=parent::$db->prepare($sql3);
+                $insertBelong->execute(array(':idShow'=>$_GET['id'],'idGenre'=>$genre['id']));
+            }
+        }
+    }
+
 }

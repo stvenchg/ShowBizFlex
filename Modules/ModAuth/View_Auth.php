@@ -21,6 +21,12 @@ class ViewAuth extends GenericView
     public function form_login()
     {
 
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
@@ -54,6 +60,12 @@ class ViewAuth extends GenericView
     public function form_register()
     {
 
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
@@ -78,7 +90,7 @@ class ViewAuth extends GenericView
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="1" id="tos" name="tos" required>
                         <label class="form-check-label" for="tos">
-                            En m\'inscrivant, je confirme avoir lu et accepter les <a href="./">conditions générales d\'utilisation</a>.
+                            En m\'inscrivant, je confirme avoir lu et accepté les <a href="./">conditions générales d\'utilisation</a>.
                         </label>
                     </div>
 
@@ -96,6 +108,13 @@ class ViewAuth extends GenericView
     }
 
     public function form_forgot() {
+
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (!isset($_SESSION['login'])) {
             echo '
         <div class="auth">
@@ -122,6 +141,13 @@ class ViewAuth extends GenericView
     }
 
     public function form_resetPassword() {
+    
+        echo '<style>
+            main {
+                height: 100vh;
+            }
+        </style>';
+
         if (isset($_GET['forgot_auth']) && isset($_GET['email']) && !empty($_GET['forgot_auth']) && !empty($_GET['email']) && !isset($_SESSION['login'])) {
             if ($this->model->verifyResetPassword(htmlspecialchars($_GET['email']), htmlspecialchars($_GET['forgot_auth']))) {
                 echo '

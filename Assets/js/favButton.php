@@ -1,31 +1,35 @@
-<script> 
+<script>
+    $(document).ready(function() {
+        $('.favButton').click(function() {
 
-$(document).ready(function () {
-    $('.favButton').click(function(){
-         
-        $.post("Assets/js/followShow.php", {idUser:"<?php echo $_SESSION['id'] ?>",idShow:"<?php echo$_GET['id']?>"} , function(data) {
-            if (data == 1) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Ajouté à votre liste de séries suivies !',
-                    showConfirmButton: false,
-                    timer: 950
-                });
+            if ($('#favButton').hasClass('activeFavButton')) {
+                $('#favButton').removeClass('activeFavButton')
             } else {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Retiré de votre liste de séries suivies !',
-                    showConfirmButton: false,
-                    timer: 950
-                });
+                $('#favButton').addClass('activeFavButton')
             }
+
+            iziToast.settings({
+                resetOnHover: true,
+                transitionIn: 'fadeInDown',
+                transitionOut: 'fadeOutUp',
+            });
+
+            $.post("Assets/js/followShow.php", {
+                idUser: "<?php echo $_SESSION['id'] ?>",
+                idShow: "<?php echo $_GET['id'] ?>"
+            }, function(data) {
+                if (data == 1) {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Ajoutée à la liste des séries suivies'
+                    })
+                } else {
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Retirée de la liste des séries suivies'
+                    })
+                }
+            });
         });
-
     });
-
-
-});
-
 </script>

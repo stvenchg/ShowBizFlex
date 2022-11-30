@@ -24,17 +24,13 @@ class ContShows
         $this->view->show_overview();
     }
 
-    public function comments(){
+    /*public function comments(){
         $this->model->sendComments();
-    }
+    }*/
 
-    public function redirection(){
-        $this->view->redirection();
-    }
-
-    public function deleteCom(){
+    /*public function deleteCom(){
         $this->model->deleteComments();
-    }
+    }*/
 
     public function exec() {
         $this->view->view();
