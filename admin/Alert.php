@@ -184,4 +184,14 @@ class Alert extends GenericView
             window.location = './?module=auth&action=register';
         });</script>";
     }
+
+    public function notAllowedPage() {
+        echo "<script>Swal.fire(
+            'Il y a un problème !',
+            'Vous n'êtes pas autorisé à accéder à cette page.',
+            'error'
+          ).then(function() {
+            window.location = './';
+        });</script>";
+    }
 }

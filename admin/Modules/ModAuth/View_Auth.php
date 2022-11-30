@@ -15,18 +15,17 @@ class ViewAuth extends GenericView
         parent::__construct();
         $this->viewAlert = new Alert;
         $this->model = new ModelAuth;
-
     }
 
     public function form_login()
     {
 
-        if (!isset($_SESSION['admin_id'])) {
+        if (!isset($_SESSION['admin_id']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
             echo '
         <div class="auth">
             <div class="page-title">
                 <h1>Espace administrateur</h1>
-                <p>Merci de vous authentifier.</p>
+                <p>Une authentification supplémentaire est nécessaire.</p>
             </div>
             <div class="auth-form">
                 <form action="./?module=auth&action=sendLogin" method="POST">
@@ -47,15 +46,17 @@ class ViewAuth extends GenericView
                 </div>
             </div>
         </div>';
-        } else {
+        } else if (isset($_SESSION['admin_id']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
             $this->viewAlert->alreadyAuthenticated();
+        } else {
+            $this->viewAlert->notAllowedPage();
         }
     }
 
     public function form_register()
     {
 
-        if (!isset($_SESSION['admin_id'])) {
+        if (!isset($_SESSION['admin_id']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
             echo '
         <div class="auth">
             <div class="page-title">
@@ -86,8 +87,10 @@ class ViewAuth extends GenericView
                 </form>
             </div>
         </div>';
-        } else {
+        } else if (isset($_SESSION['admin_id']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
             $this->viewAlert->alreadyAuthenticated();
+        } else {
+            $this->viewAlert->notAllowedPage();
         }
     }
 }

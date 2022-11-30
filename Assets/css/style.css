@@ -828,6 +828,10 @@ a:hover {
 .showMainControls {
     display: flex;
     gap: 20px;
+    display: flex;
+    gap: 20px;
+    display: flex;
+    gap: 20px
 }
 
 .favButton {

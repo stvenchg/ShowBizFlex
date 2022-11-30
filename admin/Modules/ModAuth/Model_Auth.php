@@ -33,7 +33,7 @@ class ModelAuth extends PDOConnection
         $password = htmlspecialchars($_POST['password']);
         $pin = htmlspecialchars($_POST['pin']);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['pin']) && !empty($_POST['pin'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['password']) && !empty($_POST['password']) && isset($_POST['pin']) && !empty($_POST['pin']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
 
         try {
             $stmtLoginAdmin = parent::$db->prepare("SELECT * FROM UserAdmin WHERE email=:email");
@@ -70,7 +70,7 @@ class ModelAuth extends PDOConnection
         $pinconfirm = htmlspecialchars($_POST['confirmpin']);
         $pinhashed = password_hash($_POST['pin'], PASSWORD_DEFAULT);
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && !empty($_POST['username'])) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && !empty($_POST['username']) && isset($_SESSION['idRole']) && $_SESSION['idRole'] == 1) {
             try {
                 $stmtCountUsername = parent::$db->prepare("SELECT * FROM UserAdmin WHERE username=:username");
                 $stmtCountUsername->bindParam(':username', $username);
