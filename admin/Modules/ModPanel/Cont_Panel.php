@@ -21,7 +21,7 @@ class ContPanel
     }
 
     public function dashboard() {
-        $this->view->show_dashboard();
+        $this->view->show_dashboard($this->model->getCountUsers(), $this->model->getCountComments(), $this->model->getCountShowsInList());
     }
 
     public function exec() {

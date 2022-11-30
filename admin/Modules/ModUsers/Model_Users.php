@@ -3,7 +3,7 @@
 require_once('PDOConnection.php');
 require_once('Alert.php');
 
-class ModelPanel extends PDOConnection
+class ModelUsers extends PDOConnection
 {
 
     private $viewAlert;
@@ -45,5 +45,26 @@ class ModelPanel extends PDOConnection
         $count2 = $stmtCount2->fetch();
 
         return $count1[0] + $count2[0];
+    }
+
+    // Users
+    public function getUserListString() {
+        $stmt = parent::$db->prepare("SELECT * FROM User");
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        $userListString = '';
+
+        foreach ($result as $index => $value) {
+            $userListString .= '<tr>
+            <th scope="row">'. $result[$index]['id'] .'</th>
+            <td>'. $result[$index]['avatar_file'] .'</td>
+            <td>'. $result[$index]['username'] .'</td>
+            <td>'. $result[$index]['email'] .'</td>
+            <td><i class="fa-solid fa-pen-to-square"></i></td>
+          </tr>';
+        }
+
+        return $userListString;
     }
 }

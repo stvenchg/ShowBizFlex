@@ -17,14 +17,14 @@ class ViewNavigation extends GenericView
 
             echo '<style>main {
                 position: relative;
-                left: 310px;
+                left: 330px;
                 background-color: var(--panel-color);
                 min-height: 100vh;
-                width: calc(100% - 310px);
-                padding-left: 20px;
-                padding-right: 20px;
-                padding-top: 17px;
-                padding-bottom: 15px;
+                width: calc(100% - 330px);
+                padding-left: 50px;
+                padding-right: 50px;
+                padding-top: 50px;
+                padding-bottom: 50px;
                 transition: var(--tran-05);
             }
             </style>';
@@ -38,13 +38,16 @@ class ViewNavigation extends GenericView
                 <h2>Dernière connexion le : null</h2>
             </div>
             <div class="nav-items">
-                <div class="nav-link nav-link-active">
+                <a href="./"><div class="nav-link">
                     <i class="fa-solid fa-house"></i> Vue d\'ensemble
-                </div>
-                <div class="nav-link">
-                    <i class="fa-solid fa-users"></i> Comptes
-                </div>
-                <a href="./?module=auth&action=logout"><div class="nav-link nav-bottom" style="color: lightred;">
+                </div></a>
+                <a href="./?module=users"><div class="nav-link">
+                    <i class="fa-solid fa-users"></i> Utilisateurs
+                </div></a>
+                <a href="../"><div class="nav-link nav-bottom-2">
+                    <i class="fa-solid fa-arrow-left"></i> Retourner à ShowBizFlex
+                </div></a>
+                <a href="./?module=auth&action=logout"><div class="nav-link nav-bottom">
                     <i class="fa-solid fa-right-from-bracket"></i> Se déconnecter
                 </div></a>
             </div>
