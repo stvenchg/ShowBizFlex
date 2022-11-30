@@ -28,6 +28,11 @@ class ContProfile
         $this->view->show_other_profile($this->model->getOtherUser());
     }
 
+    public function follow(){
+        $this->model->sendfollowedsUsers();
+        $this->view->showfollowedUsersList($this->model->getFollowedUsersList());
+    }
+
     public function exec() {
         $this->view->view();
     }

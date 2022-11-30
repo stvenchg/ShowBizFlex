@@ -116,21 +116,10 @@ class ModelShows extends PDOConnection
         $idUser = $_GET['idUser'];
         $idRole = $_SESSION['idRole'];
 
-        if($idUser == $_SESSION['id']){
+        if($idUser == $_SESSION['id'] || $idRole == 1){
             try {
                 $requestdeleteComments = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
                 $requestdeleteComments->execute(array($idCom));
-                echo 'Commentaire supprimé !';
-            }
-            catch (Exception $e) {
-                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
-            }
-        }
-
-        if($idRole == 1){
-            try {
-                $requestdeleteCommentsAdmin = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
-                $requestdeleteCommentsAdmin->execute(array($idCom));
                 echo 'Commentaire supprimé !';
             }
             catch (Exception $e) {

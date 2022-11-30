@@ -436,7 +436,7 @@ class ViewShows extends GenericView
                     <form action="./?module=shows&action=sendComments&id='.$idShow.'" method="POST">
                             <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
             
-                            <input type="submit" value="Poster mon commentaire" name="submitCommentaire">   
+                            <input type="submit" id="submitComments" value="Poster mon commentaire">   
                     </form> 
                 </div>
             ';
@@ -450,15 +450,21 @@ class ViewShows extends GenericView
                 $userName = $row['username'];
                 $idRole = $row['idRole'];
                 
-                echo '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . " : " . $row['message'] . "<br>";
+                if($userName == $_SESSION['login']){
+                    echo '<b class="usernameComments">'. $userName . '</b>' . " : " . $row['message'] . "<br>";
+                }
+                else {
+                    echo '<b>' . '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . '</b>' . " : " . $row['message'] . "<br>";
+                }
+
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
                 if($_SESSION['idRole'] == 1){
-                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a> </b>';
                 }
-                if($_SESSION['idRole'] == 2){
+                else {
                     if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
-                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a> </b>';
                     }
                 }
                 echo '<br> <br>';  

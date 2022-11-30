@@ -17,10 +17,12 @@ class ModProfile extends PDOConnection
             case "viewProfile":
                 $this->controller->profil();
             break;
-
             case "viewOtherProfile":
                 $this->controller->otherProfile();
             break;
+
+            case "followsUsers";
+            $this->controller->follow();
         }
 
         $this->controller->exec();
