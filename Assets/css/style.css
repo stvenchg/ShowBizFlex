@@ -1330,10 +1330,14 @@ a:hover {
     margin-top: 30px
 }
 
+.enableAdultCheckbox {
+    cursor: pointer;
+}
+
 .show-actions {
     margin-top: 15px;
     width: 300px;
-    height: 70px;
+    height: 60px;
     display: flex;
     align-items: center;
     gap: 10px;

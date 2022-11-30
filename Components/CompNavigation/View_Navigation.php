@@ -91,7 +91,7 @@ class ViewNavigation extends GenericView
             if ($_SESSION["idRole"] == 1) {
                 $this->view = $this->view . '
                 
-                <a href="#" class="sub-menu-link">
+                <a href="./admin/" class="sub-menu-link">
                     <i class="fa-solid fa-shield"></i> Administration
                 </a>
                 

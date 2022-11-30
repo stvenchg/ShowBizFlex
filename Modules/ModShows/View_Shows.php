@@ -295,10 +295,11 @@ class ViewShows extends GenericView
                         } else {
                             echo '<div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
                         }
+
+                        echo '</div>';
                     }
                     
         echo ' 
-        </div>
         </div>
                 </div>
                 <h2 class="show-tagline">' . $tagLine . '</h2>
