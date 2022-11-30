@@ -17,7 +17,13 @@ class ViewShows extends GenericView
         $this->model = new ModelShows;
     }
 
-    public function show_overview()
+    public function show_overview($isFollowing, $isSavedForLater, $fullBackdropPath, $fullPosterPath, 
+    $showName, $logo, $showFirstAirYear, $episodeRunTime, $rating, $showGenres, $trailer, $tagLine, $showSynopsisB, $providersString, $showWebsite,
+    $originalName, $status, $type, $originalLanguage, $networksString, $showCastString, $nextEpisodeToAirDate, $nextEpisodeToAirNumber, 
+    $nextEpisodeToAirName, $nextEpisodeToAirOverview, $nextEpisodeToAirSeason, $nextEpisodeToAirThumbail, $lastEpisodeToAirThumbail, 
+    $lastEpisodeToAirName, $lastEpisodeToAirSeason, $lastEpisodeToAirNumber, $lastEpisodeToAirDate, $lastEpisodeToAirOverview, 
+    $lastSeasonPosterPath, $lastSeasonName, $lastSeasonAirYear, $lastSeasonEpisodeCount, $lastSeasonOverview, $showWallpapersString, 
+    $showVideosString, $showPostersString, $videoCount, $imageCount, $posterCount, $recommandationsString)
     {
 
         // Style barre de navigation transparente
@@ -32,227 +38,6 @@ class ViewShows extends GenericView
                 height: 5%;
             }
         </style>';
-        
-        $isFollowing = $this->model->checkFollowStatus();
-        $isSavedForLater = $this->model->checkSaveStatus();
-
-        $details = $this->model->getDetails();
-        $showRating = $this->model->getContentRating();
-        $showVideos = $this->model->getVideos();
-        $watchProviders = $this->model->getWatchProviders();
-        $externalIds = $this->model->getExternalIds();
-        $showCast = $this->model->getCast();
-        $showImages = $this->model->getImages();
-        $showLogo = $this->model->getImagesFR();
-        $similars = $this->model->getSimilar();
-
-        if (!empty($showLogo['logos'][0]['file_path'])) {
-            $logo = $showLogo['logos'][0]['file_path'];
-        }
-
-        // Version courte recupération données cast
-        $showCastString = '';
-        foreach ($showCast['cast'] as $index => $value) {
-            if (!empty($value['profile_path'])) {
-                $profilPath = 'https://image.tmdb.org/t/p/w200' . $value['profile_path'];
-            } else {
-                $profilPath = './Assets/images/image_unavailable.png';
-            }
-
-            $showCastString .= '<li class="item-' . $index . '">
-            <div class="cast-box">
-                <a href="#"><img src="' . $profilPath . '"></a>
-                <h1 class="cast-title">' . $value['name'] . '</h1>
-                <h2 class="cast-character">' . $value['character'] . '</h2>
-            </div>
-        </li>';
-        }
-
-        $similarString = '';
-        foreach ($similars['results'] as $index => $value) {
-            if (!empty($value['poster_path'])) {
-                $similarPosterPath = 'https://image.tmdb.org/t/p/w342' . $value['poster_path'];
-            } else {
-                $similarPosterPath = './Assets/images/image_unavailable.png';
-            }
-
-            $similarString .= '<li class="item-' . $index . '">
-            <div class="trending-box">
-                <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $similarPosterPath . '"></a>
-            </div>
-        </li>';
-        }
-
-        if (!empty($showVideos['results'])) {
-            foreach ($showVideos['results'] as $index => $value) {
-                if ($index == 0) {
-                    $trailer = $value['key'];
-                }
-            }
-        } else {
-            $trailer = '';
-        }
-
-        $loopGenres = '';
-        foreach ($details['genres'] as $genre) {
-            $loopGenres .= ($genre['name'] . ', ');
-        }
-
-        if (!empty($showRating['results'])) {
-            foreach ($showRating['results'] as $index => $value) {
-                if ($index == 0) {
-                    $rating = $value['rating'];
-                }
-            }
-        } else {
-            $rating = 'N/A';
-        }
-
-        if (isset($watchProviders['results']['FR'])) {
-            $providers = array();
-            foreach ($watchProviders['results']['FR']['flatrate'] as $provider) {
-                array_push($providers, $provider['logo_path']);
-            }
-
-            $providersString = '';
-            foreach ($providers as $provider) {
-                $providersString .= '<img src="https://image.tmdb.org/t/p/original' . $provider . '"></img>';
-            }
-        } else {
-            $providersString = "Information indisponible.";
-        }
-
-        if (isset($details['networks'])) {
-            $networks = array();
-            foreach ($details['networks'] as $network) {
-                array_push($networks, $network['logo_path']);
-            }
-
-            $networksString = '';
-            foreach ($networks as $network) {
-                $networksString .= '<img src="https://image.tmdb.org/t/p/w154' . $network . '"></img><br /><br />';
-            }
-        } else {
-            $networksString = "Information indisponible.";
-        }
-
-
-        $videoCount = count($showVideos['results']);
-        $imageCount = count($showImages['backdrops']);
-        $posterCount = count($showImages['posters']);
-
-        $showVideosString = '';
-        foreach ($showVideos['results'] as $index => $value) {
-            $showVideosString .= '<li class="item-' . $index . '">
-            <div class="videos-box">
-                <a href="#">
-                <img src="https://img.youtube.com/vi/' . $value['key'] . '/maxresdefault.jpg">
-                </a>
-            </div>
-        </li>';
-        }
-
-        $showWallpapersString = '';
-        foreach ($showImages['backdrops'] as $index => $value) {
-            if ($index <= 4) {
-                $showWallpapersString .= '<li class="item-' . $index . '">
-            <div class="videos-box">
-                <a href="#">
-                <img src="https://image.tmdb.org/t/p/w500' . $value['file_path'] . '"
-                </a>
-            </div>
-        </li>';
-            }
-        }
-
-        $showPostersString = '';
-        foreach ($showImages['posters'] as $index => $value) {
-            if ($index <= 4) {
-                $showPostersString .= '<img src="https://image.tmdb.org/t/p/w200' . $value['file_path'] . '"></img>';
-            }
-        }
-
-
-        // header
-        $fullBackdropPath = "https://image.tmdb.org/t/p/original" . $details['backdrop_path'];
-
-        if (!empty($details['poster_path'])) {
-            $fullPosterPath = "https://image.tmdb.org/t/p/w500" . $details['poster_path'];
-        } else {
-            $fullPosterPath = 'Assets/images/image_unavailable.png';
-        }
-
-        $showName = $details['name'];
-        $showFirstAirYear = ' (' . strtok($details['first_air_date'], '-') . ')';
-        if (!empty($details['episode_run_time'][0])) {
-            $episodeRunTime = ' - ' . $details['episode_run_time'][0] . 'm';
-        } else {
-            $episodeRunTime = '';
-        }
-
-        $showGenres = rtrim($loopGenres, ', ') . $episodeRunTime;
-        $showSynopsis = str_replace('...', '.', $details['overview']);
-        $showSynopsisB = str_replace('.', '.<br />', $showSynopsis);
-        $tagLine = $details['tagline'];
-
-        // body
-        $showWebsite = $details['homepage'];
-        $originalName = $details['original_name'];
-        $status = $details['status'];
-        $type = $details['type'];
-        $originalLanguage = $details['original_language'];
-
-        $seasonCount = count($details['seasons']) - 1;
-        $lastSeasonName = $details['seasons'][$seasonCount]['name'];
-
-        if (!empty($details['seasons'][$seasonCount]['poster_path'])) {
-            $lastSeasonPosterPath = $details['seasons'][$seasonCount]['poster_path'];
-        } else {
-            $lastSeasonPosterPath = $details['poster_path'];
-        }
-
-
-        $lastSeasonEpisodeCount = $details['seasons'][$seasonCount]['episode_count'];
-        $lastSeasonNumber = $details['seasons'][$seasonCount]['season_number'];
-        $lastSeasonOverview = $details['seasons'][$seasonCount]['overview'];
-        $lastSeasonAirDate = $details['seasons'][$seasonCount]['air_date'];
-        $lastSeasonAirDateTime = new DateTime($details['seasons'][$seasonCount]['air_date']);
-        $lastSeasonAirYear = $lastSeasonAirDateTime->format('Y');
-
-        $lastEpisodeToAirNumber = $details['last_episode_to_air']['episode_number'];
-        $lastEpisodeToAirName = $details['last_episode_to_air']['name'];
-        $lastEpisodeToAirOverview = $details['last_episode_to_air']['overview'];
-        $lastEpisodeToAirSeason = $details['last_episode_to_air']['season_number'];
-
-        if (!empty($details['last_episode_to_air']['still_path'])) {
-            $lastEpisodeToAirThumbail = 'https://image.tmdb.org/t/p/w500' . $details['last_episode_to_air']['still_path'];
-        } else {
-            $lastEpisodeToAirThumbail = "Assets/images/episode_thumbail_unavailable.png";
-        }
-
-
-        $lastEpisodeToAirDate = (new DateTime($details['last_episode_to_air']['air_date']))->format('d M Y');
-
-        $nextEpisodeToAirNumber = '';
-        $nextEpisodeToAirName = '';
-        $nextEpisodeToAirOverview = '';
-        $nextEpisodeToAirSeason = '';
-        $nextEpisodeToAirThumbail = '';
-        $nextEpisodeToAirDate = '';
-
-        if (!empty($details['next_episode_to_air']['air_date'])) {
-            $nextEpisodeToAirNumber = $details['next_episode_to_air']['episode_number'];
-            $nextEpisodeToAirName = $details['next_episode_to_air']['name'];
-            $nextEpisodeToAirOverview = $details['next_episode_to_air']['overview'];
-            $nextEpisodeToAirSeason = $details['next_episode_to_air']['season_number'];
-            if (!empty($details['next_episode_to_air']['still_path'])) {
-                $nextEpisodeToAirThumbail = 'https://image.tmdb.org/t/p/w500' . $details['next_episode_to_air']['still_path'];
-            } else {
-                $nextEpisodeToAirThumbail = "Assets/images/episode_thumbail_unavailable.png";
-            }
-            $nextEpisodeToAirDate = (new DateTime($details['next_episode_to_air']['air_date']))->format('d M Y');
-        }
-
 
         echo '<div class="show-box">';
 
@@ -268,7 +53,7 @@ class ViewShows extends GenericView
             </div>
             <div class="showMainInfo">';
 
-        if (!empty($showLogo['logos'][0]['file_path']) && $showLogo['logos'][0]['height'] < 700) {
+        if (!empty($logo)) {
             echo '<h1 class="show-title"><img style="margin-bottom: 20px; width: 25%; margin-top: -30px" src="https://image.tmdb.org/t/p/w500' . $logo . '"></img>' . '</h1>';
         } else {
             echo '<h1 class="show-title"><a style="color: white" href="#">' . $showName . '</a><span class="show-release-date">' . $showFirstAirYear . '</span>' . '</h1>';
@@ -418,7 +203,7 @@ class ViewShows extends GenericView
                     <h2 class="panel-title">Ça pourrait t\'intéresser...</h2>
 
                     <ul id="autoWidthShowSimilar" class="cs-hidden">
-                        ' . $similarString . '
+                        ' . $recommandationsString . '
                     </ul>
                 </div>
             </div>
