@@ -1,6 +1,6 @@
 <?php
 
-require_once("./GenericView.php");
+require_once("GenericView.php");
 require_once("Alert.php");
 require_once("Model_Home.php");
 
