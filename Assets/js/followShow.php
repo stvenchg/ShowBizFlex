@@ -2,8 +2,8 @@
 
 extract($_POST);
 
-$dsn = "mysql:host=localhost;dbname=dutinfopw201637;charset=UTF8";
-$bdd = new PDO($dsn, 'root', '');
+$dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201637;charset=UTF8";
+$bdd = new PDO($dsn, 'dutinfopw201637', 'suqebamu');
 
 $verifShowInFollowed=$bdd->prepare('SELECT * FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow');
 $verifShowInFollowed->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));

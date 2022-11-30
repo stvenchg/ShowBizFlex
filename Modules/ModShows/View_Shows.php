@@ -474,7 +474,7 @@ class ViewShows extends GenericView
 
     public function redirection(){
         $idShow = $_GET['id'];
-        $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
+        $urlShow = "./?module=shows&action=overview&id=$idShow";
         header("refresh:0, url=$urlShow");
     }
 

@@ -80,7 +80,7 @@ class ModelShows extends PDOConnection
             $idUser = $_SESSION['id'];
 
             try{
-                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM towatchlatershows WHERE idUser=:idUser AND idShow=:idShow");
+                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow");
                 $stmt->bindParam(':idUser', $idUser);
                 $stmt->bindParam(':idShow', $idShow);
                 $stmt->execute();
