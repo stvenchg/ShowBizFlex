@@ -1531,6 +1531,12 @@ a:hover {
     font-size: 15px;
 }
 
+.submitCommentButton {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
 
 @media only screen and (max-width:991px) {
     header {

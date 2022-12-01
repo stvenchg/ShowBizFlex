@@ -236,7 +236,23 @@ class ViewShows extends GenericView
                         ' . $showPostersString . '
                     </div>
 
-                </div>
+                </div>';
+
+        if (isset($_SESSION['login'])) {
+            echo '<div class="panel-box">
+                    <h2 class="panel-title mb-20">Commentaires</h2>
+
+                    <form action="./?module=shows&action=sendComments&id=' . htmlspecialchars($_GET['id']) . '" method="POST">
+                        <input class="form-input" type="text" name="comment" placeholder="Ajouter un commentaire..." required>
+                        <div class="submitCommentButton">
+                            <button type="submit" id="submit" class="btngradient btngradient-hover color-9" style="">Poster</button>
+                        </div>
+                    </form>
+
+                </div>';
+        }
+
+                echo '
 
                 <div class="panel-box">
                     <h2 class="panel-title">Ça pourrait t\'intéresser...</h2>
@@ -247,25 +263,7 @@ class ViewShows extends GenericView
                 </div>
             </div>
 
-        </div>
-
-        <br> <br> <br>';
-
-
-        if (isset($_SESSION['login'])) {
-            $idShow = $_GET['id'];
-            echo '
-                <div class="forComments">
-                    <h1 class="titleComments"> Commentaires : </h1> <br>
-                    <form action="./?module=shows&action=sendComments&id=' . $idShow . '" method="POST">
-                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
-            
-                            <input type="submit" value="Poster mon commentaire" name="submitCommentaire">   
-                    </form> 
-                </div>
-            ';
-
-            echo "<br> <br>";
+        </div>';
 
             $comments = $this->model->getComments();
             foreach ($comments as $row) {
@@ -287,7 +285,6 @@ class ViewShows extends GenericView
                 }
                 echo '<br> <br>';
             }
-        }
     }
 
     public function redirection()
