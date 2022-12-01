@@ -429,17 +429,17 @@ class ViewShows extends GenericView
         
 
         if(isset($_SESSION['login'])){
-            $idShow = $_GET['id'];
             echo '
                 <div class="forComments">
                     <h1 class="titleComments"> Commentaires : </h1> <br>
                     <form method="POST" id="formCommments">
-                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
-                            <input type="submit" value="Poster mon commentaire">
-                            <div id="loader" style="display:none"> <img src"Assets\images\gif\loader.gif"/> </div>   
+                            <textarea class="zoneComments" name="commentaire"> </textarea> <br><br>
+                            <input type="submit" value="Poster mon commentaire"> <br>
+                            <div id="loader" style="display:none"> <img src="Assets/images/gif/loader.gif" width="30"/> </div>        
                     </form> 
                 </div>
             ';
+
             
             echo "<br> <br>";
 
@@ -468,11 +468,8 @@ class ViewShows extends GenericView
                     }
                 }
                 echo '<br> <br>';  
-            }
-        }
-    }*/
-
+            }*/
         }
     }
-
+    
 }

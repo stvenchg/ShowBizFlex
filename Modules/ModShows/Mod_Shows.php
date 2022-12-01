@@ -20,14 +20,13 @@ class ModShows extends PDOConnection
 
             /*case"sendComments":
                 $this->controller->comments();
-            break;*/
-
-            /*case"deleteComments":
-                $this->controller->deleteCom();
             break;
-        }*/
-        }
-        $this->controller->exec();
 
+            case"deleteComments":
+                $this->controller->deleteCom();
+            break;*/
+        }
+
+        $this->controller->exec();
     }
 }

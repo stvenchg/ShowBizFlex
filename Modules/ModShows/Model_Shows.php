@@ -109,9 +109,9 @@ class ModelShows extends PDOConnection
         catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }*/
+    }
 
-    /*public function deleteComments(){
+    public function deleteComments(){
         $idCom = $_GET['idCom'];
         $idUser = $_GET['idUser'];
         $idRole = $_SESSION['idRole'];
@@ -126,10 +126,10 @@ class ModelShows extends PDOConnection
                 echo 'Erreur survenue : ',  $e->getMessage(), "\n";
             }
         }
-    }*/
+    }
 
 
-    /*public function getComments(){
+    public function getComments(){
         $idShow = $_GET['id'];
         try {
             $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication, idRole FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");

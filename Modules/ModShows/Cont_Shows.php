@@ -26,9 +26,9 @@ class ContShows
 
     /*public function comments(){
         $this->model->sendComments();
-    }*/
+    }
 
-    /*public function deleteCom(){
+    public function deleteCom(){
         $this->model->deleteComments();
     }*/
 
