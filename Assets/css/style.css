@@ -1345,29 +1345,33 @@ a:hover {
 
 .profile-box {
     position: relative;
-    margin: auto;
 }
 
 .profileAvatarAndInfos {
-    width: 80%; 
+    width: 80%;
 }
 
-.profileBanner div {
+.profileBanner {
+    position: relative;
+}
+
+.profileBanner .banner {
     width: 100%;
     height: 350px;
+    opacity: 0.5;
 }
 
 .profileAvatarAndInfos {
     position: absolute;
     width: 80%;
-    margin: auto;
-    top: 15%;
+    top: 25%;
     left: 10%;
 }
 
 .profileInfos {
     display: flex;
     gap: 20px;
+    align-items: center;
 }
 
 .profileInfos img {
@@ -1396,23 +1400,70 @@ a:hover {
 .usernameAndInfos {
     display: flex;
     align-items: center;
+    height: 50%;
 }
 
 .profile-body {
     width: 80%;
     margin: auto;
     display:flex;
+    gap: 40px;
+    margin-top: 30px;
 }
 
 .panel-info-left {
-    border: 1px solid white;
     height: 200px;
-    width: 30%;
+    width: 60%;
 }
 
 .panel-right {
-    border: 1px solid white;
     width: 100%;
+    border-radius: 10px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.user-about {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.user-followers {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.usernameAndSubscribeButton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel-subtitle-left {
+    color: white;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.user-favGenres {
+    height: 150px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
 @media only screen and (max-width:991px) {
