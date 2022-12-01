@@ -81,35 +81,13 @@ class ViewProfile extends GenericView
                     </div>
 
                     <div class="panel-right">
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
+                        <div class="user-stats-lists">
 
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
-                        <p>c</p>
+                        </div>
 
-                        <p>c</p>
-                        <p>c</p>
+                        <div class="user-activity">
+                        <h2 class="panel-subtitle-left mt-30"><i class="fa-solid fa-bars-staggered"></i> Activités récentes</h2>
+                        <div>
                     </div>
                 </div>';
 
