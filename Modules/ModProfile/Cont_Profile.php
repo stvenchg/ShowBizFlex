@@ -21,11 +21,11 @@ class ContProfile
     }
 
     public function myProfile() {
-        $this->view->show_myProfile($this->model->getUserDetails());
+        $this->view->show_myProfile($this->model->getUserDetails(), $this->model->getUserShowInListsCount());
     }
 
     public function viewProfile(){
-        $this->view->show_viewProfile($this->model->getOtherUser());
+        $this->view->show_viewProfile($this->model->getOtherUser(), $this->model->getUserShowInListsCount());
     }
 
     public function exec() {

@@ -10,7 +10,7 @@ class ViewProfile extends GenericView
         parent::__construct();
     }
 
-    public function show_myProfile($user)
+    public function show_myProfile($user, $showsInListCount)
     {
         if (isset($_SESSION['login'])) {
 
@@ -49,8 +49,16 @@ class ViewProfile extends GenericView
                             <div class="usernameAndInfos">
                                 <h1>'. $username  .'</h1> <span class="memberSince">est membre de ShowBizFlex depuis le '. $registerDate .'.</span>
                             </div>
-                            <div class="subscribe-button">
-                                <button type="submit" id="submit" class="btngradient btngradient-hover color-9">Suivre</button>
+                            <div class="subscribe-button">';
+
+                if ($_SESSION['login'] == $username) {
+                    echo '<a href="./?module=settings"><button class="btngradient btngradient-hover color-9 w-200">Modifier mon profil</button></a>';
+                }
+                else {
+                    echo '<button id="followButton" class="btngradient btngradient-hover color-9">Suivre</button>';
+                }
+
+                echo '
                             </div>
                             </div>
                         </div>
@@ -82,7 +90,18 @@ class ViewProfile extends GenericView
 
                     <div class="panel-right">
                         <div class="user-stats-lists">
-
+                            <div class="stats-showsInList">
+                                <h3>Séries en liste</h3>
+                                <h1>'. $showsInListCount .'</h1>
+                            </div>
+                            <div class="stats-userComments">
+                                <h3>Commentaires</h3>
+                                <h1>1000</h1>
+                            </div>
+                            <div class="stats-userRating">
+                                <h3>Séries en liste</h3>
+                                <h1>1000</h1>
+                            </div>
                         </div>
 
                         <div class="user-activity">
@@ -100,8 +119,8 @@ class ViewProfile extends GenericView
         }
     }
 
-    public function show_viewProfile($otherUsers){
-        $this->show_myProfile($otherUsers);
+    public function show_viewProfile($user, $showsInListCount){
+        $this->show_myProfile($user, $showsInListCount);
     }
 
 }

@@ -232,6 +232,10 @@ div.forComments {
     transition: all .4s ease-in-out
 }
 
+.w-200 {
+    width: 200px;
+}
+
 .btngradient-hover:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
@@ -1474,6 +1478,34 @@ a:hover {
     border-radius: 10px;
     background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.user-stats-lists h3 {
+    font-size: 20px;
+}
+
+.user-stats-lists h1 {
+    font-size: 32px;
+    color: white;
+}
+
+.stats-showsInList {
+    width: 20%;
+    height: 100px;
+}
+
+.stats-userComments {
+    width: 20%;
+    height: 100px;
+}
+
+.stats-userRating {
+    width: 20%;
+    height: 100px;
 }
 
 @media only screen and (max-width:991px) {

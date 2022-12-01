@@ -10,7 +10,6 @@ class ModelProfile extends PDOConnection
 
     public function getUserDetails()
     {
-
         $login = $_SESSION['login'];
 
         try {
@@ -35,5 +34,21 @@ class ModelProfile extends PDOConnection
         }
     }
 
+    public function getUserShowInListsCount() {
+        try{
+            $stmt1 = parent::$db->prepare("SELECT count(*) FROM towatchlatershows WHERE idUser=$_GET[id]");
+            $stmt1->execute();
+            $results1 = $stmt1->fetch();
+
+            $stmt2 = parent::$db->prepare("SELECT count(*) FROM followedshows WHERE idUser=$_GET[id]");
+            $stmt2->execute();
+            $results2 = $stmt2->fetch();
+
+            return $results1[0] + $results2[0];
+
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
 
 }
