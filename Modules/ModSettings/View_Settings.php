@@ -61,13 +61,14 @@ class ViewSettings extends GenericView
                 <label>COULEUR DE PROFIL</label>
                 
                 <div class="profil-color-palette">
-                    <div class="profil-color-palette-item blue"></div>
-                    <div class="profil-color-palette-item purple"></div>
-                    <div class="profil-color-palette-item green"></div>
-                    <div class="profil-color-palette-item orange"></div>
-                    <div class="profil-color-palette-item red"></div>
-                    <div class="profil-color-palette-item pink"></div>
-                    <div class="profil-color-palette-item grey"></div>
+                    <div class="profil-color-palette-item blue" id="paletteBlue"></div>
+                    <div class="profil-color-palette-item purple" id="palettePurple"></div>
+                    <div class="profil-color-palette-item green" id="paletteGreen"></div>
+                    <div class="profil-color-palette-item orange" id="paletteOrange"></div>
+                    <div class="profil-color-palette-item red" id="paletteRed"></div>
+                    <div class="profil-color-palette-item pink" id="palettePink"></div>
+                    <div class="profil-color-palette-item grey" id="paletteGrey"></div>
+                    <div class="profil-color-palette-item white" id="paletteWhite"></div>
                 </div>
             </div>
 

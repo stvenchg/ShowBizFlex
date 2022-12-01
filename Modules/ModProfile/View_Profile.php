@@ -24,6 +24,10 @@ class ViewProfile extends GenericView
                 z-index: 10000;
                 height: 5%;
             }
+
+            :root {
+                --profile-color: '. $user[0]['color'] .';
+              }
         </style>';
 
             foreach($user as $value){

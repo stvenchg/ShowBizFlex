@@ -600,7 +600,8 @@ a:hover {
     height: 50px;
     border: 1px solid #fff;
     border-radius: 5px;
-    cursor: pointer
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .profil-color-palette-item:hover {
@@ -633,6 +634,10 @@ a:hover {
 
 .profil-color-palette-item.grey {
     background-color: #677B94
+}
+
+.profil-color-palette-item.white {
+    background-color: white;
 }
 
 .hide {
@@ -1437,7 +1442,6 @@ a:hover {
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-
 .mt-30 {
     margin-top: 30px;
 }
@@ -1458,7 +1462,7 @@ a:hover {
 }
 
 .panel-subtitle-left {
-    color: white;
+    color: var(--profile-color);
     font-size: 18px;
     margin-bottom: 10px;
 }
@@ -1494,7 +1498,7 @@ a:hover {
 
 .user-stats-lists h1 {
     font-size: 32px;
-    color: white;
+    color: var(--profile-color);
 }
 
 .stats-showsInList {
@@ -1527,7 +1531,7 @@ a:hover {
 }
 
 .activity-item h1 {
-    color: white;
+    color: var(--profile-color);
     font-size: 15px;
 }
 
