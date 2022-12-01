@@ -14,7 +14,7 @@
                 transitionOut: 'fadeOutUp',
             });
 
-            $.post("Assets/js/followShow.php", {
+            $.post("Assets/js/ajax/followShow.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idShow: "<?php echo $_GET['id'] ?>"
             }, function(data) {

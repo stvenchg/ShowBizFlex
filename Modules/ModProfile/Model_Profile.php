@@ -8,26 +8,11 @@ class ModelProfile extends PDOConnection
     public function __construct()
     {}
 
-    public function getUserDetails()
-    {
-        $login = $_SESSION['login'];
-
-        try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM User WHERE username=:login");
-            $stmtLogin->bindParam(':login', $login);
-            $stmtLogin->execute();
-            return $stmtLogin->fetchAll();
-
-        } catch (Exception $e) {
-            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
-        }
-    }
-
-    public function getOtherUser(){
+    public function getUserDetails() {
         try{
-            $stmtId = parent::$db->prepare("SELECT * FROM User WHERE id = $_GET[id]");
-            $stmtId->execute();
-            return $stmtId->fetchAll();
+            $stmt = parent::$db->prepare("SELECT * FROM User WHERE id = $_GET[id]");
+            $stmt->execute();
+            return $stmt->fetchAll();
 
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
@@ -45,6 +30,19 @@ class ModelProfile extends PDOConnection
             $results2 = $stmt2->fetch();
 
             return $results1[0] + $results2[0];
+
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function getUserComments() {
+        try{
+            $stmt = parent::$db->prepare("SELECT count(*) FROM comment WHERE id=$_GET[id]");
+            $stmt->execute();
+            $results = $stmt->fetch();
+
+            return $results[0];
 
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";

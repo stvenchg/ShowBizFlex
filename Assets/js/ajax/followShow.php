@@ -1,9 +1,8 @@
 <?php
 
-extract($_POST);
+require_once('connection.php');
 
-$dsn = "mysql:host=localhost;dbname=dutinfopw201637;charset=UTF8";
-$bdd = new PDO($dsn, 'root', '');
+extract($_POST);
 
 $sql = 'SELECT * FROM Show WHERE idShow = :idShow';
 $showExist=$bdd->prepare($sql);
@@ -16,12 +15,12 @@ if(!$verif){
     $sth->execute(array(':idShow'=>$idShow));
 }
 
-$verifShowInWatchLater=$bdd->prepare('SELECT * FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow');
-$verifShowInWatchLater->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
-$row = $verifShowInWatchLater->fetch();
+$verifShowInFollowed=$bdd->prepare('SELECT * FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow');
+$verifShowInFollowed->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
+$row = $verifShowInFollowed->fetch();
 
 if(!$row){
-    $sql3 = 'INSERT INTO `ToWatchLaterShows` (`idUser`, `idShow`) VALUES (?, ?)';
+    $sql3 = 'INSERT INTO `FollowedShows` (`idUser`, `idShow`) VALUES (?, ?)';
     $inser=$bdd->prepare($sql3);
     $inser->execute(array($idUser,$idShow));
 
@@ -30,7 +29,7 @@ if(!$row){
  
  else{
 
-    $inser=$bdd->prepare('DELETE FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow');
+    $inser=$bdd->prepare('DELETE FROM FollowedShows WHERE idUser=:idUser AND idShow=:idShow');
     $inser->execute(array(':idUser'=>$idUser,':idShow'=>$idShow));
 
     echo '0';

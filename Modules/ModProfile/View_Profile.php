@@ -10,7 +10,7 @@ class ViewProfile extends GenericView
         parent::__construct();
     }
 
-    public function show_myProfile($user, $showsInListCount)
+    public function show_profile($user, $showsInListCount, $commentsCount)
     {
         if (isset($_SESSION['login'])) {
 
@@ -96,11 +96,11 @@ class ViewProfile extends GenericView
                             </div>
                             <div class="stats-userComments">
                                 <h3>Commentaires</h3>
-                                <h1>1000</h1>
+                                <h1>'. $commentsCount .'</h1>
                             </div>
                             <div class="stats-userRating">
-                                <h3>Séries en liste</h3>
-                                <h1>1000</h1>
+                                <h3>Évaluations</h3>
+                                <h1>N/A</h1>
                             </div>
                         </div>
 
@@ -118,9 +118,4 @@ class ViewProfile extends GenericView
             echo "Pas identifié";
         }
     }
-
-    public function show_viewProfile($user, $showsInListCount){
-        $this->show_myProfile($user, $showsInListCount);
-    }
-
 }

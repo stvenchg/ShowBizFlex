@@ -14,10 +14,6 @@ class ModProfile extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-            case "myProfile":
-                $this->controller->myProfile();
-            break;
-
             case "view":
                 $this->controller->viewProfile();
             break;

@@ -1334,7 +1334,7 @@ a:hover {
     margin-top: 30px
 }
 
-.enableAdultCheckbox {
+.checkboxCursor {
     cursor: pointer;
 }
 
@@ -1383,6 +1383,11 @@ a:hover {
     height: 200px;
     border-radius: 50%;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: transform 0.2s;
+}
+
+.profileInfos img:hover {
+    transform: scale(1.05);
 }
 
 .usernameAndInfos {
@@ -1507,6 +1512,7 @@ a:hover {
     width: 20%;
     height: 100px;
 }
+
 
 @media only screen and (max-width:991px) {
     header {

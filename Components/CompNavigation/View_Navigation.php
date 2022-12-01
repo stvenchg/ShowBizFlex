@@ -58,7 +58,7 @@ class ViewNavigation extends GenericView
                 </div>
             <hr>
 
-                <a href="./?module=profile" class="sub-menu-link">
+                <a href="./?module=profile&action=view&id='. $_SESSION['id'] .'" class="sub-menu-link">
                     <i class="fa-solid fa-user"></i> Profil
                 </a>
 
@@ -75,7 +75,7 @@ class ViewNavigation extends GenericView
                 </div>
             <hr>
 
-                <a href="./?module=profile" class="sub-menu-link">
+                <a href="./?module=profile&action=view&id='. $_SESSION['id'] .'" class="sub-menu-link">
                     <i class="fa-solid fa-user"></i> Profil
                 </a>
 

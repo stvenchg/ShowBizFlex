@@ -17,7 +17,8 @@ class ViewSettings extends GenericView
         $this->viewAlert = new Alert;
     }
 
-    public function headerSettings() {
+    public function headerSettings()
+    {
         echo '<div class="settings">
             <div class="page-title">
             <h1>Paramètres</h1>
@@ -211,29 +212,44 @@ class ViewSettings extends GenericView
             <div class="settings-content">
 
             <div class="default-container">
+
+            <div class="profilVisibility">
+            <label>Visibilité du profil</label>
+            <div class="form-check form-switch">';
+
+            if ($user['private']) {
+                echo '<input name="enablePrivate" class="form-check-input checkboxCursor" type="checkbox" id="enablePrivate" checked>';
+            } else {
+                echo '<input class="form-check-input" type="checkbox" id="enablePrivate">';
+            }
+            echo '
+                <label class="form-check-label" for="enablePrivate">Empêcher l\'affichage du profil aux autres utilisateurs</label>
+            </div>
+
+            <br>
                 <label style="color: #f74d91;">CONTENUS SENSIBLES (NSFW)</label>
                 <div class="form-check form-switch">';
 
-                if ($user['adult']) {
-                    echo '<input name="enableAdult" class="form-check-input enableAdultCheckbox" type="checkbox" id="enableAdultCheckbox" checked>';
-                } else {
-                    echo '<input class="form-check-input" type="checkbox" id="enableAdultCheckbox">';
-                }
+            if ($user['adult']) {
+                echo '<input name="enableAdult" class="form-check-input checkboxCursor" type="checkbox" id="enableAdultCheckbox" checked>';
+            } else {
+                echo '<input class="form-check-input" type="checkbox" id="enableAdultCheckbox">';
+            }
 
-                echo '
-                    <label class="form-check-label" for="enableAdultCheckbox">Je souhaite afficher les contenus sensibles dans les résultats de mes recherches</label>
+            echo '
+                    <label class="form-check-label" for="enableAdultCheckbox">Inclure les contenus sensibles dans les résultats de mes recherches</label>
                 </div>
             </div>
         </div>
         </div>
     </div>';
-
         } else {
             $this->viewAlert->userNotAuthenticated();
         }
     }
 
-    public function show_uploadAvatar() {
+    public function show_uploadAvatar()
+    {
 
         if (isset($_SESSION['login'])) {
 
@@ -263,7 +279,8 @@ class ViewSettings extends GenericView
         }
     }
 
-    public function show_uploadBanner() {
+    public function show_uploadBanner()
+    {
 
         if (isset($_SESSION['login'])) {
 
