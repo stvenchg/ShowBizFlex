@@ -12,21 +12,20 @@ class ContProfile
     public function __construct() 
     {
         $this->view = new ViewProfile();
-        $this->view->menuProfile();
         $this->model = new ModelProfile();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : " ";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "myProfile";
     }
 
     public function getAction() {
         return $this->action;
     }
 
-    public function profil() {
-        $this->view->show_profile($this->model->getUserDetails());
+    public function myProfile() {
+        $this->view->show_myProfile($this->model->getUserDetails());
     }
 
-    public function otherProfile(){
-        $this->view->show_other_profile($this->model->getOtherUser());
+    public function viewProfile(){
+        $this->view->show_viewProfile($this->model->getOtherUser());
     }
 
     public function exec() {

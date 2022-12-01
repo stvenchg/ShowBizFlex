@@ -14,7 +14,7 @@ class ModelProfile extends PDOConnection
         $login = $_SESSION['login'];
 
         try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login");
+            $stmtLogin = parent::$db->prepare("SELECT * FROM User WHERE username=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
             return $stmtLogin->fetchAll();
@@ -26,7 +26,7 @@ class ModelProfile extends PDOConnection
 
     public function getOtherUser(){
         try{
-            $stmtId = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE id = $_GET[id]");
+            $stmtId = parent::$db->prepare("SELECT * FROM User WHERE id = $_GET[id]");
             $stmtId->execute();
             return $stmtId->fetchAll();
 
