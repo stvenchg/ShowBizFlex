@@ -12,7 +12,7 @@ class ViewProfile extends GenericView
 
     public function show_profile($user, $showsInListCount, $commentsCount)
     {
-        if (isset($_SESSION['login'])) {
+        if (!$user[0]['private'] || $_SESSION['idRole'] == 1 || $user[0]['id'] == $_SESSION['id']) {
 
             echo '<style>
             header {
@@ -115,7 +115,10 @@ class ViewProfile extends GenericView
                 echo '</div>';
             }
         } else {
-            echo "Pas identifié";
+            echo '
+            <div style="color: white; text-align:center">
+                <h1 style="font-size: 20px;">Désolé, ce profil est privé.</h1>
+            </div>';
         }
     }
 }

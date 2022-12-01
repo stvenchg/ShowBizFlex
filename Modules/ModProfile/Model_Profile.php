@@ -6,11 +6,15 @@ class ModelProfile extends PDOConnection
 {
 
     public function __construct()
-    {}
+    {
+    }
 
     public function getUserDetails() {
+
+        $id = htmlspecialchars($_GET['id']);
+        
         try{
-            $stmt = parent::$db->prepare("SELECT * FROM User WHERE id = $_GET[id]");
+            $stmt = parent::$db->prepare("SELECT * FROM User WHERE id = $id");
             $stmt->execute();
             return $stmt->fetchAll();
 
@@ -20,12 +24,15 @@ class ModelProfile extends PDOConnection
     }
 
     public function getUserShowInListsCount() {
+
+        $id = htmlspecialchars($_GET['id']);
+
         try{
-            $stmt1 = parent::$db->prepare("SELECT count(*) FROM towatchlatershows WHERE idUser=$_GET[id]");
+            $stmt1 = parent::$db->prepare("SELECT count(*) FROM towatchlatershows WHERE idUser=$id");
             $stmt1->execute();
             $results1 = $stmt1->fetch();
 
-            $stmt2 = parent::$db->prepare("SELECT count(*) FROM followedshows WHERE idUser=$_GET[id]");
+            $stmt2 = parent::$db->prepare("SELECT count(*) FROM followedshows WHERE idUser=$id");
             $stmt2->execute();
             $results2 = $stmt2->fetch();
 
@@ -37,8 +44,11 @@ class ModelProfile extends PDOConnection
     }
 
     public function getUserComments() {
+
+        $id = htmlspecialchars($_GET['id']);
+
         try{
-            $stmt = parent::$db->prepare("SELECT count(*) FROM comment WHERE id=$_GET[id]");
+            $stmt = parent::$db->prepare("SELECT count(*) FROM comment WHERE id=$id");
             $stmt->execute();
             $results = $stmt->fetch();
 

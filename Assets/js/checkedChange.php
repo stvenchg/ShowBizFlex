@@ -31,27 +31,27 @@ $(document).ready(function() {
 
     $('#enablePrivate').change(function() {
         if (this.checked) {
-            $.post("Assets/js/ajax/setAdult.php", {
+            $.post("Assets/js/ajax/setPrivate.php", {
                 idUser: <?php echo $_SESSION['id'] ?>,
-                adult: 1,
+                private: 1,
             }, function(data) {
                 if (data == 1) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Les contenus sensibles seront visibles'
+                        title: 'Ton profil sera inaccessible pour les autres utilisateurs'
                     })
                 }
             });
         }
         else {
-            $.post("Assets/js/ajax/setAdult.php", {
+            $.post("Assets/js/ajax/setPrivate.php", {
                 idUser: <?php echo $_SESSION['id'] ?>,
-                adult: 0,
+                private: 0,
             }, function(data) {
                 if (data == 0) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Les contenus sensibles seront masqués'
+                        title: 'Ton profil sera visible pour les autres utilisateurs'
                     })
                 }
             });
