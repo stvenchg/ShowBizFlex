@@ -21,7 +21,10 @@ class ContProfile
     }
 
     public function viewProfile(){
-        $this->view->show_profile($this->model->getUserDetails(), $this->model->getUserShowInListsCount(), $this->model->getUserComments());
+        $this->view->show_profile($this->model->getUserDetails(), 
+        $this->model->getUserShowInListsCount(), 
+        $this->model->getUserComments(),
+    $this->model->getUserActivity());
     }
 
     public function exec() {

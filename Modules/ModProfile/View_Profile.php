@@ -10,7 +10,7 @@ class ViewProfile extends GenericView
         parent::__construct();
     }
 
-    public function show_profile($user, $showsInListCount, $commentsCount)
+    public function show_profile($user, $showsInListCount, $commentsCount, $userActivity)
     {
         if (!$user[0]['private'] || $_SESSION['idRole'] == 1 || $user[0]['id'] == $_SESSION['id']) {
 
@@ -106,6 +106,8 @@ class ViewProfile extends GenericView
 
                         <div class="user-activity">
                         <h2 class="panel-subtitle-left mt-30"><i class="fa-solid fa-bars-staggered"></i> Activités récentes</h2>
+
+                        '. $userActivity .'
                         <div>
                     </div>
                 </div>';

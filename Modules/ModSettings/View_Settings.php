@@ -223,7 +223,7 @@ class ViewSettings extends GenericView
                 echo '<input class="form-check-input" type="checkbox" id="enablePrivate">';
             }
             echo '
-                <label class="form-check-label" for="enablePrivate">Empêcher l\'affichage du profil aux autres utilisateurs</label>
+                <label class="form-check-label" for="enablePrivate">Passer le profil en privé</label>
             </div>
 
             <br>

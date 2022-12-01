@@ -59,4 +59,26 @@ class ModelProfile extends PDOConnection
         }
     }
 
+    public function getUserActivity() {
+
+        $id = htmlspecialchars($_GET['id']);
+        $userActivityString = '';
+
+        try{
+            $stmt = parent::$db->prepare("SELECT * FROM followedshows WHERE idUser=$id ORDER BY addDate DESC LIMIT 0, 30");
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+
+        foreach ($results as $index => $value) {
+            $userActivityString .= '<div class="activity-item">
+            <h1>Série ajoutée à la liste de suivi.</h1>
+            <p>Série <a href="./?module=shows&action=overview&id=' . $value['idShow'] . '">'. $value['idShow'] .'</a> | Le '. $value['addDate'] .'</p>
+        </div>';
+        }
+
+        return $userActivityString;
+    }
 }
