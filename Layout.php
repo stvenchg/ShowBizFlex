@@ -18,10 +18,9 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?php
         require_once("Assets/js/favButton.php");
-    ?>
-    <?php
         require_once("Assets/js/checkedChange.php");
         require_once("Assets/js/saveButton.php");
+        require_once("Assets/js/profileColorSelect.php");
     ?>
 </head>
 

@@ -17,14 +17,53 @@ class ViewShows extends GenericView
         $this->model = new ModelShows;
     }
 
-    public function show_overview($isFollowing, $isSavedForLater, $fullBackdropPath, $fullPosterPath, 
-    $showName, $logo, $showFirstAirYear, $episodeRunTime, $rating, $showGenres, $trailer, $tagLine, $showSynopsisB, $providersString, $showWebsite,
-    $originalName, $status, $type, $originalLanguage, $networksString, $showCastString, $nextEpisodeToAirDate, $nextEpisodeToAirNumber, 
-    $nextEpisodeToAirName, $nextEpisodeToAirOverview, $nextEpisodeToAirSeason, $nextEpisodeToAirThumbail, $lastEpisodeToAirThumbail, 
-    $lastEpisodeToAirName, $lastEpisodeToAirSeason, $lastEpisodeToAirNumber, $lastEpisodeToAirDate, $lastEpisodeToAirOverview, 
-    $lastSeasonPosterPath, $lastSeasonName, $lastSeasonAirYear, $lastSeasonEpisodeCount, $lastSeasonOverview, $showWallpapersString, 
-    $showVideosString, $showPostersString, $videoCount, $imageCount, $posterCount, $recommandationsString)
-    {
+    public function show_overview(
+        $isFollowing,
+        $isSavedForLater,
+        $fullBackdropPath,
+        $fullPosterPath,
+        $showName,
+        $logo,
+        $showFirstAirYear,
+        $episodeRunTime,
+        $rating,
+        $showGenres,
+        $trailer,
+        $tagLine,
+        $showSynopsisB,
+        $providersString,
+        $showWebsite,
+        $originalName,
+        $status,
+        $type,
+        $originalLanguage,
+        $networksString,
+        $showCastString,
+        $nextEpisodeToAirDate,
+        $nextEpisodeToAirNumber,
+        $nextEpisodeToAirName,
+        $nextEpisodeToAirOverview,
+        $nextEpisodeToAirSeason,
+        $nextEpisodeToAirThumbail,
+        $lastEpisodeToAirThumbail,
+        $lastEpisodeToAirName,
+        $lastEpisodeToAirSeason,
+        $lastEpisodeToAirNumber,
+        $lastEpisodeToAirDate,
+        $lastEpisodeToAirOverview,
+        $lastSeasonPosterPath,
+        $lastSeasonName,
+        $lastSeasonAirYear,
+        $lastSeasonEpisodeCount,
+        $lastSeasonOverview,
+        $showWallpapersString,
+        $showVideosString,
+        $showPostersString,
+        $videoCount,
+        $imageCount,
+        $posterCount,
+        $recommandationsString
+    ) {
 
         // Style barre de navigation transparente
         echo '<style>
@@ -66,24 +105,24 @@ class ViewShows extends GenericView
                         <button class="showTrailerButton"><i class="fa-solid fa-play"></i>  Bande-annonce</button>
                     <div class="modalTrailer-bg" data-value="' . $trailer . '"></div>';
 
-                    if(isset($_SESSION['login'])){
-                        echo ' <div class="showSubControls">';
+        if (isset($_SESSION['login'])) {
+            echo ' <div class="showSubControls">';
 
-                        if ($isFollowing) {
-                            echo '<div class="favButton activeFavButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
-                        } else {
-                            echo '<div class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
-                        }
+            if ($isFollowing) {
+                echo '<div class="favButton activeFavButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
+            } else {
+                echo '<div class="favButton" id="favButton"><i class="fa-solid fa-heart"></i></div>';
+            }
 
-                        if ($isSavedForLater) {
-                            echo '<div class="saveButton activeSaveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
-                        } else {
-                            echo '<div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
-                        }
+            if ($isSavedForLater) {
+                echo '<div class="saveButton activeSaveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
+            } else {
+                echo '<div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
+            }
 
-                        echo '</div>';
-                    }
-                    
+            echo '</div>';
+        }
+
         echo ' 
         </div>
                 </div>
@@ -197,7 +236,23 @@ class ViewShows extends GenericView
                         ' . $showPostersString . '
                     </div>
 
-                </div>
+                </div>';
+
+        if (isset($_SESSION['login'])) {
+            echo '<div class="panel-box">
+                    <h2 class="panel-title mb-20">Commentaires</h2>
+
+                    <form action="./?module=shows&action=sendComments&id=' . htmlspecialchars($_GET['id']) . '" method="POST">
+                        <input class="form-input" type="text" name="comment" placeholder="Ajouter un commentaire..." required>
+                        <div class="submitCommentButton">
+                            <button type="submit" id="submit" class="btngradient btngradient-hover color-9" style="">Poster</button>
+                        </div>
+                    </form>
+
+                </div>';
+        }
+
+                echo '
 
                 <div class="panel-box">
                     <h2 class="panel-title">Ça pourrait t\'intéresser...</h2>
@@ -208,53 +263,34 @@ class ViewShows extends GenericView
                 </div>
             </div>
 
-        </div>
-
-        <br> <br> <br>';
-        
-
-        if(isset($_SESSION['login'])){
-            $idShow = $_GET['id'];
-            echo '
-                <div class="forComments">
-                    <h1 class="titleComments"> Commentaires : </h1> <br>
-                    <form action="./?module=shows&action=sendComments&id='.$idShow.'" method="POST">
-                            <textarea class="zoneComments "name="commentaire" placeholder="Votre commentaire ..."> </textarea> <br><br>
-            
-                            <input type="submit" value="Poster mon commentaire" name="submitCommentaire">   
-                    </form> 
-                </div>
-            ';
-            
-            echo "<br> <br>";
+        </div>';
 
             $comments = $this->model->getComments();
-            foreach($comments as $row){
+            foreach ($comments as $row) {
                 $idCom = $row['idCom'];
                 $idUser = $row['id'];
                 $userName = $row['username'];
                 $idRole = $row['idRole'];
-                
-                echo '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . " : " . $row['message'] . "<br>";
+
+                echo '<a href="./?module=profile&action=viewOtherProfile&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
-                if($_SESSION['idRole'] == 1){
-                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                if ($_SESSION['idRole'] == 1) {
+                    echo '<a href="./?module=shows&action=deleteComments&idCom=' . $idCom . '&idUser=' . $idUser . '&idShow=' . $_GET['id'] . '"> Supprimer </a>';
                 }
-                if($_SESSION['idRole'] == 2){
-                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
-                        echo'<a href="./?module=shows&action=deleteComments&idCom='.$idCom.'&idUser='.$idUser.'&idShow='.$_GET['id'].'"> Supprimer </a>';
+                if ($_SESSION['idRole'] == 2) {
+                    if ($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']) {
+                        echo '<a href="./?module=shows&action=deleteComments&idCom=' . $idCom . '&idUser=' . $idUser . '&idShow=' . $_GET['id'] . '"> Supprimer </a>';
                     }
                 }
-                echo '<br> <br>';  
+                echo '<br> <br>';
             }
-        }
     }
 
-    public function redirection(){
+    public function redirection()
+    {
         $idShow = $_GET['id'];
         $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
         header("refresh:0, url=$urlShow");
     }
-
 }

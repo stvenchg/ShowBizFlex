@@ -17,12 +17,6 @@ class ViewSearch extends GenericView
     public function show_searchResults()
     {
 
-        echo '<style>
-            main {
-                height: 100vh;
-            }
-        </style>';
-
         if (isset($_GET['query']) && !empty($_GET['query'])) {
 
             if ($_SESSION['adult']) {
