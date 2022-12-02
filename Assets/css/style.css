@@ -178,16 +178,16 @@ header {
 
 div.forComments {
     margin-top: 100px;
-    margin-left: 162px
+    margin-left: 162px;
 }
 
 .titleComments {
-    text-size-adjust: 5px
+    text-size-adjust: 5px;
 }
 
 .zoneComments {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%);
-    color: rgba(255, 255, 255, 0.55)
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .navbar-expand-lg {
@@ -1540,7 +1540,6 @@ a:hover {
     align-items: center;
     justify-content: end;
 }
-
 
 @media only screen and (max-width:991px) {
     header {

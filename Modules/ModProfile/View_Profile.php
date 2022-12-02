@@ -2,11 +2,9 @@
 
 require_once("./GenericView.php");
 
-class ViewProfile extends GenericView
-{
+class ViewProfile extends GenericView {
 
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 

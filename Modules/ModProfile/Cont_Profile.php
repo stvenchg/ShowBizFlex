@@ -27,6 +27,10 @@ class ContProfile
     $this->model->getUserActivity());
     }
 
+    public function follow(){
+        $this->model->sendfollowedsUsers();
+    }
+
     public function exec() {
         $this->view->view();
     }

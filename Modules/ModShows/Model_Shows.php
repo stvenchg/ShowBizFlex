@@ -11,6 +11,7 @@ class ModelShows extends PDOConnection
     public function __construct()
     {
         $this->viewAlert = new Alert;
+        $this->addShowToDB();
     }
 
     public function callTmdbAPI($api_url) {
@@ -483,6 +484,36 @@ class ModelShows extends PDOConnection
 
     public function getImagesFR() {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/".$_GET['id']."/images?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr");
+    }
+
+    public function addShowToDB() {
+ 
+        $sql = 'SELECT * FROM Show WHERE idShow = :idShow';
+        $showExist=parent::$db->prepare($sql);
+        $showExist->execute(array(':idShow'=>$_GET['id']));
+        $verif = $showExist->fetch();
+
+        if(!$verif){
+            $sql2 = 'INSERT INTO `Show` (`idShow`, `rating`) VALUES (:idShow, NULL)';
+            $sth=parent::$db->prepare($sql2);
+            $sth->execute(array(':idShow'=>$_GET['id']));
+        }
+
+        $results = $this->getDetails();
+
+        foreach($results['genres'] as $genre) {
+            $sql3 = 'SELECT * FROM Belong WHERE idShow = :idShow AND idGenre = :idGenre';
+            $showExistInBelong=parent::$db->prepare($sql3);
+            $showExistInBelong->execute(array(':idShow'=>$_GET['id'],'idGenre'=>$genre['id']));
+            $verif2 = $showExistInBelong->fetch();
+
+        if(!$verif){
+            $sql3 = 'INSERT INTO Belong VALUES (:idShow, :idGenre)';
+            $insertBelong=parent::$db->prepare($sql3);
+            $insertBelong->execute(array(':idShow'=>$_GET['id'],'idGenre'=>$genre['id']));
+        }
+        }
+
     }
 
     public function getRecommandations() {
