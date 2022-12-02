@@ -25,6 +25,10 @@ class ContSetup
         $this->view->show_selectGenres();
     }
 
+    public function settingUp() {
+        $this->view->show_settingUp();
+    }
+
     public function exec() {
         $this->view->view();
     }

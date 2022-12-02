@@ -19,11 +19,11 @@ class ViewSetup extends GenericView
 
         if (isset($_SESSION['show_setup']) && $_SESSION['show_setup'] == 1) {
 
-        echo '
+            echo '
 
         <div class="setup-container animate__animated animate__fadeIn animate__slow">
             <div class="setup-title">
-                <h1 class="animate__animated animate__fadeInUp">'. $_SESSION['login'] .', choisis 3 genres que tu aimes.</h1>
+                <h1 class="animate__animated animate__fadeInUp">Bienvenue ' . $_SESSION['login'] . ', choisis 3 genres que tu aimes.</h1>
 
                 <p class="animate__animated animate__fadeInUp animate__delay-1s">Grâce à ça, nous pourrons te recommander des séries susceptibles de te plaire. <span>Sélectionne les genres que tu aimes.</span></p>
             </div>
@@ -57,8 +57,20 @@ class ViewSetup extends GenericView
         
         ';
         }
-        else {
-            echo "Le compte est déjà configuré ou vous n'êtes pas connecté.";
+    }
+
+    public function show_settingUp()
+    {
+        if (isset($_SESSION['show_setup']) && isset($_SESSION['setupCompleted'])) {
+            echo '<div class="setup-container animate__animated animate__fadeIn animate__slow">
+            <div class="setupLoadingContainer">
+            <h1>Nous sélectionnons des séries rien que pour toi.</h1>
+            <div class="spinner"></div>
+            </div>
+        </div>';
+
+            unset($_SESSION['setupCompleted']);
+            header("refresh:4;url=./");
         }
     }
 }

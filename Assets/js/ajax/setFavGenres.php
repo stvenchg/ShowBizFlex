@@ -18,6 +18,7 @@ if (isset($_SESSION['login']) && $_SESSION['id'] == $idUser && $_SESSION['show_s
     }
     
     $_SESSION['show_setup'] = '0';
+    $_SESSION['setupCompleted'] = '1';
 
     $stmt = $bdd->prepare("UPDATE User SET show_setup=0 WHERE id=:idUser");
     $stmt->bindParam(':idUser', $idUser);

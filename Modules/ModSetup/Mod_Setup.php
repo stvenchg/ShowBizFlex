@@ -17,6 +17,9 @@ class ModSetup extends PDOConnection
             case "genres":
                 $this->controller->genres();
             break;
+            case "settingUp":
+                $this->controller->settingUp();
+            break;
         }
 
         $this->controller->exec();
