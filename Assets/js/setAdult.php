@@ -8,8 +8,8 @@ $email = $_SESSION["email"];
 if (isset($_SESSION['login']) && $_SESSION['id'] == $idUser) {
 
 
-$dsn = "mysql:host=localhost;dbname=dutinfopw201637;charset=UTF8";
-$bdd = new PDO($dsn, 'root', '');
+$dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201637;charset=UTF8";
+$bdd = new PDO($dsn, 'dutinfopw201637', 'suqebamu');
 
 $stmtLogin = $bdd->prepare("UPDATE User SET adult=:adult WHERE id=:id");
 $stmtLogin->bindParam(':adult', $adult);

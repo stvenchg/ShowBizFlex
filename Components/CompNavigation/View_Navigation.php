@@ -1,6 +1,6 @@
 <?php
 
-require_once("./GenericView.php");
+require_once("GenericView.php");
 
 class ViewNavigation extends GenericView
 {
@@ -31,7 +31,7 @@ class ViewNavigation extends GenericView
                 $this->view = $this->view . '<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link" href="#"><i class="fa-solid fa-compass"></i> Explorer</a>
-                    <a class="nav-link" href="#"><i class="fa-solid fa-heart"></i> Ma liste</a>
+                    <a class="nav-link" href="./?module=lists&action=lists"><i class="fa-solid fa-list"></i> Mes listes</a>
                 </div>';
             }
 
