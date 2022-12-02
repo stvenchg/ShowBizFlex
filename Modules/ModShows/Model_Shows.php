@@ -97,20 +97,7 @@ class ModelShows extends PDOConnection
         }
     }
 
-
-    /*public function sendComments(){
-        $idShow = $_GET['id'];
-        try{
-            $requestSendComments = parent::$db->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
-            if(isset($_POST['commentaire']) && isset($idShow) && isset($_SESSION['id'])){
-                $requestSendComments->execute(array(":comment" => $_POST['commentaire'], "idUser" => $_SESSION['id'], ":idShow" => $idShow));
-            }
-        }
-        catch (Exception $e) {
-            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
-        }
-    }
-
+/*
     public function deleteComments(){
         $idCom = $_GET['idCom'];
         $idUser = $_GET['idUser'];
@@ -127,10 +114,9 @@ class ModelShows extends PDOConnection
             }
         }
     }
+*/
 
-
-    public function getComments(){
-        $idShow = $_GET['id'];
+    public function getComments($idShow){
         try {
             $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication, idRole FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
             $requesteGetComments->execute(array($idShow));
@@ -140,7 +126,7 @@ class ModelShows extends PDOConnection
         catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }*/
+    }
 
     public function getDetails()
     {

@@ -432,16 +432,19 @@ class ViewShows extends GenericView
             echo '
                 <div class="forComments">
                     <h1 class="titleComments"> Commentaires : </h1> <br>
-                    <form method="POST" id="formCommments">
+                    <form method="POST">
                             <textarea class="zoneComments" name="commentaire"> </textarea> <br><br>
-                            <input type="submit" value="Poster mon commentaire"> <br>
+                            <button class="addComment" type="button"> Poster mon commentaire </button> <br> <br>
                             <div id="loader" style="display:none"> <img src="Assets/images/gif/loader.gif" width="30"/> </div>        
                     </form> 
                 </div>
             ';
 
-            
             echo "<br> <br>";
+
+            echo '
+                <div id="resultCommentsAJAX"> </div>
+            ';
 
             /*$comments = $this->model->getComments();
             foreach($comments as $row){

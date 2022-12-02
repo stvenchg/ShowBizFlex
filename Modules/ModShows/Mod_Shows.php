@@ -17,11 +17,7 @@ class ModShows extends PDOConnection
             case "overview":
                 $this->controller->overview();
             break;
-
-            /*case"sendComments":
-                $this->controller->comments();
-            break;
-
+            /*
             case"deleteComments":
                 $this->controller->deleteCom();
             break;*/
