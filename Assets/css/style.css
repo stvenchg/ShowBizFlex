@@ -199,11 +199,6 @@ div.forComments {
     box-shadow: 0 0 rgba(65, 132, 234, 0.75)
 }
 
-.btngradient-hover.color-9 {
-    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
-    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
-}
-
 .btngradient-hover.color-9-s {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     width: 100%;
@@ -235,6 +230,10 @@ div.forComments {
     -o-transition: all .4s ease-in-out;
     -webkit-transition: all .4s ease-in-out;
     transition: all .4s ease-in-out
+}
+
+.w-200 {
+    width: 200px;
 }
 
 .btngradient-hover:hover {
@@ -487,22 +486,6 @@ a:hover {
     width: 300px
 }
 
-.deleteComments {
-    color: rgb(110, 40, 40);
-}
-
-.usernameComments {
-    color: #175165;
-}
-
-.usernameTwoComments {
-    color: #307132;
-}
-
-.followsUsers {
-    color: #0e5f84;
-}
-
 .fileUpload {
     width: 700px;
     height: 150px;
@@ -617,7 +600,8 @@ a:hover {
     height: 50px;
     border: 1px solid #fff;
     border-radius: 5px;
-    cursor: pointer
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
 .profil-color-palette-item:hover {
@@ -650,6 +634,10 @@ a:hover {
 
 .profil-color-palette-item.grey {
     background-color: #677B94
+}
+
+.profil-color-palette-item.white {
+    background-color: white;
 }
 
 .hide {
@@ -1351,7 +1339,7 @@ a:hover {
     margin-top: 30px
 }
 
-.enableAdultCheckbox {
+.checkboxCursor {
     cursor: pointer;
 }
 
@@ -1362,6 +1350,195 @@ a:hover {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.profile-box {
+    position: relative;
+}
+
+.profileAvatarAndInfos {
+    width: 80%;
+}
+
+.profileBanner {
+    position: relative;
+}
+
+.profileBanner .banner {
+    width: 100%;
+    height: 350px;
+    opacity: 0.5;
+}
+
+.profileAvatarAndInfos {
+    position: absolute;
+    width: 80%;
+    top: 25%;
+    left: 10%;
+}
+
+.profileInfos {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.profileInfos img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: transform 0.2s;
+}
+
+.profileInfos img:hover {
+    transform: scale(1.05);
+}
+
+.usernameAndInfos {
+    width: auto;
+}
+
+.usernameAndInfos h1 {
+   color: white;
+   font-weight: 600;
+   font-size: 32px;
+}
+
+.memberSince {
+    font-size: 18px;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+.usernameAndInfos {
+    display: flex;
+    align-items: center;
+    height: 50%;
+}
+
+.profile-body {
+    width: 80%;
+    margin: auto;
+    display:flex;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.panel-info-left {
+    width: 60%;
+}
+
+.panel-right {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.user-about {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.user-followers {
+    width: 100%;
+    height: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.usernameAndSubscribeButton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.panel-subtitle-left {
+    color: var(--profile-color);
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.panel-subtitle-left i {
+    margin-right: 5px;
+}
+
+.user-favGenres {
+    height: 150px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.user-stats-lists {
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.user-stats-lists h3 {
+    font-size: 20px;
+}
+
+.user-stats-lists h1 {
+    font-size: 32px;
+    color: var(--profile-color);
+}
+
+.stats-showsInList {
+    width: 20%;
+    height: 100px;
+}
+
+.stats-userComments {
+    width: 20%;
+    height: 100px;
+}
+
+.stats-userRating {
+    width: 20%;
+    height: 100px;
+}
+
+.activity-item {
+    height: 70px;
+    padding: 10px;
+    background-color: #11161b93;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: transform 0.2s;
+}
+
+.activity-item:hover {
+    transform: scale(1.02);
+}
+
+.activity-item h1 {
+    color: var(--profile-color);
+    font-size: 15px;
+}
+
+.submitCommentButton {
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 @media only screen and (max-width:991px) {

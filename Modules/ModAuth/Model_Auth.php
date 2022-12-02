@@ -69,7 +69,7 @@ class ModelAuth extends PDOConnection
                 } else {
                     
                     // Insertion des informations concernant le compte de l'utilisateur
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult) VALUES (:username, :email, :password, 2, '1.png', '1.png', false)");
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult, color) VALUES (:username, :email, :password, 2, '1.png', '1.png', false, 'white')");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);

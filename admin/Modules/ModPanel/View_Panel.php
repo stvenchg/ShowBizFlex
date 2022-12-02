@@ -17,7 +17,7 @@ class ViewPanel extends GenericView
         $this->model = new ModelPanel;
     }
 
-    public function show_dashboard()
+    public function show_dashboard($userCount, $commentCount, $showsInListCount)
     {
         if (!isset($_SESSION['admin_id'])) {
             header("Location: ./?module=auth&action=login");
@@ -25,19 +25,50 @@ class ViewPanel extends GenericView
         else {
             echo '<div class="overview-panel">
                 <h1>Vue d\'ensemble</h1>
+
+                <h2 class="panel-subtitle">Données statistiques</h2>
                 <div class="global-stats">
                     <div class="stats">
-                    
+                        <div>
+                            <h2 class="stats-title">Nombre d\'utilisateurs</h2>
+                            <h1 class="stats-value">' . $userCount . '</h1>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-users fa-3x"></i>
+                        </div>
                     </div>
                     <div class="stats">
-                    
+                        <div>
+                            <h2 class="stats-title">Séries enregistrées</h2>
+                            <h1 class="stats-value">' . 'N/A' . '</h1>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-tv fa-3x"></i>
+                        </div>
                     </div>
                     <div class="stats">
-                    
+                        <div>
+                            <h2 class="stats-title">Commentaires postés</h2>
+                            <h1 class="stats-value">'. $commentCount .'</h1>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-comments fa-3x"></i>
+                        </div>
                     </div>
                     <div class="stats">
-                    
+                        <div>
+                            <h2 class="stats-title">Séries en liste</h2>
+                            <h1 class="stats-value">'. $showsInListCount .'</h1>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-list fa-3x"></i>
+                        </div>
                     </div>
+                </div>
+
+                <h2 class="panel-subtitle">Activités récentes</h2>
+                <div class="latest-activity">
+
                 </div>
             </div>';
         }

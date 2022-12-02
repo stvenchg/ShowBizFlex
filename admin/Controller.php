@@ -7,6 +7,7 @@ require_once("./Components/CompFooter/Comp_Footer.php");
 
 require_once("./Modules/ModAuth/Mod_Auth.php");
 require_once("./Modules/ModPanel/Mod_Panel.php");
+require_once("./Modules/ModUsers/Mod_Users.php");
 
 class Controller
 {
@@ -35,6 +36,9 @@ class Controller
         switch ($this->module) {
             case 'panel':
                 new ModPanel();
+            break;
+            case 'users':
+                new ModUsers();
             break;
             case 'auth':
                 new ModAuth();
