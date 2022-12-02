@@ -24,6 +24,10 @@ class ContUsers
         $this->view->show_overview($this->model->getUserListString());
     }
 
+    public function createUser() {
+        $this->view->show_createUser_form();
+    }
+
     public function exec() {
         $this->view->view();
     }

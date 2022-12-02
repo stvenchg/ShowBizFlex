@@ -17,6 +17,9 @@ class ModUsers extends PDOConnection
             case "overview":
                 $this->controller->overview();
             break;
+            case "createUser":
+                $this->controller->createUser();
+            break;
         }
 
         $this->controller->exec();
