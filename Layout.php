@@ -21,6 +21,7 @@
         require_once("Assets/js/checkedChange.php");
         require_once("Assets/js/saveButton.php");
         require_once("Assets/js/profileColorSelect.php");
+        require_once("Assets/js/ajax/buttonLike.php");
     ?>
 </head>
 

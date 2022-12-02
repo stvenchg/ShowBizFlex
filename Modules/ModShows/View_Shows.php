@@ -285,6 +285,8 @@ class ViewShows extends GenericView
                 }
                 echo '<br> <br>';
             }
+
+        echo '<button class="likeShows" type="button"> Liker cette série </button> <br> <br>';
     }
 
     public function redirection()
