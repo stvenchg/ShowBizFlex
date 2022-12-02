@@ -16,6 +16,9 @@ class ViewSetup extends GenericView
 
     public function show_selectGenres()
     {
+
+        if (isset($_SESSION['show_setup']) && $_SESSION['show_setup'] == 1) {
+
         echo '
 
         <div class="setup-container animate__animated animate__fadeIn animate__slow">
@@ -53,5 +56,9 @@ class ViewSetup extends GenericView
         <div>
         
         ';
+        }
+        else {
+            echo "Le compte est déjà configuré ou vous n'êtes pas connecté.";
+        }
     }
 }

@@ -78,14 +78,17 @@ $(document).ready(function() {
             dataType: 'json',
             encode: true
         })
+
+        window.setTimeout(function(){
+            window.location.href = "./?module=setup&action=settingUp";
+        }, 200);
     }
     else
     {
-        Swal.fire(
-            'Il y a un problème !',
-            'Sélectionne au minimum trois genres parmi ceux qui sont proposés.',
-            'error'
-        );
+        Toast.fire({
+            icon: 'error',
+            title: 'Sélectionne au minimum trois genres pour continuer'
+        })
     }
     });
 });
