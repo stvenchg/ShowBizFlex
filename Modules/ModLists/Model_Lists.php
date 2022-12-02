@@ -70,5 +70,22 @@ class ModelLists extends PDOConnection
         return $tab;
     }
 
+    public function getIdGenres() {
+        $sql = 'SELECT idGenre FROM Genre';
+        $genres=parent::$db->prepare($sql);
+        $genres->execute();
+
+        $tab = $genres->fetchAll();
+        return $tab;
+    }
+
+   public function recommendations() {
+        $sql = 'SELECT idGenre,COUNT(idGenre) FROM FollowedShows JOIN Belong USING(idShow) WHERE idUser = :idUser GROUP BY idGenre ORDER BY COUNT(idGenre) DESC';
+        $reco=parent::$db->prepare($sql);
+        $reco->execute(array(':idUser'=>$_SESSION['id']));
+
+        $tab = $reco->fetchAll();
+        return $tab;
+   }
 
 }
