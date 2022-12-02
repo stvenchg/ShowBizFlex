@@ -434,7 +434,7 @@ class ViewShows extends GenericView
                     <h1 class="titleComments"> Commentaires : </h1> <br>
                     <form method="POST">
                             <textarea class="zoneComments" name="commentaire"> </textarea> <br><br>
-                            <button class="addComment" type="button"> Poster mon commentaire </button> <br> <br>
+                            <button targetID="resultCommentsAJAX" class="addComment" type="button"> Poster mon commentaire </button> <br> <br>
                             <div id="loader" style="display:none"> <img src="Assets/images/gif/loader.gif" width="30"/> </div>        
                     </form> 
                 </div>
@@ -442,11 +442,9 @@ class ViewShows extends GenericView
 
             echo "<br> <br>";
 
-            echo '
-                <div id="resultCommentsAJAX"> </div>
-            ';
+            echo '<div id="resultComments"></div>';
 
-            /*$comments = $this->model->getComments();
+            $comments = $this->model->getComments();
             foreach($comments as $row){
                 $idCom = $row['idCom'];
                 $idUser = $row['id'];
@@ -471,7 +469,7 @@ class ViewShows extends GenericView
                     }
                 }
                 echo '<br> <br>';  
-            }*/
+            }
         }
     }
     

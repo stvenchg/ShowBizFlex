@@ -24,10 +24,10 @@ class ContShows
         $this->view->show_overview();
     }
 
-   /*
+   
     public function deleteCom(){
         $this->model->deleteComments();
-    }*/
+    }
 
     public function exec() {
         $this->view->view();

@@ -8,14 +8,14 @@
         try{
             $requestSendComments = $db->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
             $requestSendComments->execute(array(":comment" => $com, "idUser" => $idUser, ":idShow" => $idShow));
-            echo 'Ok';
+            echo 'NonVide';
         }
         catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
     else {
-        echo 'Vous n/"avez pas tapé de commentaire !';
+        echo 'Vide';
     }
    
 ?>

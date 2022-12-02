@@ -97,7 +97,8 @@ class ModelShows extends PDOConnection
         }
     }
 
-/*
+
+
     public function deleteComments(){
         $idCom = $_GET['idCom'];
         $idUser = $_GET['idUser'];
@@ -114,9 +115,10 @@ class ModelShows extends PDOConnection
             }
         }
     }
-*/
 
-    public function getComments($idShow){
+
+    public function getComments(){
+        $idShow = $_GET['id'];
         try {
             $requesteGetComments = parent::$db->prepare("SELECT idCom, username, message, id, datePublication, idRole FROM User NATURAL JOIN Comment WHERE idShow = ? ORDER BY idCom DESC");
             $requesteGetComments->execute(array($idShow));
