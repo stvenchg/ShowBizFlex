@@ -19,7 +19,7 @@ class ViewLists extends GenericView
 
     public function showLists() {
         if(!isset($_SESSION['login'])) {
-            echo 'Tu n\' est pas connecté';
+            $this->viewAlert->userNotAuthenticated();
         }else{
             echo '<div class="lists">';
             $this->followedShows();
