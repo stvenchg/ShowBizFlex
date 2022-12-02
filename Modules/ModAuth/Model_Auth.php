@@ -123,7 +123,8 @@ class ModelAuth extends PDOConnection
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
                 $_SESSION["banner_file"] = $stmtResult['banner_file'];
                 $_SESSION["idRole"] = $stmtResult['idRole'];
-                $_SESSION["adult"] = $stmtResult['adult'];                
+                $_SESSION["adult"] = $stmtResult['adult'];
+                $_SESSION["show_setup"] = $stmtResult['show_setup'];
 
                 header('Location: ./');
             } else {

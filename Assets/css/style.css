@@ -1541,6 +1541,41 @@ a:hover {
     justify-content: end;
 }
 
+.setup-container {
+   width: 80%;
+   margin: auto;
+   display: flex;
+   gap: 50px;
+   height: 100vh;
+   padding: 20px;
+}
+
+.setup-title {
+    width: 50%;
+    color: white;
+}
+
+.setup-title h1 {
+    color: white;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.setup-title p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.setup-title p span {
+    font-weight: 600;
+}
+
+.setup-content {
+    width: 50%;
+}
+
 @media only screen and (max-width:991px) {
     header {
         width: 100%
