@@ -287,6 +287,11 @@ class ViewShows extends GenericView
             }
 
         echo '<button class="likeShows" type="button"> Liker cette série </button> <br> <br>';
+        $idShow = $_GET['id'];
+        $countLike = $this->model->getCountShowLikes($idShow);
+        foreach($countLike as $row){
+            echo 'Cette série à ' . $row[0] . ' likes' . "<br> <br>"; 
+        }
     }
 
     public function redirection()

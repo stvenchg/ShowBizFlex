@@ -98,6 +98,18 @@ class ModelShows extends PDOConnection
     }
 
 
+    public function getCountShowLikes($idShow){
+        try {
+            $requestCountLike = parent::$db->prepare("SELECT COUNT(*) FROM ListLikes WHERE idShow = ?");
+            $requestCountLike->execute(array($idShow));
+            return $requestCountLike->fetchAll();
+        }
+        catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+
     public function sendComments(){
         $idShow = $_GET['id'];
         try{
