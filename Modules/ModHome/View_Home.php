@@ -126,10 +126,18 @@ class ViewHome extends GenericView
 
             if ($allFavGenres['total_pages'] > 5) {
                 $allFavGenres = $this->model->getTmdbDiscoverByGenre($userGenresListString, rand(1, 5));
+
+                if ($allFavGenres['total_pages'] > 10) {
+                    $allFavGenres = $this->model->getTmdbDiscoverByGenre($userGenresListString, rand(1, 10));
+                }
+
+                if ($allFavGenres['total_pages'] > 20) {
+                    $allFavGenres = $this->model->getTmdbDiscoverByGenre($userGenresListString, rand(1, 20));
+                }
             }
 
             if ($allFavGenres['total_results'] > 0) {
-                echo '<!-- Les séries les mieux notés -->
+                echo '<!-- Recommandations de séries avec tous les genres aimés -->
                     <h4 class="toprated-heading">RECOMMANDATIONS POUR TOI</h4>
 
                     <ul id="autoWidthShowRecommandations" class="cs-hidden">';
@@ -149,8 +157,613 @@ class ViewHome extends GenericView
             }
 
             foreach ($userGenresList as $genre) {
+                // Genre Animation /////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 if ($genre == 16) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">ANIMATION</h4>
+        
+                            <ul id="autoWidthShowAnimation" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
                 }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Drame /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 18) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">DRAME</h4>
+        
+                            <ul id="autoWidthShowDrame" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Comédie /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 35) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">COMÉDIE</h4>
+        
+                            <ul id="autoWidthShowComedie" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Western /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 37) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">WESTERN</h4>
+        
+                            <ul id="autoWidthShowWestern" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Crime /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 80) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">CRIME</h4>
+        
+                            <ul id="autoWidthShowCrime" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Documentaire /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 99) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">DOCUMENTAIRE</h4>
+        
+                            <ul id="autoWidthShowDocumentaire" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Mystère /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 9648) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">MYSTÈRE</h4>
+        
+                            <ul id="autoWidthShowMystere" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Familial /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10751) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">POUR LA FAMILLE</h4>
+        
+                            <ul id="autoWidthShowFamilial" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Action & Adventure /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10759) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">ACTION & AVENTURE</h4>
+        
+                            <ul id="autoWidthShowActionAdventure" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Enfants /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10762) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">POUR LES ENFANTS</h4>
+        
+                            <ul id="autoWidthShowKids" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Actualité /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10763) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">ACTUALITÉS</h4>
+        
+                            <ul id="autoWidthShowNews" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Réalité /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10764) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">RÉALITÉ</h4>
+        
+                            <ul id="autoWidthShowReality" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Scifi /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10765) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">SCIENCE-FICTION & FANTASTIQUE</h4>
+        
+                            <ul id="autoWidthShowScifi" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Feuilleton /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10766) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">FEUILLETON</h4>
+        
+                            <ul id="autoWidthShowSoap" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Talk /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10767) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">DISCUSSION</h4>
+        
+                            <ul id="autoWidthShowTalk" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                // Genre Guerre et Politiques /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                if ($genre == 10768) {
+                    $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, 1);
+
+                    if ($showsWithThisGenre['total_pages'] > 5) {
+                        $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 5));
+        
+                        if ($showsWithThisGenre['total_pages'] > 10) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 10));
+                        }
+        
+                        if ($showsWithThisGenre['total_pages'] > 20) {
+                            $showsWithThisGenre = $this->model->getTmdbDiscoverByGenre($genre, rand(1, 20));
+                        }
+                    }
+
+                    if ($showsWithThisGenre['total_results'] > 0) {
+                        echo '<!-- Recommandations de séries dont l\'utilisateur aime le genre -->
+                            <h4 class="toprated-heading">GUERRE & POLITIQUE</h4>
+        
+                            <ul id="autoWidthShowWarPolitic" class="cs-hidden">';
+        
+                        foreach ($showsWithThisGenre['results'] as $value) {
+        
+                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+        
+                            echo '<li class="item-' . $value['id'] . '">
+                                <div class="toprated-box">
+                                    <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                                </div>
+                            </li>';
+                        }
+        
+                        echo  '</ul>';
+                    }
+                }
+                ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }
         }
     }
