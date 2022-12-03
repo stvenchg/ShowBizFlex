@@ -21,14 +21,62 @@ class ViewHome extends GenericView
     {
 
         if (!isset($_SESSION['login'])) {
-            echo '        <div class="alpha-alert">
-            
-        <h1>Bienvenue sur ShowBizFlex !</h1>
+            echo '<div class="site-presentation-container">
+                    <h1>La plateforme de séries nouvelle génération</h1>
 
-        <p>Tu es actuellement sur une version démonstrative et en cours de développement.<br>Connectez-toi ou inscris-toi pour faire disparaître ce message.</p>
+                    <h2>Suis, partage, et découvre tes séries favorites avec ShowBizFlex.</h2>
 
-        <p style="color: green;">Dernière mise à jour : 17/11/2022</p>
-        </div>';
+                    <div class="presentation-features-container">
+                        <div class="features-left">
+                            <div class="features-left-1">
+                                <div>
+                                    <img class="features-image" src="Assets/images/site/track.png" />
+                                </div>
+
+                                <div>
+                                    <h3>Reste à jour</h3>
+                                    <p>Tu suis plusieurs séries sur différentes plateformes ? Ajoute-les à ta liste pour savoir quand une suite sortira.</p>
+                                </div>
+                            </div>
+                            <div class="features-left-2">
+                                <div>
+                                    <img class="features-image" src="Assets/images/site/chat.png" />
+                                </div>
+
+                                <div>
+                                    <h3>Partage ton opinion</h3>
+                                    <p>Cette série t\'a plu ? Laisse un pouce bleu et discute avec les autres utilisateurs dans l\'espace commentaire dédié.</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="features-right">
+                        <div class="features-left-1">
+                        <div>
+                            <img class="features-image" src="Assets/images/site/explore.png" />
+                        </div>
+
+                        <div>
+                            <h3>Explore et découvre</h3>
+                            <p>Dis-nous ce que tu aimes et nous te recommanderons des séries. Obtiens des informations sur chaque série.</p>
+                        </div>
+                    </div>
+                    <div class="features-left-2">
+                        <div>
+                            <img class="features-image" src="Assets/images/site/custom.png" />
+                        </div>
+
+                        <div>
+                            <h3>Personnalise à tes souhaits</h3>
+                            <p>Customise ton profil avec une bannière, un avatar et définis même une couleur dominante.</p>
+                        </div>
+                    </div>
+                        </div>
+                    </div>
+
+                    <button class="btngradient btngradient-presentation">Rejoins-nous</button>
+                </div>';
         }
 
         echo '<div class="home">';
@@ -44,12 +92,17 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbTrending();
 
         echo '        <!-- Les séries en tendances actuellement -->
-        <h4 class="trending-heading">TENDANCES ACTUELLEMENT</h4>
+        <h4 class="trending-heading">TENDANCES ACTUELLES</h4>
         <ul id="autoWidthTrending" class="cs-hidden">';
 
         foreach ($res['results'] as $value) {
 
-            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+            if (!empty($value['poster_path'])) {
+                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+            }
+            else {
+                $fullPosterPath = "Assets/images/image_unavailable.png";
+            }
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
@@ -95,7 +148,12 @@ class ViewHome extends GenericView
 
         foreach ($res['results'] as $value) {
 
-            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+            if (!empty($value['poster_path'])) {
+                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+            }
+            else {
+                $fullPosterPath = "Assets/images/image_unavailable.png";
+            }
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="toprated-box">
@@ -144,7 +202,12 @@ class ViewHome extends GenericView
 
                 foreach ($allFavGenres['results'] as $value) {
 
-                    $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                    if (!empty($value['poster_path'])) {
+                        $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                    }
+                    else {
+                        $fullPosterPath = "Assets/images/image_unavailable.png";
+                    }
 
                     echo '<li class="item-' . $value['id'] . '">
                         <div class="toprated-box">
@@ -181,7 +244,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -219,7 +287,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -257,7 +330,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -295,7 +373,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -333,7 +416,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -371,7 +459,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -409,7 +502,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -447,7 +545,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -485,7 +588,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -523,7 +631,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -561,7 +674,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -599,7 +717,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -637,7 +760,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -675,7 +803,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -713,7 +846,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">
@@ -751,7 +889,12 @@ class ViewHome extends GenericView
         
                         foreach ($showsWithThisGenre['results'] as $value) {
         
-                            $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            if (!empty($value['poster_path'])) {
+                                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+                            }
+                            else {
+                                $fullPosterPath = "Assets/images/image_unavailable.png";
+                            }
         
                             echo '<li class="item-' . $value['id'] . '">
                                 <div class="toprated-box">

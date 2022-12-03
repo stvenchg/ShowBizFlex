@@ -247,11 +247,30 @@ div.forComments {
     transition: all .4s ease-in-out
 }
 
+.btngradient-presentation {
+    width: 250px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    height: 60px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 0 rgba(65, 132, 234, 0.75);
+    font-size: 20px;
+}
+
 .w-200 {
     width: 200px;
 }
 
-.btngradient-hover:hover {
+.btngradient-hover:hover, .btngradient-presentation:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
@@ -734,23 +753,6 @@ a:hover {
 
 .cs-hidden {
     overflow: visible !important
-}
-
-.alpha-alert {
-    width: 70%;
-    margin: auto;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    text-align: center;
-    border-radius: 10px;
-    background: linear-gradient(180.2deg, rgb(25, 27, 43) 6.8%, rgb(20, 28, 31) 131%);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px
-}
-
-.alpha-alert h1 {
-    color: #fff;
-    font-weight: 500;
-    font-size: large
 }
 
 .backdrop {
@@ -1696,6 +1698,86 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     margin: auto;
 }
 
+.site-presentation-container {
+    width: 45%;
+    height: 700px;
+    border-radius: 20px;
+    margin: auto;
+    margin-bottom: 100px;
+    padding: 70px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    cursor:default;
+    position: relative;
+}
+
+.site-presentation-container h1 {
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.site-presentation-container h2 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #689be9;
+    width: 50%;
+    margin: auto;
+}
+
+.site-presentation-container button {
+    position: absolute;
+    bottom: -30px;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.presentation-features-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 70px;
+}
+
+.features-image {
+    width: 100px;
+}
+
+.features-left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.features-left-1, .features-left-2 {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.features-left h3, .features-right h3 {
+    color: white;
+    font-weight: 500;
+    font-size: 17px;
+}
+
+.features-left p, .features-right p {
+    color: #689be9;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.features-right {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
 
 @media only screen and (max-width:991px) {
     header {
@@ -1753,17 +1835,6 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 
     .settings-content {
         width: 95%
-    }
-
-    .alpha-alert {
-        width: 90%;
-        margin: auto;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        text-align: center;
-        border-radius: 10px;
-        background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px
     }
 
     .featured-heading,
@@ -1853,6 +1924,10 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 
     .footer {
         height: 650px;
+    }
+
+    .site-presentation-container {
+        width: 100%;
     }
 }
 
