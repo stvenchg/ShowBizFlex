@@ -39,51 +39,52 @@ class ViewHome extends GenericView
         echo '</div>';
     }
 
-    public function trendingThisWeek() {
+    public function trendingThisWeek()
+    {
         $res = $this->model->getTmdbTrending();
 
         echo '        <!-- Les séries en tendances actuellement -->
         <h4 class="trending-heading">TENDANCES ACTUELLEMENT</h4>
         <ul id="autoWidthTrending" class="cs-hidden">';
 
-        foreach($res['results'] as $value) {
+        foreach ($res['results'] as $value) {
 
             $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="trending-box">
-                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
+                <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
             </div>
         </li>';
-
         }
 
         echo  '</ul>';
     }
 
-    public function featured() {
+    public function featured()
+    {
 
         $res = $this->model->getTmdbPopular();
 
         echo '<!-- Séries mise en avant -->
         <ul id="autoWidthFeatured" class="cs-hidden">';
 
-        foreach($res['results'] as $value) {
+        foreach ($res['results'] as $value) {
 
             $fullBackdropPath = "https://image.tmdb.org/t/p/w780/" . $value['backdrop_path'];
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="featured-box">
-                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullBackdropPath . '"></a>
+                <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullBackdropPath . '"></a>
             </div>
         </li>';
-
         }
 
         echo  '</ul>';
     }
 
-    public function topRated() {
+    public function topRated()
+    {
 
         $res = $this->model->getTmdbTopRated();
 
@@ -92,32 +93,65 @@ class ViewHome extends GenericView
 
         <ul id="autoWidthTopRated" class="cs-hidden">';
 
-        foreach($res['results'] as $value) {
+        foreach ($res['results'] as $value) {
 
             $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
 
             echo '<li class="item-' . $value['id'] . '">
             <div class="toprated-box">
-                <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
+                <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
             </div>
         </li>';
-
         }
 
         echo  '</ul>';
     }
 
-    public function userRecommandations() {
+    public function userRecommandations()
+    {
 
         $userGenresList = $this->model->getUserFavoriteGenres();
         $userGenresListString = '';
 
-        foreach ($userGenresList as $genre) {
-            $userGenresListString .= $genre . ',';
+        if (!empty($userGenresList)) {
+            foreach ($userGenresList as $genre) {
+                $userGenresListString .= $genre . ',';
+            }
         }
 
         if (!empty($userGenresList) && isset($_SESSION['login'])) {
-            
+
+            // Affichage des séries qui regroupent tous les genres aimés
+            $allFavGenres = $this->model->getTmdbDiscoverByGenre($userGenresListString, 1);
+
+            if ($allFavGenres['total_pages'] > 5) {
+                $allFavGenres = $this->model->getTmdbDiscoverByGenre($userGenresListString, rand(1, 5));
+            }
+
+            if ($allFavGenres['total_results'] > 0) {
+                echo '<!-- Les séries les mieux notés -->
+                    <h4 class="toprated-heading">RECOMMANDATIONS POUR TOI</h4>
+
+                    <ul id="autoWidthShowRecommandations" class="cs-hidden">';
+
+                foreach ($allFavGenres['results'] as $value) {
+
+                    $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $value['poster_path'];
+
+                    echo '<li class="item-' . $value['id'] . '">
+                        <div class="toprated-box">
+                            <a href="?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $fullPosterPath . '"></a>
+                        </div>
+                    </li>';
+                }
+
+                echo  '</ul>';
+            }
+
+            foreach ($userGenresList as $genre) {
+                if ($genre == 16) {
+                }
+            }
         }
     }
 }

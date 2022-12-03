@@ -85,3 +85,14 @@ $(document).ready(function () {
         }
     });
 });
+
+$(document).ready(function () {
+    $('#autoWidthShowRecommandations').lightSlider({
+        autoWidth: true,
+        loop: false,
+        pager: false,
+        onSliderLoad: function () {
+            $('#autoWidthShowRecommandations').removeClass('cS-hidden');
+        }
+    });
+});

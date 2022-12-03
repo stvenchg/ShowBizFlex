@@ -69,6 +69,10 @@ class ModelHome extends PDOConnection
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/top_rated?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
     }
 
+    public function getTmdbDiscoverByGenre($genres, $page) {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/discover/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&sort_by=popularity.desc&page=$page&timezone=Europe%2FParis&watch_region=FR&with_genres=$genres");
+    }
+
     public function addGenres() {
         $results = $this->callTmdbAPI("https://api.themoviedb.org/3/genre/tv/list?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
 
