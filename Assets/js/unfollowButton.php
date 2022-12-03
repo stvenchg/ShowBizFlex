@@ -1,11 +1,11 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#followButton").click(function() {
+        $("#unfollowButton").click(function() {
 
-            if ($('#followButton').hasClass('activeFavButton')) {
-                $('#followButton').removeClass('activeFavButton')
+            if ($('#unfollowButton').hasClass('activeFavButton')) {
+                $('#unfollowButton').removeClass('activeFavButton')
             } else {
-                $('#followButton').addClass('activeFavButton')
+                $('#unfollowButton').addClass('activeFavButton')
             }
 
             iziToast.settings({
@@ -14,18 +14,17 @@
                 transitionOut: 'fadeOutUp',
             });
 
-            $.post("Assets/js/ajax/addFollow.php", {
+            $.post("Assets/js/ajax/deleteFollow.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idUserToFollow: "<?php echo $_GET['id'] ?>"
             }, function(data){
-                if (data == "0") {
+                if (data == "1") {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Vous avez commencé à suivre cette personne !',
+                        title: 'Vous vous êtes désabonner de cette personne !',
                     })
                 }
             });
         });
     });
 </script>
-

@@ -17,8 +17,6 @@ class ModProfile extends PDOConnection
             case "view":
                 $this->controller->viewProfile();
             break;
-            /*case "followsUsers";
-            $this->controller->follow();*/
         }
 
         $this->controller->exec();

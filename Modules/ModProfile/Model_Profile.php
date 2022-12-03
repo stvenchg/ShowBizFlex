@@ -21,19 +21,24 @@ class ModelProfile extends PDOConnection {
         }
     }
 
-    /*public function sendfollowedsUsers(){
-        $idUser = $_GET['idUser'];
-        $idUserFollowed = $_GET['idFollowedUser'];
+
+    public function verifcationfollowedsUsers(){
+        $idUser = $_SESSION['id'];
+        $idUserFollowed = $_GET['id'];
 
         try {
-            $stmtId = parent::$db->prepare("INSERT INTO FollowedUsers value (?, ?)");
-            $stmtId->execute(array($idUser, $idUserFollowed));
-
+            $requesteVerifFollow = parent::$db->prepare("SELECT * FROM FollowedUsers WHERE idUser = :idUser AND idUserFollowed = :idUserFollowed");
+            $requesteVerifFollow->execute(array(":idUser" => $idUser, ":idUserFollowed" => $idUserFollowed));
+            $requesteVerifFollow = $requesteVerifFollow->fetch();
+            return $requesteVerifFollow;
+            
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
 
+
+    /*
     public function getFollowedUsersList(){
         $idUserForShowList = $_GET['idFollowedUser'];
         try {
