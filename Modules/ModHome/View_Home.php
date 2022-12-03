@@ -35,6 +35,7 @@ class ViewHome extends GenericView
         $this->featured();
         $this->trendingThisWeek();
         $this->topRated();
+        $this->userRecommandations();
         echo '</div>';
     }
 
@@ -42,7 +43,7 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbTrending();
 
         echo '        <!-- Les séries en tendances actuellement -->
-        <h4 class="trending-heading">TENDANCES MAINTENANT</h4>
+        <h4 class="trending-heading">TENDANCES ACTUELLEMENT</h4>
         <ul id="autoWidthTrending" class="cs-hidden">';
 
         foreach($res['results'] as $value) {
@@ -87,7 +88,7 @@ class ViewHome extends GenericView
         $res = $this->model->getTmdbTopRated();
 
         echo '<!-- Les séries les mieux notés -->
-        <h4 class="toprated-heading">LES MIEUX NOTÉS CETTE SAISON</h4>
+        <h4 class="toprated-heading">LES MIEUX NOTÉES</h4>
 
         <ul id="autoWidthTopRated" class="cs-hidden">';
 
@@ -104,5 +105,19 @@ class ViewHome extends GenericView
         }
 
         echo  '</ul>';
+    }
+
+    public function userRecommandations() {
+
+        $userGenresList = $this->model->getUserFavoriteGenres();
+        $userGenresListString = '';
+
+        foreach ($userGenresList as $genre) {
+            $userGenresListString .= $genre . ',';
+        }
+
+        if (!empty($userGenresList) && isset($_SESSION['login'])) {
+            
+        }
     }
 }

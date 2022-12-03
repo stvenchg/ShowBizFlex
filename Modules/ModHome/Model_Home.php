@@ -85,4 +85,26 @@ class ModelHome extends PDOConnection
             }
         }
     }
+
+    public function getUserFavoriteGenres() {
+    
+        $idUser = $_SESSION['id'];
+
+        try {
+            $stmt = parent::$db->prepare("SELECT idGenre FROM favGenres WHERE idUser=:idUser");
+            $stmt->bindParam(':idUser', $idUser);
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            $userGenresList = array();
+            
+            foreach ($result as $genre) {
+                array_push($userGenresList, $genre['idGenre']);
+            }
+
+            return $userGenresList;
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+
+    }
 }
