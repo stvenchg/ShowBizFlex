@@ -64,7 +64,7 @@ class ViewSetup extends GenericView
         if (isset($_SESSION['show_setup']) && isset($_SESSION['setupCompleted'])) {
             echo '<div class="setup-container animate__animated animate__fadeIn animate__slow">
             <div class="setupLoadingContainer">
-            <h1>Nous sélectionnons des séries rien que pour toi.</h1>
+            <h1>Un petit instant, nous personnalisons ton expérience en sélectionnant des séries rien que pour toi.</h1>
             <div class="spinner"></div>
             </div>
         </div>';
