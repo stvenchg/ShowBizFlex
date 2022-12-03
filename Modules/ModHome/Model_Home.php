@@ -11,6 +11,7 @@ class ModelHome extends PDOConnection
     public function __construct()
     {
         $this->viewAlert = new Alert;
+        $this->addGenres();
     }
 
     public function callTmdbAPI($api_url) {
@@ -66,5 +67,22 @@ class ModelHome extends PDOConnection
     public function getTmdbLatest()
     {
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/top_rated?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
+    }
+
+    public function addGenres() {
+        $results = $this->callTmdbAPI("https://api.themoviedb.org/3/genre/tv/list?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
+
+        foreach($results['genres'] as $genre) {
+            $sql = 'SELECT * FROM Genre WHERE idGenre = :idGenre AND nameGenre = :nameGenre';
+            $qy = parent::$db->prepare($sql);
+            $qy->execute(array('idGenre'=>$genre['id'], 'nameGenre'=>$genre['name']));
+            $verif = $qy->fetch();
+
+            if(!$verif) {
+                $sql2 = 'INSERT INTO Genre VALUES (:idGenre, :nameGenre)';
+                $qy2 = parent::$db->prepare($sql2);
+                $qy2->execute(array('idGenre'=>$genre['id'], 'nameGenre'=>$genre['name']));
+            }
+        }
     }
 }

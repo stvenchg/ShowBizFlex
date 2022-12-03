@@ -13,19 +13,18 @@ class ContProfile
     {
         $this->view = new ViewProfile();
         $this->model = new ModelProfile();
-        $this->action = isset($_GET['action']) ? $_GET['action'] : "viewProfile";
+        $this->action = isset($_GET['action']) ? $_GET['action'] : "myProfile";
     }
 
     public function getAction() {
         return $this->action;
     }
 
-    public function profil() {
-        $this->view->show_profile($this->model->getUserDetails());
-    }
-
-    public function otherProfile(){
-        $this->view->show_other_profile($this->model->getOtherUser());
+    public function viewProfile(){
+        $this->view->show_profile($this->model->getUserDetails(), 
+        $this->model->getUserShowInListsCount(), 
+        $this->model->getUserComments(),
+    $this->model->getUserActivity());
     }
 
     public function follow(){
