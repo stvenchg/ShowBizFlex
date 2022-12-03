@@ -24,6 +24,7 @@ class ViewLists extends GenericView
             echo '<div class="lists">';
             $this->followedShows();
             $this->toWatchLaterShows();
+            $this->recommendations();
             echo '</div>';
         }
     }
@@ -74,5 +75,32 @@ class ViewLists extends GenericView
         }
 
         echo  '</ul>';
+    }
+
+    public function recommendations() {
+        $res = $this->model->getRecommendations();
+    
+        if ($res != null) {
+
+            echo '<!-- Recommandations en fonction des séries suivies -->
+            <h4 class="latest-heading">ON TE RECOMMANDE CES SERIES</h4>
+            <ul id="autoWidthLatest" class="cs-hidden">';
+
+            foreach($res as $value) {
+
+                $details = $this->model->getDetails($value['id']);
+
+                $fullPosterPath = "https://image.tmdb.org/t/p/w342/" . $details['poster_path'];
+
+                echo '<li class="item-' . $value['id'] . '">
+                <div class="latest-box">
+                    <a href="?module=shows&action=overview&id='. $value['id'].'"><img src="' . $fullPosterPath . '"></a>
+                </div>
+            </li>';
+
+            }
+
+            echo  '</ul>';
+        }
     }
 }
