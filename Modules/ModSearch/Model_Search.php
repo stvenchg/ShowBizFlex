@@ -44,9 +44,9 @@ class ModelSearch extends PDOConnection
         }
     }
 
-    public function getTmdbSearchResults()
+    public function getTmdbSearchResults($adult)
     {
         $query = urlencode(htmlspecialchars($_GET['query']));
-        return $this->callTmdbAPI("https://api.themoviedb.org/3/search/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&include_adult=true&page=1&query=" . $query);
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/search/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&include_adult=$adult&page=1&query=" . $query);
     }
 }

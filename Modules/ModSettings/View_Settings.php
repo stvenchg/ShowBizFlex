@@ -17,7 +17,8 @@ class ViewSettings extends GenericView
         $this->viewAlert = new Alert;
     }
 
-    public function headerSettings() {
+    public function headerSettings()
+    {
         echo '<div class="settings">
             <div class="page-title">
             <h1>Paramètres</h1>
@@ -41,7 +42,10 @@ class ViewSettings extends GenericView
                     <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-user"></i> Profil</div>
                 </a>
                 <a href="./?module=settings&action=account">
-                    <div class="settings-nav-item"><i class="fa-solid fa-lock"></i> Compte</div>
+                    <div class="settings-nav-item"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item"><i class="fa-solid fa-shield"></i> Sécurité</div>
                 </a>
                 <a href="#">
                     <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -57,13 +61,14 @@ class ViewSettings extends GenericView
                 <label>COULEUR DE PROFIL</label>
                 
                 <div class="profil-color-palette">
-                    <div class="profil-color-palette-item blue"></div>
-                    <div class="profil-color-palette-item purple"></div>
-                    <div class="profil-color-palette-item green"></div>
-                    <div class="profil-color-palette-item orange"></div>
-                    <div class="profil-color-palette-item red"></div>
-                    <div class="profil-color-palette-item pink"></div>
-                    <div class="profil-color-palette-item grey"></div>
+                    <div class="profil-color-palette-item blue" id="paletteBlue"></div>
+                    <div class="profil-color-palette-item purple" id="palettePurple"></div>
+                    <div class="profil-color-palette-item green" id="paletteGreen"></div>
+                    <div class="profil-color-palette-item orange" id="paletteOrange"></div>
+                    <div class="profil-color-palette-item red" id="paletteRed"></div>
+                    <div class="profil-color-palette-item pink" id="palettePink"></div>
+                    <div class="profil-color-palette-item grey" id="paletteGrey"></div>
+                    <div class="profil-color-palette-item white" id="paletteWhite"></div>
                 </div>
             </div>
 
@@ -108,10 +113,13 @@ class ViewSettings extends GenericView
             echo '<div class="settings-container">
             <div class="settings-nav">
                 <a href="./?module=settings">
-                    <div class="settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
+                    <div class="settings-nav-item settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
                 </a>
                 <a href="./?module=settings&action=account">
-                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-lock"></i> Compte</div>
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item"><i class="fa-solid fa-shield"></i> Sécurité</div>
                 </a>
                 <a href="#">
                     <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
@@ -176,7 +184,73 @@ class ViewSettings extends GenericView
         }
     }
 
-    public function show_uploadAvatar() {
+    public function show_settingsSecurity()
+    {
+        if (isset($_SESSION['login'])) {
+
+            $user = $this->model->getUserDetails();
+            $this->headerSettings();
+
+            echo '<div class="settings-container">
+            <div class="settings-nav">
+                <a href="./?module=settings">
+                    <div class="settings-nav-item settings-nav-item"><i class="fa-solid fa-user"></i> Profil</div>
+                </a>
+                <a href="./?module=settings&action=account">
+                    <div class="settings-nav-item"><i class="fa-solid fa-fingerprint"></i> Compte</div>
+                </a>
+                <a href="./?module=settings&action=security">
+                    <div class="settings-nav-item settings-nav-item-selected"><i class="fa-solid fa-shield"></i> Sécurité</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                </a>
+                <a href="#">
+                    <div class="settings-nav-item"><i class="fa-solid fa-list"></i> Listes</div>
+                </a>
+            </div>
+
+            <div class="settings-content">
+
+            <div class="default-container">
+
+            <div class="profilVisibility">
+            <label>VISIBILITÉ DU PROFIL</label>
+            <div class="form-check form-switch">';
+
+            if ($user['private']) {
+                echo '<input name="enablePrivate" class="form-check-input checkboxCursor" type="checkbox" id="enablePrivate" checked>';
+            } else {
+                echo '<input class="form-check-input" type="checkbox" id="enablePrivate">';
+            }
+            echo '
+                <label class="form-check-label" for="enablePrivate">Passer le profil en privé</label>
+            </div>
+
+            <br>
+                <label style="color: #f74d91;">CONTENUS SENSIBLES (NSFW)</label>
+                <div class="form-check form-switch">';
+
+            if ($user['adult']) {
+                echo '<input name="enableAdult" class="form-check-input checkboxCursor" type="checkbox" id="enableAdultCheckbox" checked>';
+            } else {
+                echo '<input class="form-check-input" type="checkbox" id="enableAdultCheckbox">';
+            }
+
+            echo '
+                    <label class="form-check-label" for="enableAdultCheckbox">Inclure les contenus sensibles dans les résultats de mes recherches</label>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>';
+        } else {
+            $this->viewAlert->userNotAuthenticated();
+        }
+    }
+
+    public function show_uploadAvatar()
+    {
 
         if (isset($_SESSION['login'])) {
 
@@ -206,7 +280,8 @@ class ViewSettings extends GenericView
         }
     }
 
-    public function show_uploadBanner() {
+    public function show_uploadBanner()
+    {
 
         if (isset($_SESSION['login'])) {
 
