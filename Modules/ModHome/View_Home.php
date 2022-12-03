@@ -20,6 +20,17 @@ class ViewHome extends GenericView
     public function show_home()
     {
 
+        $this->sitePresentation();
+
+        echo '<div class="home">';
+        $this->featured();
+        $this->trendingThisWeek();
+        $this->topRated();
+        $this->userRecommandations();
+        echo '</div>';
+    }
+
+    public function sitePresentation() {
         if (!isset($_SESSION['login'])) {
             echo '<div class="site-presentation-container">
                     <h1>La plateforme de séries nouvelle génération</h1>
@@ -35,7 +46,7 @@ class ViewHome extends GenericView
 
                                 <div>
                                     <h3>Reste à jour</h3>
-                                    <p>Tu suis plusieurs séries sur différentes plateformes ? Ajoute-les à ta liste pour savoir quand une suite sortira.</p>
+                                    <p>Ne perd pas le fil de tes séries favorites. Ajoute-les à ta liste pour être au courant lorsqu\'une suite sortira.</p>
                                 </div>
                             </div>
                             <div class="features-left-2">
@@ -45,7 +56,7 @@ class ViewHome extends GenericView
 
                                 <div>
                                     <h3>Partage ton opinion</h3>
-                                    <p>Cette série t\'a plu ? Laisse un pouce bleu et discute avec les autres utilisateurs dans l\'espace commentaire dédié.</p>
+                                    <p>Une série t\'a plu ? Laisse un pouce bleu et discute avec les autres utilisateurs dans l\'espace commentaire dédié.</p>
                                 </div>
                             </div>
                         </div>
@@ -78,13 +89,6 @@ class ViewHome extends GenericView
                     <a href="./?module=auth&action=register"><button class="btngradient btngradient-presentation">Rejoins-nous</button></a>
                 </div>';
         }
-
-        echo '<div class="home">';
-        $this->featured();
-        $this->trendingThisWeek();
-        $this->topRated();
-        $this->userRecommandations();
-        echo '</div>';
     }
 
     public function trendingThisWeek()
