@@ -21,7 +21,7 @@ class ModelProfile extends PDOConnection {
         }
     }
 
-    public function sendfollowedsUsers(){
+    /*public function sendfollowedsUsers(){
         $idUser = $_GET['idUser'];
         $idUserFollowed = $_GET['idFollowedUser'];
 
@@ -44,7 +44,7 @@ class ModelProfile extends PDOConnection {
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
-    }
+    }*/
 
     public function getUserShowInListsCount() {
 

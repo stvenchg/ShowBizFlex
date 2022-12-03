@@ -272,7 +272,7 @@ class ViewShows extends GenericView
                 $userName = $row['username'];
                 $idRole = $row['idRole'];
 
-                echo '<a href="./?module=profile&action=viewOtherProfile&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
+                echo '<a href="./?module=profile&action=view&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
                 if ($_SESSION['idRole'] == 1) {
