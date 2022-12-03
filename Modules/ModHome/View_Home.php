@@ -75,7 +75,7 @@ class ViewHome extends GenericView
                         </div>
                     </div>
 
-                    <button class="btngradient btngradient-presentation">Rejoins-nous</button>
+                    <a href="./?module=auth&action=register"><button class="btngradient btngradient-presentation">Rejoins-nous</button></a>
                 </div>';
         }
 
