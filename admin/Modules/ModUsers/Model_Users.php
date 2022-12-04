@@ -69,7 +69,7 @@ class ModelUsers extends PDOConnection
               <p>'. $value['username'] .'</p>
               <p>'. $value['email'] .'</p>
               <p>'. $role .'</p>
-              <a href="#"><p><i class="fa-solid fa-pen-to-square"></i> Modifier</p></a>
+              <a href="./?module=users&action=editUser&id=' . $value['id'] . '"><p><i class="fa-solid fa-pen-to-square"></i> Modifier</p></a>
             </div>
           </div>';
         }

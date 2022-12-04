@@ -104,12 +104,6 @@ class ViewUsers extends GenericView
           <label for="email">ADRESSE E-MAIL</label>
           <input class="form-input" type="text" name="email" value="' . $user[0]['email'] . '" required>
 
-          <label for="password">DÉFINIR UN NOUVEAU MOT DE PASSE</label>
-          <input class="form-input" type="password" name="password" required>
-
-          <label for="password">CONFIRMER LE NOUVEAU MOT DE PASSE</label>
-          <input class="form-input" type="password" name="confirmpassword" required>
-
           <label for="username">DESCRIPTION</label>
           <input class="form-input" type="text" name="about" value="' . $user[0]['about'] . '" required>
 
@@ -124,6 +118,9 @@ class ViewUsers extends GenericView
 
           <label for="username">PROFIL PRIVÉ</label>
           <input class="form-input" type="text" name="about" value="' . $user[0]['private'] . '" required>
+
+          <label for="username">FORCER LA CONFIGURATION DU COMPTE</label>
+          <input class="form-input" type="text" name="about" value="' . $user[0]['show_setup'] . '" required>
 
           <label for="pin" style="margin-top: 20px; color: red">POUR VALIDER LES MODIFICATIONS, SAISIR LE CODE PIN</label>
           <input class="form-input" type="password" name="pin" maxlength="6" required>
