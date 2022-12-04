@@ -270,7 +270,6 @@ nav {
 
 .overview-panel {
     width: 100%;
-    height: 100vh;
 }
 
 .overview-panel h1 {
@@ -320,38 +319,54 @@ nav {
     justify-content: space-between;
 }
 
-.users-container {
-    padding: 30px;
-    margin-top: 30px;
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    background: var(--darker-primary-color);
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-    font-size: 18px;
-}
-
-.table {
-    color: white;
-    padding: 20px;
-}
-
-.users-container-top {
-    display: flex;
-    margin-bottom: 20px;
-    justify-content: space-between;
-}
-
-.search-user {
-    display: flex;
-    gap: 30px;
-}
-
-.search-user input[type=text] {
-    width: 400px;
-}
-
 .user-rows-count {
     display: flex;
     align-items: center;
+}
+
+.usersSearch {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+.usersSearch h2 {
+   color: white;
+   font-weight: 500;
+   font-size: 18px;
+}
+
+.usersList {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+ }
+
+.user-item {
+    border-radius: 10px;
+    height: 100px;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    padding: 30px;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.user-item:hover {
+    transform: scale(1.02);
+}
+
+.user-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.user-infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

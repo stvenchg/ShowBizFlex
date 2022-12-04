@@ -1,3 +1,11 @@
+<?php
+
+if (!isset($_SESSION['admin_id']) && $_SESSION['idRole'] != 1) {
+    header('Location: ../');
+}
+
+?>
+
 <!doctype html>
 <html lang="fr">
 
@@ -12,6 +20,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="Assets/js/topbar.min.js"></script>
     <?php
         require_once("Assets/js/script.php");
     ?>

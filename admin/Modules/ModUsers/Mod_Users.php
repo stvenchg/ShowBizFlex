@@ -20,6 +20,9 @@ class ModUsers extends PDOConnection
             case "createUser":
                 $this->controller->createUser();
             break;
+            case "editUser":
+                $this->controller->editUser();
+            break;
         }
 
         $this->controller->exec();

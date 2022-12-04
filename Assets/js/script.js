@@ -25,14 +25,6 @@ $(window).bind('beforeunload',function(){
     topbar.show();
  });
 
-/* $(":button").click(function() {
-    topbar.show();
-});
-
-$(":img").click(function() {
-    topbar.show();
-}); */
-
 const Toast = Swal.mixin({
     toast: true,
     position: 'top',
