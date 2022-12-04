@@ -62,12 +62,18 @@ class ViewSearch extends GenericView
 
             $pagesString = '';
             $query = urlencode(htmlspecialchars($_GET['query']));
-            for ($i=1; $i< $showsResults['total_pages']; $i++) {
-                if ($i == $showsResults['page']) {
-                    $pagesString .= '<div class="page-nb page-nb-active"><a href="./?module=search&query=' . $query . '&page='. $i .'">'. $i .'</a></div>';
-                } else {
-                    $pagesString .= '<a href="./?module=search&query=' . $query . '&page='. $i .'"><div class="page-nb">'. $i .'</div></a>';
-                }
+            $currentPage = $showsResults['page'];
+            $totalPages = $showsResults['total_pages'];
+            
+            if ($currentPage == 1) {
+                $pagesString = '<a href="./?module=search&query='. $query .'&page='. ($currentPage+1) .'"><button class="btngradient btngradient-hover color-9 w-200">Suivant <i class="fa-solid fa-arrow-right"></i></button></a>';
+            }
+            else if ($currentPage == $totalPages) {
+                $pagesString = '<a href="./?module=search&query='. $query .'&page='. ($currentPage-1) .'"><button class="btngradient btngradient-hover color-9 w-200"><i class="fa-solid fa-arrow-left"></i> Précédent</button></a>';
+            } else {
+                $pagesString = '
+                <a href="./?module=search&query='. $query .'&page='. ($currentPage-1) .'"><button class="btngradient btngradient-hover color-9 w-200"><i class="fa-solid fa-arrow-left"></i> Précédent</button></a>
+                <a href="./?module=search&query='. $query .'&page='. ($currentPage+1) .'"><button class="btngradient btngradient-hover color-9 w-200">Suivant <i class="fa-solid fa-arrow-right"></i></button></a>';
             }
 
             echo '<div class="searchResultsContainer">';
@@ -95,12 +101,12 @@ class ViewSearch extends GenericView
         </div>
         
         <div class="search-page-selector">
-            '. $pagesString .'
+            '. $pagesString . '
         </div>';
 
             echo '</div>';
         } else {
-            echo "<container>Id non définie</container>";
+            echo "<container>La recherche est invalide.</container>";
         }
     }
 }
