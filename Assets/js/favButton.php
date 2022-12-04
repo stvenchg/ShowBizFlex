@@ -1,7 +1,6 @@
 <script>
     $(document).ready(function() {
         $('.favButton').click(function() {
-
             if ($('#favButton').hasClass('activeFavButton')) {
                 $('#favButton').removeClass('activeFavButton')
             } else {
@@ -24,6 +23,12 @@
                     })
                 }
             });
+        });
+
+        tippy('#favButton', {
+            theme: 'light',
+            content: 'Ajouter à ma liste de suivi',
+            animation: 'fade',
         });
     });
 </script>

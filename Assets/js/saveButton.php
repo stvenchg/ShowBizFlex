@@ -27,6 +27,12 @@
 
         });
 
+        tippy('#saveButton', {
+            theme: 'light',
+            content: 'Ajouter à ma liste à regarder plus tard',
+            animation: 'fade',
+        });
+
 
     });
 </script>
