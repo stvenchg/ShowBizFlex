@@ -80,14 +80,7 @@ class ContShows
             $this->model->getRecommandationsString($recommandations));
     }
 
-    public function comments(){
-        $this->model->sendComments();
-    }
-
-    public function redirection(){
-        $this->view->redirection();
-    }
-
+   
     public function deleteCom(){
         $this->model->deleteComments();
     }

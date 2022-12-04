@@ -125,4 +125,15 @@ class ViewProfile extends GenericView {
             </div>';
         }
     }
+
+    public function showfollowedUsersList($userListShow){
+        foreach($userListShow as $row){
+            echo 'Les séries suivies de ' . $row['username'] . ' sont : ' . $row['idShow'] . "<br> <br>";
+        }
+    }
+
+    public function show_other_profile($otherUsers){
+        $this->show_profile($otherUsers);
+    }
+
 }
