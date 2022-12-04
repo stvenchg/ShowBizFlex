@@ -69,22 +69,11 @@ class ModelAuth extends PDOConnection
                 } else {
                     
                     // Insertion des informations concernant le compte de l'utilisateur
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult, color) VALUES (:username, :email, :password, 2, '1.png', '1.png', false, 'white')");
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult, color, show_setup, private) VALUES (:username, :email, :password, 2, '1.png', '1.png', false, 'white', true, false)");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
                     $stmtResult = $stmtRegisterNewUser->execute();
-
-/*                     // Récupération de l'id de l'utilisateur crée
-                    $stmtRegisterNewUserGetId = parent::$db->prepare("SELECT id FROM User WHERE username=:username");
-                    $stmtRegisterNewUserGetId->bindParam(':username', $username);
-                    $stmtRegisterNewUserGetId->execute();
-                    $stmtResultGetId = $stmtRegisterNewUserGetId->fetch();
-
-                    // Insérer les informations par défaut du profil
-                    $stmtRegisterNewUserProfile = parent::$db->prepare("INSERT INTO User_profile(account_id, avatar_file, banner_file) VALUES (:account_id, '1.png', '1.png')");
-                    $stmtRegisterNewUserProfile->bindParam(':account_id', $stmtResultGetId['id']);
-                    $stmtResultProfile = $stmtRegisterNewUserProfile->execute(); */
 
                     if ($stmtResult) {
                         $this->viewAlert->registrationSuccessful();
@@ -123,7 +112,8 @@ class ModelAuth extends PDOConnection
                 $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
                 $_SESSION["banner_file"] = $stmtResult['banner_file'];
                 $_SESSION["idRole"] = $stmtResult['idRole'];
-                $_SESSION["adult"] = $stmtResult['adult'];                
+                $_SESSION["adult"] = $stmtResult['adult'];
+                $_SESSION["show_setup"] = $stmtResult['show_setup'];
 
                 header('Location: ./');
             } else {
@@ -151,7 +141,7 @@ class ModelAuth extends PDOConnection
 
     public function sendForgot()
     {
-        if (isset($_POST['email']) && !empty($_POST['email']) && str_contains($_POST['email'], '@') && str_contains($_POST['email'], '.') && !preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $_POST['email'])) {
+        if (isset($_POST['email']) && !empty($_POST['email']) && !preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $_POST['email'])) {
             try {
                 $email = htmlspecialchars($_POST['email']);
                 $forgot_auth = sha1(uniqid(rand(), true));

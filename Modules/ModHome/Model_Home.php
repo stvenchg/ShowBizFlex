@@ -14,7 +14,8 @@ class ModelHome extends PDOConnection
         $this->addGenres();
     }
 
-    public function callTmdbAPI($api_url) {
+    public function callTmdbAPI($api_url)
+    {
         $ch = curl_init();
         try {
 
@@ -69,19 +70,50 @@ class ModelHome extends PDOConnection
         return $this->callTmdbAPI("https://api.themoviedb.org/3/tv/top_rated?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&region=FR&page=1");
     }
 
-    public function addGenres() {
+    public function getTmdbDiscoverByGenre($genres, $page)
+    {
+        return $this->callTmdbAPI("https://api.themoviedb.org/3/discover/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&sort_by=popularity.desc&page=$page&watch_region=FR&with_genres=$genres");
+    }
+
+    public function addGenres()
+    {
         $results = $this->callTmdbAPI("https://api.themoviedb.org/3/genre/tv/list?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR");
 
-        foreach($results['genres'] as $genre) {
+        foreach ($results['genres'] as $genre) {
             $sql = 'SELECT * FROM Genre WHERE idGenre = :idGenre AND nameGenre = :nameGenre';
             $qy = parent::$db->prepare($sql);
-            $qy->execute(array('idGenre'=>$genre['id'], 'nameGenre'=>$genre['name']));
+            $qy->execute(array('idGenre' => $genre['id'], 'nameGenre' => $genre['name']));
             $verif = $qy->fetch();
 
-            if(!$verif) {
+            if (!$verif) {
                 $sql2 = 'INSERT INTO Genre VALUES (:idGenre, :nameGenre)';
                 $qy2 = parent::$db->prepare($sql2);
-                $qy2->execute(array('idGenre'=>$genre['id'], 'nameGenre'=>$genre['name']));
+                $qy2->execute(array('idGenre' => $genre['id'], 'nameGenre' => $genre['name']));
+            }
+        }
+    }
+
+    public function getUserFavoriteGenres()
+    {
+
+        if (isset($_SESSION['id'])) {
+
+            $idUser = $_SESSION['id'];
+
+            try {
+                $stmt = parent::$db->prepare("SELECT idGenre FROM favGenres WHERE idUser=:idUser");
+                $stmt->bindParam(':idUser', $idUser);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                $userGenresList = array();
+
+                foreach ($result as $genre) {
+                    array_push($userGenresList, $genre['idGenre']);
+                }
+
+                return $userGenresList;
+            } catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
             }
         }
     }

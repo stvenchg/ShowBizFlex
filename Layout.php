@@ -1,3 +1,9 @@
+<?php
+    if (isset($_SESSION['login']) && $_SESSION['show_setup'] == 1 && $_GET['module'] != 'setup') {
+        header('Location: ./?module=setup&action=genres');
+    }
+?>
+
 <!doctype html>
 <html lang="fr">
 

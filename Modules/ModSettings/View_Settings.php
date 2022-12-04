@@ -215,7 +215,7 @@ class ViewSettings extends GenericView
             <div class="default-container">
 
             <div class="profilVisibility">
-            <label>Visibilité du profil</label>
+            <label>VISIBILITÉ DU PROFIL</label>
             <div class="form-check form-switch">';
 
             if ($user['private']) {
