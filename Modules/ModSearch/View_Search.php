@@ -17,16 +17,25 @@ class ViewSearch extends GenericView
     public function show_searchResults()
     {
 
-        if (isset($_GET['query']) && !empty($_GET['query'])) {
+        if (isset($_GET['query']) && !empty($_GET['query']) && isset($_GET['page']) && !empty($_GET['page'])) {
 
             if ($_SESSION['adult']) {
-                $showsResults = $this->model->getTmdbSearchResults('true');
+                $showsResults = $this->model->getTmdbSearchResults(urlencode(htmlspecialchars($_GET['query'])), 'true', htmlspecialchars($_GET['page']));
             } else {
-                $showsResults = $this->model->getTmdbSearchResults('false');
+                $showsResults = $this->model->getTmdbSearchResults(urlencode(htmlspecialchars($_GET['query'])), 'false', htmlspecialchars($_GET['page']));
             }
             
             $resultsString = '';
             foreach($showsResults['results'] as $index => $value) {
+
+                if (isset($value['first_air_date'])) {
+                    $firstAirDatetime = $value['first_air_date'];
+                    $firstAirDate = (new DateTime($firstAirDatetime))->format('j F Y');
+                }
+                else {
+                    $firstAirDate = 'N/A';
+                }
+
                 if (!empty($value['poster_path'])) {
                     $posterPath = 'https://image.tmdb.org/t/p/w200' . $value['poster_path'];
                 }
@@ -34,7 +43,17 @@ class ViewSearch extends GenericView
                     $posterPath = './Assets/images/image_unavailable.png';
                 }
 
-                $resultsString .= '<div class="grid-item"><a href="./?module=shows&action=overview&id=' . $value['id'] . '"><img src="' . $posterPath . '"></a></div>';
+                $resultsString .= '<div class="search-item">
+                <div class="search-item-img">
+                    <a href="./?module=shows&action=overview&id='. $value['id'] .'"><img src="'. $posterPath .'" /></a>
+                </div>
+                <div class="search-item-infos">
+                    <a href="./?module=shows&action=overview&id='. $value['id'] .'"><h1>'. $value['name'] .'</h1></a>
+                    <h2>'. $firstAirDate .'</h2>
+
+                    <p>'. $value['overview'] .'</p>
+                </div>
+            </div>';
             }
 
             $query = htmlspecialchars($_GET['query']);
@@ -42,6 +61,7 @@ class ViewSearch extends GenericView
             echo '<div class="searchResultsContainer">';
 
             echo '<div class="search-filters">
+                    <div class="search-filters-box">
                     <div class="head-search-filters">
                         <h1>Voici les résultats de ta recherche pour « ' . htmlspecialchars($_GET["query"]) . ' »</h1>
                     </div>
@@ -53,13 +73,13 @@ class ViewSearch extends GenericView
                             <h2><i class="fa-solid fa-box-archive fa-xs"></i> Genres</h2>
                         </div>
                     </div>
+                    </div>
                 </div>
             
             <div class="search-results">
-                <div class="search-item">
-                    
-                </div>
-            </div>';
+                ' . $resultsString . '
+            </div>
+        </div>';
 
             echo '</div>';
         } else {

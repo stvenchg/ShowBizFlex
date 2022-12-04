@@ -61,7 +61,7 @@ searchButton.addEventListener('click', () => {
     }, 50);
 
     setTimeout(() => {
-    searchInput.innerHTML = '<div class="search-box"><form action="./" method="GET"><input name="module" value="search" type="hidden"><input class="inputSearch" placeholder="Rechercher ShowBizFlex..." type="search" name="query" id="inputSearch"></form></div>';
+    searchInput.innerHTML = '<div class="search-box"><form action="./" method="GET"><input name="module" value="search" type="hidden"><input class="inputSearch" placeholder="Rechercher ShowBizFlex..." type="search" name="query" id="inputSearch"><input name="page" value="1" type="hidden"></form></div>';
     $('input[type="search"]').focus();
     }, 100);
 });
