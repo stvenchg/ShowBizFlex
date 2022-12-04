@@ -60,7 +60,15 @@ class ViewSearch extends GenericView
                 $resultsString = '<p>Aucun résultats ne correspond à ta recherche.</p>';
             }
 
-            $query = htmlspecialchars($_GET['query']);
+            $pagesString = '';
+            $query = urlencode(htmlspecialchars($_GET['query']));
+            for ($i=1; $i< $showsResults['total_pages']; $i++) {
+                if ($i == $showsResults['page']) {
+                    $pagesString .= '<div class="page-nb page-nb-active"><a href="./?module=search&query=' . $query . '&page='. $i .'">'. $i .'</a></div>';
+                } else {
+                    $pagesString .= '<a href="./?module=search&query=' . $query . '&page='. $i .'"><div class="page-nb">'. $i .'</div></a>';
+                }
+            }
 
             echo '<div class="searchResultsContainer">';
 
@@ -87,7 +95,7 @@ class ViewSearch extends GenericView
         </div>
         
         <div class="search-page-selector">
-            
+            '. $pagesString .'
         </div>';
 
             echo '</div>';

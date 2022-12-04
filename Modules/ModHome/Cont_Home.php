@@ -21,7 +21,14 @@ class ContHome
     }
 
     public function home() {
-        $this->view->show_home();
+        $this->view->sitePresentation();
+
+        echo '<div class="home">';
+            $this->view->featured();
+            $this->view->trendingThisWeek();
+            $this->view->topRated();
+            $this->view->userRecommandations();
+        echo '</div>';
     }
 
     public function exec() {
