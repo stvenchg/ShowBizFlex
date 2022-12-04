@@ -108,19 +108,24 @@ class ViewUsers extends GenericView
           <input class="form-input" type="text" name="about" value="' . $user[0]['about'] . '" required>
 
           <label for="username">COULEUR DE PROFIL</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['color'] . '" required>
+          <input class="form-input" type="text" name="color" value="' . $user[0]['color'] . '" required>
 
           <label for="username">ROLE</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['idRole'] . '" required>
+          <input class="form-input" type="text" name="idRole" value="' . $user[0]['idRole'] . '" required>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="adult" value="' . $user[0]['adult'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Afficher les contenus sensibles</label>
+          </div>
 
-          <label for="username">CONTENUS SENSIBLES</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['adult'] . '" required>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="private" value="' . $user[0]['private'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Rendre le profil privé</label>
+          </div>
 
-          <label for="username">PROFIL PRIVÉ</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['private'] . '" required>
-
-          <label for="username">FORCER LA CONFIGURATION DU COMPTE</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['show_setup'] . '" required>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="show_setup" value="' . $user[0]['show_setup'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Forcer la configuration du compte</label>
+          </div>
 
           <label for="pin" style="margin-top: 20px; color: red">POUR VALIDER LES MODIFICATIONS, SAISIR LE CODE PIN</label>
           <input class="form-input" type="password" name="pin" maxlength="6" required>
