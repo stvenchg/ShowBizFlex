@@ -17,19 +17,6 @@ class ViewHome extends GenericView
         $this->model = new ModelHome;
     }
 
-    public function show_home()
-    {
-
-        $this->sitePresentation();
-
-        echo '<div class="home">';
-        $this->featured();
-        $this->trendingThisWeek();
-        $this->topRated();
-        $this->userRecommandations();
-        echo '</div>';
-    }
-
     public function sitePresentation() {
         if (!isset($_SESSION['login'])) {
             echo '<div class="site-presentation-container">

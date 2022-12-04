@@ -28,6 +28,10 @@ class ContUsers
         $this->view->show_createUser_form();
     }
 
+    public function editUser() {
+        $this->view->show_editUser_form();
+    }
+
     public function exec() {
         $this->view->view();
     }

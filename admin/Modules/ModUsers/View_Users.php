@@ -28,33 +28,13 @@ class ViewUsers extends GenericView
             <a href="./?module=users&action=createUser"><button class="btngradient btngradient-hover color-9"><i class="fa-solid fa-user-plus"></i> Ajouter</button></a>
         </div>
 
-        <div class="users-container">
-
-        <div class="users-container-top">
-            <div class="user-rows-count">
-                <label>N/A</label>
-            </div>
-            <div class="search-user">
-                <input class="form-input" type="text" name="userSearchQuery" placeholder="Rechercher...">
-            </div>
+        <div class="usersSearch">
+          <h2>Rechercher un utilisateur</h2>
+          <input class="form-input" type="text" name="userSearchQuery" required>
         </div>
 
-        <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Photo de profil</th>
-            <th scope="col">Nom d\'utilisateur</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            ' . $userListString . '
-          </tr>
-        </tbody>
-      </table>
+        <div class="usersList">
+          '. $userListString .'
         </div>
     </div>';
   }
@@ -92,6 +72,65 @@ class ViewUsers extends GenericView
           <input class="form-input" type="password" name="pin" maxlength="6" required>
 
           <button type="submit" id="createUserSubmitButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Créer l\'utilisateur</button>
+      </form>
+      </div>
+  </div>';
+  }
+
+  public function show_editUser_form()
+  {
+
+    $user = $this->model->getUserDetails(htmlspecialchars($_GET['id']));
+
+    echo '<div class="overview-panel">
+      <div class="title-account">
+          <h1>Édition de l\'utilisateur : ' . $user[0]['username'] . '</h1>
+      </div>
+
+      <div class="users-container">
+
+      <label style="margin-bottom: 20px">INSCRIT SUR SHOWBIZFLEX DEPUIS LE : ' . $user[0]['register_date'] . '</label>
+
+      <label for="username">AVATAR</label>
+      <img style="width: 200px; height: 200px; border-radius: 50%; margin-bottom: 20px" src="../Assets/images/avatar/' . $user[0]['avatar_file'] . '" />
+
+      <label for="username">BANNIERE</label>
+      <img style="width: 500px; height: 200px; border-radius: 10px; margin-bottom: 20px" src="../Assets/images/banner/' . $user[0]['banner_file'] . '" />
+
+      <form action="./?module=auth&action=sendEditUser" method="POST">
+          <label for="username">NOM D\'UTILISATEUR</label>
+          <input class="form-input" type="text" name="username" value="' . $user[0]['username'] . '" required>
+
+          <label for="email">ADRESSE E-MAIL</label>
+          <input class="form-input" type="text" name="email" value="' . $user[0]['email'] . '" required>
+
+          <label for="username">DESCRIPTION</label>
+          <input class="form-input" type="text" name="about" value="' . $user[0]['about'] . '" required>
+
+          <label for="username">COULEUR DE PROFIL</label>
+          <input class="form-input" type="text" name="color" value="' . $user[0]['color'] . '" required>
+
+          <label for="username">ROLE</label>
+          <input class="form-input" type="text" name="idRole" value="' . $user[0]['idRole'] . '" required>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="adult" value="' . $user[0]['adult'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Afficher les contenus sensibles</label>
+          </div>
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="private" value="' . $user[0]['private'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Rendre le profil privé</label>
+          </div>
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="show_setup" value="' . $user[0]['show_setup'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
+            <label class="form-check-label" for="flexSwitchCheckDefault">Forcer la configuration du compte</label>
+          </div>
+
+          <label for="pin" style="margin-top: 20px; color: red">POUR VALIDER LES MODIFICATIONS, SAISIR LE CODE PIN</label>
+          <input class="form-input" type="password" name="pin" maxlength="6" required>
+
+          <button type="submit" id="createUserSubmitButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Confirmer les modifications</button>
       </form>
       </div>
   </div>';

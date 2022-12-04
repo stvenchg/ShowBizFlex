@@ -40,9 +40,9 @@ body {
     width: 72px;
     height: 72px;
     border-radius: 50%;
-    background: radial-gradient(farthest-side,#3f86ed 94%,#0000) top/11.5px 11.5px no-repeat,
-           conic-gradient(#0000 30%,#3f86ed);
-    -webkit-mask: radial-gradient(farthest-side,#0000 calc(100% - 11.5px),#000 0);
+    background: radial-gradient(farthest-side, #3f86ed 94%, #0000) top/11.5px 11.5px no-repeat,
+        conic-gradient(#0000 30%, #3f86ed);
+    -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 11.5px), #000 0);
     animation: spinner-c7wet2 0.6s infinite linear;
 }
 
@@ -270,7 +270,8 @@ div.forComments {
     width: 200px;
 }
 
-.btngradient-hover:hover, .btngradient-presentation:hover {
+.btngradient-hover:hover,
+.btngradient-presentation:hover {
     background-position: 100% 0;
     moz-transition: all .4s ease-in-out;
     -o-transition: all .4s ease-in-out;
@@ -362,12 +363,12 @@ a:hover {
     background: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(19, 28, 32) 131%) !important;
 }
 
-.swal2-title, 
+.swal2-title,
 .swal2-html-container {
     color: white !important;
 }
 
-.swal2-confirm, 
+.swal2-confirm,
 .swal2-styled {
     border-radius: 50px !important;
     background-color: #4481eb !important;
@@ -716,7 +717,7 @@ a:hover {
     padding-left: 30px;
     color: white;
     font-weight: 700;
-    margin:  10px  10px;
+    margin: 10px 10px;
     margin-top: 50px;
     text-transform: uppercase;
     font-size: 1.2em;
@@ -1155,42 +1156,175 @@ a:hover {
     border-radius: 10vw
 }
 
-.searchContainer {
+.searchResultsContainer {
+    display: flex;
     width: 80%;
-    margin: auto
+    margin: auto;
+    margin-top: 20px;
+    gap: 20px;
 }
 
-.searchContainer h1 {
-    color: #fff;
+.search-filters {
+    width: 550px;
+    height: 100vh;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.search-filters .head-search-filters {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: -webkit-linear-gradient(#25aae1, #3f86ed);
+    padding: 20px;
+}
+
+.search-filters .head-search-filters h1 {
+    color: white;
     font-weight: 600;
     font-size: 20px;
-    margin-top: 25px
 }
 
-.resultsContainer {
-    margin-top: 50px;
-    margin-left: 8%;
-    display: grid;
-    grid-template-areas: "a a a a a";
-    gap: 35px;
-    grid-auto-columns: 200px
-}
-
-.grid-item {
-    width: 200px;
-    height: 300px
-}
-
-.grid-item img {
-    width: 200px;
-    height: 300px;
+.search-filters-box {
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    transition: transform 0.2s
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.grid-item img:hover {
-    transform: scale(1.05)
+.search-category {
+    background-color: #11161b93;
+    width: 100%;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.search-category div {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    padding-top: 20px;
+    cursor: pointer;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.search-category div:hover {
+    background-color: #1f242993;
+}
+
+.active-category {
+    background-color: #1f242993;
+}
+
+.search-category div h2 {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.search-category div h2 i {
+    margin-right: 10px;
+}
+
+.search-results {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.search-item {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    background-color: #11161b93;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    transition: transform 0.2s;
+    padding-right: 20px;
+}
+
+.search-item:hover {
+    transform: scale(1.01);
+}
+
+.search-item-img img {
+    width: 125px;
+    height: 200px;
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.search-item-infos h1 {
+    color: white;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.search-item-infos h2 {
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.search-item-infos p {
+    margin-top: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.search-item-count {
+    font-size: 12px;
+    font-weight: 500;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(#25aae1, #3f86ed);
+}
+
+.search-page-selector {
+    width: 80%;
+    height: 30px;
+    margin: auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.page-nb {
+    width: 20px;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.page-nb a {
+    color: white;
+}
+
+.page-nb-active {
+    background: -webkit-linear-gradient(#25aae1, #3f86ed);
 }
 
 .cast-title {
@@ -1220,7 +1354,7 @@ a:hover {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    background-color: #11161b93;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.2s;
     align-items: center
@@ -1245,7 +1379,13 @@ a:hover {
 }
 
 .panel-lastSeasonDetails p {
-    margin-top: 2%
+    margin-top: 2%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .panel-lastSeasonTitle {
@@ -1265,7 +1405,7 @@ a:hover {
     width: 100%;
     height: 200px;
     border-radius: 10px;
-    background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    background-color: #11161b93;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.2s;
     align-items: center
@@ -1417,9 +1557,9 @@ a:hover {
 }
 
 .usernameAndInfos h1 {
-   color: white;
-   font-weight: 600;
-   font-size: 32px;
+    color: white;
+    font-weight: 600;
+    font-size: 32px;
 }
 
 .memberSince {
@@ -1437,7 +1577,7 @@ a:hover {
 .profile-body {
     width: 80%;
     margin: auto;
-    display:flex;
+    display: flex;
     gap: 40px;
     margin-top: 30px;
 }
@@ -1559,12 +1699,12 @@ a:hover {
 }
 
 .setup-container {
-   width: 80%;
-   margin: auto;
-   display: flex;
-   gap: 50px;
-   height: 100vh;
-   padding: 20px;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    gap: 50px;
+    height: 100vh;
+    padding: 20px;
 }
 
 .setup-title {
@@ -1597,10 +1737,12 @@ ul.ks-cboxtags {
     list-style: none;
     padding: 20px;
 }
-ul.ks-cboxtags li{
-  display: inline;
+
+ul.ks-cboxtags li {
+    display: inline;
 }
-ul.ks-cboxtags li label{
+
+ul.ks-cboxtags li label {
     display: inline-block;
     background-color: rgba(255, 255, 255, .9);
     border: 2px solid rgba(139, 139, 139, .3);
@@ -1636,13 +1778,13 @@ ul.ks-cboxtags li label::before {
     transition: transform .3s ease-in-out;
 }
 
-ul.ks-cboxtags li input[type="checkbox"]:checked + label::before {
+ul.ks-cboxtags li input[type="checkbox"]:checked+label::before {
     content: "\f00c";
     transform: rotate(-360deg);
     transition: transform .3s ease-in-out;
 }
 
-ul.ks-cboxtags li input[type="checkbox"]:checked + label {
+ul.ks-cboxtags li input[type="checkbox"]:checked+label {
     border: 2px solid #11161b93;
     background: -webkit-linear-gradient(#25aae1, #3f86ed);
     color: #fff;
@@ -1650,14 +1792,16 @@ ul.ks-cboxtags li input[type="checkbox"]:checked + label {
 }
 
 ul.ks-cboxtags li input[type="checkbox"] {
-  display: absolute;
+    display: absolute;
 }
+
 ul.ks-cboxtags li input[type="checkbox"] {
-  position: absolute;
-  opacity: 0;
+    position: absolute;
+    opacity: 0;
 }
-ul.ks-cboxtags li input[type="checkbox"]:focus + label {
-  border: 2px solid #11161b93;
+
+ul.ks-cboxtags li input[type="checkbox"]:focus+label {
+    border: 2px solid #11161b93;
 }
 
 .setup-bar {
@@ -1680,7 +1824,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 }
 
 .setupLoadingContainer {
-    display:flex;
+    display: flex;
     flex-direction: column;
     text-align: center;
     margin: auto;
@@ -1707,11 +1851,14 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     padding: 70px;
     background-color: #11161b93;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
-    cursor:default;
+    cursor: default;
     position: relative;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .site-presentation-container h1 {
@@ -1734,10 +1881,10 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 .site-presentation-container button {
     position: absolute;
     bottom: -30px;
-    left:0;
-    right:0;
-    margin-left:auto;
-    margin-right:auto;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .presentation-features-container {
@@ -1757,19 +1904,22 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
     gap: 50px;
 }
 
-.features-left-1, .features-left-2 {
+.features-left-1,
+.features-left-2 {
     width: 100%;
     display: flex;
     gap: 20px;
 }
 
-.features-left h3, .features-right h3 {
+.features-left h3,
+.features-right h3 {
     color: white;
     font-weight: 500;
     font-size: 17px;
 }
 
-.features-left p, .features-right p {
+.features-left p,
+.features-right p {
     color: #689be9;
     font-weight: 500;
     font-size: 15px;
@@ -1960,6 +2110,6 @@ ul.ks-cboxtags li input[type="checkbox"]:focus + label {
 
 @keyframes spinner-c7wet2 {
     100% {
-       transform: rotate(1turn);
+        transform: rotate(1turn);
     }
 }

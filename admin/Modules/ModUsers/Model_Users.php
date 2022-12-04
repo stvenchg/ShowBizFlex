@@ -56,15 +56,33 @@ class ModelUsers extends PDOConnection
         $userListString = '';
 
         foreach ($result as $index => $value) {
-            $userListString .= '<tr>
-            <th scope="row">'. $result[$index]['id'] .'</th>
-            <td>'. $result[$index]['avatar_file'] .'</td>
-            <td>'. $result[$index]['username'] .'</td>
-            <td>'. $result[$index]['email'] .'</td>
-            <td><i class="fa-solid fa-pen-to-square"></i></td>
-          </tr>';
+
+            if ($value['idRole'] == 2) {
+                $role = '<span style="color:orange">Membre</span>';
+            } else {
+                $role = '<span style="color:red">Administrateur</span>';
+            }
+
+            $userListString .= '<div class="user-item">
+            <div class="user-infos">
+              <img src="../Assets/images/avatar/'. $value['avatar_file'] .'" />
+              <p>'. $value['username'] .'</p>
+              <p>'. $value['email'] .'</p>
+              <p>'. $role .'</p>
+              <a href="./?module=users&action=editUser&id=' . $value['id'] . '"><p><i class="fa-solid fa-pen-to-square"></i> Modifier</p></a>
+            </div>
+          </div>';
         }
 
         return $userListString;
+    }
+
+    public function getUserDetails($id) {
+        $stmt = parent::$db->prepare("SELECT * FROM User WHERE id=:id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+
+        return $result;
     }
 }
