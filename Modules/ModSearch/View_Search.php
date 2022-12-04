@@ -45,7 +45,7 @@ class ViewSearch extends GenericView
 
                 $resultsString .= '<div class="search-item">
                 <div class="search-item-img">
-                    <a href="./?module=shows&action=overview&id='. $value['id'] .'"><img src="'. $posterPath .'" /></a>
+                    <a href="./?module=shows&action=overview&id='. $value['id'] .'"><img src="'. $posterPath .'" loading="lazy"/></a>
                 </div>
                 <div class="search-item-infos">
                     <a href="./?module=shows&action=overview&id='. $value['id'] .'"><h1>'. $value['name'] .'</h1></a>
@@ -54,6 +54,10 @@ class ViewSearch extends GenericView
                     <p>'. $value['overview'] .'</p>
                 </div>
             </div>';
+            }
+
+            if (empty($resultsString)) {
+                $resultsString = '<p>Aucun résultats ne correspond à ta recherche.</p>';
             }
 
             $query = htmlspecialchars($_GET['query']);
@@ -68,6 +72,7 @@ class ViewSearch extends GenericView
                     <div class="search-category">
                         <div class="active-category">
                             <h2><i class="fa-solid fa-tv fa-xs"></i> Séries</h2>
+                            <h2 class="search-item-count">'. $showsResults['total_results'] .'</h2>
                         </div>
                         <div>
                             <h2><i class="fa-solid fa-box-archive fa-xs"></i> Genres</h2>
@@ -79,6 +84,10 @@ class ViewSearch extends GenericView
             <div class="search-results">
                 ' . $resultsString . '
             </div>
+        </div>
+        
+        <div class="search-page-selector">
+            
         </div>';
 
             echo '</div>';
