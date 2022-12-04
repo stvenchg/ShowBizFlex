@@ -247,6 +247,10 @@ div.forComments {
     transition: all .4s ease-in-out
 }
 
+.w-200 {
+    width: 200px;
+}
+
 .btngradient-presentation {
     width: 250px;
     font-weight: 600;
@@ -264,10 +268,6 @@ div.forComments {
     background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
     box-shadow: 0 0 rgba(65, 132, 234, 0.75);
     font-size: 20px;
-}
-
-.w-200 {
-    width: 200px;
 }
 
 .btngradient-hover:hover,

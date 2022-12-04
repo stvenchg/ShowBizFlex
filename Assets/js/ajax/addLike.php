@@ -1,15 +1,14 @@
 <?php
     extract($_POST);
 
-    $dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201637;charset=UTF8";
-    $db = new PDO($dsn, 'dutinfopw201637', 'suqebamu');
+   require_once('connection.php');
 
     $requesteVerifLike = $db->prepare("SELECT * FROM ListLikes WHERE idUser = :idUser AND idShow = :idShow");
     $requesteVerifLike->execute(array(":idUser" => $idUser, ":idShow" => $idShow));
     $requesteVerifLike2 = $requesteVerifLike->fetch();
 
     if(!$requesteVerifLike2){
-         try{
+         try {
             $requestSendLike = $db->prepare("INSERT INTO ListLikes VALUES (:idUser, :idShow, NULL)");
             $requestSendLike->execute(array(":idUser" => $idUser, ":idShow" => $idShow));
         }

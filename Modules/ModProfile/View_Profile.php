@@ -8,7 +8,7 @@ class ViewProfile extends GenericView {
         parent::__construct();
     }
 
-    public function show_profile($user, $showsInListCount, $commentsCount, $userActivity)
+    public function show_profile($user, $showsInListCount, $commentsCount, $userActivity, $verificationUserFollowed)
     {
         if (!$user[0]['private'] || $_SESSION['idRole'] == 1 || $user[0]['id'] == $_SESSION['id']) {
 
@@ -57,7 +57,12 @@ class ViewProfile extends GenericView {
                     echo '<a href="./?module=settings"><button class="btngradient btngradient-hover color-9 w-200">Modifier mon profil</button></a>';
                 }
                 else {
-                    echo '<button id="followButton" class="btngradient btngradient-hover color-9">Suivre</button>';
+                    if(!$verificationUserFollowed){
+                        echo '<button id="followButton" class="btngradient btngradient-hover color-9">Suivre</button>';
+                    }
+                    else {
+                        echo '<button id="unfollowButton" class="btngradient btngradient-hover color-10">Se désabonné</button>';
+                    }
                 }
 
                 echo '
@@ -125,15 +130,4 @@ class ViewProfile extends GenericView {
             </div>';
         }
     }
-
-    public function showfollowedUsersList($userListShow){
-        foreach($userListShow as $row){
-            echo 'Les séries suivies de ' . $row['username'] . ' sont : ' . $row['idShow'] . "<br> <br>";
-        }
-    }
-
-    public function show_other_profile($otherUsers){
-        $this->show_profile($otherUsers);
-    }
-
 }

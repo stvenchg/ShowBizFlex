@@ -77,9 +77,6 @@ class ViewShows extends GenericView
                 height: 5%;
             }
         </style>';
-        
-        $isFollowing = $this->model->checkFollowStatus();
-        $isSavedForLater = $this->model->checkSaveStatus();
 
         echo '<div class="show-box">';
 
@@ -293,14 +290,8 @@ class ViewShows extends GenericView
                 $idUser = $row['id'];
                 $userName = $row['username'];
                 $idRole = $row['idRole'];
-                
-                if($userName == $_SESSION['login']){
-                    echo '<b class="usernameComments">'. $userName . '</b>' . " : " . $row['message'] . "<br>";
-                }
-                else {
-                    echo '<b>' . '<a href="./?module=profile&action=viewOtherProfile&id='.$idUser.'"> '.$userName.' </a>' . '</b>' . " : " . $row['message'] . "<br>";
-                }
 
+                echo '<a href="./?module=profile&action=view&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
                 if($_SESSION['idRole'] == 1){
