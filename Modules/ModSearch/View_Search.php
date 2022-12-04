@@ -39,14 +39,27 @@ class ViewSearch extends GenericView
 
             $query = htmlspecialchars($_GET['query']);
 
-            echo '<div class="searchContainer">';
-                echo '<h1>Résultats de la recherche pour : ' . $query . '</h1>';
+            echo '<div class="searchResultsContainer">';
 
-                echo '<div class="resultsContainer">';
-
-                echo $resultsString;
-
-                echo '</div>';
+            echo '<div class="search-filters">
+                    <div class="head-search-filters">
+                        <h1>Voici les résultats de ta recherche pour « ' . htmlspecialchars($_GET["query"]) . ' »</h1>
+                    </div>
+                    <div class="search-category">
+                        <div class="active-category">
+                            <h2><i class="fa-solid fa-tv fa-xs"></i> Séries</h2>
+                        </div>
+                        <div>
+                            <h2><i class="fa-solid fa-box-archive fa-xs"></i> Genres</h2>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="search-results">
+                <div class="search-item">
+                    
+                </div>
+            </div>';
 
             echo '</div>';
         } else {
