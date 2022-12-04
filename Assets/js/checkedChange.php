@@ -57,6 +57,40 @@ $(document).ready(function() {
             });
         }
     });
+
+    $('#submitSetupGenres').click(function() {
+    if ($("#formSetupGenres input:checkbox:checked").length >= 3)
+    {
+        var checkedValue = [];
+        $('#formSetupGenres input:checkbox:checked').each(function(){
+            checkedValue.push($(this).val());
+        })
+
+        var formData = {
+        'idUser': <?php echo $_SESSION['id'] ?>,
+        'idGenre': checkedValue,
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: 'Assets/js/ajax/setFavGenres.php',
+            data: formData,
+            dataType: 'json',
+            encode: true
+        })
+
+        window.setTimeout(function(){
+            window.location.href = "./?module=setup&action=settingUp";
+        }, 200);
+    }
+    else
+    {
+        Toast.fire({
+            icon: 'error',
+            title: 'Sélectionne au minimum trois genres pour continuer'
+        })
+    }
+    });
 });
 
 </script>

@@ -69,19 +69,29 @@ class ViewUsers extends GenericView
       <div class="users-container">
       <form action="./?module=auth&action=sendCreateUser" method="POST">
 
-          <label for="login">NOM D\'UTILISATEUR</label>
+          <label for="username">NOM D\'UTILISATEUR</label>
           <input class="form-input" type="text" name="email" required>
 
-          <label for="login">ADRESSE E-MAIL</label>
+          <label for="email">ADRESSE E-MAIL</label>
           <input class="form-input" type="text" name="email" required>
 
-          <label for="login">MOT DE PASSE</label>
+          <label for="password">MOT DE PASSE</label>
           <input class="form-input" type="password" name="password" required>
 
-          <label for="login">ROLE</label>
-          <input class="form-input" type="password" name="password" required>
+          <label for="role">ROLE</label>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="role" id="role" value="2" checked>
+            <label class="form-check-label" for="inlineRadio1">User</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="role" id="role" value="1">
+            <label class="form-check-label" for="inlineRadio2">Admin</label>
+          </div>
 
-          <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Créer l\'utilisateur</button>
+          <label for="pin" style="margin-top: 20px">POUR VALIDER LA MODIFICATION, SAISIR LE CODE PIN</label>
+          <input class="form-input" type="password" name="pin" maxlength="6" required>
+
+          <button type="submit" id="createUserSubmitButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Créer l\'utilisateur</button>
       </form>
       </div>
   </div>';
