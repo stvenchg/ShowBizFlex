@@ -1354,7 +1354,7 @@ a:hover {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    background-color: #11161b93;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.2s;
     align-items: center
@@ -1379,7 +1379,13 @@ a:hover {
 }
 
 .panel-lastSeasonDetails p {
-    margin-top: 2%
+    margin-top: 2%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .panel-lastSeasonTitle {
@@ -1399,7 +1405,7 @@ a:hover {
     width: 100%;
     height: 200px;
     border-radius: 10px;
-    background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
+    background-color: #11161b93;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.2s;
     align-items: center
