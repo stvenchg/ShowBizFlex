@@ -8,12 +8,6 @@
                 $('#saveButton').addClass('activeSaveButton')
             }
 
-            iziToast.settings({
-                resetOnHover: true,
-                transitionIn: 'fadeInDown',
-                transitionOut: 'fadeOutUp',
-            });
-
             $.post("Assets/js/ajax/saveShow.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idShow: "<?php echo $_GET['id'] ?>"

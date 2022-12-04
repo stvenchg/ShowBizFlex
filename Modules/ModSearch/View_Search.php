@@ -19,7 +19,7 @@ class ViewSearch extends GenericView
 
         if (isset($_GET['query']) && !empty($_GET['query']) && isset($_GET['page']) && !empty($_GET['page'])) {
 
-            if ($_SESSION['adult']) {
+            if (isset($_SESSION['adult']) && $_SESSION['adult']) {
                 $showsResults = $this->model->getTmdbSearchResults(urlencode(htmlspecialchars($_GET['query'])), 'true', htmlspecialchars($_GET['page']));
             } else {
                 $showsResults = $this->model->getTmdbSearchResults(urlencode(htmlspecialchars($_GET['query'])), 'false', htmlspecialchars($_GET['page']));
