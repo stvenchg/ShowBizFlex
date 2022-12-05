@@ -4,6 +4,7 @@ require_once('PDOConnection.php');
 require_once('Alert.php');
 require_once('Mail/Mail.php');
 
+
 class ModelAuth extends PDOConnection
 {
 

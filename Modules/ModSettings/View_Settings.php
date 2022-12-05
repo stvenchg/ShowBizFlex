@@ -78,6 +78,7 @@ class ViewSettings extends GenericView
                     <input class="form-input" type="text" name="about" id="about" value="' . $user['about'] . '">
 
                     <button type="submit" id="saveChangeAbout" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
 
@@ -137,6 +138,7 @@ class ViewSettings extends GenericView
                     <input class="form-input" type="text" name="username" id="username" value="' . $user['username'] . '">
 
                     <button type="submit" id="saveChangeUsername" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
 
@@ -146,6 +148,7 @@ class ViewSettings extends GenericView
                     <input class="form-input" type="email" name="email" id="email" value="' . $user['email'] . '">
 
                     <button type="submit" id="saveChangeEmail" class="btngradient btngradient-hover color-9 hide">Enregistrer</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
 
@@ -154,6 +157,7 @@ class ViewSettings extends GenericView
                 <form>
                     <input class="form-input" type="password" name="password" id="password" placeholder="Nouveau mot de passe">
                     <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirmer le nouveau mot de passe">
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
 
@@ -273,6 +277,7 @@ class ViewSettings extends GenericView
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                     <a href="./?module=settings&action=deleteCurrentAvatar"><label class="deleteCurrentAvatar">SUPPRIMER L\'AVATAR ACTUEL</label></a>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>';
         } else {
@@ -304,6 +309,7 @@ class ViewSettings extends GenericView
 
                     <button type="submit" id="submit" name="submit" class="btngradient btngradient-hover color-9">Importer</button>
                     <a href="./?module=settings&action=deleteCurrentBanner"><label class="deleteCurrentBanner">SUPPRIMER LA BANNIÈRE ACTUELLE</label></a>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>';
         } else {

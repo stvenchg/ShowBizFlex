@@ -45,7 +45,8 @@ class ViewAuth extends GenericView
                     <label class="forgotpswd"><a href="./?module=auth&action=forgot">MOT DE PASSE OUBLIÉ ?</a></label>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
-                </form>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
+                    </form>
 
                 <div class="page-title">
                     <p>Pas encore de compte ? <a href="./?module=auth&action=register">S\'inscrire</a>.</p>
@@ -93,6 +94,7 @@ class ViewAuth extends GenericView
                             En m\'inscrivant, je confirme avoir lu et accepté les <a href="./">conditions générales d\'utilisation</a>.
                         </label>
                     </div>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
                 </form>
@@ -128,7 +130,9 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="text" name="email" id="email" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
-                </form>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
+                
+                    </form>
 
                 <div class="page-title">
                     <p>Ça t\'es revenu ? <a href="./?module=auth&action=login">Se connecter</a>.</p>
@@ -165,6 +169,7 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="password" name="confirmpassword" id="confirmpassword" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Réinitialiser</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
         </div>';

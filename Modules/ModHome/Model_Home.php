@@ -101,7 +101,7 @@ class ModelHome extends PDOConnection
             $idUser = $_SESSION['id'];
 
             try {
-                $stmt = parent::$db->prepare("SELECT idGenre FROM favGenres WHERE idUser=:idUser");
+                $stmt = parent::$db->prepare("SELECT idGenre FROM FavGenres WHERE idUser=:idUser");
                 $stmt->bindParam(':idUser', $idUser);
                 $stmt->execute();
                 $result = $stmt->fetchAll();

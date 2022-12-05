@@ -24,10 +24,10 @@ class ModSettings extends PDOConnection
                 $this->controller->security();
             break;
             case "uploadAvatar":
-                $this->controller->uploadAvatar();
+                $this->controller->uploadAvatar();  
             break;
             case "sendUploadAvatar":
-                $this->controller->sendUploadAvatar();
+                $this->controller->sendUploadAvatar();   
             break;
             case "deleteCurrentAvatar":
                 $this->controller->deleteCurrentAvatar();
