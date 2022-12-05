@@ -24,7 +24,6 @@
     <script src="Assets/js/topbar.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
-    
     <?php
         require_once("Assets/js/favButton.php");
         require_once("Assets/js/checkedChange.php");

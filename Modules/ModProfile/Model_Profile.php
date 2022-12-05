@@ -37,30 +37,16 @@ class ModelProfile extends PDOConnection {
         }
     }
 
-
-    /*
-    public function getFollowedUsersList(){
-        $idUserForShowList = $_GET['idFollowedUser'];
-        try {
-            $stmtUserFollowedList = parent::$db->prepare("SELECT * FROM User NATURAL JOIN FollowedShows WHERE idUser = ?");
-            $stmtUserFollowedList->execute(array($idUserForShowList));
-            return $stmtUserFollowedList->fetchAll();
-
-        } catch (Exception $e) {
-            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
-        }
-    }*/
-
     public function getUserShowInListsCount() {
 
         $id = htmlspecialchars($_GET['id']);
 
         try{
-            $stmt1 = parent::$db->prepare("SELECT count(*) FROM towatchlatershows WHERE idUser=$id");
+            $stmt1 = parent::$db->prepare("SELECT count(*) FROM ToWatchLaterShows WHERE idUser=$id");
             $stmt1->execute();
             $results1 = $stmt1->fetch();
 
-            $stmt2 = parent::$db->prepare("SELECT count(*) FROM followedshows WHERE idUser=$id");
+            $stmt2 = parent::$db->prepare("SELECT count(*) FROM FollowedShows WHERE idUser=$id");
             $stmt2->execute();
             $results2 = $stmt2->fetch();
 
@@ -76,7 +62,7 @@ class ModelProfile extends PDOConnection {
         $id = htmlspecialchars($_GET['id']);
 
         try{
-            $stmt = parent::$db->prepare("SELECT count(*) FROM comment WHERE id=$id");
+            $stmt = parent::$db->prepare("SELECT count(*) FROM Comment WHERE id=$id");
             $stmt->execute();
             $results = $stmt->fetch();
 
@@ -93,7 +79,7 @@ class ModelProfile extends PDOConnection {
         $userActivityString = '';
 
         try{
-            $stmt = parent::$db->prepare("SELECT * FROM followedshows WHERE idUser=$id ORDER BY addDate DESC LIMIT 0, 30");
+            $stmt = parent::$db->prepare("SELECT * FROM FollowedShows WHERE idUser=$id ORDER BY addDate DESC LIMIT 0, 30");
             $stmt->execute();
             $results = $stmt->fetchAll();
         } catch (Exception $e) {

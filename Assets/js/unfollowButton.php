@@ -8,12 +8,6 @@
                 $('#unfollowButton').addClass('activeFavButton')
             }
 
-            iziToast.settings({
-                resetOnHover: true,
-                transitionIn: 'fadeInDown',
-                transitionOut: 'fadeOutUp',
-            });
-
             $.post("Assets/js/ajax/deleteFollow.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idUserToFollow: "<?php echo $_GET['id'] ?>"
@@ -21,8 +15,10 @@
                 if (data == "1") {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Vous vous êtes désabonner de cette personne !',
-                    })
+                        title: 'Tu ne suis plus cet utilisateur',
+                    }).then(function() {
+                        window.location = './?module=profile&action=view&id=' + "<?php echo $_GET['id'] ?>";
+                    });
                 }
             });
         });

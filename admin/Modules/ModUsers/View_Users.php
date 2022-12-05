@@ -52,14 +52,14 @@ class ViewUsers extends GenericView
     } else {
       echo '<div class="overview-panel">
       <div class="title-account">
-          <h1>Utilisateurs > Créer un nouvel utilisateur</h1>
+          <h1>Créer un nouvel utilisateur</h1>
       </div>
 
       <div class="users-container">
       <form action="./?module=auth&action=sendCreateUser" method="POST">
 
           <label for="username">NOM D\'UTILISATEUR</label>
-          <input class="form-input" type="text" name="email" required>
+          <input class="form-input" type="text" name="username" required>
 
           <label for="email">ADRESSE E-MAIL</label>
           <input class="form-input" type="text" name="email" required>
@@ -111,38 +111,41 @@ class ViewUsers extends GenericView
       <label for="username">BANNIERE</label>
       <img style="width: 500px; height: 200px; border-radius: 10px; margin-bottom: 20px" src="../Assets/images/banner/' . $user[0]['banner_file'] . '" />
 
-      <form action="./?module=auth&action=sendEditUser" method="POST">
+      <form class="editUser-form">
+
+          <input class="form-input" type="text" name="id" id="id" value="' . $user[0]['id'] . '" hidden required>
+
           <label for="username">NOM D\'UTILISATEUR</label>
-          <input class="form-input" type="text" name="username" value="' . $user[0]['username'] . '" required>
+          <input class="form-input" type="text" name="username" id="username" value="' . $user[0]['username'] . '" required>
 
           <label for="email">ADRESSE E-MAIL</label>
-          <input class="form-input" type="text" name="email" value="' . $user[0]['email'] . '" required>
+          <input class="form-input" type="text" name="email" id="email" value="' . $user[0]['email'] . '" required>
 
           <label for="about">DESCRIPTION</label>
-          <input class="form-input" type="text" name="about" value="' . $user[0]['about'] . '" required>
+          <input class="form-input" type="text" name="about" id="about" value="' . $user[0]['about'] . '">
 
           <label for="color">COULEUR DE PROFIL</label>
-          <input class="form-input" type="text" name="color" value="' . $user[0]['color'] . '" required>
+          <input class="form-input" type="text" name="color" id="color" value="' . $user[0]['color'] . '" required>
 
           <label for="idRole">ROLE</label>
-          <input class="form-input" type="text" name="idRole" value="' . $user[0]['idRole'] . '" required>
+          <input class="form-input" type="text" name="idRole" id="idRole" value="' . $user[0]['idRole'] . '" required>
 
           <label for="show_setup">FORCER LA CONFIGURATION DU COMPTE</label>
-          <input class="form-input" type="text" name="show_setup" value="' . $user[0]['show_setup'] . '" required>
+          <input class="form-input" type="text" name="show_setup" id="show_setup" value="' . $user[0]['show_setup'] . '" required>
 
           <label for="private">PROFIL PRIVE</label>
-          <input class="form-input" type="text" name="private" value="' . $user[0]['private'] . '" required>
+          <input class="form-input" type="text" name="private" id="private" value="' . $user[0]['private'] . '" required>
 
           <label for="adult">AFFICHER LES CONTENUS SENSIBLES</label>
-          <input class="form-input" type="text" name="adult" value="' . $user[0]['adult'] . '" required>
+          <input class="form-input" type="text" name="adult" id="adult" value="' . $user[0]['adult'] . '" required>
 
           <label for="pin" style="margin-top: 20px; color: red">POUR VALIDER LES MODIFICATIONS, SAISIR LE CODE PIN</label>
-          <input class="form-input" type="password" name="pin" maxlength="6" required>
-
-          <button type="submit" id="editUserButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Confirmer les modifications</button>
+          <input class="form-input" type="password" name="pin" id="pin" maxlength="6" required>
       </form>
 
-          <button type="submit" id="deleteUserButton" class="btngradient btngradient-hover color-11 full" style="margin-top: 20px;">Supprimer cet utilisateur</button>
+          <button id="editUserButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Confirmer les modifications</button>
+
+          <button id="deleteUserButton" class="btngradient btngradient-hover color-11 full" style="margin-top: 20px;">Supprimer cet utilisateur</button>
       </div>
   </div>';
     }

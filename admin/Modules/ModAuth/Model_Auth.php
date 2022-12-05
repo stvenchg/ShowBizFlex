@@ -44,7 +44,8 @@ class ModelAuth extends PDOConnection
             if ($stmtResult && password_verify($password, $stmtResult['password']) && password_verify($pin, $stmtResult['pin'])) {
                 $_SESSION["admin_id"] = $stmtResult['id'];
                 $_SESSION["admin_username"] = $stmtResult['username'];
-                $_SESSION["admin_email"] = $stmtResult['email'];              
+                $_SESSION["admin_email"] = $stmtResult['email'];
+                $_SESSION["pin"] = $stmtResult['pin'];                    
                 header('Location: ./');
                 $this->viewAlert->emailUpdateSuccess();
             } else {

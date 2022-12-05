@@ -49,6 +49,30 @@ class ModelShows extends PDOConnection
         }
     }
 
+    public function hasLiked() {
+        if (isset($_SESSION['login'])) {
+
+            $idShow = $_GET['id'];
+            $idUser = $_SESSION['id'];
+
+            try{
+                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM ListLikes WHERE idUser=:idUser AND idShow=:idShow");
+                $stmt->bindParam(':idUser', $idUser);
+                $stmt->bindParam(':idShow', $idShow);
+                $stmt->execute();
+                $hasLiked = $stmt->fetchAll();
+                if ($hasLiked[0][0] == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            catch (Exception $e) {
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+            }
+        }
+    }
+
     public function checkFollowStatus() {
         if (isset($_SESSION['login'])) {
 
@@ -118,7 +142,7 @@ class ModelShows extends PDOConnection
             try {
                 $requestdeleteComments = parent::$db->prepare("DELETE FROM Comment WHERE idCom = ?");
                 $requestdeleteComments->execute(array($idCom));
-                echo 'Commentaire supprimé !';
+                header("Location:./?module=shows&action=overview&id=".$_GET['id']);
             }
             catch (Exception $e) {
                 echo 'Erreur survenue : ',  $e->getMessage(), "\n";
@@ -449,7 +473,6 @@ class ModelShows extends PDOConnection
         return $recommandationsString;
     }
 
-    
 
 
     public function getDetails()

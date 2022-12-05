@@ -1,11 +1,10 @@
 <?php
     extract($_POST);
 
-    $dsn = "mysql:host=database-etudiants.iut.univ-paris8.fr;dbname=dutinfopw201637;charset=UTF8";
-    $db = new PDO($dsn, 'dutinfopw201637', 'suqebamu');
+    require_once('connection.php');
 
         try {
-            $requesteDeleteFollow = $db->prepare("DELETE FROM FollowedUsers WHERE idUser = :idUser AND idUserFollowed = :idUserFollowed");
+            $requesteDeleteFollow = $bdd->prepare("DELETE FROM FollowedUsers WHERE idUser = :idUser AND idUserFollowed = :idUserFollowed");
             $requesteDeleteFollow->execute(array(":idUser" => $idUser, ":idUserFollowed" => $idUserToFollow));
             echo '1';
         }

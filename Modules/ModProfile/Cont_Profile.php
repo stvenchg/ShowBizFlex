@@ -24,14 +24,8 @@ class ContProfile
         $this->view->show_profile($this->model->getUserDetails(), 
         $this->model->getUserShowInListsCount(), 
         $this->model->getUserComments(),
-        $this->model->getUserActivity());
-    }
-
-    public function follow(){
-        $this->model->sendfollowedsUsers();
-        $this->view->showfollowedUsersList($this->model->getFollowedUsersList());
-        $this->model->getUserActivity();
-        $this->model->verifcationfollowedsUsers();
+        $this->model->getUserActivity(),
+        $this->model->verifcationfollowedsUsers());
     }
 
     public function exec() {
