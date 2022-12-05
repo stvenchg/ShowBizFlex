@@ -77,7 +77,8 @@ class ContShows
             count($showVideos['results']),
             count($showImages['backdrops']),
             count($showImages['posters']),
-            $this->model->getRecommandationsString($recommandations));
+            $this->model->getRecommandationsString($recommandations),
+            $this->model->hasLiked());
     }
 
    

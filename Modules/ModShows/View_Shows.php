@@ -62,7 +62,8 @@ class ViewShows extends GenericView
         $videoCount,
         $imageCount,
         $posterCount,
-        $recommandationsString
+        $recommandationsString,
+        $hasLiked
     ) {
 
         // Style barre de navigation transparente
@@ -120,7 +121,18 @@ class ViewShows extends GenericView
                 echo '<div class="saveButton" id="saveButton"><i class="fa-solid fa-bookmark"></i></div>';
             }
 
+            if ($hasLiked) {
+                echo '<div class="likeShows" id="likeShows"><i class="fa-solid fa-thumbs-up"></i></div>';
+            } else {
+                echo '<div class="likeShows" id="likeShows"><i class="fa-solid fa-thumbs-up"></i></div>';
+            }
+
             echo '</div>';
+
+            $countLike = $this->model->getCountShowLikes(htmlspecialchars($_GET['id']));
+            foreach ($countLike as $row) {
+                echo $row[0] . ' utilisateurs aiment cette série';
+            }
         }
 
         echo ' 
@@ -240,19 +252,47 @@ class ViewShows extends GenericView
 
         if (isset($_SESSION['login'])) {
             echo '<div class="panel-box">
-                    <h2 class="panel-title mb-20">Commentaires</h2>
+                    <h2 class="panel-title mb-20">Commentaires</h2>';
 
-                    <form action="./?module=shows&action=sendComments&id=' . htmlspecialchars($_GET['id']) . '" method="POST">
-                        <input class="form-input" type="text" name="comment" placeholder="Ajouter un commentaire..." required>
+            $comments = $this->model->getComments();
+            foreach ($comments as $row) {
+                $idCom = $row['idCom'];
+                $idUser = $row['id'];
+                $userName = $row['username'];
+                $idRole = $row['idRole'];
+
+                if ($userName == $_SESSION['login']) {
+                    echo "<b>" . $userName . "</b>" . " : " . $row['message'] . "<br>";
+                } else {
+                    echo '<a href="./?module=profile&action=view&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
+                }
+                echo 'Publié le : ' . $row['datePublication'] . "<br>";
+
+                if ($_SESSION['idRole'] == 1) {
+                    echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . $_GET['id'] . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
+                } else {
+                    if ($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']) {
+                        echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . $_GET['id'] . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
+                    }
+                }
+                echo '<br> <br>';
+            }
+
+
+            if (isset($_SESSION['login'])) {
+                echo '
+                    <form method="POST">
+                        <input class="form-input zoneComments" type="text" name="commentaire" placeholder="Ajouter un commentaire..." required>
                         <div class="submitCommentButton">
-                            <button type="submit" id="submit" class="btngradient btngradient-hover color-9" style="">Poster</button>
+                            <button targetID="resultCommentsAJAX" class="addComment btngradient btngradient-hover color-9">Poster</button>
                         </div>
-                    </form>
+                    </form>';
+            }
 
-                </div>';
+            echo '</div>';
         }
 
-                echo '
+        echo '
 
                 <div class="panel-box">
                     <h2 class="panel-title">Ça pourrait t\'intéresser...</h2>
@@ -263,56 +303,8 @@ class ViewShows extends GenericView
                 </div>
             </div>
 
-        </div>
-
-        <br> <br> <br>';
-        
-
-        if(isset($_SESSION['login'])){
-            echo '
-                <div class="forComments">
-                    <h1 class="titleComments"> Commentaires : </h1> <br>
-                    <form method="POST">
-                            <textarea class="zoneComments" name="commentaire"> </textarea> <br><br>
-                            <button targetID="resultCommentsAJAX" class="addComment" type="button"> Poster mon commentaire </button> <br> <br>
-                            <div id="loader" style="display:none"> <img src="Assets/images/gif/loader.gif" width="30"/> </div>        
-                    </form> 
-                </div>
-            ';
-
-            echo "<br> <br>";
-
-            echo '<div id="resultComments"></div>';
-
-            $comments = $this->model->getComments();
-            foreach ($comments as $row) {
-                $idCom = $row['idCom'];
-                $idUser = $row['id'];
-                $userName = $row['username'];
-                $idRole = $row['idRole'];
-
-                echo '<a href="./?module=profile&action=view&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
-                echo 'Publié le : ' . $row['datePublication'] . "<br>";
-
-                if($_SESSION['idRole'] == 1){
-                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id='.$_GET['id'].'&idCom='.$idCom.'&idUser='.$idUser.'"> Supprimer </a> </b>';
-                }
-                else {
-                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
-                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id='.$_GET['id'].'&idCom='.$idCom.'&idUser='.$idUser.'"> Supprimer </a> </b>';
-                    }
-                }
-                echo '<br> <br>';
-            }
-
-        echo '<button class="likeShows" type="button"> Liker cette série </button> <br> <br>';
-        $idShow = $_GET['id'];
-        $countLike = $this->model->getCountShowLikes($idShow);
-        foreach($countLike as $row){
-            echo 'Cette série à ' . $row[0] . ' likes' . "<br> <br>"; 
-        }
+        </div>';
     }
-}
 }
 
 /*

@@ -10,13 +10,7 @@
                 $('.addComment').addClass('activeFavButton')
             }
 
-            iziToast.settings({
-                resetOnHover: true,
-                transitionIn: 'fadeInDown',
-                transitionOut: 'fadeOutUp',
-            });
-
-            $.post("Assets/js/addComments.php", {
+            $.post("Assets/js/ajax/addComments.php", {
                 com:commentaire, 
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idShow: "<?php echo $_GET['id'] ?>"

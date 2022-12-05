@@ -30,14 +30,12 @@
         require_once("Assets/js/checkedChange.php");
         require_once("Assets/js/saveButton.php");
         require_once("Assets/js/profileColorSelect.php");
-        require_once("Assets/js/ajax/buttonLike.php");
+        require_once("Assets/js/buttonLike.php");
         require_once("Assets/js/checkedChange.php");
         require_once("Assets/js/saveButton.php");
         require_once("Assets/js/profileColorSelect.php");
         require_once("Assets/js/followButton.php");
         require_once("Assets/js/unfollowButton.php");
-    ?>
-    <?php
         require_once("Assets/js/buttonComments.php");
     ?>
 </head>

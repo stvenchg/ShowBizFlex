@@ -22,25 +22,25 @@ class ModelPanel extends PDOConnection
     }
 
     public function getCountShows() {
-        $stmt = parent::$db->prepare("SELECT * FROM show");
+        $stmt = parent::$db->prepare("SELECT COUNT(*) FROM Show");
         $stmt->execute();
         $stmtResult = $stmt->fetch();
-        var_dump($stmtResult);
+        return $stmtResult[0];
     }
 
     public function getCountComments() {
-        $stmt = parent::$db->prepare("SELECT count(*) FROM comment");
+        $stmt = parent::$db->prepare("SELECT count(*) FROM Comment");
         $stmt->execute();
         $stmtResult = $stmt->fetch();
         return $stmtResult[0];
     }
 
     public function getCountShowsInList() {
-        $stmtCount1 = parent::$db->prepare("SELECT count(*) FROM towatchlatershows");
+        $stmtCount1 = parent::$db->prepare("SELECT count(*) FROM ToWatchLaterShows");
         $stmtCount1->execute();
         $count1 = $stmtCount1->fetch();
 
-        $stmtCount2 = parent::$db->prepare("SELECT count(*) FROM followedshows");
+        $stmtCount2 = parent::$db->prepare("SELECT count(*) FROM FollowedShows");
         $stmtCount2->execute();
         $count2 = $stmtCount2->fetch();
 

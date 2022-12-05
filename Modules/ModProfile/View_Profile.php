@@ -58,10 +58,10 @@ class ViewProfile extends GenericView {
                 }
                 else {
                     if(!$verificationUserFollowed){
-                        echo '<button id="followButton" class="btngradient btngradient-hover color-9">Suivre</button>';
+                        echo '<button id="followButton" class="btngradient btngradient-hover color-9 following">Suivre</button>';
                     }
                     else {
-                        echo '<button id="unfollowButton" class="btngradient btngradient-hover color-10">Se désabonné</button>';
+                        echo '<button id="unfollowButton" class="btngradient btngradient-hover color-9">Ne plus suivre</button>';
                     }
                 }
 
