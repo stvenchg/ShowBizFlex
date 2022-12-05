@@ -1,26 +1,105 @@
 <?php
 
 require_once('PDOConnection.php');
-require_once('View_Profile.php');
 
-class ModelProfile extends PDOConnection
-{
+class ModelProfile extends PDOConnection {
 
-    public function __construct()
-    {}
+    public function __construct() {
+    }
 
-    public function getUserDetails()
-    {
+    public function getUserDetails() {
 
-        $login = $_SESSION['login'];
+        $id = htmlspecialchars($_GET['id']);
+        
+        try{
+            $stmt = parent::$db->prepare("SELECT * FROM User WHERE id = $id");
+            $stmt->execute();
+            return $stmt->fetchAll();
 
-        try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login");
-            $stmtLogin->bindParam(':login', $login);
-            $stmtLogin->execute();
-            return $stmtLogin->fetch();
         } catch (Exception $e) {
             echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
+
+
+    public function verifcationfollowedsUsers(){
+        $idUser = $_SESSION['id'];
+        $idUserFollowed = $_GET['id'];
+
+        try {
+            $requesteVerifFollow = parent::$db->prepare("SELECT * FROM FollowedUsers WHERE idUser = :idUser AND idUserFollowed = :idUserFollowed");
+            $requesteVerifFollow->execute(array(":idUser" => $idUser, ":idUserFollowed" => $idUserFollowed));
+            $requesteVerifFollow = $requesteVerifFollow->fetch();
+            return $requesteVerifFollow;
+            
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function getUserShowInListsCount() {
+
+        $id = htmlspecialchars($_GET['id']);
+
+        try{
+            $stmt1 = parent::$db->prepare("SELECT count(*) FROM ToWatchLaterShows WHERE idUser=$id");
+            $stmt1->execute();
+            $results1 = $stmt1->fetch();
+
+            $stmt2 = parent::$db->prepare("SELECT count(*) FROM FollowedShows WHERE idUser=$id");
+            $stmt2->execute();
+            $results2 = $stmt2->fetch();
+
+            return $results1[0] + $results2[0];
+
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function getUserComments() {
+
+        $id = htmlspecialchars($_GET['id']);
+
+        try{
+            $stmt = parent::$db->prepare("SELECT count(*) FROM Comment WHERE id=$id");
+            $stmt->execute();
+            $results = $stmt->fetch();
+
+            return $results[0];
+
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+    }
+
+    public function getUserActivity() {
+
+        $id = htmlspecialchars($_GET['id']);
+        $userActivityString = '';
+
+        try{
+            $stmt = parent::$db->prepare("SELECT * FROM FollowedShows WHERE idUser=$id ORDER BY addDate DESC LIMIT 0, 30");
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+        } catch (Exception $e) {
+            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+        }
+
+        foreach ($results as $index => $value) {
+            $userActivityString .= '<div class="activity-item">
+            <h1>Série ajoutée à la liste de suivi.</h1>
+            <p>Série <a href="./?module=shows&action=overview&id=' . $value['idShow'] . '">'. $value['idShow'] .'</a> | Le '. $value['addDate'] .'</p>
+        </div>';
+        }
+
+        return $userActivityString;
+    }
 }
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/

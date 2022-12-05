@@ -2,7 +2,7 @@
 
 require_once('PDOConnection.php');
 require_once('Alert.php');
-require_once('./Mail/Mail.php');
+require_once('Mail/Mail.php');
 
 class ModelAuth extends PDOConnection
 {
@@ -35,17 +35,15 @@ class ModelAuth extends PDOConnection
         $passwordconfirm = htmlspecialchars($_POST['passwordconfirm']);
         $passwordhashed = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $tos = htmlspecialchars($_POST['tos']);
-        $ip = $this->getIP();
-        $ua = $this->getUA();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username']) && !empty($_POST['username'])) {
             try {
-                $stmtCountUsername = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:username");
+                $stmtCountUsername = parent::$db->prepare("SELECT * FROM User WHERE username=:username");
                 $stmtCountUsername->bindParam(':username', $username);
                 $stmtCountUsername->execute();
                 $countRowUsername = $stmtCountUsername->rowCount();
 
-                $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
+                $stmtCountEmail = parent::$db->prepare("SELECT * FROM User WHERE email=:email");
                 $stmtCountEmail->bindParam(':email', $email);
                 $stmtCountEmail->execute();
                 $countRowEmail = $stmtCountEmail->rowCount();
@@ -60,22 +58,21 @@ class ModelAuth extends PDOConnection
                     $this->viewAlert->usernameTooShort();
                 } else if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]./', $username)) {
                     $this->viewAlert->specialCharsInUsername();
-                } else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
+                } /*else if (!str_contains($email, '@') || !str_contains($email, '.') || preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $email)) {
                     $this->viewAlert->invalidEmail();
-                } else if ($password !== $passwordconfirm) {
+                } */else if ($password !== $passwordconfirm) {
                     $this->viewAlert->passwordDifferents();
                 } else if (strlen($password) < 6) {
                     $this->viewAlert->passwordTooShort();
                 } else if ($tos != 1) {
                     $this->viewAlert->userDidNotAcceptedTOS();
                 } else {
-
-                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO showbizflex.accounts(username, email, password, registration_ip, registration_ua, is_admin, avatar_id) VALUES (:username, :email, :password, :registration_ip, :registration_ua, 0, 1)");
+                    
+                    // Insertion des informations concernant le compte de l'utilisateur
+                    $stmtRegisterNewUser = parent::$db->prepare("INSERT INTO User(username, email, password, idRole, avatar_file, banner_file, adult, color, show_setup, private) VALUES (:username, :email, :password, 2, '1.png', '1.png', false, 'white', true, false)");
                     $stmtRegisterNewUser->bindParam(':username', $username);
                     $stmtRegisterNewUser->bindParam(':email', $email);
                     $stmtRegisterNewUser->bindParam(':password', $passwordhashed);
-                    $stmtRegisterNewUser->bindParam(':registration_ip', $ip);
-                    $stmtRegisterNewUser->bindParam(':registration_ua', $ua);
                     $stmtResult = $stmtRegisterNewUser->execute();
 
                     if ($stmtResult) {
@@ -103,7 +100,7 @@ class ModelAuth extends PDOConnection
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login']) && !empty($_POST['login'])) {
         try {
-            $stmtLogin = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE username=:login OR email=:login");
+            $stmtLogin = parent::$db->prepare("SELECT * FROM User WHERE username=:login OR email=:login");
             $stmtLogin->bindParam(':login', $login);
             $stmtLogin->execute();
             $stmtResult = $stmtLogin->fetch();
@@ -112,11 +109,11 @@ class ModelAuth extends PDOConnection
                 $_SESSION["id"] = $stmtResult['id'];
                 $_SESSION["login"] = $stmtResult['username'];
                 $_SESSION["email"] = $stmtResult['email'];
-                $_SESSION["avatar_id"] = $stmtResult['avatar_id'];
-
-                if ($stmtResult['is_admin'] == 1) {
-                    $_SESSION["is_admin"] = "1";
-                }
+                $_SESSION["avatar_file"] = $stmtResult['avatar_file'];
+                $_SESSION["banner_file"] = $stmtResult['banner_file'];
+                $_SESSION["idRole"] = $stmtResult['idRole'];
+                $_SESSION["adult"] = $stmtResult['adult'];
+                $_SESSION["show_setup"] = $stmtResult['show_setup'];
 
                 header('Location: ./');
             } else {
@@ -136,7 +133,7 @@ class ModelAuth extends PDOConnection
             session_unset();
             session_destroy();
 
-            $this->viewAlert->logoutSuccessful();
+            header('Location: ./');
         } else {
             $this->viewAlert->logoutError();
         }
@@ -144,12 +141,12 @@ class ModelAuth extends PDOConnection
 
     public function sendForgot()
     {
-        if (isset($_POST['email']) && !empty($_POST['email']) && str_contains($_POST['email'], '@') && str_contains($_POST['email'], '.') && !preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $_POST['email'])) {
+        if (isset($_POST['email']) && !empty($_POST['email']) && !preg_match('/[\'^£$%&*()}{#~?><>,|=_+¬-]/', $_POST['email'])) {
             try {
                 $email = htmlspecialchars($_POST['email']);
                 $forgot_auth = sha1(uniqid(rand(), true));
     
-                $stmtCountEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
+                $stmtCountEmail = parent::$db->prepare("SELECT * FROM User WHERE email=:email");
                 $stmtCountEmail->bindParam(':email', $email);
                 $stmtCountEmail->execute();
                 $stmtCountEmailResult = $stmtCountEmail->fetch();
@@ -158,7 +155,7 @@ class ModelAuth extends PDOConnection
                 if ($countRowEmail == 0) {
                     $this->viewAlert->emailDontExist();
                 } else {
-                    $stmtLogin = parent::$db->prepare("UPDATE showbizflex.accounts SET forgot_auth=:forgot_auth WHERE email=:email");
+                    $stmtLogin = parent::$db->prepare("UPDATE User SET forgot_auth=:forgot_auth WHERE email=:email");
                     $stmtLogin->bindParam(':forgot_auth', $forgot_auth);
                     $stmtLogin->bindParam(':email', $email);
                     $stmtLogin->execute();
@@ -181,7 +178,7 @@ class ModelAuth extends PDOConnection
 
         //  Fonctionnel mais à fix, il y a des warnings qu'il faut examiner.
 
-        $stmtEmail = parent::$db->prepare("SELECT * FROM showbizflex.accounts WHERE email=:email");
+        $stmtEmail = parent::$db->prepare("SELECT * FROM User WHERE email=:email");
         $stmtEmail->bindParam(':email', $email);
         $stmtEmail->execute();
         $stmtEmailResult = $stmtEmail->fetch();
@@ -216,13 +213,13 @@ class ModelAuth extends PDOConnection
 
                     $passwordhashed = password_hash($password, PASSWORD_DEFAULT);
 
-                    $stmtReset = parent::$db->prepare("UPDATE showbizflex.accounts SET password=:password WHERE email=:email");
+                    $stmtReset = parent::$db->prepare("UPDATE User SET password=:password WHERE email=:email");
                     $stmtReset->bindParam(':password', $passwordhashed);
                     $stmtReset->bindParam(':email', $email);
                     $stmtReset->execute();
 
                     if ($stmtReset) {
-                        $stmtResetForgotAuth = parent::$db->prepare("UPDATE showbizflex.accounts SET forgot_auth=NULL WHERE email=:email");
+                        $stmtResetForgotAuth = parent::$db->prepare("UPDATE User SET forgot_auth=NULL WHERE email=:email");
                         $stmtResetForgotAuth->bindParam(':email', $email);
                         $stmtResetForgotAuth->execute();
 
@@ -239,13 +236,18 @@ class ModelAuth extends PDOConnection
                 }
             }
             else {
-                echo "la";
                 $this->viewAlert->invalidRequestForgot();
             }
         }
         else {
-            echo "ici";
             $this->viewAlert->invalidRequestForgot();
         }
     }
 }
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/

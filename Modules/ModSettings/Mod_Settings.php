@@ -14,23 +14,51 @@ class ModSettings extends PDOConnection
 
         switch ($this->controller->getAction()) 
         {
-            case "main":
-                $this->controller->settings();
+            case "profile":
+                $this->controller->profile();
+            break;
+            case "account":
+                $this->controller->account();
+            break;
+            case "security":
+                $this->controller->security();
             break;
             case "uploadAvatar":
-                $this->controller->uploadAvatar();
+                $this->controller->uploadAvatar();  
             break;
             case "sendUploadAvatar":
-                $this->controller->sendUploadAvatar();
+                $this->controller->sendUploadAvatar();   
             break;
             case "deleteCurrentAvatar":
                 $this->controller->deleteCurrentAvatar();
             break;
-            case "updateUserDetails":
-                $this->controller->updateUserDetails();
+            case "uploadBanner":
+                $this->controller->uploadBanner();
+            break;
+            case "sendUploadBanner":
+                $this->controller->sendUploadBanner();
+            break;
+            case "deleteCurrentBanner":
+                $this->controller->deleteCurrentBanner();
+            break;
+            case "updateAbout":
+                $this->controller->updateAbout();
+            break;
+            case "updateUsername":
+                $this->controller->updateUsername();
+            break;
+            case "updateEmail":
+                $this->controller->updateEmail();
             break;
         }
 
         $this->controller->exec();
     }
 }
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/
