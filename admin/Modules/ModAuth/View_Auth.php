@@ -39,6 +39,7 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="password" maxlength="6" name="pin" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">Se connecter</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
 
                 <div class="page-title">
@@ -84,6 +85,7 @@ class ViewAuth extends GenericView
                     <input class="form-input" type="password" maxlength="6" name="confirmpin" required>
 
                     <button type="submit" id="submit" class="btngradient btngradient-hover color-9 full mt-5p">S\'inscrire</button>
+                    <input type="hidden" name="token" value='.$_SESSION['token'].' >
                 </form>
             </div>
         </div>';

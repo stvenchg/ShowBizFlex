@@ -2,6 +2,7 @@
 
 require_once "Cont_Auth.php";
 include_once "PDOConnection.php";
+require_once "token.php";
 
 class ModAuth extends PDOConnection
 {
@@ -15,16 +16,24 @@ class ModAuth extends PDOConnection
         switch ($this->controller->getAction()) 
         {
             case "register":
+                token_creation();
                 $this->controller->register();
             break;
             case "sendRegister":
-                $this->controller->sendRegister();
+                if(verify_token($_POST['token'])) {
+                    $this->controller->sendRegister();
+                    delete_token();
+                }             
             break;
             case "login":
+                token_creation();
                 $this->controller->login();
             break;
             case "sendLogin":
-                $this->controller->sendLogin();
+                if(verify_token($_POST['token'])) {
+                    $this->controller->sendLogin();
+                    delete_token();
+                }          
             break;
             case "logout":
                 $this->controller->logout();
