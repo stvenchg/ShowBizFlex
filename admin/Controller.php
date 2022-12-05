@@ -2,12 +2,12 @@
 
 require_once("GenericView.php");
 
-require_once("./Components/CompNavigation/Comp_Navigation.php");
-require_once("./Components/CompFooter/Comp_Footer.php");
+require_once("Components/CompNavigation/Comp_Navigation.php");
+require_once("Components/CompFooter/Comp_Footer.php");
 
-require_once("./Modules/ModAuth/Mod_Auth.php");
-require_once("./Modules/ModPanel/Mod_Panel.php");
-require_once("./Modules/ModUsers/Mod_Users.php");
+require_once("Modules/ModAuth/Mod_Auth.php");
+require_once("Modules/ModPanel/Mod_Panel.php");
+require_once("Modules/ModUsers/Mod_Users.php");
 
 class Controller
 {
@@ -49,3 +49,12 @@ class Controller
         }
     }
 }
+
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/
+?>

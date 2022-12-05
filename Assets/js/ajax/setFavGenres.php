@@ -29,3 +29,13 @@ if (isset($_SESSION['login']) && $_SESSION['id'] == $idUser && $_SESSION['show_s
 } else {
     'Pas autorisé.';
 }
+
+
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/
+?>

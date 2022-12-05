@@ -49,3 +49,10 @@ class ModelSearch extends PDOConnection
         return $this->callTmdbAPI("https://api.themoviedb.org/3/search/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&include_adult=$adult&page=$page&query=" . $query);
     }
 }
+
+/*
+ShowBizFlex - 2022/12/05
+GNU GPL CopyLeft 2022-2032
+Initiated by Rachid ABDOULALIME - Steven CHING - Yanis HAMANI
+WebSite : <https://dev.showbizflex.com/>
+*/
