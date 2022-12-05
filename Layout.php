@@ -24,11 +24,19 @@
     <script src="Assets/js/topbar.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+    
     <?php
         require_once("Assets/js/favButton.php");
         require_once("Assets/js/checkedChange.php");
         require_once("Assets/js/saveButton.php");
         require_once("Assets/js/profileColorSelect.php");
+        require_once("Assets/js/buttonLike.php");
+        require_once("Assets/js/checkedChange.php");
+        require_once("Assets/js/saveButton.php");
+        require_once("Assets/js/profileColorSelect.php");
+        require_once("Assets/js/followButton.php");
+        require_once("Assets/js/unfollowButton.php");
+        require_once("Assets/js/buttonComments.php");
     ?>
 </head>
 

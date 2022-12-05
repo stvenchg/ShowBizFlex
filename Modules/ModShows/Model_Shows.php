@@ -80,7 +80,7 @@ class ModelShows extends PDOConnection
             $idUser = $_SESSION['id'];
 
             try{
-                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM towatchlatershows WHERE idUser=:idUser AND idShow=:idShow");
+                $stmt = parent::$db->prepare("SELECT COUNT(*) FROM ToWatchLaterShows WHERE idUser=:idUser AND idShow=:idShow");
                 $stmt->bindParam(':idUser', $idUser);
                 $stmt->bindParam(':idShow', $idShow);
                 $stmt->execute();
@@ -98,16 +98,14 @@ class ModelShows extends PDOConnection
     }
 
 
-    public function sendComments(){
-        $idShow = $_GET['id'];
-        try{
-            $requestSendComments = parent::$db->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
-            if(isset($_POST['commentaire']) && isset($idShow) && isset($_SESSION['id'])){
-                $requestSendComments->execute(array(":comment" => $_POST['commentaire'], "idUser" => $_SESSION['id'], ":idShow" => $idShow));
-            }
+    public function getCountShowLikes($idShow){
+        try {
+            $requestCountLike = parent::$db->prepare("SELECT COUNT(*) FROM ListLikes WHERE idShow = ?");
+            $requestCountLike->execute(array($idShow));
+            return $requestCountLike->fetchAll();
         }
         catch (Exception $e) {
-            echo 'Erreur survenue : ',  $e->getMessage(), "\n";
+                echo 'Erreur survenue : ',  $e->getMessage(), "\n";
         }
     }
 
@@ -236,10 +234,13 @@ class ModelShows extends PDOConnection
     public function getShowWatchProviders($watchProviders) {
         if (isset($watchProviders['results']['FR'])) {
             $providers = array();
-            foreach ($watchProviders['results']['FR']['flatrate'] as $provider) {
-                array_push($providers, $provider['logo_path']);
+            
+            if(isset($watchProviders['results']['FR']['flatrate'])) {
+                foreach ($watchProviders['results']['FR']['flatrate'] as $provider) {
+                    array_push($providers, $provider['logo_path']);
+                }    
             }
-
+            
             $providersString = '';
             foreach ($providers as $provider) {
                 $providersString .= '<img src="https://image.tmdb.org/t/p/original' . $provider . '"></img>';

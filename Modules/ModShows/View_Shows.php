@@ -263,7 +263,26 @@ class ViewShows extends GenericView
                 </div>
             </div>
 
-        </div>';
+        </div>
+
+        <br> <br> <br>';
+        
+
+        if(isset($_SESSION['login'])){
+            echo '
+                <div class="forComments">
+                    <h1 class="titleComments"> Commentaires : </h1> <br>
+                    <form method="POST">
+                            <textarea class="zoneComments" name="commentaire"> </textarea> <br><br>
+                            <button targetID="resultCommentsAJAX" class="addComment" type="button"> Poster mon commentaire </button> <br> <br>
+                            <div id="loader" style="display:none"> <img src="Assets/images/gif/loader.gif" width="30"/> </div>        
+                    </form> 
+                </div>
+            ';
+
+            echo "<br> <br>";
+
+            echo '<div id="resultComments"></div>';
 
             $comments = $this->model->getComments();
             foreach ($comments as $row) {
@@ -272,25 +291,26 @@ class ViewShows extends GenericView
                 $userName = $row['username'];
                 $idRole = $row['idRole'];
 
-                echo '<a href="./?module=profile&action=viewOtherProfile&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
+                echo '<a href="./?module=profile&action=view&id=' . $idUser . '"> ' . $userName . ' </a>' . " : " . $row['message'] . "<br>";
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
-                if ($_SESSION['idRole'] == 1) {
-                    echo '<a href="./?module=shows&action=deleteComments&idCom=' . $idCom . '&idUser=' . $idUser . '&idShow=' . $_GET['id'] . '"> Supprimer </a>';
+                if($_SESSION['idRole'] == 1){
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id='.$_GET['id'].'&idCom='.$idCom.'&idUser='.$idUser.'"> Supprimer </a> </b>';
                 }
-                if ($_SESSION['idRole'] == 2) {
-                    if ($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']) {
-                        echo '<a href="./?module=shows&action=deleteComments&idCom=' . $idCom . '&idUser=' . $idUser . '&idShow=' . $_GET['id'] . '"> Supprimer </a>';
+                else {
+                    if($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']){
+                        echo'<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id='.$_GET['id'].'&idCom='.$idCom.'&idUser='.$idUser.'"> Supprimer </a> </b>';
                     }
                 }
                 echo '<br> <br>';
             }
-    }
 
-    public function redirection()
-    {
+        echo '<button class="likeShows" type="button"> Liker cette série </button> <br> <br>';
         $idShow = $_GET['id'];
-        $urlShow = "http://showbizflex/?module=shows&action=overview&id=$idShow";
-        header("refresh:0, url=$urlShow");
+        $countLike = $this->model->getCountShowLikes($idShow);
+        foreach($countLike as $row){
+            echo 'Cette série à ' . $row[0] . ' likes' . "<br> <br>"; 
+        }
     }
+}
 }

@@ -20,9 +20,13 @@ class ViewUsers extends GenericView
   public function show_overview($userListString)
   {
 
-    $this->model->getUserListString();
+    if (!isset($_SESSION['admin_id'])) {
+      header("Location: ./?module=auth&action=login");
+    } else {
 
-    echo '<div class="overview-panel">
+      $this->model->getUserListString();
+
+      echo '<div class="overview-panel">
         <div class="title-account">
             <h1>Utilisateurs</h1>
             <a href="./?module=users&action=createUser"><button class="btngradient btngradient-hover color-9"><i class="fa-solid fa-user-plus"></i> Ajouter</button></a>
@@ -34,14 +38,19 @@ class ViewUsers extends GenericView
         </div>
 
         <div class="usersList">
-          '. $userListString .'
+          ' . $userListString . '
         </div>
     </div>';
+    }
   }
 
   public function show_createUser_form()
   {
-    echo '<div class="overview-panel">
+
+    if (!isset($_SESSION['admin_id'])) {
+      header("Location: ./?module=auth&action=login");
+    } else {
+      echo '<div class="overview-panel">
       <div class="title-account">
           <h1>Utilisateurs > Créer un nouvel utilisateur</h1>
       </div>
@@ -75,14 +84,19 @@ class ViewUsers extends GenericView
       </form>
       </div>
   </div>';
+    }
   }
 
   public function show_editUser_form()
   {
 
-    $user = $this->model->getUserDetails(htmlspecialchars($_GET['id']));
+    if (!isset($_SESSION['admin_id'])) {
+      header("Location: ./?module=auth&action=login");
+    } else {
 
-    echo '<div class="overview-panel">
+      $user = $this->model->getUserDetails(htmlspecialchars($_GET['id']));
+
+      echo '<div class="overview-panel">
       <div class="title-account">
           <h1>Édition de l\'utilisateur : ' . $user[0]['username'] . '</h1>
       </div>
@@ -104,35 +118,33 @@ class ViewUsers extends GenericView
           <label for="email">ADRESSE E-MAIL</label>
           <input class="form-input" type="text" name="email" value="' . $user[0]['email'] . '" required>
 
-          <label for="username">DESCRIPTION</label>
+          <label for="about">DESCRIPTION</label>
           <input class="form-input" type="text" name="about" value="' . $user[0]['about'] . '" required>
 
-          <label for="username">COULEUR DE PROFIL</label>
+          <label for="color">COULEUR DE PROFIL</label>
           <input class="form-input" type="text" name="color" value="' . $user[0]['color'] . '" required>
 
-          <label for="username">ROLE</label>
+          <label for="idRole">ROLE</label>
           <input class="form-input" type="text" name="idRole" value="' . $user[0]['idRole'] . '" required>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="adult" value="' . $user[0]['adult'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
-            <label class="form-check-label" for="flexSwitchCheckDefault">Afficher les contenus sensibles</label>
-          </div>
 
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="private" value="' . $user[0]['private'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
-            <label class="form-check-label" for="flexSwitchCheckDefault">Rendre le profil privé</label>
-          </div>
+          <label for="show_setup">FORCER LA CONFIGURATION DU COMPTE</label>
+          <input class="form-input" type="text" name="show_setup" value="' . $user[0]['show_setup'] . '" required>
 
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" name="show_setup" value="' . $user[0]['show_setup'] . '" onclick="if (this.checked) this.value=1; else this.value=0;" />
-            <label class="form-check-label" for="flexSwitchCheckDefault">Forcer la configuration du compte</label>
-          </div>
+          <label for="private">PROFIL PRIVE</label>
+          <input class="form-input" type="text" name="private" value="' . $user[0]['private'] . '" required>
+
+          <label for="adult">AFFICHER LES CONTENUS SENSIBLES</label>
+          <input class="form-input" type="text" name="adult" value="' . $user[0]['adult'] . '" required>
 
           <label for="pin" style="margin-top: 20px; color: red">POUR VALIDER LES MODIFICATIONS, SAISIR LE CODE PIN</label>
           <input class="form-input" type="password" name="pin" maxlength="6" required>
 
-          <button type="submit" id="createUserSubmitButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Confirmer les modifications</button>
+          <button type="submit" id="editUserButton" class="btngradient btngradient-hover color-9 full" style="margin-top: 20px;">Confirmer les modifications</button>
       </form>
+
+          <button type="submit" id="deleteUserButton" class="btngradient btngradient-hover color-11 full" style="margin-top: 20px;">Supprimer cet utilisateur</button>
       </div>
   </div>';
+    }
   }
 }

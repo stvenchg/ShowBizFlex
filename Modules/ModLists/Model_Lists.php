@@ -70,5 +70,77 @@ class ModelLists extends PDOConnection
         return $tab;
     }
 
+    public function getIdGenres() {
+        $sql = 'SELECT idGenre FROM Genre';
+        $genres=parent::$db->prepare($sql);
+        $genres->execute();
+
+        $tab = $genres->fetchAll();
+        return $tab;
+    }
+
+   public function getRecommendations() {
+        $sql = 'SELECT idGenre,COUNT(idGenre) FROM FollowedShows JOIN Belong USING(idShow) JOIN Genre USING(idGenre) WHERE idUser = :idUser GROUP BY idGenre ORDER BY COUNT(idGenre) DESC';
+        $favGenres=parent::$db->prepare($sql);
+        $favGenres->execute(array(':idUser'=>$_SESSION['id']));
+
+        $tab = $favGenres->fetchAll();
+
+        $favGenresString = '';
+
+        if(isset($tab[2])) {
+            $favGenresString = $tab[0][0] . ',' . $tab[1][0] . ',' . $tab[2][0];
+        } else if (isset($tab[1])) {
+            $favGenresString = $tab[0][0] . ',' . $tab[1][0];
+        } else if (isset($tab[0])) {
+            $favGenresString = $tab[0][0];
+        } else {
+            return null;
+        }
+
+        $recoUnfiltered = $this->callTmdbAPI("https://api.themoviedb.org/3/discover/tv?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&sort_by=popularity.desc&page=1&watch_region=FR&with_genres=".$favGenresString);
+
+        $followedShows = $this->getFollowedShows();
+
+        $recoFiltered = array();
+
+        foreach ($recoUnfiltered['results'] as $show) {
+            $alreadyFollowed = false;
+            foreach ($followedShows as $followedShow) {
+                if ($show['id'] == $followedShow['idShow']) {
+                    $alreadyFollowed = true;
+                }
+            }
+            if(!$alreadyFollowed) {
+                array_push($recoFiltered, $show);
+            }
+        }
+
+        $toWatchLaterShows = $this->getToWatchLaterShows();
+
+        $recommendations = array();
+
+        foreach ($recoFiltered as $show) {
+            $alreadyToWatchLater = false;
+            foreach ($toWatchLaterShows as $toWatchLaterShow) {
+                if ($show['id'] == $toWatchLaterShow['idShow']) {
+                    $alreadyToWatchLater = true;
+                }
+            }
+            if(!$alreadyToWatchLater) {
+                array_push($recommendations, $show);
+            }
+        }
+
+        return $recommendations;
+
+   }
+
+   /*Reco pour une série précise
+   https://api.themoviedb.org/3/tv/$idShow/recommendations?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&page=1
+
+   Similaire 
+   https://api.themoviedb.org/3/tv/$idShow/similar?api_key=3e4f3b0608c1d91fd1f24a37b1ddb3cb&language=fr-FR&page=1
+   */
 
 }
