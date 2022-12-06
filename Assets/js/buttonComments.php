@@ -1,32 +1,23 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $(".addComment").click(function() {
-            $('#loader').show();
             commentaire = $(".zoneComments").val();
-
-            if ($('.addComment').hasClass('activeFavButton')) {
-                $('.addComment').removeClass('activeFavButton')
-            } else {
-                $('.addComment').addClass('activeFavButton')
-            }
 
             $.post("Assets/js/ajax/addComments.php", {
                 com:commentaire, 
                 idUser: "<?php echo $_SESSION['id'] ?>",
                 idShow: "<?php echo $_GET['id'] ?>"
-            }, function(data){
-                $('#loader').hide();
-                if (data == "NonVide") {
+            }, function(data) {
+                if (data == 'NonVide') {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Vous avez posté un commentaire !',
+                        title: 'Le commentaire a été publié',
                         timer: 1000
                     }).then(function() {
                         window.location = './?module=shows&action=overview&id=' + "<?php echo $_GET['id'] ?>";
                     });
                 } 
             });
-            return false;
         });
     });
 </script>

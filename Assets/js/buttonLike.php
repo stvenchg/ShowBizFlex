@@ -1,31 +1,35 @@
 <script type="text/javascript">
     $(document).ready(function() {
-        $(".likeShows").click(function() {
+        $("#likeShows").click(function() {
 
-            if ($('.likeShows').hasClass('activeFavButton')) {
-                $('.likeShows').removeClass('activeFavButton')
+            if ($('#likeShows').hasClass('activeLikeButton')) {
+                $('#likeShows').removeClass('activeLikeButton')
             } else {
-                $('.likeShows').addClass('activeFavButton')
+                $('#likeShows').addClass('activeLikeButton')
             }
 
             $.post("Assets/js/ajax/addLike.php", {
                 idUser: "<?php echo $_SESSION['id'] ?>",
-                idShow: "<?php echo $_GET['id'] ?>"
+                idShow: "<?php echo htmlspecialchars($_GET['id']) ?>"
             }, function(data){
-                if (data == "0") {
+                if (data == 0) {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Vous avez liké la série !',
+                        title: 'Tu aimes cette série',
                     })
-                }
-               if(data == "1"){
+                } else {
                     Toast.fire({
                         icon: 'success',
-                        title: 'Vous avez retiré votre like !',
+                        title: 'Tu n\'aimes plus cette série',
                     })
                 }
             });
         });
+
+        tippy('#likeShows', {
+            theme: 'light',
+            content: 'Ajouter un j\'aime',
+            animation: 'fade',
+        });
     });
 </script>
-

@@ -122,7 +122,7 @@ class ViewShows extends GenericView
             }
 
             if ($hasLiked) {
-                echo '<div class="likeShows" id="likeShows"><i class="fa-solid fa-thumbs-up"></i></div>';
+                echo '<div class="likeShows activeLikeButton" id="likeShows"><i class="fa-solid fa-thumbs-up "></i></div>';
             } else {
                 echo '<div class="likeShows" id="likeShows"><i class="fa-solid fa-thumbs-up"></i></div>';
             }
@@ -131,7 +131,7 @@ class ViewShows extends GenericView
 
             $countLike = $this->model->getCountShowLikes(htmlspecialchars($_GET['id']));
             foreach ($countLike as $row) {
-                echo $row[0] . ' utilisateurs aiment cette série';
+                echo $row[0];
             }
         }
 
@@ -256,10 +256,10 @@ class ViewShows extends GenericView
 
             $comments = $this->model->getComments();
             foreach ($comments as $row) {
-                $idCom = $row['idCom'];
-                $idUser = $row['id'];
-                $userName = $row['username'];
-                $idRole = $row['idRole'];
+                $idCom = htmlspecialchars($row['idCom']);
+                $idUser = htmlspecialchars($row['id']);
+                $userName = htmlspecialchars($row['username']);
+                $idRole = htmlspecialchars($row['idRole']);
 
                 if ($userName == $_SESSION['login']) {
                     echo "<b>" . $userName . "</b>" . " : " . $row['message'] . "<br>";
@@ -269,10 +269,10 @@ class ViewShows extends GenericView
                 echo 'Publié le : ' . $row['datePublication'] . "<br>";
 
                 if ($_SESSION['idRole'] == 1) {
-                    echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . $_GET['id'] . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
+                    echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . htmlspecialchars($_GET['id']) . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
                 } else {
                     if ($_SESSION['idRole'] == $idRole && $userName == $_SESSION['login']) {
-                        echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . $_GET['id'] . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
+                        echo '<b> <a class="deleteComments" href="./?module=shows&action=deleteComments&id=' . htmlspecialchars($_GET['id']) . '&idCom=' . $idCom . '&idUser=' . $idUser . '"> Supprimer </a> </b>';
                     }
                 }
                 echo '<br> <br>';

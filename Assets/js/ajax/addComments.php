@@ -6,7 +6,7 @@
     if($com != null && isset($com) && isset($idUser) && isset($idShow)){
         try{
             $requestSendComments = $bdd->prepare("INSERT INTO Comment VALUES (NULL, :comment, :idUser, :idShow, NULL)");
-            $requestSendComments->execute(array(":comment" => $com, "idUser" => $idUser, ":idShow" => $idShow));
+            $requestSendComments->execute(array(":comment" => htmlspecialchars($com), "idUser" => $idUser, ":idShow" => $idShow));
             echo 'NonVide';
         }
         catch (Exception $e) {

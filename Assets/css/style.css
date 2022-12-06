@@ -860,17 +860,16 @@ a:hover {
 .showTrailerButton {
     background-color: transparent;
     border: none;
-    width: auto;
     font-weight: 600;
     font-size: 1rem;
     will-change: opacity;
     transition: linear .1s;
     color: #fff;
+    width: auto;
 }
 
 .showMainControls {
     display: flex;
-    gap: 100px;
 }
 
 .favButton {
@@ -954,7 +953,7 @@ a:hover {
 
 .showSubControls {
     display: flex;
-    gap: 10px
+    gap: 10px;
 }
 
 .favButton i {
@@ -1548,7 +1547,6 @@ a:hover {
 
 .show-actions {
     margin-top: 15px;
-    width: 300px;
     height: 60px;
     display: flex;
     align-items: center;
@@ -1618,6 +1616,11 @@ a:hover {
     display: flex;
     align-items: center;
     height: 50%;
+}
+
+.lists {
+    width: 80%;
+    margin: auto;
 }
 
 .profile-body {
@@ -1890,7 +1893,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus+label {
 
 .site-presentation-container {
     width: 45%;
-    height: 700px;
+    height: auto;
     border-radius: 20px;
     margin: auto;
     margin-bottom: 100px;
@@ -1958,8 +1961,6 @@ ul.ks-cboxtags li input[type="checkbox"]:focus+label {
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-color: linear-gradient(180.2deg, rgb(30, 33, 48) 6.8%, rgb(27, 29, 43) 131%);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: transform 0.2s;
     align-items: center
 }
@@ -2031,7 +2032,7 @@ ul.ks-cboxtags li input[type="checkbox"]:focus+label {
     }
 
     .settings-container {
-        display: block
+        display: block;
     }
 
     .settings-nav {
@@ -2133,7 +2134,462 @@ ul.ks-cboxtags li input[type="checkbox"]:focus+label {
     }
 
     .site-presentation-container {
+        width: 90%;
+        height: auto;
+    }
+
+    .site-presentation-container h1 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .site-presentation-container h2 {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .presentation-features-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .features-left,
+    .features-right {
+        gap: 10px;
+        margin: auto;
         width: 100%;
+    }
+
+
+
+    .panel-showLastEpisode,
+    .panel-showNextEpisode {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .panel-showLastEpisode img,
+    .panel-showNextEpisode img {
+        max-width: 100%;
+        max-height: 100%;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px
+    }
+
+    .body-show-container {
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+    }
+
+    .showPanel {
+        width: 95%;
+        margin: auto;
+    }
+
+    .panel-lastSeasonDetails p {
+        margin-top: 5%;
+    }
+
+    .searchResultsContainer {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: auto;
+        margin-top: 20px;
+    }
+    
+    .search-filters {
+        width: 100%;
+        height: auto;
+    }
+    
+    .search-filters .head-search-filters {
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        background: -webkit-linear-gradient(#25aae1, #3f86ed);
+        padding: 20px;
+    }
+    
+    .search-filters .head-search-filters h1 {
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    
+    .search-filters-box {
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+    
+    .search-category {
+        background-color: #11161b93;
+        width: 100%;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    
+    .search-category div {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        padding-top: 20px;
+        cursor: pointer;
+        justify-content: space-between;
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+    
+    .search-category div:hover {
+        background-color: #1f242993;
+    }
+    
+    .active-category {
+        background-color: #1f242993;
+    }
+    
+    .search-category div h2 {
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+    }
+    
+    .search-category div h2 i {
+        margin-right: 10px;
+    }
+    
+    .search-results {
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .search-item {
+        width: 100%;
+        height: 200px;
+        border-radius: 10px;
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        background-color: #11161b93;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        transition: transform 0.2s;
+        padding-right: 20px;
+    }
+    
+    .search-item:hover {
+        transform: scale(1.01);
+    }
+    
+    .search-item-img img {
+        width: 125px;
+        height: 200px;
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+    }
+    
+    .search-item-infos h1 {
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+    
+    .search-item-infos h2 {
+        font-weight: 500;
+        font-size: 16px;
+    }
+    
+    .search-item-infos p {
+        margin-top: 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    .search-item-count {
+        font-size: 12px;
+        font-weight: 500;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        border-radius: 10px;
+        background: -webkit-linear-gradient(#25aae1, #3f86ed);
+    }
+    
+    .search-page-selector {
+        width: 80%;
+        height: 30px;
+        margin: auto;
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .page-nb {
+        width: 20px;
+        height: 100%;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        color: white;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    
+    .page-nb a {
+        color: white;
+    }
+    
+    .page-nb-active {
+        background: -webkit-linear-gradient(#25aae1, #3f86ed);
+    }
+    
+    .cast-title {
+        color: #fff;
+        margin-top: 10px;
+        font-size: 15px;
+        font-weight: 600
+    }
+
+    .setup-container {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+        height: 100vh;
+        padding: 20px;
+    }
+    
+    .setup-title {
+        width: 100%;
+        color: white;
+    }
+    
+    .setup-title h1 {
+        color: white;
+        font-size: 40px;
+        font-weight: 700;
+        margin-bottom: 30px;
+    }
+    
+    .setup-title p {
+        font-size: 16px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    
+    .setup-title p span {
+        font-weight: 600;
+    }
+    
+    .setup-content {
+        width: 100%;
+    }
+
+    .profile-box {
+        position: relative;
+    }
+    
+    .profileAvatarAndInfos {
+        width: 90%;
+    }
+    
+    .profileBanner {
+        position: relative;
+    }
+    
+    .profileBanner .banner {
+        width: 100%;
+        height: 250px;
+        opacity: 0.5;
+    }
+    
+    .profileAvatarAndInfos {
+        position: absolute;
+        width: 80%;
+        top: 25%;
+        left: 10%;
+    }
+    
+    .profileInfos {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+    
+    .profileInfos img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        transition: transform 0.2s;
+    }
+    
+    .profileInfos img:hover {
+        transform: scale(1.05);
+    }
+    
+    .usernameAndInfos {
+        width: auto;
+    }
+    
+    .usernameAndInfos h1 {
+        color: white;
+        font-weight: 600;
+        font-size: 32px;
+    }
+    
+    .memberSince {
+        display: none;
+    }
+    
+    .usernameAndInfos {
+        display: flex;
+        align-items: center;
+        height: 50%;
+    }
+    
+    .lists {
+        width: 80%;
+        margin: auto;
+    }
+    
+    .profile-body {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 30px;
+    }
+    
+    .panel-info-left {
+        width: 100%;
+    }
+    
+    .panel-right {
+        width: 100%;
+        border-radius: 10px;
+    }
+    
+    .user-about {
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #11161b93;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+    
+    .mt-30 {
+        margin-top: 30px;
+    }
+    
+    .user-followers {
+        width: 100%;
+        height: 200px;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #11161b93;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+    
+    .usernameAndSubscribeButton {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .panel-subtitle-left {
+        color: var(--profile-color);
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .panel-subtitle-left i {
+        margin-right: 5px;
+    }
+    
+    .user-favGenres {
+        height: 150px;
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #11161b93;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    }
+    
+    .user-stats-lists {
+        width: 100%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #11161b93;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        text-align: center;
+    }
+    
+    .user-stats-lists h3 {
+        font-size: 20px;
+    }
+    
+    .user-stats-lists h1 {
+        font-size: 32px;
+        color: var(--profile-color);
+    }
+    
+    .stats-showsInList {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .stats-userComments {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .stats-userRating {
+        width: 100%;
+        height: 100px;
+    }
+    
+    .activity-item {
+        height: 70px;
+        padding: 10px;
+        background-color: #11161b93;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+        transition: transform 0.2s;
+    }
+    
+    .activity-item:hover {
+        transform: scale(1.02);
+    }
+    
+    .activity-item h1 {
+        color: var(--profile-color);
+        font-size: 15px;
     }
 }
 
